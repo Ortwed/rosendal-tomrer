@@ -109,7 +109,7 @@ nav a.active::after{content:'';position:absolute;left:0;right:0;bottom:0;height:
 .hero-proof strong{font-family:var(--head);font-size:1.5rem;color:var(--navy)}
 .stars{color:var(--brass);letter-spacing:.1em;font-size:1rem}
 .hero-img{position:relative;overflow:hidden;background:var(--navy)}
-.hero-img img{width:100%;height:100%;object-fit:cover;object-position:68% 60%;clip-path:polygon(14% 0,100% 0,100% 100%,0 100%)}
+.hero-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:68% 60%;clip-path:polygon(14% 0,100% 0,100% 100%,0 100%)}
 .hero-img::before{content:'';position:absolute;inset:0;background:var(--brass);clip-path:polygon(12.6% 0,14% 0,0 100%,-1.4% 100%);z-index:1}
 
 /* SIDEHOVED (undersider) */
