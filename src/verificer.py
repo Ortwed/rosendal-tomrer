@@ -1,7 +1,7 @@
 """Tjekker sitet før levering. Exit 1 ved fejl."""
 import os, re, sys, json, itertools
 sys.path.insert(0, os.path.dirname(__file__))
-from site_shared import YDELSER, GA_ID, FORMSPREE_ID
+from site_shared import YDELSER, GA_ID, FORMSPREE_ID, DEMO
 
 R = os.path.join(os.path.dirname(__file__), "..", "docs")
 fejl, adv = [], []
@@ -51,7 +51,8 @@ for f in sider:
 # Ordoverlap mellem ydelsessider (kun brødtekst i <main>, uden faelles CTA)
 def ord(s):
     h = open(os.path.join(R, s + ".html"), encoding="utf-8").read()
-    h = h.split("<main>")[1].split('Andre ydelser')[0]
+    h = h.split("<main>")[1].split('<section class="cta">')[0]
+    h = re.sub(r'<aside.*?</aside>', ' ', h, flags=re.S)
     h = re.sub(r'<div class="crumb">.*?</div>|<div class="btn-row">.*?</div>', ' ', h, flags=re.S)
     return set(w for w in re.findall(r"[a-zæøå]{4,}", tekst(h).lower()))
 O = {s: ord(s) for s, _ in YDELSER}
@@ -61,6 +62,7 @@ for a, b in itertools.combinations(O, 2):
     maks = max(maks, ov)
     if ov > 0.30: adv.append(f"ordoverlap {a}/{b}: {ov:.0%}")
 
+if DEMO: adv.append("DEMO = True: noindex på alle sider. Skal være False ved go-live")
 if not GA_ID: adv.append("GA_ID ikke sat (demo)")
 if not FORMSPREE_ID: adv.append("FORMSPREE_ID ikke sat: formularen sender ikke (demo)")
 for f in ["robots.txt", "sitemap.xml", "llms.txt", "favicon.ico", "apple-touch-icon.png", ".nojekyll", "images/og-forside.jpg"]:

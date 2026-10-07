@@ -1,24 +1,33 @@
 # Faktatjek med Sebastian før go-live
 
-Demoen er bygget 04-10-2026. Tekst er udkast skrevet ud fra fagviden, anmeldelser og hans profil på Anmeld Håndværker.
+Opdateret 07-10-2026 efter gennemgang af det gamle site (skærmbilleder) og Anmeld Håndværker.
 
-## Påstande på sitet der skal bekræftes
-- "Tømrermester og uddannet bygningskonstruktør" (fra brief) og at han kan hjælpe med tegninger/projektering
-- Medlem af Dansk Håndværk med garantiordning (forside, trust-bånd)
-- Svartid "inden for 24 timer på hverdage" (CTA, kontakt)
-- Faste samarbejdspartnere: murer, el, VVS, maler, kloak (hovedentreprise-FAQ)
-- Terrasse-FAQ: belægning "i samarbejde med en lokal anlægsgartner" (krydshenvisning til Ortwed)
-- Asbest i ældre eternittage (tag-siden, formuleret forsigtigt)
+## Bekræftet via hans eget site eller Anmeld Håndværker
+- Åbningstid mandag-fredag 07.00-17.00
+- Dækker hele Nordsjælland og Hovedstadsområdet
+- Byggaranti
+- Søger løbende tømrersvende (jobside med formular)
+- Gårdhaver = gårdmiljøer: hegn, skure, pergolaer, cykeloverdækninger, platforme. Private og erhverv
+- 38 anmeldelser, snit 4,9, Elite. 6 ansatte (5/2026). 20 nyeste vises på referencesiden
+- Ekstra ydelser fra Anmeld Håndværker: carporte, garager, udestuer, vinterhaver, trapper, spær, skillevægge, loftsbeklædning, facader, foldedøre, forsatsvinduer, køkkener, garderobeskabe
+
+## Påstande der stadig skal bekræftes
+- Tømrermester og uddannet bygningskonstruktør, og at han kan hjælpe med tegninger
+- Medlem af Dansk Håndværk (vises sammen med byggaranti)
+- Svartid "inden for 24 timer på hverdage"
+- Faste samarbejdspartnere: murer, el, VVS, maler, kloak
+- Belægning "i samarbejde med en lokal anlægsgartner" (terrasse og gårdhaver)
+- Asbest i ældre eternittage (tag-siden)
 - Materieludlejning: hvad udlejes, levering, opstilling
-- Serviceområde i JSON-LD: Halsnæs, Frederiksværk, Frederikssund, Hillerød, Helsinge, Gribskov
-- Jobsiden: søger de faktisk folk/lærlinge?
+- Må vi bruge hans underskrift på forsiden? (klippet fra det gamle site)
+- Er det ok at vise anmeldelserne med fornavn og by?
 
-## Afklaret via Anmeld Håndværker (04-10-2026)
-- 37 anmeldelser, snit 4,9, Elite. 6 ansatte opgjort 5/2026. Etableret 2021
-- Anmeldelser vises med fornavn + by, let sprogligt rettet. Bør godkendes af Sebastian
+## Billeder
+- Ipé-broen, de runde bænke, jobbilen og underskriften er klippet ud af skærmbilleder. Bænkene er kun 360 px brede. Bed om originalerne
+- Hent ALDRIG billeder direkte fra det inficerede WordPress-site. Bed Sebastian sende dem fra telefonen
+- Projektsider er bygget, men skjult (status 'pending'), indtil der er færdigbilleder
 
-## Mangler for at gå live
-- Billeder af færdige projekter (eneste foto nu: firmabilen). Projektsider er bygget, men skjult (status 'pending')
-- Formspree-ID (FORMSPREE_ID i site_shared.py). Indtil da sender formularen ikke
-- GA4-ID (GA_ID i site_shared.py)
+## Go-live
+- DEMO = False, FORMSPREE_ID og GA_ID i src/site_shared.py (verificer.py advarer, indtil de er sat)
+- CNAME-fil i docs/ med rosendal-tomrer.dk
 - Liste over gamle URL'er. Redirect-stubs findes for de 9 kendte

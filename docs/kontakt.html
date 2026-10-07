@@ -26,13 +26,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --navy:#0E2A44; --blue:#1D3D73; --blue-mid:#2C5294; --brass:#B87F35; --brass-dk:#94641F;
+  --navy:#0A1E4F; --blue:#0B257C; --blue-mid:#1D3D73; --brass:#B87F35; --brass-dk:#94641F;
   --sand:#F7F4EE; --mist:#EEF1F5; --line:#DFE3E9; --ink:#16202B; --muted:#55606D; --white:#fff;
   --head:'Archivo',system-ui,sans-serif; --body:'Manrope',system-ui,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 :root{padding-top:env(safe-area-inset-top,0px)}
-html{scroll-behavior:smooth;scroll-padding-top:90px}
+html{scroll-behavior:smooth;scroll-padding-top:150px}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
 body{font-family:var(--body);color:var(--ink);background:var(--white);line-height:1.65;font-size:1.02rem;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
@@ -43,22 +43,25 @@ h1,h2,h3,h4{font-family:var(--head);font-stretch:92%;font-weight:700;line-height
 .narrow{max-width:780px}
 
 /* HEADER */
+.topbar{background:var(--blue);color:#fff;font-size:.86rem}
+.topbar-inner{max-width:1200px;margin:0 auto;padding:.45rem 1.5rem;display:flex;gap:1.6rem;align-items:center}
+.topbar .social{margin-left:auto}
+.topbar .social a{width:28px;height:28px;border-color:rgba(255,255,255,.35);color:#fff}
+.topbar .social a:hover{background:#fff;color:var(--blue)}
 header{background:var(--white);position:sticky;top:0;z-index:100;border-bottom:1px solid var(--line)}
-.header-inner{max-width:1200px;margin:0 auto;padding:.9rem 1.5rem;display:flex;align-items:center;gap:1.6rem}
-.logo img{height:52px;width:auto}
-nav{margin-left:auto}
-nav ul{display:flex;gap:1.8rem;list-style:none;align-items:center}
-nav a{font-size:.95rem;font-weight:600;padding:.3rem 0;position:relative}
+.header-inner{max-width:1200px;margin:0 auto;padding:.9rem 1.5rem;display:flex;align-items:center;gap:2.2rem}
+.logo img{height:56px;width:auto}
+.hinfo{display:flex;align-items:center;gap:.7rem;font-size:.9rem;line-height:1.35}
+.hinfo .ic{width:40px;height:40px;border-radius:4px;background:var(--blue);display:grid;place-items:center;flex:none}
+.hinfo .ic svg{width:18px;height:18px;fill:#fff}
+.hinfo strong{display:block;font-family:var(--head);color:var(--navy);font-size:.82rem;letter-spacing:.04em;text-transform:uppercase}
+.hinfo:first-of-type{margin-left:auto}
+.menubar{border-top:1px solid var(--line)}
+.menubar-inner{max-width:1200px;margin:0 auto;padding:0 1.5rem}
+nav ul{display:flex;gap:1.35rem;list-style:none;align-items:center;flex-wrap:nowrap}
+nav a{font-size:.9rem;font-weight:700;padding:.85rem 0;position:relative;display:block;white-space:nowrap}
 nav a:hover,nav a.active{color:var(--blue)}
-nav a.active::after{content:'';position:absolute;left:0;right:0;bottom:-3px;height:2px;background:var(--brass)}
-.nav-dd{position:relative;padding-bottom:1rem;margin-bottom:-1rem}
-.nav-dd>button{font:inherit;font-size:.95rem;font-weight:600;background:none;border:0;cursor:pointer;color:inherit;padding:.3rem 0}
-.nav-dd>button.active{color:var(--blue)}
-.nav-sub{display:none;position:absolute;top:100%;left:-1rem;background:#fff;min-width:250px;padding:.5rem 0;border:1px solid var(--line);border-top:3px solid var(--blue);box-shadow:0 12px 28px rgba(14,42,68,.12)}
-.nav-dd:hover .nav-sub,.nav-dd:focus-within .nav-sub{display:block}
-.nav-sub a{display:block;padding:.6rem 1.2rem;font-size:.92rem;white-space:nowrap}
-.nav-sub a:hover,.nav-sub a.active{background:var(--mist)}
-.nav-sub a.active::after{display:none}
+nav a.active::after{content:'';position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--brass)}
 .social{display:flex;gap:.5rem}
 .social a{width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;color:var(--blue)}
 .social a:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
@@ -85,7 +88,7 @@ nav a.active::after{content:'';position:absolute;left:0;right:0;bottom:-3px;heig
 .hero-inner{max-width:560px}
 .hero-kicker{display:flex;align-items:center;gap:.7rem;font-weight:700;color:var(--brass-dk);margin-bottom:1.2rem;font-size:.98rem}
 .hero-kicker::before{content:'';width:3px;height:1.4em;background:var(--brass)}
-.hero h1{font-size:clamp(2rem,3.5vw,3.05rem);margin-bottom:1.2rem;font-stretch:88%}
+.hero h1{font-size:clamp(2rem,3.2vw,2.75rem);margin-bottom:1.2rem;font-stretch:88%}
 .hero p.lead{font-size:1.12rem;color:var(--muted);margin-bottom:2rem;max-width:34em}
 .hero-proof{display:flex;align-items:center;gap:.8rem;margin-top:2rem;padding-top:1.4rem;border-top:1px solid var(--line);font-size:.92rem;color:var(--muted)}
 .hero-proof strong{font-family:var(--head);font-size:1.5rem;color:var(--navy)}
@@ -270,7 +273,7 @@ footer a:hover{color:#fff;text-decoration:underline}
 .ck-footerlink{background:none;border:0;font:inherit;color:inherit;cursor:pointer;text-decoration:underline;text-underline-offset:2px}
 
 /* COOKIEBANNER */
-.ck-banner{position:fixed;left:0;right:0;bottom:0;z-index:9999;background:#fff;border-top:3px solid var(--blue);box-shadow:0 -6px 24px rgba(14,42,68,.14);padding:1.3rem 1.5rem calc(1.3rem + env(safe-area-inset-bottom,0px));display:none}
+.ck-banner{position:fixed;left:0;right:0;bottom:0;z-index:9999;background:#fff;border-top:3px solid var(--blue);box-shadow:0 -6px 24px rgba(10,30,79,.14);padding:1.3rem 1.5rem calc(1.3rem + env(safe-area-inset-bottom,0px));display:none}
 .ck-banner.vis{display:block}
 .ck-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:1.5rem;align-items:center}
 .ck-banner h2{font-size:1.05rem;margin-bottom:.3rem}
@@ -281,18 +284,48 @@ footer a:hover{color:#fff;text-decoration:underline}
 .ck-afvis{background:#fff;color:var(--blue)}
 .ck-accept{background:var(--blue);color:#fff}
 
+/* SIGNATUR */
+.sign{display:flex;align-items:center;gap:1.2rem;margin-top:1.8rem}
+.sign img{width:96px;height:auto}
+.sign strong{display:block;font-family:var(--head);color:var(--navy);font-size:1.15rem}
+.sign span{font-size:.9rem;color:var(--muted)}
+
+/* YDELSESSIDE MED SIDEBAR */
+.svc-layout{display:grid;grid-template-columns:270px minmax(0,1fr);gap:3.5rem;align-items:start}
+.side{position:sticky;top:160px}
+.side-nav{list-style:none;border-left:3px solid var(--blue)}
+.side-nav a{display:block;padding:.85rem 1.2rem;background:var(--mist);margin-bottom:3px;font-weight:600;font-size:.95rem}
+.side-nav a:hover{background:#E1E6EE}
+.side-nav a.active{background:var(--blue);color:#fff}
+.side-cta{background:var(--blue);color:#fff;padding:1.8rem 1.5rem;margin-top:1.4rem;text-align:center}
+.side-cta h2{color:#fff;font-size:1.3rem;margin-bottom:.5rem}
+.side-cta p{color:rgba(255,255,255,.85);font-size:.92rem;margin-bottom:1.2rem}
+.side-cta .btn{width:100%;justify-content:center}
+.side-link{display:block;margin-top:.8rem;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.svc-main{max-width:760px}
+.svc-fig{margin:0 0 1.6rem}
+.svc-fig img{width:100%;height:auto;border-radius:2px}
+.svc-gal{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin:2rem 0 0}
+.svc-gal img{width:100%;aspect-ratio:4/3;object-fit:cover;cursor:zoom-in}
+.job-img{width:100%;max-width:440px;height:auto;margin-bottom:2rem;border-radius:2px}
+
 /* MOBIL */
-@media (max-width:1080px){
+@media (max-width:1280px){
+  nav ul{gap:.8rem}
+  nav a{font-size:.85rem}
+  .header-inner{gap:1.4rem}
+}
+@media (max-width:1140px){
   .header-inner{gap:.8rem}
+  .hinfo{display:none}
+  .menubar{border:0}
+  .menubar-inner{padding:0}
   nav{position:absolute;top:100%;left:0;right:0;background:#fff;border-bottom:1px solid var(--line);display:none;max-height:calc(100vh - 80px);overflow:auto}
   nav.open{display:block}
   nav ul{flex-direction:column;align-items:stretch;gap:0;padding:.5rem 0}
-  nav li>a,.nav-dd>button{display:block;padding:.85rem 1.5rem;width:100%;text-align:left}
+  nav li>a{padding:.8rem 1.5rem}
+  nav a.active{background:var(--mist)}
   nav a.active::after{display:none}
-  .nav-dd{padding:0;margin:0}
-  .nav-sub{display:block;position:static;border:0;box-shadow:none;padding:0 0 .4rem;min-width:0}
-  .nav-sub a{padding:.55rem 2.4rem}
-  .social{display:none}
   .hdr-tlf{margin-left:auto}
   .menu-toggle{display:block}
   .svc-grid{grid-template-columns:repeat(2,1fr)}
@@ -310,10 +343,16 @@ footer a:hover{color:#fff;text-decoration:underline}
   .hero-kicker{margin-bottom:.7rem;font-size:.9rem}
   .hero-proof{margin-top:1.4rem}
   .about,.split,.contact-grid{grid-template-columns:1fr;gap:2.4rem}
+  .svc-layout{grid-template-columns:minmax(0,1fr);gap:2.4rem}
+  .side{position:static;order:2}
+  .side-nav{display:none}
+  .side-cta{margin-top:0}
   .f-grid{grid-template-columns:1fr;gap:2rem}
   .proj-gallery{columns:2}
 }
 @media (max-width:600px){
+  .topbar-inner{font-size:.8rem;gap:1rem;padding:.4rem 1rem}
+  .topbar .omr{display:none}
   .logo img{height:40px}
   .hdr-tlf{padding:.55rem .8rem;font-size:.92rem}
   .sec{padding:3.4rem 0}
@@ -333,41 +372,38 @@ footer a:hover{color:#fff;text-decoration:underline}
 .svc-more{margin-top:1.4rem;color:var(--muted)}
 .svc-more a{color:var(--blue);font-weight:700;text-decoration:underline;text-underline-offset:3px}
 </style>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "GeneralContractor", "@id": "https://rosendal-tomrer.dk/#virksomhed", "name": "Rosendal Tømrer Entreprise ApS", "alternateName": "Rosendal Tømrer", "url": "https://rosendal-tomrer.dk/", "logo": "https://rosendal-tomrer.dk/images/logo.png", "image": "https://rosendal-tomrer.dk/images/og-forside.jpg", "telephone": "+4550700505", "email": "info@rosendal-tomrer.dk", "vatID": "DK42228672", "taxID": "42228672", "foundingDate": "2021-03", "founder": {"@type": "Person", "name": "Sebastian Norborg Rosendal", "jobTitle": "Tømrermester og bygningskonstruktør"}, "address": {"@type": "PostalAddress", "streetAddress": "Engdraget 11", "postalCode": "3390", "addressLocality": "Hundested", "addressRegion": "Hovedstaden", "addressCountry": "DK"}, "areaServed": [{"@type": "AdministrativeArea", "name": "Nordsjælland"}, {"@type": "AdministrativeArea", "name": "Halsnæs"}, {"@type": "AdministrativeArea", "name": "Hundested"}, {"@type": "AdministrativeArea", "name": "Frederiksværk"}, {"@type": "AdministrativeArea", "name": "Frederikssund"}, {"@type": "AdministrativeArea", "name": "Hillerød"}, {"@type": "AdministrativeArea", "name": "Helsinge"}, {"@type": "AdministrativeArea", "name": "Gribskov"}], "knowsAbout": ["Hovedentreprise", "Fagentreprise", "Nybyg", "Tilbygning", "Tagarbejde", "Døre og vinduer", "Terrasser", "Carporte", "Renovering"], "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9", "bestRating": "5", "reviewCount": "37"}, "sameAs": ["https://www.facebook.com/profile.php?id=100068776222589", "https://www.instagram.com/rosendaltomrerentrepriseaps/", "https://www.anmeld-haandvaerker.dk/tomrer/rosendal-tomrer-entreprise-aps"]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "GeneralContractor", "@id": "https://rosendal-tomrer.dk/#virksomhed", "name": "Rosendal Tømrer Entreprise ApS", "alternateName": "Rosendal Tømrer", "url": "https://rosendal-tomrer.dk/", "logo": "https://rosendal-tomrer.dk/images/logo.png", "image": "https://rosendal-tomrer.dk/images/og-forside.jpg", "telephone": "+4550700505", "email": "info@rosendal-tomrer.dk", "vatID": "DK42228672", "taxID": "42228672", "foundingDate": "2021-03", "founder": {"@type": "Person", "name": "Sebastian Norborg Rosendal", "jobTitle": "Tømrermester og bygningskonstruktør"}, "address": {"@type": "PostalAddress", "streetAddress": "Engdraget 11", "postalCode": "3390", "addressLocality": "Hundested", "addressRegion": "Hovedstaden", "addressCountry": "DK"}, "areaServed": [{"@type": "AdministrativeArea", "name": "Nordsjælland"}, {"@type": "AdministrativeArea", "name": "Hovedstadsområdet"}, {"@type": "AdministrativeArea", "name": "Halsnæs"}, {"@type": "AdministrativeArea", "name": "Hundested"}, {"@type": "AdministrativeArea", "name": "Frederiksværk"}, {"@type": "AdministrativeArea", "name": "Frederikssund"}, {"@type": "AdministrativeArea", "name": "Hillerød"}, {"@type": "AdministrativeArea", "name": "Helsinge"}, {"@type": "AdministrativeArea", "name": "Gribskov"}, {"@type": "AdministrativeArea", "name": "København"}], "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "07:00", "closes": "17:00"}], "knowsAbout": ["Hovedentreprise", "Fagentreprise", "Nybyg", "Tilbygning", "Tagarbejde", "Døre og vinduer", "Terrasser", "Carporte", "Renovering"], "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9", "bestRating": "5", "reviewCount": "38"}, "sameAs": ["https://www.facebook.com/profile.php?id=100068776222589", "https://www.instagram.com/rosendaltomrerentrepriseaps/", "https://www.anmeld-haandvaerker.dk/tomrer/rosendal-tomrer-entreprise-aps"]}</script>
 </head>
 <body>
+<div class="topbar"><div class="topbar-inner">
+  <span>Mandag-fredag 07.00-17.00</span><span class="omr">Vi dækker Nordsjælland og Hovedstadsområdet</span>
+  <div class="social">
+    <a href="https://www.facebook.com/profile.php?id=100068776222589" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.8c0-.9.3-1.5 1.6-1.5h1.7V3.4c-.3 0-1.3-.1-2.5-.1-2.4 0-4.1 1.5-4.1 4.2v2.3H7.5V13h2.7v8z"/></svg></a>
+    <a href="https://www.instagram.com/rosendaltomrerentrepriseaps/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7.3A4.7 4.7 0 1 0 16.7 12 4.7 4.7 0 0 0 12 7.3zm0 7.8a3.1 3.1 0 1 1 3.1-3.1 3.1 3.1 0 0 1-3.1 3.1zm6-8a1.1 1.1 0 1 1-1.1-1.1A1.1 1.1 0 0 1 18 7.1zM21.9 8.2a5.5 5.5 0 0 0-1.5-3.9 5.5 5.5 0 0 0-3.9-1.5C15 2.7 9 2.7 7.5 2.8a5.5 5.5 0 0 0-3.9 1.5 5.5 5.5 0 0 0-1.5 3.9C2 9.7 2 14.3 2.1 15.8a5.5 5.5 0 0 0 1.5 3.9 5.5 5.5 0 0 0 3.9 1.5c1.5.1 7.5.1 9 0a5.5 5.5 0 0 0 3.9-1.5 5.5 5.5 0 0 0 1.5-3.9c.1-1.5.1-6.1 0-7.6zm-2 9.2a3.1 3.1 0 0 1-1.8 1.8c-1.2.5-4.1.4-5.4.4s-4.2.1-5.4-.4a3.1 3.1 0 0 1-1.8-1.8c-.5-1.2-.4-4.1-.4-5.4s-.1-4.2.4-5.4a3.1 3.1 0 0 1 1.8-1.8C8.5 4.3 11.4 4.4 12.7 4.4s4.2-.1 5.4.4a3.1 3.1 0 0 1 1.8 1.8c.5 1.2.4 4.1.4 5.4s.1 4.2-.4 5.4z"/></svg></a>
+  </div>
+</div></div>
 <header>
   <div class="header-inner">
     <a href="index.html" class="logo"><img src="images/logo.webp" alt="Rosendal Tømrer Entreprise ApS" width="437" height="150"></a>
-    <nav id="mainnav" aria-label="Hovedmenu">
-      <ul>
-        <li><a href="index.html">Forside</a></li>
-        <li class="nav-dd"><button type="button" aria-haspopup="true">Ydelser ▾</button><div class="nav-sub"><a href="hovedentreprise.html">Hoved- og fagentreprise</a><a href="nybyg.html">Nybyg og tilbygning</a><a href="tag.html">Tag</a><a href="doere-og-vinduer.html">Døre og vinduer</a><a href="terrasse.html">Terrasser</a><a href="gaardhaver.html">Gårdhaver og udestuer</a><a href="renovering.html">Renovering</a><a href="materieludlejning.html">Materieludlejning</a></div></li>
-        <li><a href="referencer.html">Referencer</a></li>
-        <li><a href="index.html#om">Om os</a></li>
-        <li><a href="job.html">Job</a></li>
-        <li><a href="kontakt.html" class="active">Kontakt</a></li>
-      </ul>
-    </nav>
-    <div class="social">
-      <a href="https://www.facebook.com/profile.php?id=100068776222589" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.8c0-.9.3-1.5 1.6-1.5h1.7V3.4c-.3 0-1.3-.1-2.5-.1-2.4 0-4.1 1.5-4.1 4.2v2.3H7.5V13h2.7v8z"/></svg></a>
-      <a href="https://www.instagram.com/rosendaltomrerentrepriseaps/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7.3A4.7 4.7 0 1 0 16.7 12 4.7 4.7 0 0 0 12 7.3zm0 7.8a3.1 3.1 0 1 1 3.1-3.1 3.1 3.1 0 0 1-3.1 3.1zm6-8a1.1 1.1 0 1 1-1.1-1.1A1.1 1.1 0 0 1 18 7.1zM21.9 8.2a5.5 5.5 0 0 0-1.5-3.9 5.5 5.5 0 0 0-3.9-1.5C15 2.7 9 2.7 7.5 2.8a5.5 5.5 0 0 0-3.9 1.5 5.5 5.5 0 0 0-1.5 3.9C2 9.7 2 14.3 2.1 15.8a5.5 5.5 0 0 0 1.5 3.9 5.5 5.5 0 0 0 3.9 1.5c1.5.1 7.5.1 9 0a5.5 5.5 0 0 0 3.9-1.5 5.5 5.5 0 0 0 1.5-3.9c.1-1.5.1-6.1 0-7.6zm-2 9.2a3.1 3.1 0 0 1-1.8 1.8c-1.2.5-4.1.4-5.4.4s-4.2.1-5.4-.4a3.1 3.1 0 0 1-1.8-1.8c-.5-1.2-.4-4.1-.4-5.4s-.1-4.2.4-5.4a3.1 3.1 0 0 1 1.8-1.8C8.5 4.3 11.4 4.4 12.7 4.4s4.2-.1 5.4.4a3.1 3.1 0 0 1 1.8 1.8c.5 1.2.4 4.1.4 5.4s.1 4.2-.4 5.4z"/></svg></a>
-    </div>
+    <div class="hinfo"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 14.5 9 2.5 2.5 0 0 1 12 11.5z"/></svg></span><div><strong>3390 Hundested</strong>Engdraget 11</div></div>
+    <div class="hinfo"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18a1 1 0 0 1 1 1v.4l-10 6.2L2 6.4V6a1 1 0 0 1 1-1zm-1 3.7 10 6.2 10-6.2V18a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/></svg></span><div><strong>Mail</strong><a href="mailto:info@rosendal-tomrer.dk">info@rosendal-tomrer.dk</a></div></div>
     <a class="hdr-tlf" href="tel:+4550700505"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg><span>50 70 05 05</span></a>
     <button class="menu-toggle" type="button" aria-label="Åbn menu" aria-controls="mainnav" aria-expanded="false"
       onclick="var n=document.getElementById('mainnav');n.classList.toggle('open');this.setAttribute('aria-expanded',n.classList.contains('open'))">☰</button>
   </div>
+  <div class="menubar"><div class="menubar-inner"><nav id="mainnav" aria-label="Hovedmenu"><ul><li><a href="index.html">Hjem</a></li><li><a href="doere-og-vinduer.html">Døre og vinduer</a></li><li><a href="terrasse.html">Terrasse</a></li><li><a href="gaardhaver.html">Gårdhaver</a></li><li><a href="nybyg.html">Nybyg</a></li><li><a href="tag.html">Tag</a></li><li><a href="renovering.html">Renovering</a></li><li><a href="hovedentreprise.html">Hovedentreprise</a></li><li><a href="materieludlejning.html">Materieludlejning</a></li><li><a href="referencer.html">Referencer</a></li><li><a href="job.html">Job</a></li><li><a href="kontakt.html" class="active">Kontakt</a></li></ul></nav></div></div>
 </header>
 <main>
 
 <section class="page-header"><div class="container">
-  <div class="crumb"><a href="index.html">Forside</a> / Kontakt</div>
+  <div class="crumb"><a href="index.html">Hjem</a> › Kontakt</div>
   <h1>Få et uforpligtende tilbud</h1>
   <p>Fortæl kort om opgaven, så vender vi tilbage inden for 24 timer på hverdage. Den hurtigste vej er telefonen.</p>
 </div></section>
 <section class="sec"><div class="container contact-grid">
   <div>
     <div class="c-item"><div><div class="c-label">Telefon</div><div class="c-value c-big"><a href="tel:+4550700505">50 70 05 05</a></div></div></div>
+    <div class="c-item"><div><div class="c-label">Åbningstid</div><div class="c-value">Mandag-fredag 07.00-17.00</div></div></div>
     <div class="c-item"><div><div class="c-label">E-mail</div><div class="c-value"><a href="mailto:info@rosendal-tomrer.dk">info@rosendal-tomrer.dk</a></div></div></div>
     <div class="c-item"><div><div class="c-label">Adresse</div><div class="c-value">Engdraget 11, 3390 Hundested</div></div></div>
     <div class="c-item"><div><div class="c-label">CVR</div><div class="c-value">42228672</div></div></div>
@@ -375,7 +411,7 @@ footer a:hover{color:#fff;text-decoration:underline}
       <strong>Vis kort</strong><span>Kortet hentes fra Google Maps, som sætter cookies. Klikker du her, accepterer du det, og kortet vises med det samme.</span></button></div>
   </div>
   <div>
-    <form class="kf" id="kf" action="#" method="POST">
+    <form class="kf" id="kf" action="#" method="POST" data-lead>
       <h2>Send en henvendelse</h2>
       <p class="sub">Jo mere du fortæller, jo bedre kan vi give et retvisende tilbud.</p>
       <div class="f-row">
@@ -384,7 +420,7 @@ footer a:hover{color:#fff;text-decoration:underline}
       </div>
       <div class="f-g"><label for="mail">E-mail</label><input id="mail" name="_replyto" type="email" required autocomplete="email"></div>
       <div class="f-row">
-        <div class="f-g"><label for="type">Type opgave <span>(valgfrit)</span></label><select id="type" name="Type opgave"><option value="">Vælg</option><option>Hoved- og fagentreprise</option><option>Nybyg og tilbygning</option><option>Tag</option><option>Døre og vinduer</option><option>Terrasser</option><option>Gårdhaver og udestuer</option><option>Renovering</option><option>Materieludlejning</option><option>Andet</option></select></div>
+        <div class="f-g"><label for="type">Type opgave <span>(valgfrit)</span></label><select id="type" name="Type opgave"><option value="">Vælg</option><option>Døre og vinduer</option><option>Terrasse</option><option>Gårdhaver</option><option>Nybyg</option><option>Tag</option><option>Renovering</option><option>Hovedentreprise</option><option>Materieludlejning</option><option>Andet</option></select></div>
         <div class="f-g"><label for="adr">Adresse på opgaven <span>(valgfrit)</span></label><input id="adr" name="Adresse" autocomplete="street-address"></div>
       </div>
       <div class="f-g"><label for="besk">Beskriv opgaven</label><textarea id="besk" name="Beskrivelse" required></textarea></div>
@@ -400,10 +436,10 @@ footer a:hover{color:#fff;text-decoration:underline}
   <div class="f-grid">
     <div>
       <img class="flogo" src="images/logo-hvid.png" alt="Rosendal Tømrer Entreprise ApS" width="437" height="150">
-      <p>Tømrermester og bygningskonstruktør. Fag- og hovedentrepriser for private og erhverv i Nordsjælland.</p>
-      <p style="margin-top:1rem">Engdraget 11, 3390 Hundested<br><a href="tel:+4550700505">Tlf. 50 70 05 05</a><br><a href="mailto:info@rosendal-tomrer.dk">info@rosendal-tomrer.dk</a></p>
+      <p>Tømrermester og bygningskonstruktør. Fag- og hovedentrepriser for private og erhverv i hele Nordsjælland og Hovedstadsområdet.</p>
+      <p style="margin-top:1rem">Mandag-fredag 07.00-17.00<br>Engdraget 11, 3390 Hundested<br><a href="tel:+4550700505">Tlf. 50 70 05 05</a><br><a href="mailto:info@rosendal-tomrer.dk">info@rosendal-tomrer.dk</a></p>
     </div>
-    <div><h3>Ydelser</h3><ul><li><a href="hovedentreprise.html">Hoved- og fagentreprise</a></li><li><a href="nybyg.html">Nybyg og tilbygning</a></li><li><a href="tag.html">Tag</a></li><li><a href="doere-og-vinduer.html">Døre og vinduer</a></li><li><a href="terrasse.html">Terrasser</a></li><li><a href="gaardhaver.html">Gårdhaver og udestuer</a></li><li><a href="renovering.html">Renovering</a></li><li><a href="materieludlejning.html">Materieludlejning</a></li></ul></div>
+    <div><h3>Ydelser</h3><ul><li><a href="doere-og-vinduer.html">Døre og vinduer</a></li><li><a href="terrasse.html">Terrasse</a></li><li><a href="gaardhaver.html">Gårdhaver</a></li><li><a href="nybyg.html">Nybyg</a></li><li><a href="tag.html">Tag</a></li><li><a href="renovering.html">Renovering</a></li><li><a href="hovedentreprise.html">Hovedentreprise</a></li><li><a href="materieludlejning.html">Materieludlejning</a></li></ul></div>
     <div><h3>Virksomheden</h3><ul>
       <li><a href="referencer.html">Referencer</a></li><li><a href="index.html#om">Om os</a></li>
       <li><a href="job.html">Job</a></li><li><a href="kontakt.html">Kontakt</a></li>
@@ -439,7 +475,7 @@ document.addEventListener('click',function(ev){var a=ev.target.closest?ev.target
 </script>
 <script>(function(){var f=document.getElementById('kf'),k=document.getElementById('kvit');
 f.addEventListener('submit',function(ev){ev.preventDefault();var b=f.querySelector('button[type=submit]');b.disabled=true;b.textContent='Sender...';
-function ok(){f.style.display='none';k.classList.add('vis');if(typeof gtag==='function'){gtag('event','generate_lead',{'currency':'DKK','value':0});}}
+function ok(){f.style.display='none';k.classList.add('vis');if(f.hasAttribute('data-lead')&&typeof gtag==='function'){gtag('event','generate_lead',{'currency':'DKK','value':0});}}
 if(f.getAttribute('action')==='#'){ok();return;}
 fetch(f.action,{method:'POST',body:new FormData(f),headers:{'Accept':'application/json'}}).then(function(r){if(r.ok){ok();}else{throw 0;}})
 .catch(function(){b.disabled=false;b.textContent='Send henvendelse';alert('Formularen kunne ikke sendes. Ring på 50 70 05 05 eller skriv til info@rosendal-tomrer.dk.');});});})();</script>
