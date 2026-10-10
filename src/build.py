@@ -87,8 +87,8 @@ forside = f"""
     </div>
     <div class="hero-proof"><strong>{ANM_SNIT}</strong><div>{STJ}<br>{ANM_ANTAL} anmeldelser på Anmeld Håndværker</div></div>
   </div></div>
-  <div class="hero-img"><img src="images/bro-ipe.webp" srcset="images/bro-ipe-720.webp 720w, images/bro-ipe.webp 1081w" sizes="(max-width:820px) 100vw, 55vw"
-    alt="Terrasse i ipé langs vandet med trappe op ad skrænten, bygget af Rosendal Tømrer" width="1081" height="804" fetchpriority="high"></div>
+  <div class="hero-img"><img src="images/terrasse-have.webp" srcset="images/terrasse-have-720.webp 720w, images/terrasse-have.webp 1500w" sizes="(max-width:820px) 100vw, 55vw"
+    alt="Ny træterrasse i hårdttræ ved et hus med have, bygget af Rosendal Tømrer" width="1500" height="1125" fetchpriority="high"></div>
 </section>
 
 <section class="sec-mist">{TRUST}</section>
