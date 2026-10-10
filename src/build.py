@@ -120,7 +120,7 @@ forside = f"""
     <div class="rev-score"><span class="big">{ANM_SNIT}</span><span class="meta">{STJ}<br>ud af 5 baseret på {ANM_ANTAL} anmeldelser</span></div>
   </div>
   <div class="rev-grid">{rev_kort('brian')}{rev_kort('bitten')}{rev_kort('morten')}</div>
-  <div class="rev-links"><a href="referencer.html">Læs flere anmeldelser</a><a href="{ANM_URL}" target="_blank" rel="noopener">Alle {ANM_ANTAL} på Anmeld Håndværker</a></div>
+  <div class="rev-links"><a href="{ANM_URL}" target="_blank" rel="noopener">Læs alle {ANM_ANTAL} anmeldelser her på Anmeldhåndværker.dk</a></div>
 </div></section>
 
 <section class="sec sec-sand"><div class="container">

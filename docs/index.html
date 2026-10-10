@@ -83,8 +83,8 @@ nav a.active::after{content:'';position:absolute;left:0;right:0;bottom:0;height:
 .btn-row{display:flex;flex-wrap:wrap;gap:.8rem}
 
 /* HERO (forside) */
-.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);min-height:600px;background:var(--white)}
-.hero-text{display:flex;align-items:center;padding:4rem 3rem 4rem max(1.5rem,calc((100vw - 1200px)/2 + 1.5rem))}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);min-height:600px;background:var(--white);max-width:1200px;margin:0 auto;padding-right:1.5rem}
+.hero-text{display:flex;align-items:center;padding:4rem 3rem 4rem 1.5rem}
 .hero-inner{max-width:560px}
 .hero-kicker{display:flex;align-items:center;gap:.7rem;font-weight:700;color:var(--brass-dk);margin-bottom:1.2rem;font-size:.98rem}
 .hero-kicker::before{content:'';width:3px;height:1.4em;background:var(--brass)}
@@ -333,7 +333,7 @@ footer a:hover{color:#fff;text-decoration:underline}
   .rev-grid,.refs-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media (max-width:820px){
-  .hero{grid-template-columns:minmax(0,1fr);min-height:0}
+  .hero{grid-template-columns:minmax(0,1fr);min-height:0;padding-right:0}
   .hero-text{padding:2rem 1.5rem 2.2rem;order:1}
   .hero-img{order:0;height:200px}
   .hero-img img{clip-path:none;object-position:72% 64%}
@@ -454,7 +454,7 @@ footer a:hover{color:#fff;text-decoration:underline}
     <div class="rev-score"><span class="big">4,9</span><span class="meta"><span class="stars" aria-hidden="true">★★★★★</span><br>ud af 5 baseret på 38 anmeldelser</span></div>
   </div>
   <div class="rev-grid"><article class="rev"><span class="stars" aria-hidden="true">★★★★★</span><h3>Renovering af sommerhus med nyt tag</h3><blockquote>Nye vægge og gulv med isolering og nyt tag. Det har været en fornøjelse hele vejen igennem. Sebastian er altid til at få fat på, og hans ansatte er både dygtige og søde. Alle aftaler er overholdt, derfor fuld plade herfra.</blockquote><div class="who"><strong>Brian</strong>, Hundested · februar 2026</div></article><article class="rev"><span class="stars" aria-hidden="true">★★★★★</span><h3>Beklædning på vægge og loft samt altan</h3><blockquote>Kæmpe fornøjelse at have Rosendal til at stå for mit sommerhusprojekt. Alle aftaler blev overholdt, og resultatet er blevet super flot. Dejligt med en håndværker, der både holder aftaler og svarer, når man skriver eller ringer.</blockquote><div class="who"><strong>Bitten</strong>, Hundested · august 2025</div></article><article class="rev"><span class="stars" aria-hidden="true">★★★★★</span><h3>Repos-trappe i ipé</h3><blockquote>Vi fik bygget et fem meter langt repos-trin i ipé fra foldedør ned til eksisterende stenterrasse. Tilbud, udførsel, oprydning og fakturering kørte helt som aftalt, og resultatet er super flot. Vi havde god sparring med svendene mens de byggede. Vil klart bruge igen.</blockquote><div class="who"><strong>Morten</strong>, Veksø · juli 2026</div></article></div>
-  <div class="rev-links"><a href="referencer.html">Læs flere anmeldelser</a><a href="https://www.anmeld-haandvaerker.dk/tomrer/rosendal-tomrer-entreprise-aps" target="_blank" rel="noopener">Alle 38 på Anmeld Håndværker</a></div>
+  <div class="rev-links"><a href="https://www.anmeld-haandvaerker.dk/tomrer/rosendal-tomrer-entreprise-aps" target="_blank" rel="noopener">Læs alle 38 anmeldelser her på Anmeldhåndværker.dk</a></div>
 </div></section>
 
 <section class="sec sec-sand"><div class="container">
