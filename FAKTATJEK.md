@@ -30,4 +30,5 @@ Opdateret 07-10-2026 efter gennemgang af det gamle site (skærmbilleder) og Anme
 ## Go-live
 - DEMO = False, FORMSPREE_ID og GA_ID i src/site_shared.py (verificer.py advarer, indtil de er sat)
 - CNAME-fil i docs/ med rosendal-tomrer.dk
+- Formspree (mrpekpzr) ligger i Christians login. Ved go-live: "Restrict to Domain" ændres fra ortwed.github.io til rosendal-tomrer.dk, og formularen flyttes senere til Sebastians egen konto (nyt ID i src/site_shared.py)
 - Liste over gamle URL'er. Redirect-stubs findes for de 9 kendte
