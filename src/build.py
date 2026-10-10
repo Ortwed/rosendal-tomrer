@@ -235,10 +235,12 @@ for p in LIVE:
 
 # ---------------- JOB ----------------
 FORM_ACTION = f"https://formspree.io/f/{FORMSPREE_ID}" if FORMSPREE_ID else "#"
+# Uden Formspree-ID siger formularen fra i stedet for at vise "Tak". Ellers ligner en
+# ikke-koblet formular (eller en gammel side i browserens cache) en der virker.
 FORM_JS = """<script>(function(){var f=document.getElementById('kf'),k=document.getElementById('kvit');
 f.addEventListener('submit',function(ev){ev.preventDefault();var b=f.querySelector('button[type=submit]');b.disabled=true;b.textContent='Sender...';
 function ok(){f.style.display='none';k.classList.add('vis');if(f.hasAttribute('data-lead')&&typeof gtag==='function'){gtag('event','generate_lead',{'currency':'DKK','value':%(v)s});}}
-if(f.getAttribute('action')==='#'){ok();return;}
+if(f.getAttribute('action')==='#'){b.disabled=false;b.textContent='Send';alert('Formularen er ikke koblet til endnu (demo). Ring på 50 70 05 05.');return;}
 fetch(f.action,{method:'POST',body:new FormData(f),headers:{'Accept':'application/json'}}).then(function(r){if(r.ok){ok();}else{throw 0;}})
 .catch(function(){b.disabled=false;b.textContent='Send henvendelse';alert('Formularen kunne ikke sendes. Ring på 50 70 05 05 eller skriv til info@rosendal-tomrer.dk.');});});})();</script>""" % {"v": "0"}
 
