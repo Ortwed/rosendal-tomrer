@@ -54,7 +54,7 @@ YDELSER = {
             "Går noget skævt mellem to fag, er det vores problem at løse og ikke dit. Det er den største forskel i hverdagen: du skal ikke selv være byggeleder ved siden af dit arbejde.",
         ]),
         ("Tømrermester og bygningskonstruktør", [
-            "Sebastian er både tømrermester og uddannet bygningskonstruktør. Det betyder at vi kan hjælpe med planlægning og tegninger tidligt i projektet, og at vi kender konstruktionen indefra, når det skal bygges.",
+            "Sebastian er både tømrermester og uddannet bygningskonstruktør. Det betyder at vi kan være med i planlægningen tidligt i projektet, og at vi kender konstruktionen indefra, når det skal bygges.",
             "Vi taler også gerne med din arkitekt eller ingeniør, hvis projektet allerede er tegnet.",
         ]),
         ("Typiske opgaver i hovedentreprise", ('ul', [
@@ -68,15 +68,13 @@ YDELSER = {
         ]),
     ],
     faq=[
-        ("Hvad er forskellen på hovedentreprise og totalentreprise?", "Ved en hovedentreprise udfører vi byggeriet efter et projekt, som enten du eller en rådgiver har fået tegnet. Ved en totalentreprise står entreprenøren også for projekteringen. Vi hjælper gerne med begge dele og gennemgår forskellen konkret for jeres projekt."),
         ("Er hovedentreprise dyrere end at hyre fagene selv?", "Der er et tillæg for koordineringen, men til gengæld slipper du for spildtid mellem fagene og for selv at bære risikoen, når de skal passe sammen. Vi lægger tallene frem, så du kan vurdere det."),
-        ("Hjælper I med byggetilladelse?", "Ja. Vi kan hjælpe med tegninger og ansøgning til kommunen, eller samarbejde med den rådgiver du allerede har."),
         ("Hvilke fag samarbejder I med?", "Vi har faste samarbejdspartnere inden for murer, el, VVS, maler og kloak i Nordsjælland. Du får ét samlet tilbud."),
     ],
     anm="brian"),
 "nybyg": dict(
     title="Nybyg og tilbygning i Nordsjælland · Rosendal",
-    desc="Tilbygning, anneks, gæstehus eller nyt hus. Tømrermester og bygningskonstruktør fra Hundested, der tager byggeriet fra tegning til aflevering.",
+    desc="Tilbygning, anneks, gæstehus eller nyt hus. Tømrermester og bygningskonstruktør fra Hundested, der tager byggeriet fra første snak til aflevering.",
     h1="Nybyg og tilbygning",
     intro="Mere plads uden at flytte. Vi bygger tilbygninger, gæstehuse og nye boliger i hele Nordsjælland.",
     sek=[
@@ -95,8 +93,6 @@ YDELSER = {
         ]),
     ],
     faq=[
-        ("Skal jeg have byggetilladelse til en tilbygning?", "Som udgangspunkt ja, når der bygges til selve boligen. Reglerne afhænger af størrelse, placering og lokalplan. Vi hjælper med at afklare det og med ansøgningen."),
-        ("Hvad med carport og udhus?", "Mindre småbygninger kan ofte opføres uden byggetilladelse, men der gælder regler for areal, højde og afstand til skel. Kommunen har det sidste ord, og vi tjekker det sammen med dig før vi bygger."),
         ("Hvor lang tid tager en tilbygning?", "Det afhænger af størrelse og hvor mange fag der er involveret. Du får altid en tidsplan sammen med tilbuddet, så du ved hvad du kan regne med."),
         ("Kan vi bo i huset mens I bygger til?", "Som regel ja. Vi planlægger arbejdet så der først åbnes ind til det eksisterende hus, når tilbygningen er lukket og tæt."),
     ],
@@ -153,7 +149,7 @@ YDELSER = {
     ],
     faq=[
         ("Hvor lang tid tager det at skifte et vindue?", "Et almindeligt vindue skiftes typisk på få timer, og hullet i facaden er kun åbent kort tid. Ved større opgaver planlægger vi rækkefølgen, så huset ikke står åbent natten over."),
-        ("Kan I lave en fransk altan i et eksisterende hus?", "Ja. Det kræver som regel at hullet i muren gøres større, og det kan kræve tilladelse. Vi hjælper med at afklare det."),
+        ("Kan I lave en fransk altan i et eksisterende hus?", "Ja. Hullet i muren skal som regel gøres større, og det klarer vi som en del af opgaven."),
         ("Hvad med lysninger og indvendig afslutning?", "Det er med i opgaven. Du skal ikke have en maler eller anden håndværker ind bagefter for at gøre det færdigt, medmindre du ønsker det."),
         ("Leverer I selv vinduerne?", "Ja, vi bestiller og leverer vinduer og døre, så du kun har ét sted at henvende dig, også hvis der skulle være noget med produktet senere."),
     ],
@@ -209,7 +205,6 @@ YDELSER = {
     ],
     faq=[
         ("Laver I gårdhaver for boligforeninger?", "Ja. Vi bygger gårdmiljøer for både private, boligforeninger og erhverv, fra en enkelt cykeloverdækning til hele gården."),
-        ("Kræver en overdækning byggetilladelse?", "Det afhænger af størrelse og placering i forhold til skel. Vi hjælper med at afklare det med kommunen før vi bygger."),
         ("Kan I bygge en bænk rundt om et træ?", "Ja. Runde bænke og siddemiljøer bygges på mål, så de passer til træet og pladsen."),
         ("Laver I også belægningen?", "Belægning og haveanlæg laver vi i samarbejde med en lokal anlægsgartner, så du kan få det hele i ét projekt."),
     ],

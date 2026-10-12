@@ -49,8 +49,6 @@ KORT_TXT = {
     "tag": "Nyt tag, tegltag, tagrenovering og efterisolering.",
     "renovering": "Vægge, gulve, lofter, facader og sommerhuse.",
 }
-OGSAA = ["carporte og garager", "udestuer og vinterhaver", "trapper", "spær", "skillevægge", "loftsbeklædning",
-         "facadebeklædning", "foldedøre", "forsatsvinduer", "køkkener og garderobeskabe", "bygningsvedligeholdelse"]
 
 def svc_grid():
     out = ['<div class="svc-grid">',
@@ -61,7 +59,7 @@ def svc_grid():
         if s in KORT_TXT:
             out.append(f'<a class="svc" href="{s}.html">{HEX}<h3>{e(n)}</h3><p>{KORT_TXT[s]}</p><span class="svc-go">Læs mere</span></a>')
     out.append("</div>")
-    out.append(f'<p class="svc-more">Vi laver også {", ".join(OGSAA[:-1])} og {OGSAA[-1]}. Vi lejer desuden stillads og trailer ud. <a href="materieludlejning.html">Se materieludlejning</a></p>')
+    out.append('<p class="svc-more">Vi laver også carporte og garager, udestuer og vinterhaver, skillevægge, loftsbeklædning, facadebeklædning, foldedøre, køkkener og garderobeskabe samt bygningsvedligeholdelse. Vi lejer desuden stillads og trailer ud. Se mere her: <a href="materieludlejning.html">Materieludlejning</a></p>')
     return "\n".join(out)
 
 TRUST = f"""<div class="container trust">
@@ -78,34 +76,34 @@ SIGNATUR = """<div class="sign"><img src="images/signatur.png" alt="Sebastian Ro
 forside = f"""
 <section class="hero">
   <div class="hero-text"><div class="hero-inner">
-    <div class="hero-kicker">Tømrermester og bygningskonstruktør</div>
-    <h1>Tømrer i Hundested for hele Nordsjælland og Hovedstadsområdet</h1>
-    <p class="lead">Vi tager store som små opgaver for private og erhverv: døre og vinduer, terrasser, tag, nybyg og renovering. Et fast hold af tømrere, én kontakt og aftaler der bliver holdt.</p>
+    <div class="hero-kicker">Tømrermester og bygningskonstruktør i Hundested</div>
+    <h1>Godt håndværk og aftaler, du kan regne med</h1>
+    <p class="lead">Vi hjælper private og erhverv med alt fra nye vinduer og træterrasser til større renoveringer og tilbygninger. Vi er et fast hold af tømrere, og med Sebastian som din faste kontaktperson er der styr på både håndværket og processen.</p>
     <div class="btn-row">
       <a class="btn btn-primary" href="tel:{TLF_RAW}">{ICON_TLF}Ring {TLF}</a>
       <a class="btn btn-ghost" href="kontakt.html">Få et tilbud</a>
     </div>
-    <div class="hero-proof"><strong>{ANM_SNIT}</strong><div>{STJ}<br>{ANM_ANTAL} anmeldelser på Anmeld Håndværker</div></div>
+    <div class="hero-proof"><strong>{ANM_SNIT}</strong><div>{STJ} ud af 5 på Anmeld Håndværker<br>{ANM_ANTAL} anmeldelser · Byggaranti · Fast hold af tømrere</div></div>
   </div></div>
-  <div class="hero-img"><img src="images/terrasse-have.webp" srcset="images/terrasse-have-720.webp 720w, images/terrasse-have.webp 1500w" sizes="(max-width:820px) 100vw, 55vw"
-    alt="Ny træterrasse i hårdttræ ved et hus med have, bygget af Rosendal Tømrer" width="1500" height="1125" fetchpriority="high"></div>
+  <div class="hero-img"><img src="images/terrasse-trapper.webp" srcset="images/terrasse-trapper-720.webp 720w, images/terrasse-trapper.webp 1500w" sizes="(max-width:820px) 100vw, 55vw"
+    alt="Terrasse i hårdttræ med siddetrapper, trappe op ad skrænten og hegn af lodrette lister, bygget af Rosendal Tømrer" width="1500" height="1125" fetchpriority="high"></div>
 </section>
 
 <section class="sec-mist">{TRUST}</section>
 
 <section class="sec" id="om"><div class="container about">
   <div class="prose">
-    <h2>Et tømrerfirma der tager hele opgaven</h2>
-    <p>Rosendal Tømrer Entreprise blev stiftet i 2021 af Sebastian Rosendal, der er tømrermester og uddannet bygningskonstruktør. I dag er vi et fast hold af tømrere med base på Engdraget i Hundested, og vi dækker hele Nordsjælland og Hovedstadsområdet.</p>
-    <p>Vi tager imod store som små opgaver, fra en enkelt ny terrassedør til tilbygninger og totalrenoveringer, hvor vi står for hele byggeriet og koordinerer de andre fag. Finder du ikke lige den opgave du står med her på siden, er du stadig meget velkommen til at ringe.</p>
-    <p>Vi giver selvfølgelig byggaranti. Det er din tryghed for, at kvaliteten er i orden.</p>
+    <h2>Et tømrerfirma, der tager hele opgaven</h2>
+    <p>Rosendal Tømrer Entreprise blev stiftet i 2021 af Sebastian Rosendal, der er tømrermester og uddannet bygningskonstruktør. I dag er vi et fast hold af tømrere med værksted og kontor på Engdraget i Hundested. Herfra hjælper vi private og erhverv med tømreropgaver i hele Nordsjælland og Hovedstadsområdet.</p>
+    <p>Vi tager os af både de mindre opgaver og de større byggeprojekter. Det kan være alt fra en ny terrassedør til en tilbygning eller en gennemgribende renovering, hvor vi også koordinerer de øvrige håndværkere.</p>
+    <p>For os handler godt håndværk ikke kun om det færdige resultat. Det handler også om, at du ved, hvad der skal ske, at vi holder vores aftaler, og at der bliver taget hånd om tingene undervejs.</p>
     {SIGNATUR}
   </div>
   <ul class="principles">
-    <li><strong>Én kontakt hele vejen</strong><span>Sebastian er altid til at få fat på, fra første besøg til aflevering.</span></li>
-    <li><strong>Aftaler der holder</strong><span>Pris, tidsplan og omfang står i tilbuddet. Opstår der noget undervejs, hører du det før vi går videre.</span></li>
-    <li><strong>Byggeteknisk overblik</strong><span>Som bygningskonstruktør kan Sebastian hjælpe med planlægning og tegninger, før der skal bygges.</span></li>
-    <li><strong>Ryddet op hver dag</strong><span>Vi arbejder i dit hjem og opfører os derefter.</span></li>
+    <li><strong>Du har én fast kontaktperson</strong><span>Du taler med Sebastian fra den første snak til det færdige resultat. Du ved, hvem du skal kontakte, og hvem der har overblikket over dit projekt.</span></li>
+    <li><strong>Vi holder, hvad vi aftaler</strong><span>Du får et skriftligt tilbud, så du ved, hvad der er aftalt. Hvis der opstår noget uventet undervejs, tager vi dialogen med dig, inden vi går videre.</span></li>
+    <li><strong>Vi tænker projektet igennem</strong><span>Med erfaring som tømrermester og uddannet bygningskonstruktør har Sebastian blik for både detaljerne og helheden. Det giver et godt grundlag for at finde løsninger, der fungerer i praksis.</span></li>
+    <li><strong>Vi behandler dit hjem ordentligt</strong><span>Vi arbejder i dit hjem, og det tager vi alvorligt. Vi rydder op efter os og gør os umage for at gøre byggeperioden så overskuelig som muligt.</span></li>
   </ul>
 </div></section>
 

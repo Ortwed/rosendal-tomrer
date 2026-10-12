@@ -12,7 +12,7 @@ Opdateret 07-10-2026 efter gennemgang af det gamle site (skærmbilleder) og Anme
 - Ekstra ydelser fra Anmeld Håndværker: carporte, garager, udestuer, vinterhaver, trapper, spær, skillevægge, loftsbeklædning, facader, foldedøre, forsatsvinduer, køkkener, garderobeskabe
 
 ## Påstande der stadig skal bekræftes
-- Tømrermester og uddannet bygningskonstruktør, og at han kan hjælpe med tegninger
+- Tømrermester og uddannet bygningskonstruktør (tegninger leverer han ikke, det er fjernet fra sitet 12-10-2026)
 - Medlem af Dansk Håndværk (vises sammen med byggaranti)
 - Svartid "inden for 24 timer på hverdage"
 - Faste samarbejdspartnere: murer, el, VVS, maler, kloak
@@ -26,6 +26,11 @@ Opdateret 07-10-2026 efter gennemgang af det gamle site (skærmbilleder) og Anme
 - Ipé-broen, de runde bænke, jobbilen og underskriften er klippet ud af skærmbilleder. Bænkene er kun 360 px brede. Bed om originalerne
 - Hent ALDRIG billeder direkte fra det inficerede WordPress-site. Bed Sebastian sende dem fra telefonen
 - Projektsider er bygget, men skjult (status 'pending'), indtil der er færdigbilleder
+- Billeder af Sebastian og holdet i gang med rigtige opgaver til de fire punkter på forsiden (ingen stockbilleder)
+
+## Efter go-live
+- Nye FAQ-spørgsmål (Nybyg har kun ét tilbage, Hovedentreprise to), projektsider og undersider
+- Anmeld Håndværker-widget på Referencer og forsiden. Koden ligger i Sebastians firmalogin
 
 ## Go-live
 - DEMO = False, FORMSPREE_ID og GA_ID i src/site_shared.py (verificer.py advarer, indtil de er sat)
