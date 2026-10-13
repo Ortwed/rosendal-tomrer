@@ -216,6 +216,7 @@ YDELSER = {
         ("Kan I bygge en bænk rundt om et træ?", "Ja. Runde bænke og siddemiljøer bygges på mål, så de passer til træet og pladsen."),
         ("Laver I også belægningen?", "Belægning og haveanlæg laver vi i samarbejde med en lokal anlægsgartner, så du kan få det hele i ét projekt."),
     ],
+    billede=("images/gaard-pergola-cykelskur.webp", "Gårdmiljø i træ med pergola, cykelstativer og skure mellem etageboliger"),
     galleri=[("images/baenk-1.webp", "Rund træbænk omkring et træ i et gårdmiljø ved en erhvervsejendom"),
              ("images/baenk-2.webp", "Rund bænk i træ med lameller, bygget af Rosendal Tømrer")],
     anm="kira"),
