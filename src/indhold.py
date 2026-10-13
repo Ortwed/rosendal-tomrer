@@ -262,12 +262,14 @@ YDELSER = {
         ])),
     ],
     kategorier=[
-        ("El-værktøj", "images/materiel-el-vaerktoej.svg",
-         "Til indvendige opgaver og finish, fx byggestøvsuger, vægsliber og bordrundsav."),
-        ("Bygningsmateriel", "images/materiel-bygningsmateriel.svg",
-         "Til byggepladsen og større opgaver, fx rullestillads, betonblander og byggevarmer. Vi har også trailer."),
-        ("Jord- og anlægsmateriel", "images/materiel-jord-og-anlaeg.svg",
-         "Til haven og terrænet, fx jordbor og minidumper."),
+        # Listerne er laest ud fra produktbillederne paa det gamle site. Sebastian bekraefter
+        # dem i dokumentet "Lejebetingelser til gennemsyn".
+        ("El-værktøj", "images/materiel-el-vaerktoej.svg", "Til indvendige opgaver og finish.",
+         ["Byggestøvsuger", "Vægsliber", "Bordrundsav"]),
+        ("Bygningsmateriel", "images/materiel-bygningsmateriel.svg", "Til byggepladsen og større opgaver.",
+         ["Rullestillads", "Betonblander", "Byggevarmer", "Trailer"]),
+        ("Jord- og anlægsmateriel", "images/materiel-jord-og-anlaeg.svg", "Til haven og terrænet.",
+         ["Jordbor", "Minidumper"]),
     ],
     efter_html='<p>Læs de fulde <a href="lejebetingelser.html">lejebetingelser</a>, før du lejer.</p>',
     faq=[

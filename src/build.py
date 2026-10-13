@@ -158,7 +158,8 @@ def ydelse(slug):
         # Illustrationerne er tegninger, ikke fotos af Sebastians materiel. Alt-teksten
         # er derfor bare kategorien, saa den ikke lover bestemte maskiner.
         kort = "".join(f'<div class="mat-kort"><img src="{src}" alt="Illustration: {e(n)}" width="960" height="720" loading="lazy">'
-                       f'<h3>{e(n)}</h3><p>{e(t)}</p></div>' for n, src, t in d["kategorier"])
+                       f'<h3>{e(n)}</h3><p>{e(t)}</p><ul>{"".join(f"<li>{e(x)}</li>" for x in ting)}</ul></div>'
+                       for n, src, t, ting in d["kategorier"])
         blokke.insert(1, f'<h2>Det kan du leje</h2><div class="mat-grid">{kort}</div>')
     if d.get("billede"):
         src, alt = d["billede"]
