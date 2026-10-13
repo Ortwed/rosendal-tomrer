@@ -181,6 +181,10 @@ YDELSER = {
         ("Laver I også belægning omkring terrassen?", "Belægning og haveanlæg laver vi i samarbejde med en lokal anlægsgartner, så du kan få det hele i ét projekt."),
     ],
     billede=("images/bro-ipe.webp", "Lang terrasse i ipé langs kysten med trappe op ad skrænten, bygget af Rosendal Tømrer"),
+    galleri=[("images/terrasse-haardttrae-trin.webp", "Terrasse i hårdttræ med indbyggede trin ved et sort træhus"),
+             ("images/terrasse-haardttrae-hus.webp", "Nylagt terrasse i hårdttræ ved et hus med have"),
+             ("images/terrasse-trykimp-langs-hus.webp", "Terrasse i trykimprægneret træ langs et hus med store vinduespartier"),
+             ("images/terrasse-trykimp-hjoerne.webp", "Terrasse i trykimprægneret træ, der knækker rundt om hjørnet af huset")],
     anm="morten"),
 "gaardhaver": dict(
     title="Gårdhaver og gårdmiljøer i træ · Rosendal Tømrer",
