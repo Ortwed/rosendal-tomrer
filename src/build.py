@@ -232,12 +232,11 @@ for p in LIVE:
          active="referencer", extra_js=LB_JS)
 
 # ---------------- JOB ----------------
-# Ingen honeypot (_gotcha): Chromes autoudfyld kan skrive i skjulte felter, og saa smider
-# Formspree henvendelsen vaek uden fejl. En tabt kunde er vaerre end lidt spam, og
-# Formspree har sit eget spamfilter.
-# Begge formularer sender til samme Formspree-formular. Feltet "Formular" viser i mailen
-# hvilken det kom fra. Jobformularen havde foer et _subject-felt, og det var den eneste
-# forskel paa en formular der virkede og en der ikke gjorde, saa det er taget ud.
+# Ingen honeypot (_gotcha): Formspree's eget spamfilter (Formshield) er nok, og et skjult
+# felt kan blive udfyldt af Chromes autoudfyld, saa en rigtig henvendelse forsvinder.
+# NB: Formshield lagde testbeskeder som "asdasd" i Spam. Test altid med rigtige saetninger.
+# Begge formularer sender til samme Formspree-formular. _subject giver mailen en emnelinje,
+# og feltet "Formular" goer det nemt at sortere i Formspree.
 FORM_ACTION = f"https://formspree.io/f/{FORMSPREE_ID}" if FORMSPREE_ID else "#"
 # Uden Formspree-ID siger formularen fra i stedet for at vise "Tak". Ellers ligner en
 # ikke-koblet formular (eller en gammel side i browserens cache) en der virker.
@@ -269,6 +268,7 @@ job = f"""
       <h2>Søg job hos Danmarks fedeste tømrerfirma</h2>
       <p class="sub">Måske er det dig vi lige står og mangler? Send en besked, så vender vi tilbage til dig.</p>
       <input type="hidden" name="Formular" value="Jobansøgning">
+      <input type="hidden" name="_subject" value="Jobansøgning via hjemmesiden">
       <div class="f-g"><label for="navn">Navn</label><input id="navn" name="Navn" required autocomplete="name"></div>
       <div class="f-row">
         <div class="f-g"><label for="mail">E-mail</label><input id="mail" name="_replyto" type="email" required autocomplete="email"></div>
@@ -306,6 +306,7 @@ kontakt = f"""
   <div>
     <form class="kf" id="kf" action="{FORM_ACTION}" method="POST" data-lead>
       <input type="hidden" name="Formular" value="Kontakt">
+      <input type="hidden" name="_subject" value="Henvendelse via hjemmesiden">
       <h2>Send en henvendelse</h2>
       <p class="sub">Jo mere du fortæller, jo bedre kan vi give et retvisende tilbud.</p>
       <div class="f-row">
