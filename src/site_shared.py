@@ -257,7 +257,6 @@ form.kf{background:var(--mist);padding:2.2rem;border-top:4px solid var(--blue)}
 .f-g input:focus,.f-g select:focus,.f-g textarea:focus{outline:2px solid var(--blue);outline-offset:0;border-color:var(--blue)}
 .f-note{font-size:.9rem;color:var(--muted);margin:.4rem 0 1.4rem;padding-left:.9rem;border-left:3px solid var(--brass)}
 .kf .btn{border:0;cursor:pointer;width:100%;justify-content:center}
-.hp{position:absolute;left:-9999px}
 .kvit{display:none;background:#fff;border-left:4px solid var(--brass);padding:1.6rem}
 .kvit h2{margin-bottom:.5rem}
 .kvit.vis{display:block}

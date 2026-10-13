@@ -232,6 +232,9 @@ for p in LIVE:
          active="referencer", extra_js=LB_JS)
 
 # ---------------- JOB ----------------
+# Ingen honeypot (_gotcha): Chromes autoudfyld kan skrive i skjulte felter, og saa smider
+# Formspree henvendelsen vaek uden fejl. En tabt kunde er vaerre end lidt spam, og
+# Formspree har sit eget spamfilter.
 # Begge formularer sender til samme Formspree-formular. Feltet "Formular" viser i mailen
 # hvilken det kom fra. Jobformularen havde foer et _subject-felt, og det var den eneste
 # forskel paa en formular der virkede og en der ikke gjorde, saa det er taget ud.
@@ -272,7 +275,6 @@ job = f"""
         <div class="f-g"><label for="tlf">Telefon</label><input id="tlf" name="Telefon" type="tel" required autocomplete="tel"></div>
       </div>
       <div class="f-g"><label for="besk">Besked</label><textarea id="besk" name="Besked" required></textarea></div>
-      <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
       <button class="btn btn-primary" type="submit">Send ansøgning</button>
     </form>
     <div class="kvit" id="kvit" role="status"><h2>Tak for din ansøgning</h2><p>Vi har modtaget den og vender tilbage hurtigst muligt.</p></div>
@@ -317,7 +319,6 @@ kontakt = f"""
       </div>
       <div class="f-g"><label for="besk">Beskriv opgaven</label><textarea id="besk" name="Beskrivelse" required></textarea></div>
       <p class="f-note">Har du billeder af opgaven? Send dem gerne til <a href="mailto:{MAIL}">{MAIL}</a> efter du har sendt formularen.</p>
-      <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
       <button class="btn btn-primary" type="submit">Send henvendelse</button>
     </form>
     <div class="kvit" id="kvit" role="status"><h2>Tak for din henvendelse</h2><p>Vi har modtaget den og vender tilbage inden for 24 timer på hverdage. Haster det, så ring på <a href="tel:{TLF_RAW}">{TLF}</a>.</p></div>
