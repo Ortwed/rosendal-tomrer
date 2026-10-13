@@ -20,7 +20,7 @@ ANM_SNIT = "4,9"
 GA_ID = None          # fx "G-XXXXXXX". None = ingen gtag.js (demo)
 FORMSPREE_ID = "mbgdzaov"   # Rosendals egen formular, sender til info@ og er låst til rosendal-tomrer.dk
 COOKIE = "rosendal_samtykke"
-DEMO = True          # True = noindex paa alle sider (demo paa GitHub Pages). Saet False ved go-live
+DEMO = False         # True = noindex paa alle sider. Sitet er live paa Simply siden 13-10-2026
 
 AABNING = "Mandag-fredag 07.00-17.00"
 OMRAADE = "Nordsjælland og Hovedstadsområdet"

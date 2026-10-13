@@ -33,8 +33,14 @@ Opdateret 07-10-2026 efter gennemgang af det gamle site (skærmbilleder) og Anme
 - Anmeld Håndværker-widget på Referencer og forsiden. Koden ligger i Sebastians firmalogin
 - Formularer via PHP på Simply i stedet for Formspree (data bliver i DK). Kræver egen spambeskyttelse, og Jakob skal bekræfte PHP mail() samt SPF/DKIM. Formspree slås fra, når det er testet mod info@
 
-## Go-live
-- DEMO = False, FORMSPREE_ID og GA_ID i src/site_shared.py (verificer.py advarer, indtil de er sat)
-- CNAME-fil i docs/ med rosendal-tomrer.dk
-- Formspree (mrpekpzr) ligger i Christians login. Ved go-live: "Restrict to Domain" ændres fra ortwed.github.io til rosendal-tomrer.dk, og formularen flyttes senere til Sebastians egen konto (nyt ID i src/site_shared.py)
-- Liste over gamle URL'er. Redirect-stubs findes for de 9 kendte
+## Go-live (13-10-2026, Simply.com)
+- Sitet ligger på Simply.com. GitHub Pages bruges ikke længere til det live site
+- DEMO = False. GA_ID er ikke sat (ingen Google Analytics)
+- Formspree: formularen mbgdzaov på Sebastians konto, sender til info@, låst til rosendal-tomrer.dk
+- .htaccess: HTTPS uden www, 301 for de 9 gamle URL'er, 410 på wp-stier
+
+## Efter go-live, oprydning
+- Slå GitHub Pages fra på repoet, så der ikke ligger en kopi på ortwed.github.io
+- Slet Christians gamle Formspree-formular (mrpekpzr), når en test fra rosendal-tomrer.dk er kommet frem
+- Tilmeld rosendal-tomrer.dk i Google Search Console og indsend sitemap.xml
+- Slet grenen udkast-materieludlejning på GitHub (identisk med main)
