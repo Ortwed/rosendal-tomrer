@@ -319,11 +319,11 @@ footer a:hover{color:#fff;text-decoration:underline}
 .svc-main{max-width:760px}
 .svc-fig{margin:0 0 1.6rem}
 .mat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.2rem;margin:1.2rem 0 2rem}
-.mat-kort{background:var(--white);border:1px solid var(--line);border-top:3px solid var(--brass);border-radius:2px;overflow:hidden}
+.mat-kort{text-align:center;background:var(--white);border:1px solid var(--line);border-top:3px solid var(--brass);border-radius:2px;overflow:hidden}
 .mat-kort img{display:block;width:100%;height:auto;aspect-ratio:4/3}
 .mat-kort h3{margin:1rem 1.1rem .4rem}
 .mat-kort p{margin:0 1.1rem .6rem;font-size:.95rem}
-.mat-kort ul{margin:0 1.1rem 1.2rem;padding-left:1.1rem;font-size:.95rem}
+.mat-kort ul{margin:0 1.1rem 1.2rem;padding:0;list-style:none;font-size:.95rem}
 .mat-kort li{margin:.15rem 0}
 .svc-fig img{width:100%;height:auto;border-radius:2px}
 .svc-gal{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin:2rem 0 0}
