@@ -31,6 +31,7 @@ Opdateret 07-10-2026 efter gennemgang af det gamle site (skærmbilleder) og Anme
 ## Efter go-live
 - Nye FAQ-spørgsmål (Nybyg har kun ét tilbage, Hovedentreprise to), projektsider og undersider
 - Anmeld Håndværker-widget på Referencer og forsiden. Koden ligger i Sebastians firmalogin
+- Formularer via PHP på Simply i stedet for Formspree (data bliver i DK). Kræver egen spambeskyttelse, og Jakob skal bekræfte PHP mail() samt SPF/DKIM. Formspree slås fra, når det er testet mod info@
 
 ## Go-live
 - DEMO = False, FORMSPREE_ID og GA_ID i src/site_shared.py (verificer.py advarer, indtil de er sat)
