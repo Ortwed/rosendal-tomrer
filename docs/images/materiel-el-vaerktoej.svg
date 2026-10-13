@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="720" viewBox="0 0 960 720" role="img" aria-label="Illustration af el-værktøj: akku-boremaskine og rundsav">
+<rect width="960" height="720" fill="#EEF2F7"/>
+<defs>
+<pattern id="gridEl" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#13257A" stroke-opacity="0.07" stroke-width="1.5"></path></pattern>
+</defs>
+<rect width="960" height="720" fill="url(#gridEl)"></rect>
+<rect y="600" width="960" height="120" fill="#13257A" fill-opacity="0.05"></rect>
+<line x1="0" y1="600" x2="960" y2="600" stroke="#13257A" stroke-opacity="0.14" stroke-width="2"></line>
+<g transform="translate(-5,0)" stroke-linejoin="round" stroke-linecap="round">
+<ellipse cx="330" cy="604" rx="210" ry="14" fill="#13257A" fill-opacity="0.14"></ellipse>
+<ellipse cx="715" cy="604" rx="175" ry="14" fill="#13257A" fill-opacity="0.14"></ellipse>
+<rect x="110" y="287" width="100" height="16" rx="4" fill="#8A97B5" stroke="#0C1850" stroke-width="4"></rect>
+<line x1="130" y1="289" x2="140" y2="301" stroke="#FFFFFF" stroke-opacity="0.7" stroke-width="3"></line>
+<line x1="152" y1="289" x2="162" y2="301" stroke="#FFFFFF" stroke-opacity="0.7" stroke-width="3"></line>
+<line x1="174" y1="289" x2="184" y2="301" stroke="#FFFFFF" stroke-opacity="0.7" stroke-width="3"></line>
+<rect x="198" y="262" width="64" height="66" rx="10" fill="#C9D2E3" stroke="#0C1850" stroke-width="5"></rect>
+<line x1="216" y1="270" x2="216" y2="320" stroke="#8A97B5" stroke-width="4"></line>
+<line x1="231" y1="270" x2="231" y2="320" stroke="#8A97B5" stroke-width="4"></line>
+<line x1="246" y1="270" x2="246" y2="320" stroke="#8A97B5" stroke-width="4"></line>
+<path d="M395 320 L470 320 L494 505 L413 505 Z" fill="#13257A" stroke="#0C1850" stroke-width="5"></path>
+<path d="M414 362 L458 362 L474 484 L429 484 Z" fill="#0C1850"></path>
+<rect x="374" y="350" width="26" height="46" rx="9" fill="#B8873A" stroke="#0C1850" stroke-width="4"></rect>
+<rect x="255" y="240" width="275" height="105" rx="46" fill="#13257A" stroke="#0C1850" stroke-width="5"></rect>
+<rect x="262" y="250" width="30" height="85" rx="8" fill="#B8873A"></rect>
+<line x1="468" y1="272" x2="502" y2="272" stroke="#FFFFFF" stroke-opacity="0.45" stroke-width="5"></line>
+<line x1="468" y1="292" x2="502" y2="292" stroke="#FFFFFF" stroke-opacity="0.45" stroke-width="5"></line>
+<line x1="468" y1="312" x2="502" y2="312" stroke="#FFFFFF" stroke-opacity="0.45" stroke-width="5"></line>
+<line x1="315" y1="262" x2="430" y2="262" stroke="#FFFFFF" stroke-opacity="0.18" stroke-width="8"></line>
+<rect x="378" y="500" width="156" height="66" rx="14" fill="#0C1850" stroke="#0C1850" stroke-width="5"></rect>
+<rect x="378" y="520" width="156" height="11" fill="#B8873A"></rect>
+<circle cx="500" cy="550" r="4" fill="#D9B57A"></circle>
+<circle cx="514" cy="550" r="4" fill="#D9B57A"></circle>
+<circle cx="486" cy="550" r="4" fill="#D9B57A" fill-opacity="0.4"></circle>
+<path d="M650 545 A 75 75 0 0 0 790 545 Z" fill="#C9D2E3" stroke="#0C1850" stroke-width="5"></path>
+<path d="M672 552 A 52 52 0 0 0 768 552" fill="none" stroke="#8A97B5" stroke-width="4" stroke-dasharray="6 8"></path>
+<rect x="560" y="528" width="320" height="22" rx="6" fill="#C9D2E3" stroke="#0C1850" stroke-width="5"></rect>
+<path d="M600 528 A 115 115 0 0 1 830 528 Z" fill="#13257A" stroke="#0C1850" stroke-width="5"></path>
+<path d="M632 528 A 83 83 0 0 1 798 528" fill="none" stroke="#FFFFFF" stroke-opacity="0.2" stroke-width="6"></path>
+<path d="M640 445 C 628 330 792 318 800 452" fill="none" stroke="#0C1850" stroke-width="32"></path>
+<path d="M640 445 C 628 330 792 318 800 452" fill="none" stroke="#13257A" stroke-width="22"></path>
+<path d="M684 360 C 718 344 758 346 782 368" fill="none" stroke="#B8873A" stroke-width="22"></path>
+<circle cx="715" cy="482" r="46" fill="#0C1850"></circle>
+<circle cx="715" cy="482" r="22" fill="#B8873A"></circle>
+<circle cx="715" cy="482" r="7" fill="#0C1850"></circle>
+</g>
+</svg>

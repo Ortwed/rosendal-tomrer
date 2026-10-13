@@ -249,15 +249,6 @@ YDELSER = {
             "Uanset om opgaven er lille eller stor, har vi udstyr, der gør arbejdet effektivt og sikkert. Vores materiel er velholdt og klar til brug, og vi tilbyder fleksible lejeperioder.",
             "Er du i tvivl om, hvad du skal bruge, så ring. Vi er tømrere og bruger selv materiellet, så vi kan rådgive dig om, hvad der passer bedst til opgaven.",
         ]),
-        ("El-værktøj", [
-            "Til indvendige opgaver og finish. Det kan for eksempel være byggestøvsuger, vægsliber og bordrundsav.",
-        ]),
-        ("Bygningsmateriel", [
-            "Til byggepladsen og større opgaver. Det kan for eksempel være rullestillads, betonblander og byggevarmer. Vi har også trailer.",
-        ]),
-        ("Jord- og anlægsmateriel", [
-            "Til haven og terrænet. Det kan for eksempel være jordbor og minidumper.",
-        ]),
         ("Sådan foregår lejen", ('ul', [
             "Materiellet lejes pr. kalenderdag. En dag er 8 timers brug",
             "Afhentning fra Engdraget 11 i Hundested efter aftale",
@@ -266,6 +257,14 @@ YDELSER = {
             "Der lægges et forsikringsgebyr på 7 % oven i den samlede pris",
         ])),
     ],
+    kategorier=[
+        ("El-værktøj", "images/materiel-el-vaerktoej.svg",
+         "Til indvendige opgaver og finish, fx byggestøvsuger, vægsliber og bordrundsav."),
+        ("Bygningsmateriel", "images/materiel-bygningsmateriel.svg",
+         "Til byggepladsen og større opgaver, fx rullestillads, betonblander og byggevarmer. Vi har også trailer."),
+        ("Jord- og anlægsmateriel", "images/materiel-jord-og-anlaeg.svg",
+         "Til haven og terrænet, fx jordbor og minidumper."),
+    ],
     efter_html='<p>Læs de fulde <a href="lejebetingelser.html">lejebetingelser</a>, før du lejer.</p>',
     faq=[
         ("Hvad koster det at leje?", "Prisen afhænger af materiel og lejeperiode. Ring og fortæl hvad du skal bruge, så får du en pris."),
@@ -273,6 +272,5 @@ YDELSER = {
         ("Kan jeg afbestille?", "Ja, op til 7 dage før den aftalte booking. Ved afbestilling opkræves et gebyr på 275 kr. inkl. moms. Se lejebetingelserne."),
         ("Lejer I også ud til private?", "Ja. Vi lejer ud til både private og erhverv."),
     ],
-    billede=("images/firmabil.webp", "Rosendal Tømrers trailer med stillads og firmabil med lægter på taget"),
     anm=None),
 }

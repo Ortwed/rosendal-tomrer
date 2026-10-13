@@ -154,6 +154,12 @@ def ydelse(slug):
         else:
             body = "".join(f"<p>{e(x)}</p>" for x in indhold)
         blokke.append(f"<h2>{e(h2)}</h2>{body}")
+    if d.get("kategorier"):
+        # Illustrationerne er tegninger, ikke fotos af Sebastians materiel. Alt-teksten
+        # er derfor bare kategorien, saa den ikke lover bestemte maskiner.
+        kort = "".join(f'<div class="mat-kort"><img src="{src}" alt="Illustration: {e(n)}" width="960" height="720" loading="lazy">'
+                       f'<h3>{e(n)}</h3><p>{e(t)}</p></div>' for n, src, t in d["kategorier"])
+        blokke.insert(1, f'<h2>Det kan du leje</h2><div class="mat-grid">{kort}</div>')
     if d.get("billede"):
         src, alt = d["billede"]
         blokke.insert(1, f'<figure class="svc-fig"><img src="{src}" alt="{e(alt)}" loading="lazy"></figure>')
