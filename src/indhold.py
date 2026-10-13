@@ -124,6 +124,10 @@ YDELSER = {
         ("Hvad sker der hvis det regner undervejs?", "Vi åbner kun så meget af taget ad gangen, som vi kan nå at lukke igen, og dækker af når det er nødvendigt."),
         ("Leverer I også stillads?", "Ja. Vi har selv stillads og trailer, så det er med i tilbuddet."),
     ],
+    galleri=[("images/tag-roedt-gult-hus.webp", "Nyt rødt tag på et gult hus med overdækket terrasse"),
+             ("images/tag-stillads-banner.webp", "Stillads med Rosendal-banner og firmabiler under udskiftning af et tag"),
+             ("images/tag-sort-kviste.webp", "Nyt sort tag med kviste på et murstenshus"),
+             ("images/tag-sort-fra-stillads.webp", "Nyt sort tag set fra stilladset")],
     anm="kenneth"),
 "doere-og-vinduer": dict(
     title="Udskiftning af døre og vinduer i Nordsjælland",
