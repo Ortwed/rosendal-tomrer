@@ -360,6 +360,36 @@ for gammel, ny in GAMLE.items():
 <meta http-equiv="refresh" content="0; url=../{ny}"></head><body><p>Siden er flyttet til <a href="../{ny}">{ny}</a>.</p></body></html>
 """)
 
+# ---------------- .HTACCESS (Simply.com, Apache) ----------------
+# GitHub Pages ignorerer filen. Paa Simply giver den rigtige 301'ere for de gamle URL'er
+# (stubbene ovenfor er reserve), og 410 paa WordPress-stierne, saa Google hurtigt dropper
+# spam-siderne fra infektionen i stedet for at blive ved med at proeve dem.
+vaert = DOMAIN.split("//")[1]
+skriv(".htaccess", f"""Options -Indexes -MultiViews
+ErrorDocument 404 /404.html
+ErrorDocument 410 /404.html
+
+RewriteEngine On
+RewriteCond %{{HTTPS}} off [OR]
+RewriteCond %{{HTTP_HOST}} ^www\\. [NC]
+RewriteRule ^(.*)$ https://{vaert}/$1 [R=301,L]
+
+RewriteRule ^(wp-admin|wp-content|wp-includes|wp-json)(/.*)?$ - [G,L]
+RewriteRule ^(wp-login\\.php|xmlrpc\\.php|wp-config\\.php)$ - [G,L]
+""" + "".join(f"RewriteRule ^{g}/?$ /{n} [R=301,L]\n" for g, n in GAMLE.items()) + """
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
+""")
+
 # ---------------- ROBOTS, SITEMAP, LLMS ----------------
 bots = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "PerplexityBot", "Google-Extended", "ClaudeBot", "Claude-SearchBot", "Applebot-Extended"]
 skriv("robots.txt", "User-agent: *\nAllow: /\n\n" + "".join(f"User-agent: {b}\nAllow: /\n\n" for b in bots) + f"Sitemap: {DOMAIN}/sitemap.xml\n")
