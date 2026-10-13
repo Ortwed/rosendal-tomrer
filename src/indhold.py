@@ -240,24 +240,38 @@ YDELSER = {
     ],
     anm="bitten"),
 "materieludlejning": dict(
-    title="Materieludlejning: stillads og trailer · Rosendal",
-    desc="Lej stillads og trailer hos Rosendal Tømrer i Hundested. Ring og hør hvad vi har ledigt, og hvordan afhentning og levering foregår.",
-    h1="Materieludlejning",
-    intro="Vi lejer stillads og trailer ud, når vi ikke selv bruger det. Ring og hør hvad der er ledigt.",
+    title="Materieludlejning i Hundested og Nordsjælland · Rosendal",
+    desc="Lej el-værktøj, stillads, byggevarmer, betonblander, jordbor og minidumper hos Rosendal Tømrer i Hundested. Til private og erhverv. Ring for pris og levering.",
+    h1="Materieludlejning i Hundested, Nordsjælland og København",
+    intro="Har du brug for pålideligt materiel til dit næste projekt? Vi lejer ud til både private og erhverv, og vi hjælper dig med at vælge det rigtige til opgaven.",
     sek=[
-        ("Hvad kan du leje?", [
-            "Vi har stillads og trailer, som vi bruger på vores egne opgaver. Når det står ledigt, kan du leje det til dit eget projekt.",
-            "Ring til os og fortæl hvad du skal bruge, og hvornår. Så finder vi ud af om det kan lade sig gøre, og hvordan afhentning eller levering skal foregå.",
+        ("Udstyr der er klar til brug", [
+            "Uanset om opgaven er lille eller stor, har vi udstyr, der gør arbejdet effektivt og sikkert. Vores materiel er velholdt og klar til brug, og vi tilbyder fleksible lejeperioder.",
+            "Er du i tvivl om, hvad du skal bruge, så ring. Vi er tømrere og bruger selv materiellet, så vi kan rådgive dig om, hvad der passer bedst til opgaven.",
         ]),
-        ("Godt at vide", ('ul', [
+        ("El-værktøj", [
+            "Til indvendige opgaver og finish. Det kan for eksempel være byggestøvsuger, vægsliber og bordrundsav.",
+        ]),
+        ("Bygningsmateriel", [
+            "Til byggepladsen og større opgaver. Det kan for eksempel være rullestillads, betonblander og byggevarmer. Vi har også trailer.",
+        ]),
+        ("Jord- og anlægsmateriel", [
+            "Til haven og terrænet. Det kan for eksempel være jordbor og minidumper.",
+        ]),
+        ("Sådan foregår lejen", ('ul', [
+            "Materiellet lejes pr. kalenderdag. En dag er 8 timers brug",
             "Afhentning fra Engdraget 11 i Hundested efter aftale",
-            "Vi forklarer gerne hvordan stilladset sættes korrekt op",
-            "Pris efter aftale og lejeperiode",
+            "Levering og afhentning kan aftales. Kontakt os for pris",
+            "Benzindrevne maskiner udlejes uden brændstof",
+            "Der lægges et forsikringsgebyr på 7 % oven i den samlede pris",
         ])),
     ],
+    efter_html='<p>Læs de fulde <a href="lejebetingelser.html">lejebetingelser</a>, før du lejer.</p>',
     faq=[
-        ("Kan I levere og stille stilladset op?", "Det kan aftales. Ring og fortæl om opgaven, så finder vi den bedste løsning."),
-        ("Hvor længe kan jeg leje?", "Det afhænger af hvornår vi selv skal bruge materiellet. Vi aftaler en periode, når du ringer."),
+        ("Hvad koster det at leje?", "Prisen afhænger af materiel og lejeperiode. Ring og fortæl hvad du skal bruge, så får du en pris."),
+        ("Kan I levere materiellet?", "Ja, levering og afhentning kan aftales. Kontakt os for pris."),
+        ("Kan jeg afbestille?", "Ja, op til 7 dage før den aftalte booking. Ved afbestilling opkræves et gebyr på 275 kr. inkl. moms. Se lejebetingelserne."),
+        ("Lejer I også ud til private?", "Ja. Vi lejer ud til både private og erhverv."),
     ],
     billede=("images/firmabil.webp", "Rosendal Tømrers trailer med stillads og firmabil med lægter på taget"),
     anm=None),

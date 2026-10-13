@@ -170,7 +170,7 @@ def ydelse(slug):
 </div></section>
 <section class="sec"><div class="container svc-layout">
   {sidebar(slug)}
-  <div class="prose svc-main">{''.join(blokke)}{gal}{anm}
+  <div class="prose svc-main">{''.join(blokke)}{d.get("efter_html", "")}{gal}{anm}
     <h2>Ofte stillede spørgsmål</h2><div class="faq">{faq}</div>
   </div>
 </div></section>
@@ -344,6 +344,46 @@ cookies = f"""
 </div></section>"""
 side("cookies", "Cookiepolitik · Rosendal Tømrer",
      "Sådan bruger rosendal-tomrer.dk cookies, og hvordan du ændrer eller trækker dit samtykke tilbage.", cookies)
+
+# ---------------- LEJEBETINGELSER ----------------
+# Afskrevet fra det gamle sites PDF (Rosendal-Materieludlejning-Betingelser.pdf). Indholdet er
+# bevaret, kun stavning og tegnsaetning er rettet. Det er juridisk tekst, saa aendringer i
+# indholdet skal komme fra Sebastian.
+lb = f"""
+<section class="page-header"><div class="container"><div class="crumb"><a href="index.html">Hjem</a> › <a href="materieludlejning.html">Materieludlejning</a> › Lejebetingelser</div>
+<h1>Lejebetingelser for materieludlejning</h1><p>Gælder for al leje af materiel hos {e(NAVN)}.</p></div></section>
+<section class="sec"><div class="container narrow prose">
+  <h2>1. Lejeperiode</h2>
+  <p>Al udlejning af materiel sker pr. kalenderdag, og én kalenderdag tælles som 8 timer. Bruges det lejede materiel mere end 8 timer, afregnes der én ekstra kalenderdag.</p>
+  <p>Lejet materiel må kun benyttes til arbejde på de lejede dage.</p>
+  <h2>2. Brug og ansvar</h2>
+  <p>Lejet materiel må kun benyttes af lejeren eller af andre, der står skrevet i kontrakten. Udlejer er ikke ansvarlig for personskader eller andet i forbindelse med brugen. Ligeledes er udlejer ikke erstatningsansvarlig for tab som følge af arbejdsafbrydelser, funktionssvigt, driftstab, avancetab eller andet tab.</p>
+  <h2>3. Fremleje og tilbagelevering</h2>
+  <p>Lejer må ikke fremleje eller handle med lejet materiel. Alt lejet materiel skal tilbageleveres på udlejers plads til den aftalte tid og i samme stand. Lejer erklærer sig indforstået med, at udlejer ved lejers svigtende tilbagelevering kan komme i besiddelse af materiellet ved en fogedforretning på lejers regning.</p>
+  <h2>4. Skader, tyveri og selvrisiko</h2>
+  <p>Har lejer beskadiget lejet materiel, forpligter lejer sig til at erstatte bortkommet eller beskadiget materiel. Ved tyveri, brand, hærværk m.v. forpligter lejer sig til en selvrisiko på 35 % af materiellets værdi. Selvrisikoen er oplyst ekskl. moms.</p>
+  <h2>5. Uheld</h2>
+  <p>Udgifter for lejer på grund af uheld er udlejer uvedkommende.</p>
+  <h2>6. Forsikringsgebyr</h2>
+  <p>Der tillægges et almindeligt forsikringsgebyr på 7 % af den samlede pris.</p>
+  <h2>7. Ansvarsforsikring</h2>
+  <p>Udlejer tegner ansvarsforsikring mod det erstatningsansvar, som udlejer ifølge dansk ret måtte ifalde for skader på personer eller ejendom (tingskader). Udlejer påtager sig intet ansvar og ingen risiko, hvorfor dette påhviler lejer. Såfremt udlejer bliver pålagt dette ansvar, er lejer forpligtet til at holde udlejer skadesløs for ethvert ansvar.</p>
+  <h2>Annullering</h2>
+  <p>Annullering af en ordre skal ske senest 7 dage før den aftalte booking. Ved annullering opkræves et gebyr på 220 kr. ekskl. moms (275 kr. inkl. moms).</p>
+  <h2>Kontrol, rengøring og brændstof</h2>
+  <p>I lejeperioden er udlejer forpligtet til at lave sikkerheds- og driftsmæssige kontroller af lejet materiel, herunder væskestand, batterier og løbende rengøring.</p>
+  <p>Ved manglende rengøring opkræves et gebyr på 400 kr. ekskl. moms (500 kr. inkl. moms).</p>
+  <p>Alle benzindrevne maskiner udleveres uden brændstof, og det er lejers ansvar at påfylde korrekte væsker i henhold til anvisningerne.</p>
+  <h2>Ansvar og erstatning</h2>
+  <p>Lejer påtager sig alt ansvar og al risiko ved lejet materiel, herunder skader på personer, ting eller materiel, uanset om skaderne sker som følge af forkerte oplysninger.</p>
+  <p>Lejer er ikke berettiget til at kræve erstatning for tab opstået i forbindelse med brug af materiellet.</p>
+  <h2>Levering og afhentning</h2>
+  <p>Ved levering eller afhentning af lejet materiel: kontakt os for pris.</p>
+  <h2>Udlejer</h2>
+  <p>{e(NAVN)}, {ADR}, {POST} {BY}. CVR {CVR}. Telefon <a href="tel:{TLF_RAW}">{TLF}</a>, <a href="mailto:{MAIL}">{MAIL}</a>.</p>
+</div></section>"""
+side("lejebetingelser", "Lejebetingelser for materieludlejning · Rosendal Tømrer",
+     "Betingelser for leje af materiel hos Rosendal Tømrer Entreprise ApS: lejeperiode, selvrisiko, forsikringsgebyr, annullering og rengøring.", lb)
 
 # ---------------- 404 ----------------
 f404 = f"""<section class="page-header"><div class="container"><h1>Siden findes ikke</h1>
