@@ -11,7 +11,7 @@ Opdateret 07-10-2026 efter gennemgang af det gamle site (skærmbilleder) og Anme
 - 38 anmeldelser, snit 4,9, Elite. 6 ansatte (5/2026). 20 nyeste vises på referencesiden
 - Ekstra ydelser fra Anmeld Håndværker: carporte, garager, udestuer, vinterhaver, trapper, spær, skillevægge, loftsbeklædning, facader, foldedøre, forsatsvinduer, køkkener, garderobeskabe
 
-## Påstande der stadig skal bekræftes
+## Påstande bekræftet af Sebastian 13-10-2026 (står også på Anmeld Håndværker)
 - Tømrermester og uddannet bygningskonstruktør (tegninger leverer han ikke, det er fjernet fra sitet 12-10-2026)
 - Medlem af Dansk Håndværk (vises sammen med byggaranti)
 - Svartid "inden for 24 timer på hverdage"
