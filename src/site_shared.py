@@ -1,5 +1,5 @@
 """Faelles skabelon for rosendal-tomrer.dk. Alt HTML bygges herfra."""
-import json, os, html
+import json, os, html, sys
 
 DOMAIN = "https://rosendal-tomrer.dk"
 NAVN = "Rosendal Tømrer Entreprise ApS"
@@ -20,7 +20,11 @@ ANM_SNIT = "4,9"
 GA_ID = None          # fx "G-XXXXXXX". None = ingen gtag.js (demo)
 FORMSPREE_ID = "mbgdzaov"   # Rosendals egen formular, sender til info@ og er låst til rosendal-tomrer.dk
 COOKIE = "rosendal_samtykke"
-DEMO = False         # True = noindex paa alle sider. Sitet er live paa Simply siden 13-10-2026
+# docs/ er testsiden paa ortwed.github.io og skal have noindex, saa Google kun finder
+# rosendal-tomrer.dk. Live-versionen til Simply bygges med "python3 src/build.py --live",
+# som saetter DEMO = False og lægger sitet i live/ plus rosendal-tomrer-live.zip.
+LIVEBYG = "--live" in sys.argv
+DEMO = not LIVEBYG
 
 AABNING = "Mandag-fredag 07.00-17.00"
 OMRAADE = "Nordsjælland og Hovedstadsområdet"

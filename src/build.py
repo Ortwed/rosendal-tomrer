@@ -1,10 +1,22 @@
-"""Bygger hele sitet til ../docs. Idempotent: kan koeres igen og igen."""
+"""Bygger hele sitet. Idempotent: kan koeres igen og igen.
+
+  python3 src/build.py          testsiden til ../docs (noindex, vises paa ortwed.github.io)
+  python3 src/build.py --live   live-versionen til ../live og ../rosendal-tomrer-live.zip (til Simply)
+"""
 import os, sys
 sys.path.insert(0, os.path.dirname(__file__))
 from site_shared import *
 from indhold import ANMELDELSER as A, YDELSER as Y
 
-OUT = os.path.join(os.path.dirname(__file__), "..", "docs")
+ROD = os.path.join(os.path.dirname(__file__), "..")
+OUT = os.path.join(ROD, "live" if LIVEBYG else "docs")
+if LIVEBYG:
+    import shutil
+    # Live-mappen bygges forfra hver gang, saa der aldrig ligger gamle filer med i zip'en.
+    shutil.rmtree(OUT, ignore_errors=True)
+    shutil.copytree(os.path.join(ROD, "docs", "images"), os.path.join(OUT, "images"))
+    for f in ("favicon.ico", "apple-touch-icon.png"):
+        shutil.copy(os.path.join(ROD, "docs", f), OUT)
 SIDER = []
 
 def skriv(navn, txt):
@@ -468,5 +480,10 @@ skriv("llms.txt", f"""# {NAVN}
 - [Referencer]({DOMAIN}/referencer.html)
 - [Kontakt]({DOMAIN}/kontakt.html)
 """)
-skriv(".nojekyll", "")
+if not LIVEBYG:
+    skriv(".nojekyll", "")  # kun GitHub Pages bruger den
+else:
+    import shutil
+    zipsti = shutil.make_archive(os.path.join(ROD, "rosendal-tomrer-live"), "zip", OUT)
+    print(f"Live-zip: {os.path.abspath(zipsti)}")
 print("Bygget:", len(SIDER), "sider +404 +", len(GAMLE), "redirect-stubs")

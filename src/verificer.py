@@ -1,9 +1,10 @@
 """Tjekker sitet før levering. Exit 1 ved fejl."""
 import os, re, sys, json, itertools
 sys.path.insert(0, os.path.dirname(__file__))
-from site_shared import YDELSER, GA_ID, FORMSPREE_ID, DEMO
+from site_shared import YDELSER, GA_ID, FORMSPREE_ID, DEMO, LIVEBYG
 
-R = os.path.join(os.path.dirname(__file__), "..", "docs")
+# Med --live tjekkes live-mappen (bygget med build.py --live), ellers testsiden i docs/
+R = os.path.join(os.path.dirname(__file__), "..", "live" if LIVEBYG else "docs")
 fejl, adv = [], []
 sider = sorted(f for f in os.listdir(R) if f.endswith(".html"))
 linket = set()
@@ -62,10 +63,10 @@ for a, b in itertools.combinations(O, 2):
     maks = max(maks, ov)
     if ov > 0.30: adv.append(f"ordoverlap {a}/{b}: {ov:.0%}")
 
-if DEMO: adv.append("DEMO = True: noindex på alle sider. Skal være False ved go-live")
+if DEMO: adv.append("testside: noindex på alle sider (live bygges med --live)")
 if not GA_ID: adv.append("GA_ID ikke sat (demo)")
 if not FORMSPREE_ID: adv.append("FORMSPREE_ID ikke sat: formularen sender ikke (demo)")
-for f in ["robots.txt", "sitemap.xml", "llms.txt", "favicon.ico", "apple-touch-icon.png", ".nojekyll", "images/og-forside.jpg"]:
+for f in ["robots.txt", "sitemap.xml", "llms.txt", "favicon.ico", "apple-touch-icon.png", ".htaccess", "images/og-forside.jpg"] + ([] if LIVEBYG else [".nojekyll"]):
     if not os.path.exists(os.path.join(R, f)): fejl.append(f"mangler: {f}")
 
 print(f"{len(sider)} HTML-sider. Største ordoverlap mellem ydelsessider: {maks:.0%}")
