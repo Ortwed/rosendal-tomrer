@@ -1,22 +1,30 @@
 """Bygger hele sitet. Idempotent: kan koeres igen og igen.
 
-  python3 src/build.py          testsiden til ../docs (noindex, vises paa ortwed.github.io)
+  python3 src/build.py          testsiden til ../docs (noindex, vises paa ortwed.github.io/rosendal-tomrer/)
   python3 src/build.py --live   live-versionen til ../live og ../rosendal-tomrer-live.zip (til Simply)
+
+Sider ligger som /<slug>/index.html (pæne URL'er). Al HTML skrives med rodstier (/tag/, /images/x.webp);
+build_page goer dem relative, saa samme HTML virker paa begge adresser.
 """
-import os, sys
+import os, sys, shutil
 sys.path.insert(0, os.path.dirname(__file__))
+import site_shared as S
 from site_shared import *
 from indhold import ANMELDELSER as A, YDELSER as Y
 
 ROD = os.path.join(os.path.dirname(__file__), "..")
 OUT = os.path.join(ROD, "live" if LIVEBYG else "docs")
+BEHOLD = {"images", "favicon.ico", "apple-touch-icon.png", ".git"}
 if LIVEBYG:
-    import shutil
-    # Live-mappen bygges forfra hver gang, saa der aldrig ligger gamle filer med i zip'en.
-    shutil.rmtree(OUT, ignore_errors=True)
+    shutil.rmtree(OUT, ignore_errors=True)       # live-mappen bygges forfra, saa der aldrig ligger gamle filer med
     shutil.copytree(os.path.join(ROD, "docs", "images"), os.path.join(OUT, "images"))
     for f in ("favicon.ico", "apple-touch-icon.png"):
         shutil.copy(os.path.join(ROD, "docs", f), OUT)
+else:
+    for f in os.listdir(OUT):                    # ryd gamle genererede filer (fx de gamle .html-sider)
+        if f in BEHOLD: continue
+        p = os.path.join(OUT, f)
+        shutil.rmtree(p) if os.path.isdir(p) else os.remove(p)
 SIDER = []
 
 def skriv(navn, txt):
@@ -26,10 +34,27 @@ def skriv(navn, txt):
         f.write(txt)
 
 def side(slug, *a, **k):
-    skriv(f"{slug}.html", build_page(slug, *a, **k))
+    skriv("index.html" if slug == "index" else f"{slug}/index.html", build_page(slug, *a, **k))
     if not k.get("noindex"):
         SIDER.append(slug)
 
+# ---------------- PROJEKTER ----------------
+# status 'pending' = skjult (ingen side, intet menupunkt, ikke i sitemap) indtil der er faerdigbilleder
+# og tekst fra Sebastian. Saet status til 'live' og udfyld billeder, tekst og citat, saa bygges siden.
+PROJEKTER = [
+    dict(slug="sommerhus-nyt-tag", titel="Sommerhusrenovering med nyt tag", by="Hundested", maaned="februar 2026", ydelse="sommerhus", anm="brian", status="pending", billeder=[]),
+    dict(slug="tilbygning-gaestehus", titel="Tilbygning og gæstehus", by="Hundested", maaned="november 2025", ydelse="tilbygning", anm="rita", status="pending", billeder=[]),
+    dict(slug="repos-trappe-ipe", titel="Repos-trappe i ipé", by="Veksø", maaned="juli 2026", ydelse="terrasse", anm="morten", status="pending", billeder=[]),
+    dict(slug="nyt-tegltag", titel="Nyt tegltag", by="Hundested", maaned="oktober 2026", ydelse="tag", anm="kenneth", status="pending", billeder=[]),
+    dict(slug="vinduer-og-franske-altaner", titel="Nye vinduer og to franske altaner", by="Hundested", maaned="august 2026", ydelse="vinduer", anm="peter", status="pending", billeder=[]),
+    dict(slug="facadebeklaedning-og-isolering", titel="Facadebeklædning og isolering", by="Ølsted", maaned="september 2025", ydelse="renovering", anm="hanne", status="pending", billeder=[]),
+    dict(slug="terrasse-liseleje", titel="Terrasse i Liseleje", by="Liseleje", maaned="august 2025", ydelse="terrasse", anm="kira", status="pending", billeder=[]),
+    dict(slug="doere-og-vinduer-vejby", titel="Nye døre og vinduer i Vejby", by="Vejby", maaned="april 2026", ydelse="doere", anm="anita", status="pending", billeder=[]),
+]
+LIVE = [p for p in PROJEKTER if p["status"] == "live"]
+S.STATE["projekter"] = bool(LIVE)
+
+# ---------------- FAELLES BYGGEKLODSER ----------------
 LB_JS = """<div class="lb" id="lb" role="dialog" aria-label="Billedvisning"><button class="lb-close" aria-label="Luk">×</button><button class="lb-prev" aria-label="Forrige">‹</button><img alt=""><button class="lb-next" aria-label="Næste">›</button></div>
 <script>(function(){var L=document.getElementById('lb'),I=L.querySelector('img'),B=[].slice.call(document.querySelectorAll('[data-lb]')),i=0;
 function v(n){i=(n+B.length)%B.length;I.src=B[i].src;I.alt=B[i].alt;L.classList.add('open');}
@@ -47,57 +72,75 @@ def rev_kort(key, cls="rev"):
     return (f'<article class="{cls}">{stj(k)}<h3>{e(t)}</h3><blockquote>{e(q)}</blockquote>'
             f'<div class="who"><strong>{e(n)}</strong>, {e(by)} · {e(d)}</div></article>')
 
-def rev_en(key):
-    t, q, n, by, d, k, _ = A[key]
-    return (f'<figure class="rev-one"><blockquote>"{e(q)}"</blockquote>'
-            f'<figcaption class="who">{stj(k)} {e(n)}, {e(by)} · Verificeret anmeldelse på '
-            f'<a href="{ANM_URL}" target="_blank" rel="noopener" style="text-decoration:underline">Anmeld Håndværker</a></figcaption></figure>')
+def rev_mini(keys):
+    if not keys: return ""
+    return (f'<h2>Det siger kunderne</h2><div class="rev-mini">{"".join(rev_kort(k) for k in keys)}</div>'
+            f'<p><a href="/anmeldelser/">Alle anmeldelser</a></p>')
+
+def omr_chips():
+    li = "".join(f'<li><a href="{url(sl)}">{e(n)}</a></li>' if sl else f"<li><span>{e(n)}</span></li>" for sl, n in OMRAADER)
+    return f'<ul class="chips">{li}</ul>'
 
 KORT_TXT = {
-    "doere-og-vinduer": "Vinduer, hoveddøre, terrassedøre, foldedøre og franske altaner.",
-    "terrasse": "Træterrasser, repos og trappetrin, gerne i ipé.",
-    "gaardhaver": "Pergolaer, cykelskure, platforme, bænke og hegn til private og erhverv.",
-    "nybyg": "Tilbygninger, gæstehuse, carporte, garager og nye huse.",
+    "tilbygning": "Mere plads til stuen, et ekstra værelse, et anneks eller en førstesal.",
+    "sommerhus": "Nyt tag, isolering, vinduer, terrasse og altan til sommerhuse.",
     "tag": "Nyt tag, tegltag, tagrenovering og efterisolering.",
-    "renovering": "Vægge, gulve, lofter, facader og sommerhuse.",
+    "vinduer": "Vinduer i træ og træ/alu, målt op, leveret og monteret.",
+    "doere": "Hoveddøre, terrassedøre, foldedøre og franske altaner.",
+    "terrasse": "Træterrasser, repos og trappetrin, gerne i ipé.",
+    "renovering": "Vægge, gulve, lofter, isolering og facader.",
+    "nybyg": "Nye huse, gæstehuse, anneks, carporte og garager.",
+    "pergola-hegn-og-cykelskur": "Pergolaer, hegn, cykelskure og bænke til private og erhverv.",
+    "udlejning-af-stillads-og-trailer": "Lej rullestillads, trailer og værktøj i Hundested.",
 }
 
 def svc_grid():
     out = ['<div class="svc-grid">',
-           f'<a class="svc svc-feature" href="hovedentreprise.html">{HEX}<h3>Hoved- og fagentreprise</h3>'
+           f'<a class="svc svc-feature" href="{url("totalentreprise")}">{HEX}<h3>Totalentreprise og hovedentreprise</h3>'
            '<p>Vi styrer hele byggeriet og koordinerer murer, elektriker, VVS og maler. Én kontrakt, én kontakt og ét ansvar fra start til aflevering.</p>'
-           '<span class="svc-go">Sådan foregår det</span></a>']
-    for s, n in YDELSER:
-        if s in KORT_TXT:
-            out.append(f'<a class="svc" href="{s}.html">{HEX}<h3>{e(n)}</h3><p>{KORT_TXT[s]}</p><span class="svc-go">Læs mere</span></a>')
+           '<span class="svc-go">Læs om entrepriseformerne</span></a>']
+    for sl, n in YDELSER:
+        if sl in KORT_TXT:
+            out.append(f'<a class="svc" href="{url(sl)}">{HEX}<h3>{e(n)}</h3><p>{KORT_TXT[sl]}</p><span class="svc-go">Læs mere</span></a>')
     out.append("</div>")
-    out.append('<p class="svc-more">Vi laver også carporte og garager, udestuer og vinterhaver, skillevægge, loftsbeklædning, facadebeklædning, foldedøre, køkkener og garderobeskabe samt bygningsvedligeholdelse. Vi lejer desuden stillads og trailer ud. Se mere her: <a href="materieludlejning.html">Materieludlejning</a></p>')
+    out.append(f'<p class="svc-more">Vi laver også carporte og garager, udestuer og vinterhaver, skillevægge, loftsbeklædning, facadebeklædning, køkkener og garderobeskabe samt bygningsvedligeholdelse. Ring og hør, hvad vi kan gøre for dig: <a href="tel:{TLF_RAW}">{TLF}</a>.</p>')
     return "\n".join(out)
 
 TRUST = f"""<div class="container trust">
   <div><strong>Tømrermester</strong><span>og uddannet bygningskonstruktør</span></div>
-  <div><strong>{ANM_SNIT} ud af 5</strong><span>{ANM_ANTAL} verificerede anmeldelser</span></div>
+  <div><strong>{ANM_SNIT} ud af 5</strong><span>{ANM_TEKST} anmeldelser på Anmeld Håndværker</span></div>
   <div><strong>Byggaranti</strong><span>Medlem af Dansk Håndværk</span></div>
-  <div><strong>Hele {OMRAADE.split(" og ")[0]}</strong><span>og Hovedstadsområdet, fra base i Hundested</span></div>
+  <div><strong>Hele {OMRAADE}</strong><span>fra værksted og kontor i Hundested</span></div>
 </div>"""
 
-SIGNATUR = """<div class="sign"><img src="images/signatur.png" alt="Sebastian Rosendals underskrift" width="172" height="176" loading="lazy">
+TRUST_LILLE = f"""<section class="sec-mist"><div class="container trust">
+  <div><strong>Tømrermester</strong><span>og uddannet bygningskonstruktør</span></div>
+  <div><strong>Skriftligt tilbud</strong><span>så du kender pris og omfang, før vi går i gang</span></div>
+  <div><strong>Svar inden for 24 timer</strong><span>på hverdage</span></div>
+  <div><strong>{ANM_SNIT} ud af 5</strong><span>{ANM_TEKST} anmeldelser på Anmeld Håndværker</span></div>
+</div></section>"""
+
+SIGNATUR = """<div class="sign"><img src="/images/signatur.png" alt="Sebastian Rosendals underskrift" width="172" height="176" loading="lazy">
   <div><strong>Sebastian Rosendal</strong><span>Indehaver, tømrermester og bygningskonstruktør</span></div></div>"""
+
+def hero_knapper(tag="hero"):
+    return (f'<div class="btn-row"><a class="btn btn-brass" href="tel:{TLF_RAW}">{ICON_TLF}Ring {TLF}</a>'
+            f'<a class="btn btn-ghost" href="/kontakt/" data-cta="{tag}">Få et tilbud</a></div>')
 
 # ---------------- FORSIDE ----------------
 forside = f"""
 <section class="hero">
   <div class="hero-text"><div class="hero-inner">
-    <div class="hero-kicker">Tømrermester og bygningskonstruktør i Hundested</div>
-    <h1>Godt håndværk og aftaler, du kan regne med</h1>
-    <p class="lead">Vi hjælper private og erhverv med alt fra nye vinduer og træterrasser til større renoveringer og tilbygninger. Vi er et fast hold af tømrere, og med Sebastian som din faste kontaktperson er der styr på både håndværket og processen.</p>
+    <div class="hero-kicker">Rosendal Tømrer Entreprise · siden 2021</div>
+    <h1>Tømrermester i Hundested: tilbygning, tag, vinduer og totalentreprise i Nordsjælland</h1>
+    <p class="lead">Vi hjælper private og erhverv med alt fra nye vinduer og træterrasser til renoveringer, tilbygninger og hele byggerier. Sebastian er din faste kontaktperson, og vi er et fast hold af tømrere.</p>
     <div class="btn-row">
       <a class="btn btn-primary" href="tel:{TLF_RAW}">{ICON_TLF}Ring {TLF}</a>
-      <a class="btn btn-ghost" href="kontakt.html">Få et tilbud</a>
+      <a class="btn btn-ghost" href="/kontakt/" data-cta="hero">Få et tilbud</a>
     </div>
-    <div class="hero-proof"><strong>{ANM_SNIT}</strong><div>{STJ} ud af 5 på Anmeld Håndværker<br>{ANM_ANTAL} anmeldelser · Byggaranti · Fast hold af tømrere</div></div>
+    <div class="hero-proof"><strong>{ANM_SNIT}</strong><div>{STJ} ud af 5 på Anmeld Håndværker<br>{ANM_TEKST} anmeldelser · Byggaranti · Fast hold af tømrere</div></div>
   </div></div>
-  <div class="hero-img"><img src="images/terrasse-trapper.webp" srcset="images/terrasse-trapper-720.webp 720w, images/terrasse-trapper.webp 1500w" sizes="(max-width:820px) 100vw, 55vw"
+  <div class="hero-img"><img src="/images/terrasse-trapper.webp" srcset="/images/terrasse-trapper-720.webp 720w, /images/terrasse-trapper.webp 1500w" sizes="(max-width:820px) 100vw, 55vw"
     alt="Terrasse i hårdttræ med siddetrapper, trappe op ad skrænten og hegn af lodrette lister, bygget af Rosendal Tømrer" width="1500" height="1125" fetchpriority="high"></div>
 </section>
 
@@ -106,9 +149,9 @@ forside = f"""
 <section class="sec" id="om"><div class="container about">
   <div class="prose">
     <h2>Et tømrerfirma, der tager hele opgaven</h2>
-    <p>Rosendal Tømrer Entreprise blev stiftet i 2021 af Sebastian Rosendal, der er tømrermester og uddannet bygningskonstruktør. I dag er vi et fast hold af tømrere med værksted og kontor på Engdraget i Hundested. Herfra hjælper vi private og erhverv med tømreropgaver i hele Nordsjælland og Hovedstadsområdet.</p>
+    <p>Rosendal Tømrer Entreprise blev stiftet i 2021 af Sebastian Rosendal, der er tømrermester og uddannet bygningskonstruktør. I dag er vi et fast hold af tømrere med værksted og kontor på Engdraget i Hundested. Herfra hjælper vi private og erhverv med tømreropgaver i hele {OMRAADE}.</p>
     <p>Vi tager os af både de mindre opgaver og de større byggeprojekter. Det kan være alt fra en ny terrassedør til en tilbygning eller en gennemgribende renovering, hvor vi også koordinerer de øvrige håndværkere.</p>
-    <p>For os handler godt håndværk ikke kun om det færdige resultat. Det handler også om, at du ved, hvad der skal ske, at vi holder vores aftaler, og at der bliver taget hånd om tingene undervejs.</p>
+    <p>For os handler godt håndværk ikke kun om det færdige resultat. Det handler også om, at du ved, hvad der skal ske, at vi holder vores aftaler, og at der bliver taget hånd om tingene undervejs. Læs mere <a href="/om-os/" style="text-decoration:underline">om os</a>.</p>
     {SIGNATUR}
   </div>
   <ul class="principles">
@@ -120,17 +163,17 @@ forside = f"""
 </div></section>
 
 <section class="sec sec-mist"><div class="container">
-  <div class="sec-head"><h2>Det laver vi</h2><p>Fra små opgaver til hele byggerier, for private og erhverv. Vælg en ydelse og læs mere om hvordan vi griber den an.</p></div>
+  <div class="sec-head"><h2>Det laver vi</h2><p>Fra små opgaver til hele byggerier, for private og erhverv. Vælg en ydelse og læs mere om, hvordan vi griber den an.</p></div>
   {svc_grid()}
 </div></section>
 
 <section class="sec"><div class="container">
   <div class="rev-top">
-    <div class="sec-head" style="margin:0"><h2>Det siger kunderne</h2><p>Udvalgte, verificerede anmeldelser fra Anmeld Håndværker.</p></div>
-    <div class="rev-score"><span class="big">{ANM_SNIT}</span><span class="meta">{STJ}<br>ud af 5 baseret på {ANM_ANTAL} anmeldelser</span></div>
+    <div class="sec-head" style="margin:0"><h2>Det siger kunderne</h2><p>Udvalgte anmeldelser fra Anmeld Håndværker.</p></div>
+    <div class="rev-score"><span class="big">{ANM_SNIT}</span><span class="meta">{STJ}<br>ud af 5 baseret på {ANM_TEKST} anmeldelser</span></div>
   </div>
   <div class="rev-grid">{rev_kort('brian')}{rev_kort('bitten')}{rev_kort('morten')}</div>
-  <div class="rev-links"><a href="{ANM_URL}" target="_blank" rel="noopener">Læs alle {ANM_ANTAL} anmeldelser her på Anmeldhåndværker.dk</a></div>
+  <div class="rev-links"><a href="/anmeldelser/">Se flere anmeldelser</a><a href="{ANM_URL}" target="_blank" rel="noopener">Læs dem alle på Anmeld Håndværker</a></div>
 </div></section>
 
 <section class="sec sec-sand"><div class="container">
@@ -142,73 +185,179 @@ forside = f"""
     <li><strong>Udførelse og aflevering</strong><span>Vi bygger, holder dig orienteret undervejs og afleverer ryddet op.</span></li>
   </ol>
 </div></section>
+
+<section class="sec"><div class="container narrow prose">
+  <h2>Hvor kører vi?</h2>
+  <p>Vi kører fra værksted og kontor på Engdraget 11 i Hundested og tager opgaver i hele Nordsjælland. Her er de områder, vi dækker.</p>
+  {omr_chips()}
+  <p><a href="/omrader/" style="text-decoration:underline">Se alle områder</a></p>
+</div></section>
 {some()}
 {cta()}
 """
-side("index", "Tømrer i Hundested · Nordsjælland og Hovedstaden",
-     "Tømrermester og bygningskonstruktør i Hundested. Døre og vinduer, terrasser, tag, nybyg og renovering i Nordsjælland og København. 4,9 ud af 5.",
+side("index", "Tømrer i Hundested og Nordsjælland | Rosendal Tømrer",
+     "Tømrermester og bygningskonstruktør i Hundested. Tilbygning, tag, vinduer, terrasser og totalentreprise i Nordsjælland. Ring 50 70 05 05.",
      forside, schemas=[schema_virksomhed()])
 
 # ---------------- YDELSESSIDER ----------------
 def sidebar(aktiv):
-    li = "".join(f'<li><a href="{s}.html"{" class=\"active\"" if s == aktiv else ""}>{e(n)}</a></li>' for s, n in YDELSER)
+    li = "".join(f'<li><a href="{url(sl)}"{" class=\"active\"" if sl == aktiv else ""}>{e(n)}</a></li>' for sl, n in YDELSER)
     return (f'<aside class="side"><ul class="side-nav">{li}</ul>'
             f'<div class="side-cta"><h2>Kontakt os i dag</h2><p>Tømrerarbejde i Hundested. Vi dækker hele {OMRAADE}.</p>'
-            f'<a class="btn btn-brass" href="tel:{TLF_RAW}">{ICON_TLF}{TLF}</a><a class="side-link" href="kontakt.html">Skriv til os</a></div></aside>')
+            f'<a class="btn btn-brass" href="tel:{TLF_RAW}">{ICON_TLF}{TLF}</a><a class="side-link" href="/kontakt/" data-cta="sidebar">Skriv til os</a></div></aside>')
+
+def liste(items):
+    return "<ul>" + "".join(f'<li><a href="{url(x[1])}">{e(x[0])}</a></li>' if isinstance(x, tuple) else f"<li>{e(x)}</li>" for x in items) + "</ul>"
+
+OMR_VERB = {"totalentreprise": "styrer byggerier", "tilbygning": "bygger til huse", "sommerhus": "renoverer sommerhuse", "tag": "skifter tage",
+            "vinduer": "skifter vinduer", "doere": "monterer døre", "terrasse": "bygger terrasser", "renovering": "renoverer boliger",
+            "nybyg": "bygger nyt", "pergola-hegn-og-cykelskur": "bygger pergolaer og hegn", "udlejning-af-stillads-og-trailer": "udlejer materiel"}
 
 def ydelse(slug):
     d = Y[slug]
     navn = dict(YDELSER)[slug]
-    blokke = []
-    for h2, indhold in d["sek"]:
-        if isinstance(indhold, tuple):
-            body = "<ul>" + "".join(f"<li>{e(x)}</li>" for x in indhold[1]) + "</ul>"
+    blokke = [f'<div class="svar"><strong>Kort svar</strong>{e(d["svar"])}</div>']
+    if d.get("billede"):
+        src, alt = d["billede"]
+        blokke.append(f'<figure class="svc-fig"><img src="{src}" alt="{e(alt)}" loading="lazy"></figure>')
+    if d.get("ind"):
+        blokke.append(f'<h2>{e(d.get("ind_h", "Det indgår i opgaven"))}</h2>{liste(d["ind"])}')
+    for h2, c in d["sek"]:
+        if isinstance(c, tuple):
+            body = liste(c[1]) if c[0] == "ul" else c[1]
         else:
-            body = "".join(f"<p>{e(x)}</p>" for x in indhold)
+            body = "".join(f"<p>{e(x)}</p>" for x in c)
         blokke.append(f"<h2>{e(h2)}</h2>{body}")
     if d.get("kategorier"):
-        # Illustrationerne er tegninger, ikke fotos af Sebastians materiel. Alt-teksten
-        # er derfor bare kategorien, saa den ikke lover bestemte maskiner.
+        # Illustrationerne er tegninger, ikke fotos af Sebastians materiel, saa alt-teksten er kun kategorien.
         kort = "".join(f'<div class="mat-kort"><img src="{src}" alt="Illustration: {e(n)}" width="960" height="720" loading="lazy">'
                        f'<h3>{e(n)}</h3><p>{e(t)}</p><ul>{"".join(f"<li>{e(x)}</li>" for x in ting)}</ul></div>'
                        for n, src, t, ting in d["kategorier"])
-        blokke.insert(1, f'<h2>Det kan du leje</h2><div class="mat-grid">{kort}</div>')
-    if d.get("billede"):
-        src, alt = d["billede"]
-        blokke.insert(1, f'<figure class="svc-fig"><img src="{src}" alt="{e(alt)}" loading="lazy"></figure>')
-    gal = ""
+        blokke.append(f'<h2>Det kan du leje</h2><div class="mat-grid">{kort}</div>')
+    if d.get("efter_html"):
+        blokke.append(d["efter_html"])
+    blokke.append("<h2>Sådan foregår det</h2><ol class=\"trin\">" + "".join(f"<li><strong>{e(t)}</strong>{e(x)}</li>" for t, x in d["trin"]) + "</ol>")
+    blokke.append(f'<h2>Hvad påvirker prisen?</h2><p>{e(d["pris_intro"])}</p>{liste(d["pris"])}')
     if d.get("galleri"):
-        gal = '<div class="svc-gal">' + "".join(f'<figure><img src="{s}" alt="{e(a)}" loading="lazy" data-lb></figure>' for s, a in d["galleri"]) + "</div>"
-    anm = rev_en(d["anm"]) if d["anm"] else ""
+        blokke.append('<div class="svc-gal">' + "".join(f'<figure><img src="{s}" alt="{e(a)}" loading="lazy" data-lb></figure>' for s, a in d["galleri"]) + "</div>")
+    blokke.append(rev_mini(d["anm"]))
+    blokke.append(f'<h2>Områder vi dækker</h2><p>Vi {OMR_VERB[slug]} i Hundested og resten af Nordsjælland. '
+                  'Læs om <a href="/tomrer-hundested/">tømrer i Hundested</a>, eller se <a href="/omrader/">alle områder</a>.</p>')
     faq = "".join(f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in d["faq"])
     body = f"""
 <section class="page-header"><div class="container">
-  <div class="crumb"><a href="index.html">Hjem</a> › {e(navn)}</div>
+  {crumb_html([(navn, None)])}
   <h1>{e(d['h1'])}</h1><p>{e(d['intro'])}</p>
-  <div class="btn-row"><a class="btn btn-brass" href="tel:{TLF_RAW}">{ICON_TLF}Ring {TLF}</a><a class="btn btn-ghost" href="kontakt.html">Få et tilbud</a></div>
+  {hero_knapper()}
 </div></section>
 <section class="sec"><div class="container svc-layout">
   {sidebar(slug)}
-  <div class="prose svc-main">{''.join(blokke)}{d.get("efter_html", "")}{gal}{anm}
+  <div class="prose svc-main">{''.join(blokke)}
     <h2>Ofte stillede spørgsmål</h2><div class="faq">{faq}</div>
   </div>
 </div></section>
+{TRUST_LILLE}
 {cta()}"""
-    side(slug, d["title"], d["desc"], body, active=slug, schemas=[schema_virksomhed(), faq_schema(d["faq"])],
-         extra_js=LB_JS if d.get("galleri") else "")
+    side(slug, d["title"], d["desc"], body, active=slug,
+         schemas=[schema_service(navn, d["desc"], slug), faq_schema(d["faq"])],
+         extra_js=LB_JS if d.get("galleri") else "", krummer=[(navn, None)])
 
-for s, _ in YDELSER:
-    ydelse(s)
+for sl, _ in YDELSER:
+    ydelse(sl)
 
-# ---------------- REFERENCER ----------------
-# Projekter med billeder. status 'pending' = skjult indtil der er faerdigbilleder.
-PROJEKTER = [
-    dict(slug="tilbygning-gaestehus", titel="Tilbygning og gæstehus", by="Hundested", status="pending", billeder=[]),
-    dict(slug="sommerhus-nyt-tag", titel="Sommerhus med nyt tag", by="Hundested", status="pending", billeder=[]),
-    dict(slug="repos-ipe", titel="Repos-trappe i ipé", by="Veksø", status="pending", billeder=[]),
+# ---------------- OM OS ----------------
+fakta = [("Firmanavn", NAVN), ("CVR", CVR), ("Adresse", f"{ADR}, {POST} {BY} (værksted og kontor)"), ("Telefon", f'<a href="tel:{TLF_RAW}">{TLF}</a>'),
+         ("E-mail", f'<a href="mailto:{MAIL}">{MAIL}</a>'), ("Åbningstid", AABNING), ("Stiftet", "2021 af Sebastian Rosendal"),
+         ("Dækningsområde", f"Hundested og {OMRAADE}"), ("Svartid", "Inden for 24 timer på hverdage"),
+         ("Anmeldelser", f'{ANM_SNIT} ud af 5 på <a href="{ANM_URL}" target="_blank" rel="noopener">Anmeld Håndværker</a> ({ANM_TEKST} anmeldelser)')]
+fakta_html = "".join(f"<dt>{e(k)}</dt><dd>{v if '<a' in v else e(v)}</dd>" for k, v in fakta)
+omos = f"""
+<section class="page-header"><div class="container">
+  {crumb_html([("Om os", None)])}
+  <h1>Tømrermester og bygningskonstruktør i Hundested</h1>
+  <p>Rosendal Tømrer Entreprise ApS blev stiftet i 2021 af Sebastian Rosendal og har værksted og kontor på Engdraget i Hundested.</p>
+  {hero_knapper()}
+</div></section>
+<section class="sec"><div class="container narrow prose">
+  <h2>Sebastian Rosendal</h2>
+  <p>Sebastian er tømrermester og uddannet bygningskonstruktør. Han stiftede firmaet i 2021 og er den, du taler med fra den første snak til det færdige resultat. Når der er brug for at tænke et projekt igennem, før det bygges, kommer begge uddannelser i spil.</p>
+  {SIGNATUR}
+  <h2>Holdet</h2>
+  <p>Vi er et fast hold af tømrere. Kunderne omtaler vores svende som dygtige og venlige, og det er den måde, vi vil arbejde på. Du får besøg af folk, der kender opgaven, og som tager godt imod dine spørgsmål undervejs. Vi søger løbende tømrersvende, så er du interesseret i at blive en del af holdet, kan du læse mere under <a href="/job/">job</a>.</p>
+  <h2>Sådan arbejder vi</h2>
+  <p>Du har én fast kontaktperson. Du får et skriftligt tilbud, så du ved, hvad der er aftalt, og hvis der opstår noget uventet undervejs, tager vi dialogen med dig, inden vi går videre. Vi arbejder i dit hjem, og det tager vi alvorligt: Vi rydder op efter os og gør os umage for at gøre byggeperioden så overskuelig som muligt.</p>
+  <p>Mange af opgaverne involverer flere fag. Vi har faste samarbejdspartnere inden for murer, el, VVS, maler og kloak og kan tage hele projektet som <a href="/totalentreprise/">hovedentreprise</a>, så du kun har én kontakt.</p>
+  <h2>Fakta om virksomheden</h2>
+  <dl class="fakta">{fakta_html}</dl>
+  <p>Se også hvad kunderne siger under <a href="/anmeldelser/">anmeldelser</a>, eller <a href="/omrader/">se hvilke områder vi dækker</a>.</p>
+</div></section>
+{cta()}"""
+side("om-os", "Om Rosendal Tømrer | Tømrermester i Hundested",
+     "Rosendal Tømrer Entreprise ApS i Hundested: tømrermester og bygningskonstruktør Sebastian Rosendal og et fast hold af tømrere. Ring 50 70 05 05.",
+     omos, schemas=[schema_virksomhed()], krummer=[("Om os", None)])
+
+# ---------------- OMRAADER OG HUNDESTED ----------------
+omr = f"""
+<section class="page-header"><div class="container">
+  {crumb_html([("Områder", None)])}
+  <h1>Områder vi dækker i Nordsjælland</h1>
+  <p>Vi kører fra værksted og kontor på Engdraget 11 i Hundested og tager tømrerarbejde i hele Nordsjælland.</p>
+  {hero_knapper()}
+</div></section>
+<section class="sec"><div class="container narrow prose">
+  <div class="svar"><strong>Kort svar</strong>Rosendal Tømrer Entreprise har base i Hundested og tager opgaver i Hundested, Frederiksværk, Hillerød, Helsinge, Gilleleje og sommerhusområderne langs Nordkysten. Ring på {TLF}, så finder vi ud af, om vi kan tage din opgave.</div>
+  <h2>Her kører vi</h2>
+  {omr_chips()}
+  <p>Hundested har sin egen side, hvor du kan se opgaver fra byen: <a href="/tomrer-hundested/">tømrer i Hundested</a>.</p>
+  <h2>Hvor vi har løst opgaver</h2>
+  <p>Kunderne fortæller selv, hvor og hvad vi har lavet. Vi har blandt andet løst opgaver i Hundested, Frederiksværk, Ølsted, Hillerød, Liseleje og Vejby: tag, vinduer og døre, terrasser, facade og renoveringer. Læs deres anmeldelser under <a href="/anmeldelser/">anmeldelser</a>.</p>
+  <h2>Ligger din opgave et andet sted?</h2>
+  <p>Ring og fortæl, hvor opgaven ligger, og hvad den går ud på. Så hører du, om vi kan tage den.</p>
+  <h2>Det laver vi i hele området</h2>
+  {liste([(n, sl) for sl, n in YDELSER])}
+</div></section>
+{cta()}"""
+side("omrader", "Områder vi dækker i Nordsjælland | Rosendal Tømrer",
+     "Rosendal Tømrer i Hundested tager tømrerarbejde i Hundested, Frederiksværk, Hillerød, Helsinge, Gilleleje og på Nordkysten. Ring 50 70 05 05.",
+     omr, schemas=[schema_virksomhed()], krummer=[("Områder", None)])
+
+hund_faq = [
+    ("Har I værksted i Hundested?", f"Ja. Vi har værksted og kontor på {ADR}, {POST} {BY}."),
+    ("Hvilke områder omkring Hundested kører I til?", "Vi tager opgaver i hele Nordsjælland, blandt andet Frederiksværk, Ølsted, Lynæs, Hillerød, Helsinge, Gilleleje og sommerhusområderne langs Nordkysten."),
+    ("Hvordan får jeg et tilbud i Hundested?", f"Ring på {TLF} på hverdage mellem 07.00 og 17.00, eller send en henvendelse. Vi kommer ud og ser på opgaven og giver et fast skriftligt tilbud."),
+    ("Hvor hurtigt svarer I?", "Vi vender tilbage inden for 24 timer på hverdage."),
+    ("Kan jeg leje stillads eller trailer i Hundested?", "Ja. Rullestillads, trailer og andet materiel kan hentes på Engdraget 11 efter aftale, og levering kan aftales."),
 ]
-LIVE = [p for p in PROJEKTER if p["status"] == "live"]
+hund = f"""
+<section class="page-header"><div class="container">
+  {crumb_html([("Områder", "omrader"), ("Tømrer i Hundested", None)])}
+  <h1>Tømrer i Hundested</h1>
+  <p>Rosendal Tømrer Entreprise har værksted og kontor på Engdraget 11 i Hundested. Vi tager tag, vinduer, døre, terrasser, tilbygninger og renoveringer i Hundested og omegn.</p>
+  {hero_knapper()}
+</div></section>
+<section class="sec"><div class="container narrow prose">
+  <div class="svar"><strong>Kort svar</strong>Rosendal Tømrer Entreprise er et tømrerfirma i Hundested, stiftet i 2021 af tømrermester og bygningskonstruktør Sebastian Rosendal. Vi har værksted og kontor på Engdraget 11 og tager tag, vinduer, døre, terrasser, tilbygninger og renoveringer. Ring på {TLF} på hverdage 07.00 til 17.00.</div>
+  <h2>Vi har base i Hundested</h2>
+  <p>Det er herfra, vi kører ud til opgaverne, og det er her, du kan hente rullestillads, trailer og værktøj, hvis du vil leje. Du ringer til Sebastian og får en fast kontaktperson, der kender dit projekt fra første snak til aflevering.</p>
+  <h2>Opgaver vi har løst i Hundested</h2>
+  <p>Kunderne fortæller selv, hvordan det er gået. Her er et udpluk fra Hundested.</p>
+  <div class="rev-mini">{rev_kort('kenneth')}{rev_kort('peter')}{rev_kort('brian')}</div>
+  <p>Hundestedkunderne har blandt andet også fået en tilbygning og et gæstehus (november 2025), beklædning på vægge og loft samt altan i et sommerhus (august 2025), nyt tag og skillevæg (september 2025) og nyt tag (august 2025). <a href="/anmeldelser/">Læs flere anmeldelser</a>.</p>
+  <h2>De mest relevante ydelser i Hundested</h2>
+  {liste([("Tag: nyt tag og tagrenovering", "tag"), ("Vinduer: nye vinduer og vinduesudskiftning", "vinduer"), ("Tilbygning: mere plads til huset", "tilbygning"), ("Sommerhus: renovering og nyt tag", "sommerhus")])}
+  <h2>Sådan kommer vi i gang</h2>
+  <p>Ring på <a href="tel:{TLF_RAW}">{TLF}</a>, eller send en henvendelse via <a href="/kontakt/" data-cta="omrade">kontaktsiden</a>. Vi kommer ud og ser på opgaven, og du får et fast skriftligt tilbud. Vi svarer inden for 24 timer på hverdage.</p>
+  <p>Vi kører også til resten af Nordsjælland. Se <a href="/omrader/">alle områder</a>.</p>
+  <h2>Ofte stillede spørgsmål</h2>
+  <div class="faq">{''.join(f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in hund_faq)}</div>
+</div></section>
+{cta()}"""
+side("tomrer-hundested", "Tømrer i Hundested | Rosendal Tømrer",
+     "Tømrer i Hundested: tag, vinduer, døre, terrasser, tilbygning og renovering. Tømrermester med værksted på Engdraget 11. Ring 50 70 05 05.",
+     hund, active="tomrer-hundested", schemas=[faq_schema(hund_faq)],
+     krummer=[("Områder", "omrader"), ("Tømrer i Hundested", None)])
 
+# ---------------- ANMELDELSER ----------------
 def case(key):
     t, q, n, by, d, k, typ = A[key]
     return (f'<article class="case"><div class="case-top"><div class="case-type">{e(typ)}</div><h3>{e(t)}</h3></div>'
@@ -217,64 +366,72 @@ def case(key):
 
 proj_html = ""
 if LIVE:
-    kort = "".join(f'<a class="ref-card" href="projekt-{p["slug"]}.html"><div class="ref-card-media"><img src="{p["billeder"][0][0]}" alt="{e(p["billeder"][0][1])}" loading="lazy"></div>'
-                   f'<div class="ref-card-body"><h3>{e(p["titel"])}</h3><p>{e(p["by"])}</p></div></a>' for p in LIVE)
+    kort = "".join(f'<a class="ref-card" href="/projekter/{p["slug"]}/"><div class="ref-card-media"><img src="{p["billeder"][0][0]}" alt="{e(p["billeder"][0][1])}" loading="lazy"></div>'
+                   f'<div class="ref-card-body"><h3>{e(p["titel"])}</h3><p>{e(p["by"])} · {e(p["maaned"])}</p></div></a>' for p in LIVE)
     proj_html = f'<section class="sec"><div class="container"><div class="sec-head"><h2>Projekter</h2></div><div class="refs-grid">{kort}</div></div></section>'
 
 ref_body = f"""
 <section class="page-header"><div class="container">
-  <div class="crumb"><a href="index.html">Hjem</a> › Referencer</div>
-  <h1>Referencer og anmeldelser</h1>
-  <p>Opgaver vi har løst i Nordsjælland og Hovedstadsområdet, fortalt med kundernes egne ord. Her er de {len(A)} nyeste af {ANM_ANTAL} anmeldelser på Anmeld Håndværker.</p>
+  {crumb_html([("Anmeldelser", None)])}
+  <h1>Anmeldelser fra vores kunder</h1>
+  <p>Opgaver vi har løst i Nordsjælland, fortalt med kundernes egne ord. Her er de {len(A)} nyeste af {ANM_TEKST} anmeldelser på Anmeld Håndværker.</p>
 </div></section>
 {proj_html}
 <section class="sec sec-mist"><div class="container">
   <div class="rev-top">
-    <div class="sec-head" style="margin:0"><h2>{ANM_ANTAL} anmeldelser, {ANM_SNIT} i snit</h2><p>Kommunikation, aftaler, pris, tilfredshed og oprydning.</p></div>
+    <div class="sec-head" style="margin:0"><h2>{ANM_TEKST.capitalize()} anmeldelser, {ANM_SNIT} i snit</h2><p>Kommunikation, aftaler, pris, tilfredshed og oprydning.</p></div>
   </div>
   <div class="refs-grid">{''.join(case(k) for k in A)}</div>
   <div class="rev-links"><a href="{ANM_URL}" target="_blank" rel="noopener">Læs alle anmeldelser på Anmeld Håndværker</a><a href="{FB_ANM}" target="_blank" rel="noopener">Anmeldelser på Facebook</a></div>
 </div></section>
 {some()}
 {cta()}"""
-side("referencer", "Referencer og anmeldelser · Rosendal Tømrer",
-     "38 verificerede anmeldelser med et snit på 4,9 ud af 5. Tag, vinduer, terrasser, tilbygning og renovering i Nordsjælland og Hovedstadsområdet.",
-     ref_body, schemas=[schema_virksomhed()])
+side("anmeldelser", "Anmeldelser fra kunder | Rosendal Tømrer",
+     f"{ANM_TEKST.capitalize()} anmeldelser med {ANM_SNIT} i snit på Anmeld Håndværker. Tag, vinduer, terrasser, tilbygning og renovering i Nordsjælland.",
+     ref_body, schemas=[schema_virksomhed()], krummer=[("Anmeldelser", None)])
 
-
-
-for p in LIVE:
+# ---------------- PROJEKTSIDER (kun naar status = live) ----------------
+def projekt_side(p):
+    ydl = dict(YDELSER)[p["ydelse"]]
     imgs = "".join(f'<figure><img src="{s}" alt="{e(a)}" loading="lazy" data-lb></figure>' for s, a in p["billeder"])
-    side(f"projekt-{p['slug']}", f"{p['titel']} · Rosendal Tømrer", p.get("desc", p["titel"]),
-         f'<section class="page-header"><div class="container"><div class="crumb"><a href="referencer.html">Referencer</a></div><h1>{e(p["titel"])}</h1><p>{e(p["by"])}</p></div></section>'
-         f'<section class="sec"><div class="container"><div class="proj-gallery">{imgs}</div></div></section>{cta()}',
-         active="referencer", extra_js=LB_JS)
+    body = (f'<section class="page-header"><div class="container">{crumb_html([("Projekter", "projekter"), (p["titel"], None)])}'
+            f'<h1>{e(p["titel"])}</h1><p>{e(p["by"])} · {e(p["maaned"])}</p></div></section>'
+            f'<section class="sec"><div class="container"><div class="proj-gallery">{imgs}</div></div></section>'
+            f'<section class="sec sec-mist"><div class="container narrow prose">{rev_mini([p["anm"]])}'
+            f'<p>Læs mere om <a href="{url(p["ydelse"])}">{e(ydl.lower())}</a> eller <a href="/tomrer-hundested/">tømrer i Hundested</a>.</p></div></section>{cta()}')
+    side(f"projekter/{p['slug']}", f"{p['titel']} | Rosendal Tømrer", f"{p['titel']} i {p['by']}, {p['maaned']}. Udført af Rosendal Tømrer. Ring 50 70 05 05.",
+         body, active="projekter", extra_js=LB_JS, krummer=[("Projekter", "projekter"), (p["titel"], None)])
 
-# ---------------- JOB ----------------
+if LIVE:
+    kort = "".join(f'<a class="ref-card" href="/projekter/{p["slug"]}/"><div class="ref-card-media"><img src="{p["billeder"][0][0]}" alt="{e(p["billeder"][0][1])}" loading="lazy"></div>'
+                   f'<div class="ref-card-body"><h3>{e(p["titel"])}</h3><p>{e(p["by"])} · {e(p["maaned"])}</p></div></a>' for p in LIVE)
+    side("projekter", "Projekter | Rosendal Tømrer", "Se udvalgte projekter fra Rosendal Tømrer i Hundested og Nordsjælland: tag, vinduer, terrasser, tilbygning og renovering.",
+         f'<section class="page-header"><div class="container">{crumb_html([("Projekter", None)])}<h1>Projekter</h1><p>Udvalgte opgaver, vist med billeder af det færdige resultat.</p></div></section>'
+         f'<section class="sec"><div class="container"><div class="refs-grid">{kort}</div></div></section>{cta()}', krummer=[("Projekter", None)])
+    for p in LIVE:
+        projekt_side(p)
+
+# ---------------- FORMULARER ----------------
 # Ingen honeypot (_gotcha): Formspree's eget spamfilter (Formshield) er nok, og et skjult
 # felt kan blive udfyldt af Chromes autoudfyld, saa en rigtig henvendelse forsvinder.
 # NB: Formshield lagde testbeskeder som "asdasd" i Spam. Test altid med rigtige saetninger.
-# Begge formularer sender til samme Formspree-formular. _subject giver mailen en emnelinje,
-# og feltet "Formular" goer det nemt at sortere i Formspree.
+# Efter afsendelse sendes besoegende til /tak/ (egen side, noindex), hvor maalingen sker.
 FORM_ACTION = f"https://formspree.io/f/{FORMSPREE_ID}" if FORMSPREE_ID else "#"
-# Uden Formspree-ID siger formularen fra i stedet for at vise "Tak". Ellers ligner en
-# ikke-koblet formular (eller en gammel side i browserens cache) en der virker.
-FORM_JS = """<script>(function(){var f=document.getElementById('kf'),k=document.getElementById('kvit');
-f.addEventListener('submit',function(ev){ev.preventDefault();var b=f.querySelector('button[type=submit]');b.disabled=true;b.textContent='Sender...';
-function ok(){f.style.display='none';k.classList.add('vis');if(f.hasAttribute('data-lead')&&typeof gtag==='function'){gtag('event','generate_lead',{'currency':'DKK','value':%(v)s});}}
-if(f.getAttribute('action')==='#'){b.disabled=false;b.textContent='Send';alert('Formularen er ikke koblet til endnu (demo). Ring på 50 70 05 05.');return;}
-fetch(f.action,{method:'POST',body:new FormData(f),headers:{'Accept':'application/json'}}).then(function(r){if(r.ok){ok();}else{throw 0;}})
-.catch(function(){b.disabled=false;b.textContent='Send henvendelse';alert('Formularen kunne ikke sendes. Ring på 50 70 05 05 eller skriv til info@rosendal-tomrer.dk.');});});})();</script>""" % {"v": "0"}
+FORM_JS = """<script>(function(){var f=document.getElementById('kf');
+f.addEventListener('submit',function(ev){ev.preventDefault();var b=f.querySelector('button[type=submit]'),t=b.textContent;b.disabled=true;b.textContent='Sender...';
+if(f.getAttribute('action')==='#'){b.disabled=false;b.textContent=t;alert('Formularen er ikke koblet til endnu (demo). Ring på 50 70 05 05.');return;}
+fetch(f.action,{method:'POST',body:new FormData(f),headers:{'Accept':'application/json'}}).then(function(r){if(r.ok){window.location.href=f.getAttribute('data-tak');}else{throw 0;}})
+.catch(function(){b.disabled=false;b.textContent=t;alert('Formularen kunne ikke sendes. Ring på 50 70 05 05 eller skriv til info@rosendal-tomrer.dk.');});});})();</script>"""
 
 job = f"""
 <section class="page-header"><div class="container">
-  <div class="crumb"><a href="index.html">Hjem</a> › Job</div>
+  {crumb_html([("Job", None)])}
   <h1>Er du vores nye tømrer?</h1>
   <p>Vi søger løbende tømrersvende til holdet. Også selvom der ikke ligger et opslag ude.</p>
 </div></section>
 <section class="sec"><div class="container contact-grid">
   <div class="prose">
-    <img class="job-img" src="images/jobbil.webp" alt="Rosendal Tømrers firmabil ved værkstedet med en kasse i træ" width="587" height="585" loading="lazy">
+    <img class="job-img" src="/images/jobbil.webp" alt="Rosendal Tømrers firmabil ved værkstedet med en kasse i træ" width="587" height="585" loading="lazy">
     <h2>Hvem er vi?</h2>
     <p>Hos Rosendal Tømrer Entreprise er vi kvalitetsbevidste og stolte af vores faglige kunnen. Vi går på arbejde med glæde, fordi vi laver det vi brænder for, og vi lægger vægt på et kammeratligt og tæt sammenhold.</p>
     <p>Vi laver alle former for tømreropgaver, fordi vi kan lide at to dage ikke er ens: tag, døre og vinduer, terrasser, hegn, skure, gårdmiljøer, nybyg og renovering. Alt udføres ud fra kundens ønsker, så det er vigtigt at du er god til at tale med kunderne fra start til slut.</p>
@@ -283,7 +440,7 @@ job = f"""
     <p>Du kan også bare ringe til Sebastian på <a href="tel:{TLF_RAW}">{TLF}</a>.</p>
   </div>
   <div>
-    <form class="kf" id="kf" action="{FORM_ACTION}" method="POST">
+    <form class="kf" id="kf" action="{FORM_ACTION}" method="POST" data-tak="/tak/?f=job">
       <h2>Søg job hos Danmarks fedeste tømrerfirma</h2>
       <p class="sub">Måske er det dig vi lige står og mangler? Send en besked, så vender vi tilbage til dig.</p>
       <input type="hidden" name="Formular" value="Jobansøgning">
@@ -296,19 +453,17 @@ job = f"""
       <div class="f-g"><label for="besk">Besked</label><textarea id="besk" name="Besked" required></textarea></div>
       <button class="btn btn-primary" type="submit">Send ansøgning</button>
     </form>
-    <div class="kvit" id="kvit" role="status"><h2>Tak for din ansøgning</h2><p>Vi har modtaget den og vender tilbage hurtigst muligt.</p></div>
   </div>
 </div></section>
 {cta("Spørgsmål om job?", "Ring til Sebastian og tag en uforpligtende snak.")}"""
-side("job", "Job som tømrer i Nordsjælland · Rosendal Tømrer",
+side("job", "Job som tømrer i Nordsjælland | Rosendal Tømrer",
      "Vi søger løbende tømrersvende til holdet i Hundested. Send en ansøgning via formularen eller ring til Sebastian på 50 70 05 05.", job,
-     extra_js=FORM_JS)
+     extra_js=FORM_JS, krummer=[("Job", None)])
 
-# ---------------- KONTAKT ----------------
 valg = "".join(f"<option>{e(n)}</option>" for _, n in YDELSER) + "<option>Andet</option>"
 kontakt = f"""
 <section class="page-header"><div class="container">
-  <div class="crumb"><a href="index.html">Hjem</a> › Kontakt</div>
+  {crumb_html([("Kontakt", None)])}
   <h1>Få et uforpligtende tilbud</h1>
   <p>Fortæl kort om opgaven, så vender vi tilbage inden for 24 timer på hverdage. Den hurtigste vej er telefonen.</p>
 </div></section>
@@ -323,7 +478,7 @@ kontakt = f"""
       <strong>Vis kort</strong><span>Kortet hentes fra Google Maps, som sætter cookies. Klikker du her, accepterer du det, og kortet vises med det samme.</span></button></div>
   </div>
   <div>
-    <form class="kf" id="kf" action="{FORM_ACTION}" method="POST" data-lead>
+    <form class="kf" id="kf" action="{FORM_ACTION}" method="POST" data-tak="/tak/">
       <input type="hidden" name="Formular" value="Kontakt">
       <input type="hidden" name="_subject" value="Henvendelse via hjemmesiden">
       <h2>Send en henvendelse</h2>
@@ -335,23 +490,32 @@ kontakt = f"""
       <div class="f-g"><label for="mail">E-mail</label><input id="mail" name="_replyto" type="email" required autocomplete="email"></div>
       <div class="f-row">
         <div class="f-g"><label for="type">Type opgave <span>(valgfrit)</span></label><select id="type" name="Type opgave"><option value="">Vælg</option>{valg}</select></div>
-        <div class="f-g"><label for="adr">Adresse på opgaven <span>(valgfrit)</span></label><input id="adr" name="Adresse" autocomplete="street-address"></div>
+        <div class="f-g"><label for="adr">By eller postnummer <span>(valgfrit)</span></label><input id="adr" name="By eller postnummer"></div>
       </div>
       <div class="f-g"><label for="besk">Beskriv opgaven</label><textarea id="besk" name="Beskrivelse" required></textarea></div>
-      <p class="f-note">Har du billeder af opgaven? Send dem gerne til <a href="mailto:{MAIL}">{MAIL}</a> efter du har sendt formularen.</p>
+      <p class="f-note">Har du billeder af opgaven? Send dem gerne til <a href="mailto:{MAIL}">{MAIL}</a>, efter du har sendt formularen.</p>
       <button class="btn btn-primary" type="submit">Send henvendelse</button>
     </form>
-    <div class="kvit" id="kvit" role="status"><h2>Tak for din henvendelse</h2><p>Vi har modtaget den og vender tilbage inden for 24 timer på hverdage. Haster det, så ring på <a href="tel:{TLF_RAW}">{TLF}</a>.</p></div>
   </div>
 </div></section>"""
-
-side("kontakt", "Kontakt Rosendal Tømrer · Ring 50 70 05 05",
+side("kontakt", "Kontakt Rosendal Tømrer | Ring 50 70 05 05",
      "Ring på 50 70 05 05 eller send en henvendelse. Vi vender tilbage inden for 24 timer på hverdage. Engdraget 11, 3390 Hundested.",
-     kontakt, extra_js=FORM_JS, schemas=[schema_virksomhed()])
+     kontakt, extra_js=FORM_JS, schemas=[schema_virksomhed()], krummer=[("Kontakt", None)])
 
-# ---------------- COOKIES ----------------
+TAK_JS = """<script>(function(){var job=/[?&]f=job/.test(location.search);
+if(typeof gtag==='function'){gtag('event','form_submit',{'formular':job?'job':'kontakt'});
+if(!job){gtag('event','generate_lead',{'currency':'DKK','value':0});}}})();</script>"""
+tak = f"""
+<section class="sec tak"><div class="container narrow">
+  <h1>Tak for din henvendelse</h1>
+  <p class="lead" style="color:var(--muted);font-size:1.12rem;margin-top:.8rem">Vi har modtaget den og vender tilbage inden for 24 timer på hverdage. Haster det, så ring på <a href="tel:{TLF_RAW}" style="text-decoration:underline">{TLF}</a>.</p>
+  <div class="btn-row"><a class="btn btn-primary" href="/">Til forsiden</a><a class="btn btn-ghost" href="/anmeldelser/">Læs, hvad kunderne siger</a></div>
+</div></section>"""
+side("tak", "Tak for din henvendelse | Rosendal Tømrer", "Tak for din henvendelse. Vi vender tilbage inden for 24 timer på hverdage.",
+     tak, noindex=True, extra_js=TAK_JS)
+
 cookies = f"""
-<section class="page-header"><div class="container"><div class="crumb"><a href="index.html">Hjem</a> › Cookiepolitik</div>
+<section class="page-header"><div class="container">{crumb_html([("Cookiepolitik", None)])}
 <h1>Cookiepolitik</h1><p>Her kan du se hvilke cookies vi bruger, og hvordan du ændrer dit valg.</p></div></section>
 <section class="sec"><div class="container narrow prose">
   <h2>Hvad er cookies?</h2><p>En cookie er en lille tekstfil, som gemmes i din browser. Vi sætter kun cookies, der ikke er nødvendige, hvis du har sagt ja.</p>
@@ -361,15 +525,13 @@ cookies = f"""
   <h2>Skift dit valg</h2><p>Du kan altid ændre eller trække dit samtykke tilbage via linket "Skift cookieindstillinger" nederst på alle sider.</p>
   <h2>Ansvarlig</h2><p>{e(NAVN)}, {ADR}, {POST} {BY}. CVR {CVR}. <a href="mailto:{MAIL}">{MAIL}</a></p>
 </div></section>"""
-side("cookies", "Cookiepolitik · Rosendal Tømrer",
-     "Sådan bruger rosendal-tomrer.dk cookies, og hvordan du ændrer eller trækker dit samtykke tilbage.", cookies)
+side("cookies", "Cookiepolitik | Rosendal Tømrer",
+     "Sådan bruger rosendal-tomrer.dk cookies, og hvordan du ændrer eller trækker dit samtykke tilbage.", cookies, noindex=True)
 
-# ---------------- LEJEBETINGELSER ----------------
-# Afskrevet fra det gamle sites PDF (Rosendal-Materieludlejning-Betingelser.pdf). Indholdet er
-# bevaret, kun stavning og tegnsaetning er rettet. Det er juridisk tekst, saa aendringer i
-# indholdet skal komme fra Sebastian.
+# Afskrevet fra det gamle sites PDF (Rosendal-Materieludlejning-Betingelser.pdf). Indholdet er bevaret, kun stavning
+# og tegnsaetning er rettet. Det er juridisk tekst, saa aendringer i indholdet skal komme fra Sebastian.
 lb = f"""
-<section class="page-header"><div class="container"><div class="crumb"><a href="index.html">Hjem</a> › <a href="materieludlejning.html">Materieludlejning</a> › Lejebetingelser</div>
+<section class="page-header"><div class="container">{crumb_html([("Leje af stillads og trailer", "udlejning-af-stillads-og-trailer"), ("Lejebetingelser", None)])}
 <h1>Lejebetingelser for materieludlejning</h1><p>Gælder for al leje af materiel hos {e(NAVN)}.</p></div></section>
 <section class="sec"><div class="container narrow prose">
   <h2>1. Lejeperiode</h2>
@@ -401,47 +563,58 @@ lb = f"""
   <h2>Udlejer</h2>
   <p>{e(NAVN)}, {ADR}, {POST} {BY}. CVR {CVR}. Telefon <a href="tel:{TLF_RAW}">{TLF}</a>, <a href="mailto:{MAIL}">{MAIL}</a>.</p>
 </div></section>"""
-side("lejebetingelser", "Lejebetingelser for materieludlejning · Rosendal Tømrer",
-     "Betingelser for leje af materiel hos Rosendal Tømrer Entreprise ApS: lejeperiode, selvrisiko, forsikringsgebyr, annullering og rengøring.", lb)
+side("lejebetingelser", "Lejebetingelser for materieludlejning | Rosendal",
+     "Betingelser for leje af materiel hos Rosendal Tømrer Entreprise ApS: lejeperiode, selvrisiko, forsikringsgebyr, annullering og rengøring.", lb, noindex=True)
 
 # ---------------- 404 ----------------
 f404 = f"""<section class="page-header"><div class="container"><h1>Siden findes ikke</h1>
-<p>Adressen er måske ændret, da vi fik ny hjemmeside. Gå til forsiden, eller ring hvis du leder efter noget bestemt.</p>
-<div class="btn-row"><a class="btn btn-brass" href="index.html">Til forsiden</a><a class="btn btn-ghost" href="tel:{TLF_RAW}">Ring {TLF}</a></div></div></section>
+<p>Adressen er måske ændret, da vi fik ny hjemmeside. Gå til forsiden, eller ring, hvis du leder efter noget bestemt.</p>
+<div class="btn-row"><a class="btn btn-brass" href="/">Til forsiden</a><a class="btn btn-ghost" href="tel:{TLF_RAW}">Ring {TLF}</a></div></div></section>
 <section class="sec"><div class="container">{svc_grid()}</div></section>"""
-skriv("404.html", build_page("404", "Siden findes ikke · Rosendal Tømrer",
-      "Siden findes ikke. Gå til forsiden eller ring på 50 70 05 05.", f404, noindex=True)
-      .replace('href="', 'href="/').replace('href="/http', 'href="http').replace('href="/tel:', 'href="tel:')
-      .replace('href="/mailto:', 'href="mailto:').replace('href="/#', 'href="#')
-      .replace('src="images/', 'src="/images/').replace('url(images/', 'url(/images/'))
+skriv("404.html", build_page("404", "Siden findes ikke | Rosendal Tømrer", "Siden findes ikke. Gå til forsiden eller ring på 50 70 05 05.", f404, noindex=True))
 
-# ---------------- REDIRECT-STUBS for gamle WordPress-URL'er ----------------
-GAMLE = {"doere-vinduer": "doere-og-vinduer.html", "terrasse": "terrasse.html", "gaardhaver": "gaardhaver.html",
-         "nybyg": "nybyg.html", "tag": "tag.html", "renovering": "renovering.html",
-         "materieludlejning": "materieludlejning.html", "job": "job.html", "kontakt": "kontakt.html"}
-for gammel, ny in GAMLE.items():
-    skriv(f"{gammel}/index.html", f"""<!DOCTYPE html><html lang="da"><head><meta charset="UTF-8">
-<title>Siden er flyttet</title><link rel="canonical" href="{DOMAIN}/{ny}"><meta name="robots" content="noindex">
-<meta http-equiv="refresh" content="0; url=../{ny}"></head><body><p>Siden er flyttet til <a href="../{ny}">{ny}</a>.</p></body></html>
+# ---------------- REDIRECTS (gamle URL'er -> nye) ----------------
+# Gamle sider laa som <navn>.html. De oprindelige WordPress-adresser var /<slug>/ og er enten nye sider
+# (terrasse, tag, nybyg, renovering, job, kontakt) eller omdirigeres her. Rigtige 301'ere kommer fra .htaccess paa
+# Simply. Stubbene er reserve (meta refresh + canonical), hvis .htaccess ikke kan bruges, og de virker paa testsiden.
+HTML_GAMLE = {"hovedentreprise.html": "totalentreprise", "doere-og-vinduer.html": "vinduer", "gaardhaver.html": "pergola-hegn-og-cykelskur",
+              "materieludlejning.html": "udlejning-af-stillads-og-trailer", "referencer.html": "anmeldelser", "terrasse.html": "terrasse",
+              "tag.html": "tag", "nybyg.html": "nybyg", "renovering.html": "renovering", "job.html": "job", "kontakt.html": "kontakt",
+              "cookies.html": "cookies", "lejebetingelser.html": "lejebetingelser"}
+WP_GAMLE = {"doere-vinduer": "vinduer", "gaardhaver": "pergola-hegn-og-cykelskur", "materieludlejning": "udlejning-af-stillads-og-trailer"}
+
+def stub(fil, ny, dybde):
+    rel = "../" * dybde + ny + "/"
+    skriv(fil, f"""<!DOCTYPE html><html lang="da"><head><meta charset="UTF-8">
+<title>Siden er flyttet</title><link rel="canonical" href="{DOMAIN}{url(ny)}"><meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="0; url={rel}"></head><body><p>Siden er flyttet til <a href="{rel}">{DOMAIN}{url(ny)}</a>.</p></body></html>
 """)
+for g, n in HTML_GAMLE.items(): stub(g, n, 0)
+for g, n in WP_GAMLE.items(): stub(f"{g}/index.html", n, 1)
 
 # ---------------- .HTACCESS (Simply.com, Apache) ----------------
-# GitHub Pages ignorerer filen. Paa Simply giver den rigtige 301'ere for de gamle URL'er
-# (stubbene ovenfor er reserve), og 410 paa WordPress-stierne, saa Google hurtigt dropper
-# spam-siderne fra infektionen i stedet for at blive ved med at proeve dem.
+# Gamle URL'er foerst og med fuld adresse, saa de kun bruger ét hop. Derefter 410 paa WordPress-stierne (Google dropper
+# spam-siderne fra infektionen hurtigere) og til sidst HTTPS uden www.
+# Maa IKKE indeholde en regel for index.html: DirectoryIndex rammer den internt og giver en endeloes loekke.
 vaert = DOMAIN.split("//")[1]
-skriv(".htaccess", f"""Options -Indexes -MultiViews
+htaccess = f"""Options -Indexes -MultiViews
+DirectoryIndex index.html
 ErrorDocument 404 /404.html
 ErrorDocument 410 /404.html
 
 RewriteEngine On
+# Gamle .html-adresser og WordPress-adresser til de nye sider (301)
+""" + "".join(f"RewriteRule ^{g.replace('.', chr(92) + '.')}$ {DOMAIN}{url(n)} [R=301,L]\n" for g, n in HTML_GAMLE.items()) \
+    + "".join(f"RewriteRule ^{g}/?$ {DOMAIN}{url(n)} [R=301,L]\n" for g, n in WP_GAMLE.items()) + f"""
+# WordPress-rester findes ikke laengere (410)
+RewriteRule ^(wp-admin|wp-content|wp-includes|wp-json)(/.*)?$ - [G,L]
+RewriteRule ^(wp-login\\.php|xmlrpc\\.php|wp-config\\.php)$ - [G,L]
+
+# HTTPS og uden www
 RewriteCond %{{HTTPS}} off [OR]
 RewriteCond %{{HTTP_HOST}} ^www\\. [NC]
 RewriteRule ^(.*)$ https://{vaert}/$1 [R=301,L]
 
-RewriteRule ^(wp-admin|wp-content|wp-includes|wp-json)(/.*)?$ - [G,L]
-RewriteRule ^(wp-login\\.php|xmlrpc\\.php|wp-config\\.php)$ - [G,L]
-""" + "".join(f"RewriteRule ^{g}/?$ /{n} [R=301,L]\n" for g, n in GAMLE.items()) + """
 <IfModule mod_headers.c>
   Header always set X-Content-Type-Options "nosniff"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
@@ -453,37 +626,41 @@ RewriteRule ^(wp-login\\.php|xmlrpc\\.php|wp-config\\.php)$ - [G,L]
   ExpiresByType image/jpeg "access plus 1 month"
   ExpiresByType text/html "access plus 0 seconds"
 </IfModule>
-""")
+"""
+skriv(".htaccess", htaccess)
 
 # ---------------- ROBOTS, SITEMAP, LLMS ----------------
 bots = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "PerplexityBot", "Google-Extended", "ClaudeBot", "Claude-SearchBot", "Applebot-Extended"]
 skriv("robots.txt", "User-agent: *\nAllow: /\n\n" + "".join(f"User-agent: {b}\nAllow: /\n\n" for b in bots) + f"Sitemap: {DOMAIN}/sitemap.xml\n")
-urls = "".join(f"  <url><loc>{DOMAIN}/{'' if s == 'index' else s + '.html'}</loc></url>\n" for s in SIDER)
+urls = "".join(f"  <url><loc>{DOMAIN}{url(s)}</loc><lastmod>{SIDST_OPDATERET}</lastmod></url>\n" for s in SIDER)
 skriv("sitemap.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}</urlset>\n')
-ylist = "\n".join(f"- [{n}]({DOMAIN}/{s}.html)" for s, n in YDELSER)
+ylist = "\n".join(f"- [{n}]({DOMAIN}{url(sl)})" for sl, n in YDELSER)
 skriv("llms.txt", f"""# {NAVN}
 
-> Tømrerfirma i Hundested, stiftet 2021 af tømrermester og bygningskonstruktør Sebastian Norborg Rosendal. Fag- og hovedentrepriser for private og erhverv i Nordsjælland og Hovedstadsområdet: døre og vinduer, terrasser, gårdhaver og gårdmiljøer, nybyg, tag og renovering.
+> Tømrerfirma i Hundested, stiftet 2021 af tømrermester og bygningskonstruktør Sebastian Norborg Rosendal. Fag-, hoved- og totalentrepriser for private og erhverv i Nordsjælland: tilbygning, tag, vinduer og døre, terrasser, sommerhuse, renovering og nybyg.
 
 - Telefon: {TLF}
 - E-mail: {MAIL}
-- Adresse: {ADR}, {POST} {BY}
+- Adresse: {ADR}, {POST} {BY} (værksted og kontor)
 - CVR: {CVR}
-- Anmeldelser: {ANM_SNIT} ud af 5 baseret på {ANM_ANTAL} verificerede anmeldelser ({ANM_URL})
+- Anmeldelser: {ANM_SNIT} ud af 5, {ANM_TEKST} anmeldelser på Anmeld Håndværker ({ANM_URL})
 - Åbningstid: {AABNING}
-- Serviceområde: hele {OMRAADE}, med base i Hundested
+- Serviceområde: Hundested og resten af Nordsjælland, med base på Engdraget 11 i Hundested
 
 ## Ydelser
 {ylist}
 
 ## Andet
-- [Referencer]({DOMAIN}/referencer.html)
-- [Kontakt]({DOMAIN}/kontakt.html)
+- [Om os]({DOMAIN}/om-os/)
+- [Områder]({DOMAIN}/omrader/)
+- [Tømrer i Hundested]({DOMAIN}/tomrer-hundested/)
+- [Anmeldelser]({DOMAIN}/anmeldelser/)
+- [Kontakt]({DOMAIN}/kontakt/)
 """)
+
 if not LIVEBYG:
     skriv(".nojekyll", "")  # kun GitHub Pages bruger den
 else:
-    import shutil
     zipsti = shutil.make_archive(os.path.join(ROD, "rosendal-tomrer-live"), "zip", OUT)
     print(f"Live-zip: {os.path.abspath(zipsti)}")
-print("Bygget:", len(SIDER), "sider +404 +", len(GAMLE), "redirect-stubs")
+print("Bygget:", len(SIDER), "indekserbare sider i", os.path.abspath(OUT))

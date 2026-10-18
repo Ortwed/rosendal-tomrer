@@ -15,7 +15,7 @@ FB = "https://www.facebook.com/profile.php?id=100068776222589"
 FB_ANM = "https://www.facebook.com/profile.php?id=100068776222589&sk=reviews"
 IG = "https://www.instagram.com/rosendaltomrerentrepriseaps/"
 ANM_URL = "https://www.anmeld-haandvaerker.dk/tomrer/rosendal-tomrer-entreprise-aps"
-ANM_ANTAL = 38
+ANM_TEKST = "over 35"   # bevidst ikke et fast tal: profilen viser 39 (18-10-2026), tallet vokser
 ANM_SNIT = "4,9"
 GA_ID = None          # fx "G-XXXXXXX". None = ingen gtag.js (demo)
 FORMSPREE_ID = "mbgdzaov"   # Rosendals egen formular, sender til info@ og er låst til rosendal-tomrer.dk
@@ -27,18 +27,30 @@ LIVEBYG = "--live" in sys.argv
 DEMO = not LIVEBYG
 
 AABNING = "Mandag-fredag 07.00-17.00"
-OMRAADE = "Nordsjælland og Hovedstadsområdet"
+OMRAADE = "Nordsjælland"
 
-YDELSER = [  # (slug, navn i menu og lister). Samme raekkefoelge som paa det gamle site
-    ("doere-og-vinduer", "Døre og vinduer"),
-    ("terrasse", "Terrasse"),
-    ("gaardhaver", "Gårdhaver"),
-    ("nybyg", "Nybyg"),
+YDELSER = [  # (slug, navn i menu, lister og formular). Slug = URL: /<slug>/
+    ("totalentreprise", "Totalentreprise"),
+    ("tilbygning", "Tilbygning"),
+    ("sommerhus", "Sommerhus"),
     ("tag", "Tag"),
+    ("vinduer", "Vinduer"),
+    ("doere", "Døre"),
+    ("terrasse", "Terrasse"),
     ("renovering", "Renovering"),
-    ("hovedentreprise", "Hovedentreprise"),
-    ("materieludlejning", "Materieludlejning"),
+    ("nybyg", "Nybyg"),
+    ("pergola-hegn-og-cykelskur", "Pergola, hegn og cykelskur"),
+    ("udlejning-af-stillads-og-trailer", "Leje af stillads og trailer"),
 ]
+# Omraader inden for aftalt scope. Kun dem med en side faar et link (slug), resten er ren tekst.
+OMRAADER = [("tomrer-hundested", "Hundested"), (None, "Frederiksværk"), (None, "Ølsted"), (None, "Lynæs"),
+            (None, "Hillerød"), (None, "Helsinge"), (None, "Gilleleje"), (None, "Græsted"),
+            (None, "Skævinge"), (None, "Gørløse"), (None, "Liseleje"), (None, "Tisvildeleje"),
+            (None, "Vejby"), (None, "Rågeleje"), (None, "Dronningmølle"), (None, "Tibirke"), (None, "Asserbo")]
+SIDST_OPDATERET = "2026-10-18"   # lastmod i sitemap. Saet til byggedato naar indhold aendres
+
+def url(slug):
+    return "/" if slug == "index" else f"/{slug}/"
 
 def e(s):
     return html.escape(s, quote=True)
@@ -118,7 +130,7 @@ nav a.active::after{content:'';position:absolute;left:0;right:0;bottom:0;height:
 
 /* SIDEHOVED (undersider) */
 .page-header{background:var(--navy);color:#fff;padding:4.2rem 0 3.6rem;position:relative;overflow:hidden}
-.page-header::after{content:'';position:absolute;right:-60px;top:-40px;width:340px;height:390px;background:url(images/hex-hvid.svg) no-repeat center/contain;opacity:.07}
+.page-header::after{content:'';position:absolute;right:-60px;top:-40px;width:340px;height:390px;background:url(/images/hex-hvid.svg) no-repeat center/contain;opacity:.07}
 .page-header .crumb{font-size:.9rem;color:rgba(255,255,255,.7);margin-bottom:.9rem}
 .page-header .crumb a{text-decoration:underline;text-underline-offset:3px}
 .page-header h1{color:#fff;font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem;max-width:20ch}
@@ -212,7 +224,7 @@ nav a.active::after{content:'';position:absolute;left:0;right:0;bottom:0;height:
 .refs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
 .case{background:#fff;border:1px solid var(--line);display:flex;flex-direction:column}
 .case-top{background:var(--navy);color:#fff;padding:1.3rem 1.5rem 1.2rem;position:relative;overflow:hidden}
-.case-top::after{content:'';position:absolute;right:-18px;bottom:-26px;width:90px;height:104px;background:url(images/hex-hvid.svg) no-repeat center/contain;opacity:.12}
+.case-top::after{content:'';position:absolute;right:-18px;bottom:-26px;width:90px;height:104px;background:url(/images/hex-hvid.svg) no-repeat center/contain;opacity:.12}
 .case-type{font-size:.85rem;color:rgba(255,255,255,.72);margin-bottom:.3rem}
 .case-top h3{color:#fff;font-size:1.2rem}
 .case-body{padding:1.4rem 1.5rem 1.6rem;display:flex;flex-direction:column;flex:1}
@@ -396,6 +408,46 @@ footer a:hover{color:#fff;text-decoration:underline}
 @media (max-width:600px){h1,h2,h3{overflow-wrap:break-word}}
 .svc-more{margin-top:1.4rem;color:var(--muted)}
 .svc-more a{color:var(--blue);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+
+/* NAV DROPDOWN, SVARBOKS, FAKTA, PROCES */
+.dd{position:relative}
+.dd summary{list-style:none;cursor:pointer;font-size:.9rem;font-weight:700;padding:.85rem 0;white-space:nowrap;position:relative}
+.dd summary::-webkit-details-marker{display:none}
+.dd summary::after{content:'▾';margin-left:.35rem;font-size:.8rem;color:var(--brass)}
+.dd summary:hover,.dd summary.active{color:var(--blue)}
+.dd summary.active{box-shadow:inset 0 -3px 0 var(--brass)}
+nav .dd-menu{display:block;position:absolute;top:100%;left:-1rem;background:#fff;border:1px solid var(--line);border-top:3px solid var(--brass);min-width:290px;padding:.4rem 0;z-index:200;box-shadow:0 10px 28px rgba(10,30,79,.12)}
+nav .dd-menu a{padding:.55rem 1.2rem;font-weight:600}
+nav .dd-menu a.active::after{display:none}
+nav .dd-menu a.active,nav .dd-menu a:hover{background:var(--mist)}
+.nav-cta{margin-left:auto}
+nav .nav-cta a.btn{padding:.55rem 1.1rem;margin:.3rem 0;display:inline-flex;font-size:.9rem;color:#fff}
+nav .nav-cta a.btn:hover{color:#fff}
+.svar{background:var(--mist);border-left:4px solid var(--brass);padding:1.3rem 1.6rem;margin:0 0 2.2rem;font-size:1.06rem;color:var(--ink)}
+.svar strong{display:block;font-family:var(--head);color:var(--navy);margin-bottom:.35rem;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase}
+.fakta{display:grid;grid-template-columns:max-content 1fr;gap:.55rem 1.6rem;border:1px solid var(--line);border-top:3px solid var(--brass);padding:1.4rem 1.6rem;margin:1.2rem 0 2rem;background:#fff}
+.fakta dt{font-weight:700;color:var(--navy)}
+.fakta dd{margin:0}
+.chips{list-style:none;margin:1rem 0 1.6rem;padding:0;display:flex;flex-wrap:wrap;gap:.5rem}
+.prose .chips li{margin:0}
+.chips a,.chips span{display:block;padding:.4rem .9rem;border:1px solid var(--line);border-radius:999px;font-size:.92rem;background:#fff}
+.chips a{border-color:var(--blue);color:var(--blue);font-weight:700}
+.chips a:hover{background:var(--blue);color:#fff}
+.trin{list-style:none;counter-reset:t;margin:0 0 1.4rem;padding:0}
+.prose .trin li{counter-increment:t;position:relative;padding:0 0 1.1rem 3.2rem;margin:0}
+.trin li::before{content:counter(t);position:absolute;left:0;top:-.1rem;width:2.2rem;height:2.2rem;border-radius:50%;background:var(--blue);color:#fff;font-family:var(--head);font-weight:800;display:grid;place-items:center}
+.trin strong{display:block;color:var(--navy);font-family:var(--head)}
+.rev-mini{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin:1rem 0 2rem}
+.prose .rev-mini .rev{margin:0}
+.tak{text-align:center;padding:5rem 0}
+.tak .btn-row{justify-content:center;margin-top:1.6rem}
+@media (max-width:1140px){
+  .dd summary{padding:.8rem 1.5rem;display:block}
+  nav .dd-menu{position:static;box-shadow:none;border:0;padding:0 0 .4rem 1rem;min-width:0}
+  nav .dd-menu a{padding:.6rem 1.5rem}
+  .nav-cta{margin:0;padding:.5rem 1.5rem 1rem}
+}
+@media (max-width:600px){.fakta{grid-template-columns:1fr;gap:.1rem}.fakta dd{margin-bottom:.7rem}}
 """
 
 ICON_TLF = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>'
@@ -411,27 +463,44 @@ FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
          '&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">')
 
 def schema_virksomhed():
+    # Ingen aggregateRating: Google viser ikke stjerner for en virksomhed, der selv styrer sine anmeldelser.
     return {
         "@context": "https://schema.org", "@type": "GeneralContractor",
-        "@id": DOMAIN + "/#virksomhed", "name": NAVN, "alternateName": KORT,
+        "@id": DOMAIN + "/#virksomhed", "name": NAVN, "legalName": NAVN, "alternateName": KORT,
         "url": DOMAIN + "/", "logo": DOMAIN + "/images/logo.png",
         "image": DOMAIN + "/images/og-forside.jpg",
         "telephone": TLF_RAW, "email": MAIL, "vatID": "DK" + CVR, "taxID": CVR,
         "foundingDate": "2021-03", "founder": {"@type": "Person", "name": "Sebastian Norborg Rosendal",
                                                "jobTitle": "Tømrermester og bygningskonstruktør"},
         "address": {"@type": "PostalAddress", "streetAddress": ADR, "postalCode": POST,
-                    "addressLocality": BY, "addressRegion": "Hovedstaden", "addressCountry": "DK"},
-        "areaServed": [{"@type": "AdministrativeArea", "name": n} for n in
-                       ["Nordsjælland", "Hovedstadsområdet", "Halsnæs", "Hundested", "Frederiksværk",
-                        "Frederikssund", "Hillerød", "Helsinge", "Gribskov", "København"]],
+                    "addressLocality": BY, "addressCountry": "DK"},
+        "areaServed": [{"@type": "Place", "name": n} for _, n in OMRAADER],
         "openingHoursSpecification": [{"@type": "OpeningHoursSpecification",
             "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "07:00", "closes": "17:00"}],
-        "knowsAbout": ["Hovedentreprise", "Fagentreprise", "Nybyg", "Tilbygning", "Tagarbejde",
-                       "Døre og vinduer", "Terrasser", "Carporte", "Renovering"],
-        "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9", "bestRating": "5",
-                            "reviewCount": str(ANM_ANTAL)},
+        "knowsAbout": ["Totalentreprise", "Hovedentreprise", "Fagentreprise", "Tilbygning", "Tagarbejde",
+                       "Vinduer og døre", "Terrasser", "Carporte", "Renovering af sommerhuse"],
         "sameAs": [FB, IG, ANM_URL],
     }
+
+def schema_service(navn, beskrivelse, slug):
+    return {"@context": "https://schema.org", "@type": "Service", "name": navn, "description": beskrivelse,
+            "url": DOMAIN + url(slug), "serviceType": navn,
+            "provider": {"@type": "GeneralContractor", "@id": DOMAIN + "/#virksomhed", "name": NAVN, "url": DOMAIN + "/",
+                         "telephone": TLF_RAW},
+            "areaServed": [{"@type": "Place", "name": n} for _, n in OMRAADER]}
+
+def schema_krummer(krummer):
+    """krummer = [(navn, slug eller None for siden selv)]. Hjem tilfoejes foerst."""
+    liste = [("Hjem", "index")] + list(krummer)
+    return {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": i + 1, "name": n, **({"item": DOMAIN + url(sl)} if sl else {})}
+        for i, (n, sl) in enumerate(liste)]}
+
+def crumb_html(krummer):
+    dele = ['<a href="/">Hjem</a>']
+    for n, sl in krummer:
+        dele.append(f'<a href="{url(sl)}">{e(n)}</a>' if sl else e(n))
+    return '<div class="crumb">' + " › ".join(dele) + "</div>"
 
 def faq_schema(faqs):
     return {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
@@ -449,10 +518,16 @@ gtag('js',new Date());gtag('config','{GA_ID}',{{'anonymize_ip':true}});
 </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>"""
 
+STATE = {"projekter": False}   # saettes af build.py: er der projektsider med faerdigbilleder?
+
 def nav(active):
-    punkter = [("index", "index.html", "Hjem")] + [(sl, f"{sl}.html", n) for sl, n in YDELSER] + [
-        ("referencer", "referencer.html", "Referencer"), ("job", "job.html", "Job"), ("kontakt", "kontakt.html", "Kontakt")]
-    li = "".join(f'<li><a href="{h}"{" class=\"active\"" if k == active else ""}>{e(t)}</a></li>' for k, h, t in punkter)
+    ydl = "".join(f'<li><a href="{url(sl)}"{" class=\"active\"" if sl == active else ""}>{e(n)}</a></li>' for sl, n in YDELSER)
+    yakt = " active" if active in dict(YDELSER) else ""
+    punkter = [("omrader", "Områder")] + ([("projekter", "Projekter")] if STATE["projekter"] else []) + [
+        ("anmeldelser", "Anmeldelser"), ("om-os", "Om os"), ("kontakt", "Kontakt")]
+    li = (f'<li class="dd"><details><summary class="dd-sum{yakt}">Ydelser</summary><ul class="dd-menu">{ydl}</ul></details></li>'
+          + "".join(f'<li><a href="{url(k)}"{" class=\"active\"" if k == active or (k == "omrader" and active == "tomrer-hundested") else ""}>{t}</a></li>' for k, t in punkter)
+          + '<li class="nav-cta"><a class="btn btn-brass" href="/kontakt/" data-cta="menu">Få et tilbud</a></li>')
     return f"""<div class="topbar"><div class="topbar-inner">
   <span>{AABNING}</span><span class="omr">Vi dækker {OMRAADE}</span>
   <div class="social">
@@ -462,7 +537,7 @@ def nav(active):
 </div></div>
 <header>
   <div class="header-inner">
-    <a href="index.html" class="logo"><img src="images/logo.webp" alt="{e(NAVN)}" width="437" height="150"></a>
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="{e(NAVN)}" width="437" height="150"></a>
     <div class="hinfo"><span class="ic">{ICON_PIN}</span><div><strong>{POST} {BY}</strong>{ADR}</div></div>
     <div class="hinfo"><span class="ic">{ICON_MAIL}</span><div><strong>Mail</strong><a href="mailto:{MAIL}">{MAIL}</a></div></div>
     <a class="hdr-tlf" href="tel:{TLF_RAW}">{ICON_TLF}<span>{TLF}</span></a>
@@ -476,7 +551,7 @@ def cta(h="Har I et projekt vi skal se på?",
         p="Ring og fortæl kort om opgaven, eller send en beskrivelse og gerne et par billeder. Vi vender tilbage inden for 24 timer på hverdage."):
     return f"""<section class="cta"><div class="container cta-inner">
   <div><h2>{h}</h2><p>{p}</p></div>
-  <div class="btn-row"><a class="btn btn-brass" href="tel:{TLF_RAW}">{ICON_TLF}Ring {TLF}</a><a class="btn btn-ghost" href="kontakt.html">Skriv til os</a></div>
+  <div class="btn-row"><a class="btn btn-brass" href="tel:{TLF_RAW}">{ICON_TLF}Ring {TLF}</a><a class="btn btn-ghost" href="/kontakt/" data-cta="bund">Få et tilbud</a></div>
 </div></section>"""
 
 def some():
@@ -486,29 +561,31 @@ def some():
 </div></section>"""
 
 def footer():
-    ylinks = "".join(f'<li><a href="{s}.html">{e(n)}</a></li>' for s, n in YDELSER)
+    ylinks = "".join(f'<li><a href="{url(sl)}">{e(n)}</a></li>' for sl, n in YDELSER)
+    proj = '<li><a href="/projekter/">Projekter</a></li>' if STATE["projekter"] else ""
     return f"""<footer><div class="container">
   <div class="f-grid">
     <div>
-      <img class="flogo" src="images/logo-hvid.png" alt="{e(NAVN)}" width="437" height="150">
-      <p>Tømrermester og bygningskonstruktør. Fag- og hovedentrepriser for private og erhverv i hele {OMRAADE}.</p>
+      <img class="flogo" src="/images/logo-hvid.png" alt="{e(NAVN)}" width="437" height="150" loading="lazy">
+      <p>Tømrermester og bygningskonstruktør. Fag-, hoved- og totalentrepriser for private og erhverv i {OMRAADE}.</p>
       <p style="margin-top:1rem">{AABNING}<br>{ADR}, {POST} {BY}<br><a href="tel:{TLF_RAW}">Tlf. {TLF}</a><br><a href="mailto:{MAIL}">{MAIL}</a></p>
     </div>
     <div><h3>Ydelser</h3><ul>{ylinks}</ul></div>
     <div><h3>Virksomheden</h3><ul>
-      <li><a href="referencer.html">Referencer</a></li><li><a href="index.html#om">Om os</a></li>
-      <li><a href="job.html">Job</a></li><li><a href="kontakt.html">Kontakt</a></li>
+      <li><a href="/om-os/">Om os</a></li><li><a href="/anmeldelser/">Anmeldelser</a></li>{proj}
+      <li><a href="/omrader/">Områder</a></li><li><a href="/tomrer-hundested/">Tømrer i Hundested</a></li>
+      <li><a href="/job/">Job</a></li><li><a href="/kontakt/">Kontakt</a></li>
       <li><a href="{FB}" target="_blank" rel="noopener">Facebook</a></li><li><a href="{IG}" target="_blank" rel="noopener">Instagram</a></li>
     </ul></div>
   </div>
   <div class="f-bottom">© 2026 {e(NAVN)} · CVR {CVR}<br>
-    <a href="cookies.html">Cookiepolitik</a> · <button type="button" class="ck-footerlink" onclick="return ckAabn()">Skift cookieindstillinger</button></div>
+    <a href="/cookies/">Cookiepolitik</a> · <a href="/lejebetingelser/">Lejebetingelser</a> · <button type="button" class="ck-footerlink" onclick="return ckAabn()">Skift cookieindstillinger</button></div>
 </div></footer>"""
 
 COOKIE_HTML = """<div class="ck-banner" id="ckBanner" role="dialog" aria-labelledby="ckTitel" aria-describedby="ckBesk">
   <div class="ck-inner">
     <div><h2 id="ckTitel">Cookies på rosendal-tomrer.dk</h2>
-      <p id="ckBesk">Vi bruger cookies til at se hvordan siden bliver brugt og til at måle effekten af vores annoncering. Kortet fra Google Maps på kontaktsiden sætter også cookies. Vælger du "Kun nødvendige", sættes ingen af delene, og siden virker præcis som før. <a href="cookies.html">Læs mere om cookies</a>.</p></div>
+      <p id="ckBesk">Vi bruger cookies til at se hvordan siden bliver brugt og til at måle effekten af vores annoncering. Kortet fra Google Maps på kontaktsiden sætter også cookies. Vælger du "Kun nødvendige", sættes ingen af delene, og siden virker præcis som før. <a href="/cookies/">Læs mere om cookies</a>.</p></div>
     <div class="ck-knapper"><button type="button" class="ck-afvis" onclick="ckSvar('noedvendige')">Kun nødvendige</button><button type="button" class="ck-accept" onclick="ckSvar('alle')">Accepter alle</button></div>
   </div>
 </div>"""
@@ -527,20 +604,41 @@ COOKIE_JS = """<script>
   window.ckAabn=function(){slet();if(b)b.classList.add('vis');return false;};
   var v=laes();if(v===null){if(b)b.classList.add('vis');}else if(v==='alle'){ckKort();}
 })();
-document.addEventListener('click',function(ev){var a=ev.target.closest?ev.target.closest('a[href^="tel:"]'):null;
-  if(a&&typeof gtag==='function'){gtag('event','kontakt_opkald',{'nummer':a.getAttribute('href').slice(4)});}},true);
+document.addEventListener('click',function(ev){var t=ev.target.closest?ev.target.closest('a'):null;if(!t||typeof gtag!=='function')return;
+  var h=t.getAttribute('href')||'';
+  if(h.indexOf('tel:')===0){gtag('event','kontakt_opkald',{'nummer':h.slice(4)});}
+  else if(h.indexOf('mailto:')===0){gtag('event','email_click',{'adresse':h.slice(7)});}
+  else if(t.hasAttribute('data-cta')){gtag('event','cta_click',{'placering':t.getAttribute('data-cta')});}},true);
+(function(){var d=document.querySelector('.dd details');if(!d)return;
+  document.addEventListener('click',function(ev){if(!d.contains(ev.target))d.removeAttribute('open');});
+  document.addEventListener('keydown',function(ev){if(ev.key==='Escape')d.removeAttribute('open');});})();
 </script>""" % {"c": COOKIE}
 
+import re
+
+def relativ(h, dybde):
+    """Siden er skrevet med rodrelative stier (/tag/, /images/x.webp). Her goeres de relative til sidens
+    dybde, saa den samme HTML virker baade paa rosendal-tomrer.dk og paa testsiden under /rosendal-tomrer/."""
+    pre = "../" * dybde
+    fix = lambda sti: (pre + sti) or "./"
+    h = re.sub(r'\b(href|src|data-tak)="/([^"/][^"]*|)"', lambda m: f'{m.group(1)}="{fix(m.group(2))}"', h)
+    h = re.sub(r'srcset="([^"]*)"', lambda m: 'srcset="' + ", ".join(
+        (pre + x.strip()[1:]) if x.strip().startswith("/") else x.strip() for x in m.group(1).split(",")) + '"', h)
+    h = re.sub(r'url\(/([^)]*)\)', lambda m: f"url({pre}{m.group(1)})", h)
+    return h
+
 def build_page(slug, title, desc, body, active=None, schemas=(), og_img="images/og-forside.jpg",
-               noindex=False, extra_js=""):
+               noindex=False, extra_js="", krummer=None):
     if len(title) > 60: raise ValueError(f"{slug}: title {len(title)} tegn")
     if len(desc) > 158: raise ValueError(f"{slug}: description {len(desc)} tegn")
-    path = "" if slug == "index" else f"{slug}.html"
-    url = f"{DOMAIN}/{path}"
+    sti = url(slug) if slug != "404" else "/404.html"
+    full = f"{DOMAIN}{sti}"
+    schemas = list(schemas)
+    if krummer: schemas.append(schema_krummer(krummer))
     ld = "\n".join(f'<script type="application/ld+json">{json.dumps(s, ensure_ascii=False)}</script>' for s in schemas)
     robots = '<meta name="robots" content="noindex, follow">\n' if (noindex or DEMO) else ""
-    canon = "" if noindex else f'<link rel="canonical" href="{url}">\n'
-    return f"""<!DOCTYPE html>
+    canon = "" if noindex else f'<link rel="canonical" href="{full}">\n'
+    html_ = f"""<!DOCTYPE html>
 <html lang="da">
 <head>
 <meta charset="UTF-8">
@@ -548,13 +646,13 @@ def build_page(slug, title, desc, body, active=None, schemas=(), og_img="images/
 {analytics_head()}
 <title>{e(title)}</title>
 <meta name="description" content="{e(desc)}">
-{robots}{canon}<link rel="icon" href="favicon.ico" sizes="any">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+{robots}{canon}<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#1D3D73">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="{e(NAVN)}">
 <meta property="og:locale" content="da_DK">
-<meta property="og:url" content="{url}">
+<meta property="og:url" content="{full}">
 <meta property="og:title" content="{e(title)}">
 <meta property="og:description" content="{e(desc)}">
 <meta property="og:image" content="{DOMAIN}/{og_img}">
@@ -577,3 +675,6 @@ def build_page(slug, title, desc, body, active=None, schemas=(), og_img="images/
 </body>
 </html>
 """
+    if slug == "404":
+        return html_            # vises paa vilkaarlig dybde, saa rodstierne bevares
+    return relativ(html_, 0 if slug == "index" else slug.count("/") + 1)

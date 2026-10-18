@@ -1,7 +1,14 @@
 import os, sys
 from playwright.sync_api import sync_playwright
 R=os.path.abspath(os.path.join(os.path.dirname(__file__),'..','docs'))
-SIDER=[f for f in sorted(os.listdir(R)) if f.endswith('.html')]
+SIDER=[]
+for rod,_,fl in os.walk(R):
+    for f in fl:
+        if f.endswith('.html'):
+            rel=os.path.relpath(os.path.join(rod,f),R)
+            if 'Siden er flyttet' in open(os.path.join(R,rel),encoding='utf-8').read(): continue
+            SIDER.append(rel)
+SIDER.sort()
 VP=[(1440,900),(390,844),(360,800)]
 fejl=0
 os.makedirs('/home/claude/shots',exist_ok=True)
@@ -17,15 +24,16 @@ with sync_playwright() as p:
             if sw>w: print(f'FEJL {f} @{w}: horisontal scroll ({sw}px)'); fejl+=1
             if errs: print(f'FEJL {f} @{w}: JS {errs}'); fejl+=1
             if f=='index.html':
+                pg.evaluate("document.getElementById('ckBanner') && document.getElementById('ckBanner').classList.remove('vis')")
                 # CTA over folden (banner skjult saa vi maaler layoutet)
                 pg.evaluate("document.getElementById('ckBanner').classList.remove('vis')")
                 bot=pg.evaluate("document.querySelector('.hero .btn-primary').getBoundingClientRect().bottom")
                 print(f'index @{w}x{h}: CTA bund {bot:.0f}px', 'OK' if bot<=h else 'UNDER FOLDEN')
                 if bot>h: fejl+=1
                 pg.screenshot(path=f'/home/claude/shots/index-{w}.png',full_page=(w==1440 or w==390))
-            if f in('hovedentreprise.html','kontakt.html','referencer.html') and w in (1440,390):
-                pg.evaluate("document.getElementById('ckBanner').classList.remove('vis')")
-                pg.screenshot(path=f'/home/claude/shots/{f[:-5]}-{w}.png',full_page=True)
+            if f in('totalentreprise/index.html','kontakt/index.html','anmeldelser/index.html','omrader/index.html') and w in (1440,390):
+                pg.evaluate("document.getElementById('ckBanner') && document.getElementById('ckBanner').classList.remove('vis')")
+                pg.screenshot(path=f'/home/claude/shots/{f.split(chr(47))[0]}-{w}.png',full_page=True)
             pg.close()
         ctx.close()
     b.close()

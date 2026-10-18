@@ -1,23 +1,35 @@
 Options -Indexes -MultiViews
+DirectoryIndex index.html
 ErrorDocument 404 /404.html
 ErrorDocument 410 /404.html
 
 RewriteEngine On
+# Gamle .html-adresser og WordPress-adresser til de nye sider (301)
+RewriteRule ^hovedentreprise\.html$ https://rosendal-tomrer.dk/totalentreprise/ [R=301,L]
+RewriteRule ^doere-og-vinduer\.html$ https://rosendal-tomrer.dk/vinduer/ [R=301,L]
+RewriteRule ^gaardhaver\.html$ https://rosendal-tomrer.dk/pergola-hegn-og-cykelskur/ [R=301,L]
+RewriteRule ^materieludlejning\.html$ https://rosendal-tomrer.dk/udlejning-af-stillads-og-trailer/ [R=301,L]
+RewriteRule ^referencer\.html$ https://rosendal-tomrer.dk/anmeldelser/ [R=301,L]
+RewriteRule ^terrasse\.html$ https://rosendal-tomrer.dk/terrasse/ [R=301,L]
+RewriteRule ^tag\.html$ https://rosendal-tomrer.dk/tag/ [R=301,L]
+RewriteRule ^nybyg\.html$ https://rosendal-tomrer.dk/nybyg/ [R=301,L]
+RewriteRule ^renovering\.html$ https://rosendal-tomrer.dk/renovering/ [R=301,L]
+RewriteRule ^job\.html$ https://rosendal-tomrer.dk/job/ [R=301,L]
+RewriteRule ^kontakt\.html$ https://rosendal-tomrer.dk/kontakt/ [R=301,L]
+RewriteRule ^cookies\.html$ https://rosendal-tomrer.dk/cookies/ [R=301,L]
+RewriteRule ^lejebetingelser\.html$ https://rosendal-tomrer.dk/lejebetingelser/ [R=301,L]
+RewriteRule ^doere-vinduer/?$ https://rosendal-tomrer.dk/vinduer/ [R=301,L]
+RewriteRule ^gaardhaver/?$ https://rosendal-tomrer.dk/pergola-hegn-og-cykelskur/ [R=301,L]
+RewriteRule ^materieludlejning/?$ https://rosendal-tomrer.dk/udlejning-af-stillads-og-trailer/ [R=301,L]
+
+# WordPress-rester findes ikke laengere (410)
+RewriteRule ^(wp-admin|wp-content|wp-includes|wp-json)(/.*)?$ - [G,L]
+RewriteRule ^(wp-login\.php|xmlrpc\.php|wp-config\.php)$ - [G,L]
+
+# HTTPS og uden www
 RewriteCond %{HTTPS} off [OR]
 RewriteCond %{HTTP_HOST} ^www\. [NC]
 RewriteRule ^(.*)$ https://rosendal-tomrer.dk/$1 [R=301,L]
-
-RewriteRule ^(wp-admin|wp-content|wp-includes|wp-json)(/.*)?$ - [G,L]
-RewriteRule ^(wp-login\.php|xmlrpc\.php|wp-config\.php)$ - [G,L]
-RewriteRule ^doere-vinduer/?$ /doere-og-vinduer.html [R=301,L]
-RewriteRule ^terrasse/?$ /terrasse.html [R=301,L]
-RewriteRule ^gaardhaver/?$ /gaardhaver.html [R=301,L]
-RewriteRule ^nybyg/?$ /nybyg.html [R=301,L]
-RewriteRule ^tag/?$ /tag.html [R=301,L]
-RewriteRule ^renovering/?$ /renovering.html [R=301,L]
-RewriteRule ^materieludlejning/?$ /materieludlejning.html [R=301,L]
-RewriteRule ^job/?$ /job.html [R=301,L]
-RewriteRule ^kontakt/?$ /kontakt.html [R=301,L]
 
 <IfModule mod_headers.c>
   Header always set X-Content-Type-Options "nosniff"

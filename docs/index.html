@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<title>Tømrer i Hundested · Nordsjælland og Hovedstaden</title>
-<meta name="description" content="Tømrermester og bygningskonstruktør i Hundested. Døre og vinduer, terrasser, tag, nybyg og renovering i Nordsjælland og København. 4,9 ud af 5.">
+<title>Tømrer i Hundested og Nordsjælland | Rosendal Tømrer</title>
+<meta name="description" content="Tømrermester og bygningskonstruktør i Hundested. Tilbygning, tag, vinduer, terrasser og totalentreprise i Nordsjælland. Ring 50 70 05 05.">
 <meta name="robots" content="noindex, follow">
 <link rel="canonical" href="https://rosendal-tomrer.dk/">
 <link rel="icon" href="favicon.ico" sizes="any">
@@ -15,8 +15,8 @@
 <meta property="og:site_name" content="Rosendal Tømrer Entreprise ApS">
 <meta property="og:locale" content="da_DK">
 <meta property="og:url" content="https://rosendal-tomrer.dk/">
-<meta property="og:title" content="Tømrer i Hundested · Nordsjælland og Hovedstaden">
-<meta property="og:description" content="Tømrermester og bygningskonstruktør i Hundested. Døre og vinduer, terrasser, tag, nybyg og renovering i Nordsjælland og København. 4,9 ud af 5.">
+<meta property="og:title" content="Tømrer i Hundested og Nordsjælland | Rosendal Tømrer">
+<meta property="og:description" content="Tømrermester og bygningskonstruktør i Hundested. Tilbygning, tag, vinduer, terrasser og totalentreprise i Nordsjælland. Ring 50 70 05 05.">
 <meta property="og:image" content="https://rosendal-tomrer.dk/images/og-forside.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -377,12 +377,52 @@ footer a:hover{color:#fff;text-decoration:underline}
 @media (max-width:600px){h1,h2,h3{overflow-wrap:break-word}}
 .svc-more{margin-top:1.4rem;color:var(--muted)}
 .svc-more a{color:var(--blue);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+
+/* NAV DROPDOWN, SVARBOKS, FAKTA, PROCES */
+.dd{position:relative}
+.dd summary{list-style:none;cursor:pointer;font-size:.9rem;font-weight:700;padding:.85rem 0;white-space:nowrap;position:relative}
+.dd summary::-webkit-details-marker{display:none}
+.dd summary::after{content:'▾';margin-left:.35rem;font-size:.8rem;color:var(--brass)}
+.dd summary:hover,.dd summary.active{color:var(--blue)}
+.dd summary.active{box-shadow:inset 0 -3px 0 var(--brass)}
+nav .dd-menu{display:block;position:absolute;top:100%;left:-1rem;background:#fff;border:1px solid var(--line);border-top:3px solid var(--brass);min-width:290px;padding:.4rem 0;z-index:200;box-shadow:0 10px 28px rgba(10,30,79,.12)}
+nav .dd-menu a{padding:.55rem 1.2rem;font-weight:600}
+nav .dd-menu a.active::after{display:none}
+nav .dd-menu a.active,nav .dd-menu a:hover{background:var(--mist)}
+.nav-cta{margin-left:auto}
+nav .nav-cta a.btn{padding:.55rem 1.1rem;margin:.3rem 0;display:inline-flex;font-size:.9rem;color:#fff}
+nav .nav-cta a.btn:hover{color:#fff}
+.svar{background:var(--mist);border-left:4px solid var(--brass);padding:1.3rem 1.6rem;margin:0 0 2.2rem;font-size:1.06rem;color:var(--ink)}
+.svar strong{display:block;font-family:var(--head);color:var(--navy);margin-bottom:.35rem;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase}
+.fakta{display:grid;grid-template-columns:max-content 1fr;gap:.55rem 1.6rem;border:1px solid var(--line);border-top:3px solid var(--brass);padding:1.4rem 1.6rem;margin:1.2rem 0 2rem;background:#fff}
+.fakta dt{font-weight:700;color:var(--navy)}
+.fakta dd{margin:0}
+.chips{list-style:none;margin:1rem 0 1.6rem;padding:0;display:flex;flex-wrap:wrap;gap:.5rem}
+.prose .chips li{margin:0}
+.chips a,.chips span{display:block;padding:.4rem .9rem;border:1px solid var(--line);border-radius:999px;font-size:.92rem;background:#fff}
+.chips a{border-color:var(--blue);color:var(--blue);font-weight:700}
+.chips a:hover{background:var(--blue);color:#fff}
+.trin{list-style:none;counter-reset:t;margin:0 0 1.4rem;padding:0}
+.prose .trin li{counter-increment:t;position:relative;padding:0 0 1.1rem 3.2rem;margin:0}
+.trin li::before{content:counter(t);position:absolute;left:0;top:-.1rem;width:2.2rem;height:2.2rem;border-radius:50%;background:var(--blue);color:#fff;font-family:var(--head);font-weight:800;display:grid;place-items:center}
+.trin strong{display:block;color:var(--navy);font-family:var(--head)}
+.rev-mini{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin:1rem 0 2rem}
+.prose .rev-mini .rev{margin:0}
+.tak{text-align:center;padding:5rem 0}
+.tak .btn-row{justify-content:center;margin-top:1.6rem}
+@media (max-width:1140px){
+  .dd summary{padding:.8rem 1.5rem;display:block}
+  nav .dd-menu{position:static;box-shadow:none;border:0;padding:0 0 .4rem 1rem;min-width:0}
+  nav .dd-menu a{padding:.6rem 1.5rem}
+  .nav-cta{margin:0;padding:.5rem 1.5rem 1rem}
+}
+@media (max-width:600px){.fakta{grid-template-columns:1fr;gap:.1rem}.fakta dd{margin-bottom:.7rem}}
 </style>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "GeneralContractor", "@id": "https://rosendal-tomrer.dk/#virksomhed", "name": "Rosendal Tømrer Entreprise ApS", "alternateName": "Rosendal Tømrer", "url": "https://rosendal-tomrer.dk/", "logo": "https://rosendal-tomrer.dk/images/logo.png", "image": "https://rosendal-tomrer.dk/images/og-forside.jpg", "telephone": "+4550700505", "email": "info@rosendal-tomrer.dk", "vatID": "DK42228672", "taxID": "42228672", "foundingDate": "2021-03", "founder": {"@type": "Person", "name": "Sebastian Norborg Rosendal", "jobTitle": "Tømrermester og bygningskonstruktør"}, "address": {"@type": "PostalAddress", "streetAddress": "Engdraget 11", "postalCode": "3390", "addressLocality": "Hundested", "addressRegion": "Hovedstaden", "addressCountry": "DK"}, "areaServed": [{"@type": "AdministrativeArea", "name": "Nordsjælland"}, {"@type": "AdministrativeArea", "name": "Hovedstadsområdet"}, {"@type": "AdministrativeArea", "name": "Halsnæs"}, {"@type": "AdministrativeArea", "name": "Hundested"}, {"@type": "AdministrativeArea", "name": "Frederiksværk"}, {"@type": "AdministrativeArea", "name": "Frederikssund"}, {"@type": "AdministrativeArea", "name": "Hillerød"}, {"@type": "AdministrativeArea", "name": "Helsinge"}, {"@type": "AdministrativeArea", "name": "Gribskov"}, {"@type": "AdministrativeArea", "name": "København"}], "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "07:00", "closes": "17:00"}], "knowsAbout": ["Hovedentreprise", "Fagentreprise", "Nybyg", "Tilbygning", "Tagarbejde", "Døre og vinduer", "Terrasser", "Carporte", "Renovering"], "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9", "bestRating": "5", "reviewCount": "38"}, "sameAs": ["https://www.facebook.com/profile.php?id=100068776222589", "https://www.instagram.com/rosendaltomrerentrepriseaps/", "https://www.anmeld-haandvaerker.dk/tomrer/rosendal-tomrer-entreprise-aps"]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "GeneralContractor", "@id": "https://rosendal-tomrer.dk/#virksomhed", "name": "Rosendal Tømrer Entreprise ApS", "legalName": "Rosendal Tømrer Entreprise ApS", "alternateName": "Rosendal Tømrer", "url": "https://rosendal-tomrer.dk/", "logo": "https://rosendal-tomrer.dk/images/logo.png", "image": "https://rosendal-tomrer.dk/images/og-forside.jpg", "telephone": "+4550700505", "email": "info@rosendal-tomrer.dk", "vatID": "DK42228672", "taxID": "42228672", "foundingDate": "2021-03", "founder": {"@type": "Person", "name": "Sebastian Norborg Rosendal", "jobTitle": "Tømrermester og bygningskonstruktør"}, "address": {"@type": "PostalAddress", "streetAddress": "Engdraget 11", "postalCode": "3390", "addressLocality": "Hundested", "addressCountry": "DK"}, "areaServed": [{"@type": "Place", "name": "Hundested"}, {"@type": "Place", "name": "Frederiksværk"}, {"@type": "Place", "name": "Ølsted"}, {"@type": "Place", "name": "Lynæs"}, {"@type": "Place", "name": "Hillerød"}, {"@type": "Place", "name": "Helsinge"}, {"@type": "Place", "name": "Gilleleje"}, {"@type": "Place", "name": "Græsted"}, {"@type": "Place", "name": "Skævinge"}, {"@type": "Place", "name": "Gørløse"}, {"@type": "Place", "name": "Liseleje"}, {"@type": "Place", "name": "Tisvildeleje"}, {"@type": "Place", "name": "Vejby"}, {"@type": "Place", "name": "Rågeleje"}, {"@type": "Place", "name": "Dronningmølle"}, {"@type": "Place", "name": "Tibirke"}, {"@type": "Place", "name": "Asserbo"}], "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "07:00", "closes": "17:00"}], "knowsAbout": ["Totalentreprise", "Hovedentreprise", "Fagentreprise", "Tilbygning", "Tagarbejde", "Vinduer og døre", "Terrasser", "Carporte", "Renovering af sommerhuse"], "sameAs": ["https://www.facebook.com/profile.php?id=100068776222589", "https://www.instagram.com/rosendaltomrerentrepriseaps/", "https://www.anmeld-haandvaerker.dk/tomrer/rosendal-tomrer-entreprise-aps"]}</script>
 </head>
 <body>
 <div class="topbar"><div class="topbar-inner">
-  <span>Mandag-fredag 07.00-17.00</span><span class="omr">Vi dækker Nordsjælland og Hovedstadsområdet</span>
+  <span>Mandag-fredag 07.00-17.00</span><span class="omr">Vi dækker Nordsjælland</span>
   <div class="social">
     <a href="https://www.facebook.com/profile.php?id=100068776222589" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.8c0-.9.3-1.5 1.6-1.5h1.7V3.4c-.3 0-1.3-.1-2.5-.1-2.4 0-4.1 1.5-4.1 4.2v2.3H7.5V13h2.7v8z"/></svg></a>
     <a href="https://www.instagram.com/rosendaltomrerentrepriseaps/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7.3A4.7 4.7 0 1 0 16.7 12 4.7 4.7 0 0 0 12 7.3zm0 7.8a3.1 3.1 0 1 1 3.1-3.1 3.1 3.1 0 0 1-3.1 3.1zm6-8a1.1 1.1 0 1 1-1.1-1.1A1.1 1.1 0 0 1 18 7.1zM21.9 8.2a5.5 5.5 0 0 0-1.5-3.9 5.5 5.5 0 0 0-3.9-1.5C15 2.7 9 2.7 7.5 2.8a5.5 5.5 0 0 0-3.9 1.5 5.5 5.5 0 0 0-1.5 3.9C2 9.7 2 14.3 2.1 15.8a5.5 5.5 0 0 0 1.5 3.9 5.5 5.5 0 0 0 3.9 1.5c1.5.1 7.5.1 9 0a5.5 5.5 0 0 0 3.9-1.5 5.5 5.5 0 0 0 1.5-3.9c.1-1.5.1-6.1 0-7.6zm-2 9.2a3.1 3.1 0 0 1-1.8 1.8c-1.2.5-4.1.4-5.4.4s-4.2.1-5.4-.4a3.1 3.1 0 0 1-1.8-1.8c-.5-1.2-.4-4.1-.4-5.4s-.1-4.2.4-5.4a3.1 3.1 0 0 1 1.8-1.8C8.5 4.3 11.4 4.4 12.7 4.4s4.2-.1 5.4.4a3.1 3.1 0 0 1 1.8 1.8c.5 1.2.4 4.1.4 5.4s.1 4.2-.4 5.4z"/></svg></a>
@@ -390,27 +430,27 @@ footer a:hover{color:#fff;text-decoration:underline}
 </div></div>
 <header>
   <div class="header-inner">
-    <a href="index.html" class="logo"><img src="images/logo.webp" alt="Rosendal Tømrer Entreprise ApS" width="437" height="150"></a>
+    <a href="./" class="logo"><img src="images/logo.webp" alt="Rosendal Tømrer Entreprise ApS" width="437" height="150"></a>
     <div class="hinfo"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 14.5 9 2.5 2.5 0 0 1 12 11.5z"/></svg></span><div><strong>3390 Hundested</strong>Engdraget 11</div></div>
     <div class="hinfo"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18a1 1 0 0 1 1 1v.4l-10 6.2L2 6.4V6a1 1 0 0 1 1-1zm-1 3.7 10 6.2 10-6.2V18a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/></svg></span><div><strong>Mail</strong><a href="mailto:info@rosendal-tomrer.dk">info@rosendal-tomrer.dk</a></div></div>
     <a class="hdr-tlf" href="tel:+4550700505"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg><span>50 70 05 05</span></a>
     <button class="menu-toggle" type="button" aria-label="Åbn menu" aria-controls="mainnav" aria-expanded="false"
       onclick="var n=document.getElementById('mainnav');n.classList.toggle('open');this.setAttribute('aria-expanded',n.classList.contains('open'))">☰</button>
   </div>
-  <div class="menubar"><div class="menubar-inner"><nav id="mainnav" aria-label="Hovedmenu"><ul><li><a href="index.html" class="active">Hjem</a></li><li><a href="doere-og-vinduer.html">Døre og vinduer</a></li><li><a href="terrasse.html">Terrasse</a></li><li><a href="gaardhaver.html">Gårdhaver</a></li><li><a href="nybyg.html">Nybyg</a></li><li><a href="tag.html">Tag</a></li><li><a href="renovering.html">Renovering</a></li><li><a href="hovedentreprise.html">Hovedentreprise</a></li><li><a href="materieludlejning.html">Materieludlejning</a></li><li><a href="referencer.html">Referencer</a></li><li><a href="job.html">Job</a></li><li><a href="kontakt.html">Kontakt</a></li></ul></nav></div></div>
+  <div class="menubar"><div class="menubar-inner"><nav id="mainnav" aria-label="Hovedmenu"><ul><li class="dd"><details><summary class="dd-sum">Ydelser</summary><ul class="dd-menu"><li><a href="totalentreprise/">Totalentreprise</a></li><li><a href="tilbygning/">Tilbygning</a></li><li><a href="sommerhus/">Sommerhus</a></li><li><a href="tag/">Tag</a></li><li><a href="vinduer/">Vinduer</a></li><li><a href="doere/">Døre</a></li><li><a href="terrasse/">Terrasse</a></li><li><a href="renovering/">Renovering</a></li><li><a href="nybyg/">Nybyg</a></li><li><a href="pergola-hegn-og-cykelskur/">Pergola, hegn og cykelskur</a></li><li><a href="udlejning-af-stillads-og-trailer/">Leje af stillads og trailer</a></li></ul></details></li><li><a href="omrader/">Områder</a></li><li><a href="anmeldelser/">Anmeldelser</a></li><li><a href="om-os/">Om os</a></li><li><a href="kontakt/">Kontakt</a></li><li class="nav-cta"><a class="btn btn-brass" href="kontakt/" data-cta="menu">Få et tilbud</a></li></ul></nav></div></div>
 </header>
 <main>
 
 <section class="hero">
   <div class="hero-text"><div class="hero-inner">
-    <div class="hero-kicker">Tømrermester og bygningskonstruktør i Hundested</div>
-    <h1>Godt håndværk og aftaler, du kan regne med</h1>
-    <p class="lead">Vi hjælper private og erhverv med alt fra nye vinduer og træterrasser til større renoveringer og tilbygninger. Vi er et fast hold af tømrere, og med Sebastian som din faste kontaktperson er der styr på både håndværket og processen.</p>
+    <div class="hero-kicker">Rosendal Tømrer Entreprise · siden 2021</div>
+    <h1>Tømrermester i Hundested: tilbygning, tag, vinduer og totalentreprise i Nordsjælland</h1>
+    <p class="lead">Vi hjælper private og erhverv med alt fra nye vinduer og træterrasser til renoveringer, tilbygninger og hele byggerier. Sebastian er din faste kontaktperson, og vi er et fast hold af tømrere.</p>
     <div class="btn-row">
       <a class="btn btn-primary" href="tel:+4550700505"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>Ring 50 70 05 05</a>
-      <a class="btn btn-ghost" href="kontakt.html">Få et tilbud</a>
+      <a class="btn btn-ghost" href="kontakt/" data-cta="hero">Få et tilbud</a>
     </div>
-    <div class="hero-proof"><strong>4,9</strong><div><span class="stars" aria-hidden="true">★★★★★</span> ud af 5 på Anmeld Håndværker<br>38 anmeldelser · Byggaranti · Fast hold af tømrere</div></div>
+    <div class="hero-proof"><strong>4,9</strong><div><span class="stars" aria-hidden="true">★★★★★</span> ud af 5 på Anmeld Håndværker<br>over 35 anmeldelser · Byggaranti · Fast hold af tømrere</div></div>
   </div></div>
   <div class="hero-img"><img src="images/terrasse-trapper.webp" srcset="images/terrasse-trapper-720.webp 720w, images/terrasse-trapper.webp 1500w" sizes="(max-width:820px) 100vw, 55vw"
     alt="Terrasse i hårdttræ med siddetrapper, trappe op ad skrænten og hegn af lodrette lister, bygget af Rosendal Tømrer" width="1500" height="1125" fetchpriority="high"></div>
@@ -418,17 +458,17 @@ footer a:hover{color:#fff;text-decoration:underline}
 
 <section class="sec-mist"><div class="container trust">
   <div><strong>Tømrermester</strong><span>og uddannet bygningskonstruktør</span></div>
-  <div><strong>4,9 ud af 5</strong><span>38 verificerede anmeldelser</span></div>
+  <div><strong>4,9 ud af 5</strong><span>over 35 anmeldelser på Anmeld Håndværker</span></div>
   <div><strong>Byggaranti</strong><span>Medlem af Dansk Håndværk</span></div>
-  <div><strong>Hele Nordsjælland</strong><span>og Hovedstadsområdet, fra base i Hundested</span></div>
+  <div><strong>Hele Nordsjælland</strong><span>fra værksted og kontor i Hundested</span></div>
 </div></section>
 
 <section class="sec" id="om"><div class="container about">
   <div class="prose">
     <h2>Et tømrerfirma, der tager hele opgaven</h2>
-    <p>Rosendal Tømrer Entreprise blev stiftet i 2021 af Sebastian Rosendal, der er tømrermester og uddannet bygningskonstruktør. I dag er vi et fast hold af tømrere med værksted og kontor på Engdraget i Hundested. Herfra hjælper vi private og erhverv med tømreropgaver i hele Nordsjælland og Hovedstadsområdet.</p>
+    <p>Rosendal Tømrer Entreprise blev stiftet i 2021 af Sebastian Rosendal, der er tømrermester og uddannet bygningskonstruktør. I dag er vi et fast hold af tømrere med værksted og kontor på Engdraget i Hundested. Herfra hjælper vi private og erhverv med tømreropgaver i hele Nordsjælland.</p>
     <p>Vi tager os af både de mindre opgaver og de større byggeprojekter. Det kan være alt fra en ny terrassedør til en tilbygning eller en gennemgribende renovering, hvor vi også koordinerer de øvrige håndværkere.</p>
-    <p>For os handler godt håndværk ikke kun om det færdige resultat. Det handler også om, at du ved, hvad der skal ske, at vi holder vores aftaler, og at der bliver taget hånd om tingene undervejs.</p>
+    <p>For os handler godt håndværk ikke kun om det færdige resultat. Det handler også om, at du ved, hvad der skal ske, at vi holder vores aftaler, og at der bliver taget hånd om tingene undervejs. Læs mere <a href="om-os/" style="text-decoration:underline">om os</a>.</p>
     <div class="sign"><img src="images/signatur.png" alt="Sebastian Rosendals underskrift" width="172" height="176" loading="lazy">
   <div><strong>Sebastian Rosendal</strong><span>Indehaver, tømrermester og bygningskonstruktør</span></div></div>
   </div>
@@ -441,26 +481,30 @@ footer a:hover{color:#fff;text-decoration:underline}
 </div></section>
 
 <section class="sec sec-mist"><div class="container">
-  <div class="sec-head"><h2>Det laver vi</h2><p>Fra små opgaver til hele byggerier, for private og erhverv. Vælg en ydelse og læs mere om hvordan vi griber den an.</p></div>
+  <div class="sec-head"><h2>Det laver vi</h2><p>Fra små opgaver til hele byggerier, for private og erhverv. Vælg en ydelse og læs mere om, hvordan vi griber den an.</p></div>
   <div class="svc-grid">
-<a class="svc svc-feature" href="hovedentreprise.html"><svg class="hex" viewBox="0 0 30 34" aria-hidden="true"><path d="M15 0l15 8.5v17L15 34 0 25.5v-17z"/></svg><h3>Hoved- og fagentreprise</h3><p>Vi styrer hele byggeriet og koordinerer murer, elektriker, VVS og maler. Én kontrakt, én kontakt og ét ansvar fra start til aflevering.</p><span class="svc-go">Sådan foregår det</span></a>
-<a class="svc" href="doere-og-vinduer.html"><svg class="hex" viewBox="0 0 30 34" aria-hidden="true"><path d="M15 0l15 8.5v17L15 34 0 25.5v-17z"/></svg><h3>Døre og vinduer</h3><p>Vinduer, hoveddøre, terrassedøre, foldedøre og franske altaner.</p><span class="svc-go">Læs mere</span></a>
-<a class="svc" href="terrasse.html"><svg class="hex" viewBox="0 0 30 34" aria-hidden="true"><path d="M15 0l15 8.5v17L15 34 0 25.5v-17z"/></svg><h3>Terrasse</h3><p>Træterrasser, repos og trappetrin, gerne i ipé.</p><span class="svc-go">Læs mere</span></a>
-<a class="svc" href="gaardhaver.html"><svg class="hex" viewBox="0 0 30 34" aria-hidden="true"><path d="M15 0l15 8.5v17L15 34 0 25.5v-17z"/></svg><h3>Gårdhaver</h3><p>Pergolaer, cykelskure, platforme, bænke og hegn til private og erhverv.</p><span class="svc-go">Læs mere</span></a>
-<a class="svc" href="nybyg.html"><svg class="hex" viewBox="0 0 30 34" aria-hidden="true"><path d="M15 0l15 8.5v17L15 34 0 25.5v-17z"/></svg><h3>Nybyg</h3><p>Tilbygninger, gæstehuse, carporte, garager og nye huse.</p><span class="svc-go">Læs mere</span></a>
-<a class="svc" href="tag.html"><svg class="hex" viewBox="0 0 30 34" aria-hidden="true"><path d="M15 0l15 8.5v17L15 34 0 25.5v-17z"/></svg><h3>Tag</h3><p>Nyt tag, tegltag, tagrenovering og efterisolering.</p><span class="svc-go">Læs mere</span></a>
-<a class="svc" href="renovering.html"><svg class="hex" viewBox="0 0 30 34" aria-hidden="true"><path d="M15 0l15 8.5v17L15 34 0 25.5v-17z"/></svg><h3>Renovering</h3><p>Vægge, gulve, lofter, facader og sommerhuse.</p><span class="svc-go">Læs mere</span></a>
+<a class="svc svc-feature" href="totalentreprise/"><svg class="hex" viewBox="0 0 30 34" aria-hidden="true"><path d="M15 0l15 8.5v17L15 34 0 25.5v-17z"/></svg><h3>Totalentreprise og hovedentreprise</h3><p>Vi styrer hele byggeriet og koordinerer murer, elektriker, VVS og maler. Én kontrakt, én kontakt og ét ansvar fra start til aflevering.</p><span class="svc-go">Læs om entrepriseformerne</span></a>
+<a class="svc" href="tilbygning/"><svg class="hex" viewBox="0 0 30 34" aria-hidden="true"><path d="M15 0l15 8.5v17L15 34 0 25.5v-17z"/></svg><h3>Tilbygning</h3><p>Mere plads til stuen, et ekstra værelse, et anneks eller en førstesal.</p><span class="svc-go">Læs mere</span></a>
+<a class="svc" href="sommerhus/"><svg class="hex" viewBox="0 0 30 34" aria-hidden="true"><path d="M15 0l15 8.5v17L15 34 0 25.5v-17z"/></svg><h3>Sommerhus</h3><p>Nyt tag, isolering, vinduer, terrasse og altan til sommerhuse.</p><span class="svc-go">Læs mere</span></a>
+<a class="svc" href="tag/"><svg class="hex" viewBox="0 0 30 34" aria-hidden="true"><path d="M15 0l15 8.5v17L15 34 0 25.5v-17z"/></svg><h3>Tag</h3><p>Nyt tag, tegltag, tagrenovering og efterisolering.</p><span class="svc-go">Læs mere</span></a>
+<a class="svc" href="vinduer/"><svg class="hex" viewBox="0 0 30 34" aria-hidden="true"><path d="M15 0l15 8.5v17L15 34 0 25.5v-17z"/></svg><h3>Vinduer</h3><p>Vinduer i træ og træ/alu, målt op, leveret og monteret.</p><span class="svc-go">Læs mere</span></a>
+<a class="svc" href="doere/"><svg class="hex" viewBox="0 0 30 34" aria-hidden="true"><path d="M15 0l15 8.5v17L15 34 0 25.5v-17z"/></svg><h3>Døre</h3><p>Hoveddøre, terrassedøre, foldedøre og franske altaner.</p><span class="svc-go">Læs mere</span></a>
+<a class="svc" href="terrasse/"><svg class="hex" viewBox="0 0 30 34" aria-hidden="true"><path d="M15 0l15 8.5v17L15 34 0 25.5v-17z"/></svg><h3>Terrasse</h3><p>Træterrasser, repos og trappetrin, gerne i ipé.</p><span class="svc-go">Læs mere</span></a>
+<a class="svc" href="renovering/"><svg class="hex" viewBox="0 0 30 34" aria-hidden="true"><path d="M15 0l15 8.5v17L15 34 0 25.5v-17z"/></svg><h3>Renovering</h3><p>Vægge, gulve, lofter, isolering og facader.</p><span class="svc-go">Læs mere</span></a>
+<a class="svc" href="nybyg/"><svg class="hex" viewBox="0 0 30 34" aria-hidden="true"><path d="M15 0l15 8.5v17L15 34 0 25.5v-17z"/></svg><h3>Nybyg</h3><p>Nye huse, gæstehuse, anneks, carporte og garager.</p><span class="svc-go">Læs mere</span></a>
+<a class="svc" href="pergola-hegn-og-cykelskur/"><svg class="hex" viewBox="0 0 30 34" aria-hidden="true"><path d="M15 0l15 8.5v17L15 34 0 25.5v-17z"/></svg><h3>Pergola, hegn og cykelskur</h3><p>Pergolaer, hegn, cykelskure og bænke til private og erhverv.</p><span class="svc-go">Læs mere</span></a>
+<a class="svc" href="udlejning-af-stillads-og-trailer/"><svg class="hex" viewBox="0 0 30 34" aria-hidden="true"><path d="M15 0l15 8.5v17L15 34 0 25.5v-17z"/></svg><h3>Leje af stillads og trailer</h3><p>Lej rullestillads, trailer og værktøj i Hundested.</p><span class="svc-go">Læs mere</span></a>
 </div>
-<p class="svc-more">Vi laver også carporte og garager, udestuer og vinterhaver, skillevægge, loftsbeklædning, facadebeklædning, foldedøre, køkkener og garderobeskabe samt bygningsvedligeholdelse. Vi lejer desuden stillads og trailer ud. Se mere her: <a href="materieludlejning.html">Materieludlejning</a></p>
+<p class="svc-more">Vi laver også carporte og garager, udestuer og vinterhaver, skillevægge, loftsbeklædning, facadebeklædning, køkkener og garderobeskabe samt bygningsvedligeholdelse. Ring og hør, hvad vi kan gøre for dig: <a href="tel:+4550700505">50 70 05 05</a>.</p>
 </div></section>
 
 <section class="sec"><div class="container">
   <div class="rev-top">
-    <div class="sec-head" style="margin:0"><h2>Det siger kunderne</h2><p>Udvalgte, verificerede anmeldelser fra Anmeld Håndværker.</p></div>
-    <div class="rev-score"><span class="big">4,9</span><span class="meta"><span class="stars" aria-hidden="true">★★★★★</span><br>ud af 5 baseret på 38 anmeldelser</span></div>
+    <div class="sec-head" style="margin:0"><h2>Det siger kunderne</h2><p>Udvalgte anmeldelser fra Anmeld Håndværker.</p></div>
+    <div class="rev-score"><span class="big">4,9</span><span class="meta"><span class="stars" aria-hidden="true">★★★★★</span><br>ud af 5 baseret på over 35 anmeldelser</span></div>
   </div>
   <div class="rev-grid"><article class="rev"><span class="stars" aria-hidden="true">★★★★★</span><h3>Renovering af sommerhus med nyt tag</h3><blockquote>Nye vægge og gulv med isolering og nyt tag. Det har været en fornøjelse hele vejen igennem. Sebastian er altid til at få fat på, og hans ansatte er både dygtige og søde. Alle aftaler er overholdt, derfor fuld plade herfra.</blockquote><div class="who"><strong>Brian</strong>, Hundested · februar 2026</div></article><article class="rev"><span class="stars" aria-hidden="true">★★★★★</span><h3>Beklædning på vægge og loft samt altan</h3><blockquote>Kæmpe fornøjelse at have Rosendal til at stå for mit sommerhusprojekt. Alle aftaler blev overholdt, og resultatet er blevet super flot. Dejligt med en håndværker, der både holder aftaler og svarer, når man skriver eller ringer.</blockquote><div class="who"><strong>Bitten</strong>, Hundested · august 2025</div></article><article class="rev"><span class="stars" aria-hidden="true">★★★★★</span><h3>Repos-trappe i ipé</h3><blockquote>Vi fik bygget et fem meter langt repos-trin i ipé fra foldedør ned til eksisterende stenterrasse. Tilbud, udførsel, oprydning og fakturering kørte helt som aftalt, og resultatet er super flot. Vi havde god sparring med svendene mens de byggede. Vil klart bruge igen.</blockquote><div class="who"><strong>Morten</strong>, Veksø · juli 2026</div></article></div>
-  <div class="rev-links"><a href="https://www.anmeld-haandvaerker.dk/tomrer/rosendal-tomrer-entreprise-aps" target="_blank" rel="noopener">Læs alle 38 anmeldelser her på Anmeldhåndværker.dk</a></div>
+  <div class="rev-links"><a href="anmeldelser/">Se flere anmeldelser</a><a href="https://www.anmeld-haandvaerker.dk/tomrer/rosendal-tomrer-entreprise-aps" target="_blank" rel="noopener">Læs dem alle på Anmeld Håndværker</a></div>
 </div></section>
 
 <section class="sec sec-sand"><div class="container">
@@ -472,37 +516,45 @@ footer a:hover{color:#fff;text-decoration:underline}
     <li><strong>Udførelse og aflevering</strong><span>Vi bygger, holder dig orienteret undervejs og afleverer ryddet op.</span></li>
   </ol>
 </div></section>
+
+<section class="sec"><div class="container narrow prose">
+  <h2>Hvor kører vi?</h2>
+  <p>Vi kører fra værksted og kontor på Engdraget 11 i Hundested og tager opgaver i hele Nordsjælland. Her er de områder, vi dækker.</p>
+  <ul class="chips"><li><a href="tomrer-hundested/">Hundested</a></li><li><span>Frederiksværk</span></li><li><span>Ølsted</span></li><li><span>Lynæs</span></li><li><span>Hillerød</span></li><li><span>Helsinge</span></li><li><span>Gilleleje</span></li><li><span>Græsted</span></li><li><span>Skævinge</span></li><li><span>Gørløse</span></li><li><span>Liseleje</span></li><li><span>Tisvildeleje</span></li><li><span>Vejby</span></li><li><span>Rågeleje</span></li><li><span>Dronningmølle</span></li><li><span>Tibirke</span></li><li><span>Asserbo</span></li></ul>
+  <p><a href="omrader/" style="text-decoration:underline">Se alle områder</a></p>
+</div></section>
 <section class="some"><div class="container">
   <p>Vi viser løbende vores opgaver på Facebook og Instagram.</p>
   <div class="social"><a href="https://www.facebook.com/profile.php?id=100068776222589" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.8c0-.9.3-1.5 1.6-1.5h1.7V3.4c-.3 0-1.3-.1-2.5-.1-2.4 0-4.1 1.5-4.1 4.2v2.3H7.5V13h2.7v8z"/></svg>Facebook</a><a href="https://www.instagram.com/rosendaltomrerentrepriseaps/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7.3A4.7 4.7 0 1 0 16.7 12 4.7 4.7 0 0 0 12 7.3zm0 7.8a3.1 3.1 0 1 1 3.1-3.1 3.1 3.1 0 0 1-3.1 3.1zm6-8a1.1 1.1 0 1 1-1.1-1.1A1.1 1.1 0 0 1 18 7.1zM21.9 8.2a5.5 5.5 0 0 0-1.5-3.9 5.5 5.5 0 0 0-3.9-1.5C15 2.7 9 2.7 7.5 2.8a5.5 5.5 0 0 0-3.9 1.5 5.5 5.5 0 0 0-1.5 3.9C2 9.7 2 14.3 2.1 15.8a5.5 5.5 0 0 0 1.5 3.9 5.5 5.5 0 0 0 3.9 1.5c1.5.1 7.5.1 9 0a5.5 5.5 0 0 0 3.9-1.5 5.5 5.5 0 0 0 1.5-3.9c.1-1.5.1-6.1 0-7.6zm-2 9.2a3.1 3.1 0 0 1-1.8 1.8c-1.2.5-4.1.4-5.4.4s-4.2.1-5.4-.4a3.1 3.1 0 0 1-1.8-1.8c-.5-1.2-.4-4.1-.4-5.4s-.1-4.2.4-5.4a3.1 3.1 0 0 1 1.8-1.8C8.5 4.3 11.4 4.4 12.7 4.4s4.2-.1 5.4.4a3.1 3.1 0 0 1 1.8 1.8c.5 1.2.4 4.1.4 5.4s.1 4.2-.4 5.4z"/></svg>Instagram</a></div>
 </div></section>
 <section class="cta"><div class="container cta-inner">
   <div><h2>Har I et projekt vi skal se på?</h2><p>Ring og fortæl kort om opgaven, eller send en beskrivelse og gerne et par billeder. Vi vender tilbage inden for 24 timer på hverdage.</p></div>
-  <div class="btn-row"><a class="btn btn-brass" href="tel:+4550700505"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>Ring 50 70 05 05</a><a class="btn btn-ghost" href="kontakt.html">Skriv til os</a></div>
+  <div class="btn-row"><a class="btn btn-brass" href="tel:+4550700505"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>Ring 50 70 05 05</a><a class="btn btn-ghost" href="kontakt/" data-cta="bund">Få et tilbud</a></div>
 </div></section>
 
 </main>
 <footer><div class="container">
   <div class="f-grid">
     <div>
-      <img class="flogo" src="images/logo-hvid.png" alt="Rosendal Tømrer Entreprise ApS" width="437" height="150">
-      <p>Tømrermester og bygningskonstruktør. Fag- og hovedentrepriser for private og erhverv i hele Nordsjælland og Hovedstadsområdet.</p>
+      <img class="flogo" src="images/logo-hvid.png" alt="Rosendal Tømrer Entreprise ApS" width="437" height="150" loading="lazy">
+      <p>Tømrermester og bygningskonstruktør. Fag-, hoved- og totalentrepriser for private og erhverv i Nordsjælland.</p>
       <p style="margin-top:1rem">Mandag-fredag 07.00-17.00<br>Engdraget 11, 3390 Hundested<br><a href="tel:+4550700505">Tlf. 50 70 05 05</a><br><a href="mailto:info@rosendal-tomrer.dk">info@rosendal-tomrer.dk</a></p>
     </div>
-    <div><h3>Ydelser</h3><ul><li><a href="doere-og-vinduer.html">Døre og vinduer</a></li><li><a href="terrasse.html">Terrasse</a></li><li><a href="gaardhaver.html">Gårdhaver</a></li><li><a href="nybyg.html">Nybyg</a></li><li><a href="tag.html">Tag</a></li><li><a href="renovering.html">Renovering</a></li><li><a href="hovedentreprise.html">Hovedentreprise</a></li><li><a href="materieludlejning.html">Materieludlejning</a></li></ul></div>
+    <div><h3>Ydelser</h3><ul><li><a href="totalentreprise/">Totalentreprise</a></li><li><a href="tilbygning/">Tilbygning</a></li><li><a href="sommerhus/">Sommerhus</a></li><li><a href="tag/">Tag</a></li><li><a href="vinduer/">Vinduer</a></li><li><a href="doere/">Døre</a></li><li><a href="terrasse/">Terrasse</a></li><li><a href="renovering/">Renovering</a></li><li><a href="nybyg/">Nybyg</a></li><li><a href="pergola-hegn-og-cykelskur/">Pergola, hegn og cykelskur</a></li><li><a href="udlejning-af-stillads-og-trailer/">Leje af stillads og trailer</a></li></ul></div>
     <div><h3>Virksomheden</h3><ul>
-      <li><a href="referencer.html">Referencer</a></li><li><a href="index.html#om">Om os</a></li>
-      <li><a href="job.html">Job</a></li><li><a href="kontakt.html">Kontakt</a></li>
+      <li><a href="om-os/">Om os</a></li><li><a href="anmeldelser/">Anmeldelser</a></li>
+      <li><a href="omrader/">Områder</a></li><li><a href="tomrer-hundested/">Tømrer i Hundested</a></li>
+      <li><a href="job/">Job</a></li><li><a href="kontakt/">Kontakt</a></li>
       <li><a href="https://www.facebook.com/profile.php?id=100068776222589" target="_blank" rel="noopener">Facebook</a></li><li><a href="https://www.instagram.com/rosendaltomrerentrepriseaps/" target="_blank" rel="noopener">Instagram</a></li>
     </ul></div>
   </div>
   <div class="f-bottom">© 2026 Rosendal Tømrer Entreprise ApS · CVR 42228672<br>
-    <a href="cookies.html">Cookiepolitik</a> · <button type="button" class="ck-footerlink" onclick="return ckAabn()">Skift cookieindstillinger</button></div>
+    <a href="cookies/">Cookiepolitik</a> · <a href="lejebetingelser/">Lejebetingelser</a> · <button type="button" class="ck-footerlink" onclick="return ckAabn()">Skift cookieindstillinger</button></div>
 </div></footer>
 <div class="ck-banner" id="ckBanner" role="dialog" aria-labelledby="ckTitel" aria-describedby="ckBesk">
   <div class="ck-inner">
     <div><h2 id="ckTitel">Cookies på rosendal-tomrer.dk</h2>
-      <p id="ckBesk">Vi bruger cookies til at se hvordan siden bliver brugt og til at måle effekten af vores annoncering. Kortet fra Google Maps på kontaktsiden sætter også cookies. Vælger du "Kun nødvendige", sættes ingen af delene, og siden virker præcis som før. <a href="cookies.html">Læs mere om cookies</a>.</p></div>
+      <p id="ckBesk">Vi bruger cookies til at se hvordan siden bliver brugt og til at måle effekten af vores annoncering. Kortet fra Google Maps på kontaktsiden sætter også cookies. Vælger du "Kun nødvendige", sættes ingen af delene, og siden virker præcis som før. <a href="cookies/">Læs mere om cookies</a>.</p></div>
     <div class="ck-knapper"><button type="button" class="ck-afvis" onclick="ckSvar('noedvendige')">Kun nødvendige</button><button type="button" class="ck-accept" onclick="ckSvar('alle')">Accepter alle</button></div>
   </div>
 </div>
@@ -520,8 +572,14 @@ footer a:hover{color:#fff;text-decoration:underline}
   window.ckAabn=function(){slet();if(b)b.classList.add('vis');return false;};
   var v=laes();if(v===null){if(b)b.classList.add('vis');}else if(v==='alle'){ckKort();}
 })();
-document.addEventListener('click',function(ev){var a=ev.target.closest?ev.target.closest('a[href^="tel:"]'):null;
-  if(a&&typeof gtag==='function'){gtag('event','kontakt_opkald',{'nummer':a.getAttribute('href').slice(4)});}},true);
+document.addEventListener('click',function(ev){var t=ev.target.closest?ev.target.closest('a'):null;if(!t||typeof gtag!=='function')return;
+  var h=t.getAttribute('href')||'';
+  if(h.indexOf('tel:')===0){gtag('event','kontakt_opkald',{'nummer':h.slice(4)});}
+  else if(h.indexOf('mailto:')===0){gtag('event','email_click',{'adresse':h.slice(7)});}
+  else if(t.hasAttribute('data-cta')){gtag('event','cta_click',{'placering':t.getAttribute('data-cta')});}},true);
+(function(){var d=document.querySelector('.dd details');if(!d)return;
+  document.addEventListener('click',function(ev){if(!d.contains(ev.target))d.removeAttribute('open');});
+  document.addEventListener('keydown',function(ev){if(ev.key==='Escape')d.removeAttribute('open');});})();
 </script>
 
 </body>
