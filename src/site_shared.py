@@ -17,10 +17,10 @@ IG = "https://www.instagram.com/rosendaltomrerentrepriseaps/"
 ANM_URL = "https://www.anmeld-haandvaerker.dk/tomrer/rosendal-tomrer-entreprise-aps"
 ANM_ANTAL = 38
 ANM_SNIT = "4,9"
-GA_ID = None          # fx "G-XXXXXXX". None = ingen gtag.js (demo)
+GA_ID = "G-Y07ZQXFQWY"   # GA4 paa Sebastians konto
 FORMSPREE_ID = "mbgdzaov"   # Rosendals egen formular, sender til info@ og er låst til rosendal-tomrer.dk
 COOKIE = "rosendal_samtykke"
-DEMO = True          # True = noindex paa alle sider (demo paa GitHub Pages). Saet False ved go-live
+DEMO = False         # Dette er den live version paa Simply
 
 AABNING = "Mandag-fredag 07.00-17.00"
 OMRAADE = "Nordsjælland og Hovedstadsområdet"

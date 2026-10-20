@@ -344,7 +344,7 @@ cookies = f"""
 <section class="sec"><div class="container narrow prose">
   <h2>Hvad er cookies?</h2><p>En cookie er en lille tekstfil, som gemmes i din browser. Vi sætter kun cookies, der ikke er nødvendige, hvis du har sagt ja.</p>
   <h2>Nødvendige cookies</h2><p><strong>{COOKIE}</strong> gemmer dit valg i cookiebanneret i 12 måneder. Den er nødvendig for at vi kan huske dit svar.</p>
-  <h2>Statistik og marketing</h2><p>Hvis du accepterer, bruger vi Google Analytics til at se hvordan siden bliver brugt, og Google Ads til at måle effekten af vores annoncering. Afviser du, sendes der kun anonyme signaler uden cookies.</p>
+  <h2>Statistik og marketing</h2><p>Hvis du accepterer, bruger vi Google Analytics til at se, hvordan siden bliver brugt. Afviser du, sendes der kun anonyme signaler uden cookies.</p>
   <h2>Google Maps</h2><p>Kortet på kontaktsiden hentes fra Google og sætter cookies. Det vises derfor først, når du har accepteret.</p>
   <h2>Skift dit valg</h2><p>Du kan altid ændre eller trække dit samtykke tilbage via linket "Skift cookieindstillinger" nederst på alle sider.</p>
   <h2>Ansvarlig</h2><p>{e(NAVN)}, {ADR}, {POST} {BY}. CVR {CVR}. <a href="mailto:{MAIL}">{MAIL}</a></p>
