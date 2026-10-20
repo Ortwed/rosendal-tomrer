@@ -45,6 +45,6 @@ Opdateret 07-10-2026 efter gennemgang af det gamle site (skærmbilleder) og Anme
 - Indsend sitemap.xml igen i Search Console, når den nye sitestruktur er uploadet til Simply
 - GBP's booking/kontaktlink er sat 20-10-2026 til https://rosendal-tomrer.dk/kontakt.html?utm_source=google&utm_medium=organic&utm_campaign=gbp-kontakt
 - Når den nye struktur er live: ret GBP's booking/kontaktlink til https://rosendal-tomrer.dk/kontakt/ (samme UTM), og anmod om indeksering af de nye adresser (/tag/, /terrasse/ osv.)
-- GA4 (fredag med Sebastian): opret på Sebastians Google-konto, Christian som redaktør. Dataopbevaring 14 mdr., Google-signaler fra, knyt til Search Console. Målings-ID sættes i GA_ID og går live med den nye struktur. Nøglehændelser: kontakt_opkald, kontakt_mail, formularindsendelse. Tjek cookiepolitikken (nævner Google Ads)
+- GA4 oprettet 20-10-2026 på Sebastians konto: G-Y07ZQXFQWY. Ligger i live-builden og går live med den nye struktur. Formularinteraktioner i Forbedret måling er slået fra (sitet sender selv form_submit). Nøglehændelser: kontakt_opkald, email_click, generate_lead. Mangler: dataopbevaring 14 mdr., Google-signaler fra, knyt til Search Console
 - Status på GBP og Search Console: se GBP-GSC-STATUS.md (20-10-2026). Search Console viser ingen sikkerhedsproblemer
 - Slet grenen udkast-materieludlejning på GitHub (identisk med main)
