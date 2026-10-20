@@ -17,7 +17,7 @@ IG = "https://www.instagram.com/rosendaltomrerentrepriseaps/"
 ANM_URL = "https://www.anmeld-haandvaerker.dk/tomrer/rosendal-tomrer-entreprise-aps"
 ANM_TEKST = "over 35"   # bevidst ikke et fast tal: profilen viser 39 (18-10-2026), tallet vokser
 ANM_SNIT = "4,9"
-GA_ID = None          # fx "G-XXXXXXX". None = ingen gtag.js (demo)
+GA_ID = "G-Y07ZQXFQWY"   # GA4 paa Sebastians konto. Kun med i live-builden, se analytics_head()
 FORMSPREE_ID = "mbgdzaov"   # Rosendals egen formular, sender til info@ og er låst til rosendal-tomrer.dk
 COOKIE = "rosendal_samtykke"
 # docs/ er testsiden paa ortwed.github.io og skal have noindex, saa Google kun finder
@@ -507,7 +507,9 @@ def faq_schema(faqs):
         {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faqs]}
 
 def analytics_head():
-    if not GA_ID:
+    # Testsiden paa github.io maa ikke sende data til GA4, ellers blandes vores egne
+    # testbesoeg med rigtige kunder. Derfor kun i live-builden.
+    if not GA_ID or not LIVEBYG:
         return ""
     return f"""<script>
 window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}
