@@ -27,7 +27,7 @@ LIVEBYG = "--live" in sys.argv
 DEMO = not LIVEBYG
 
 AABNING = "Mandag-fredag 07.00-17.00"
-OMRAADE = "Nordsjælland"
+OMRAADE = "Nordsjælland og Hovedstadsområdet"   # Hovedstadsområdet afventer Sebastians bekræftelse
 
 YDELSER = [  # (slug, navn i menu, lister og formular). Slug = URL: /<slug>/
     ("totalentreprise", "Totalentreprise"),

@@ -5,7 +5,7 @@
 """
 import os, re, sys, json, itertools
 sys.path.insert(0, os.path.dirname(__file__))
-from site_shared import YDELSER, GA_ID, FORMSPREE_ID, DEMO, LIVEBYG, DOMAIN, url
+from site_shared import YDELSER, GA_ID, FORMSPREE_ID, DEMO, LIVEBYG, DOMAIN, url, OMRAADE
 
 R = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "live" if LIVEBYG else "docs"))
 fejl, adv = [], []
@@ -85,11 +85,13 @@ for f in sider:
     brod = tekst(h)
     if re.search(r" — ", brod): t("spaced em-dash i tekst")
     if "/wp-content" in h: t("hotlink til gammel WordPress")
-    for ord_, msg in [("27010474", "forveksling med S. Rosendal ApS (CVR)"), ("S. Rosendal", "omtale af S. Rosendal ApS"),
+    for ord_, msg in ([("27010474", "forveksling med S. Rosendal ApS (CVR)"), ("S. Rosendal", "omtale af S. Rosendal ApS"),
                       ("[UDFYLD", "pladsholder paa side"), ("[VERIFIC", "pladsholder paa side"),
                       ("Frederikssund", "udenfor scope"), ("Jægerspris", "udenfor scope"), ("Skibby", "udenfor scope"), ("Slangerup", "udenfor scope"),
-                      ("38 anmeldelser", "forkert anmeldelsestal"), ("38 verificerede", "forkert anmeldelsestal"), ("39 anmeldelser", "fast anmeldelsestal"),
-                      ("Hovedstadsområdet", "udenfor scope (audit)")]:
+                      ("38 anmeldelser", "forkert anmeldelsestal"), ("38 verificerede", "forkert anmeldelsestal"), ("39 anmeldelser", "fast anmeldelsestal")]
+                     # Hovedstadsomraadet var udenfor scope i auditten, men er med igen (20-10-2026), saa
+                     # site og Google-profil siger det samme. Fejl kun hvis OMRAADE ikke laengere naevner det.
+                     + ([] if "Hovedstadsområdet" in OMRAADE else [("Hovedstadsområdet", "udenfor scope (audit)")])):
         if ord_ in h: t(f"{msg}: '{ord_}'")
     if "København" in brod: adv.append(f"{f}: nævner København (udenfor aftalt scope)")
 
