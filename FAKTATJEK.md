@@ -41,5 +41,6 @@ Opdateret 07-10-2026 efter gennemgang af det gamle site (skærmbilleder) og Anme
 
 ## Efter go-live, oprydning
 - Slet Christians gamle Formspree-formular (mrpekpzr), når en test fra rosendal-tomrer.dk er kommet frem
-- Tilmeld rosendal-tomrer.dk i Google Search Console og indsend sitemap.xml
+- Google Search Console sat op 20-10-2026. Google Virksomhedsprofil overtaget, website-feltet peger på https://rosendal-tomrer.dk/ med UTM (utm_source=google, utm_medium=organic, utm_campaign=gbp)
+- Indsend sitemap.xml igen i Search Console, når den nye sitestruktur er uploadet til Simply
 - Slet grenen udkast-materieludlejning på GitHub (identisk med main)
