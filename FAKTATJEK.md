@@ -43,4 +43,6 @@ Opdateret 07-10-2026 efter gennemgang af det gamle site (skærmbilleder) og Anme
 - Slet Christians gamle Formspree-formular (mrpekpzr), når en test fra rosendal-tomrer.dk er kommet frem
 - Google Search Console sat op 20-10-2026. Google Virksomhedsprofil overtaget, website-feltet peger på https://rosendal-tomrer.dk/ med UTM (utm_source=google, utm_medium=organic, utm_campaign=gbp)
 - Indsend sitemap.xml igen i Search Console, når den nye sitestruktur er uploadet til Simply
+- Når den nye struktur er live: ret GBP's booking/kontaktlink til https://rosendal-tomrer.dk/kontakt/ (ikke kontakt.html), og anmod om indeksering af de nye adresser (/tag/, /terrasse/ osv.)
+- Status på GBP og Search Console: se GBP-GSC-STATUS.md (20-10-2026). Search Console viser ingen sikkerhedsproblemer
 - Slet grenen udkast-materieludlejning på GitHub (identisk med main)
