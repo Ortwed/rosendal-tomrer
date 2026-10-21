@@ -40,14 +40,14 @@ YDELSER = [  # (slug, navn i menu, lister og formular). Slug = URL: /<slug>/
     ("renovering", "Renovering"),
     ("nybyg", "Nybyg"),
     ("pergola-hegn-og-cykelskur", "Pergola, hegn og cykelskur"),
-    ("udlejning-af-stillads-og-trailer", "Leje af stillads og trailer"),
+    ("materieludlejning", "Materieludlejning"),
 ]
 # Omraader inden for aftalt scope. Kun dem med en side faar et link (slug), resten er ren tekst.
 OMRAADER = [("tomrer-hundested", "Hundested"), (None, "Frederiksværk"), (None, "Ølsted"), (None, "Lynæs"),
             (None, "Hillerød"), (None, "Helsinge"), (None, "Gilleleje"), (None, "Græsted"),
             (None, "Skævinge"), (None, "Gørløse"), (None, "Liseleje"), (None, "Tisvildeleje"),
             (None, "Vejby"), (None, "Rågeleje"), (None, "Dronningmølle"), (None, "Tibirke"), (None, "Asserbo")]
-SIDST_OPDATERET = "2026-10-18"   # lastmod i sitemap. Saet til byggedato naar indhold aendres
+SIDST_OPDATERET = "2026-10-21"   # lastmod i sitemap. Saet til byggedato naar indhold aendres
 
 def url(slug):
     return "/" if slug == "index" else f"/{slug}/"
@@ -334,13 +334,24 @@ footer a:hover{color:#fff;text-decoration:underline}
 .side-link{display:block;margin-top:.8rem;font-weight:700;text-decoration:underline;text-underline-offset:3px}
 .svc-main{max-width:760px}
 .svc-fig{margin:0 0 1.6rem}
-.mat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.2rem;margin:1.2rem 0 2rem}
-.mat-kort{text-align:center;background:var(--white);border:1px solid var(--line);border-top:3px solid var(--brass);border-radius:2px;overflow:hidden}
-.mat-kort img{display:block;width:100%;height:auto;aspect-ratio:4/3}
-.mat-kort h3{margin:1rem 1.1rem .4rem}
-.mat-kort p{margin:0 1.1rem .6rem;font-size:.95rem}
-.mat-kort ul{margin:0 1.1rem 1.2rem;padding:0;list-style:none;font-size:.95rem}
-.mat-kort li{margin:.15rem 0}
+.m-side{max-width:1200px}
+.m-hurtig{display:flex;flex-wrap:wrap;gap:.6rem;margin:0 0 2rem}
+.m-hurtig a{border:1px solid var(--line);border-radius:999px;padding:.45rem 1rem;font-weight:600;font-size:.92rem;color:var(--navy);text-decoration:none}
+.m-hurtig a:hover{border-color:var(--blue);color:var(--blue)}
+.m-kat{scroll-margin-top:150px;margin:0 0 2.4rem}
+.m-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.2rem;margin:1rem 0 0}
+.maskine{scroll-margin-top:150px;display:flex;flex-direction:column;background:var(--white);border:1px solid var(--line);border-top:3px solid var(--brass);border-radius:2px;overflow:hidden}
+.maskine img{display:block;width:100%;height:auto;aspect-ratio:4/3;background:var(--mist)}
+.m-krop{display:flex;flex-direction:column;flex:1;padding:1.1rem 1.2rem 1.3rem}
+.prose .m-krop h3{margin:0 0 .4rem;font-size:1.15rem}
+.prose .m-krop p{margin:0 0 .6rem;font-size:.95rem}
+.prose .m-krop ul{margin:0 0 1rem;padding-left:1.1rem;font-size:.92rem}
+.prose .m-krop li{margin:.1rem 0}
+.prose .m-krop .m-pris{margin:auto 0 .9rem;color:var(--muted);font-size:.9rem}
+.m-pris strong{font-family:var(--head);font-size:1.5rem;color:var(--navy);margin-right:.35rem}
+.m-pris span{display:block}
+.m-krop .btn{justify-content:center;width:100%;white-space:nowrap;font-size:.9rem;padding-left:.8rem;padding-right:.8rem}
+.prose .m-note{background:var(--mist);padding:1rem 1.2rem;font-size:.95rem}
 .svc-fig img{width:100%;height:auto;border-radius:2px}
 .svc-gal{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin:2rem 0 0}
 .svc-gal img{width:100%;aspect-ratio:4/3;object-fit:cover;cursor:zoom-in}

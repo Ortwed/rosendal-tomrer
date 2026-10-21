@@ -48,3 +48,15 @@ Opdateret 07-10-2026 efter gennemgang af det gamle site (skærmbilleder) og Anme
 - GA4 (G-Y07ZQXFQWY) er live på Simply siden 20-10-2026 på den nuværende version (gren live-ga4, bygget fra 5fc7680). Testet: realtid virker. Nøglehændelser markeres i GA4, når der er data: kontakt_opkald, email_click, generate_lead. Mangler i GA4: dataopbevaring 14 mdr., Google-signaler fra, knyt til Search Console. main (ny struktur) har også GA4 og afløser live-ga4, når den uploades
 - Status på GBP og Search Console: se GBP-GSC-STATUS.md (20-10-2026). Search Console viser ingen sikkerhedsproblemer
 - Slet grenen udkast-materieludlejning på GitHub (identisk med main)
+
+## Materieludlejning (siden /materieludlejning/, 21-10-2026)
+Bygget ud fra Sebastians Word-dokument "Rosendal Materiel Udlejning" (12 maskiner). Afklar med Sebastian:
+- Bukkestillads: hvad betyder "Stilladsklasse 4 300 Kr/m2"? Udeladt indtil videre
+- Affugter DH 752: "rumstørrelse 701 m3" og "900 W" strider mod producentens data. Udeladt indtil videre
+- Girafsliber: præcist modelnavn (står kun som "Festool girafsliber")
+- Gælder lejebetingelserne og forsikringsgebyret på 7 % stadig? Den nye PDF er ordret den samme som den gamle
+- Levering: lejebetingelserne siger "kontakt for pris". Er det stadig sådan?
+- Trailer: udlejes den stadig? Den står ikke i Word-dokumentet og er derfor fjernet fra siden
+- Geografi: prompten siger "Vi dækker hele Nordsjælland", men sitet bruger OMRAADE (lige nu med Hovedstadsområdet), så siden følger resten af sitet
+- Illustrationerne er tegninger (src/lav_materiel_svg.py), ikke fotos af Sebastians materiel
+

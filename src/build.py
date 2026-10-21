@@ -10,7 +10,7 @@ import os, sys, shutil
 sys.path.insert(0, os.path.dirname(__file__))
 import site_shared as S
 from site_shared import *
-from indhold import ANMELDELSER as A, YDELSER as Y
+from indhold import ANMELDELSER as A, YDELSER as Y, MATERIEL, MATERIEL_KATEGORIER, MATERIEL_SIDE, MATERIEL_LINKS
 
 ROD = os.path.join(os.path.dirname(__file__), "..")
 OUT = os.path.join(ROD, "live" if LIVEBYG else "docs")
@@ -91,7 +91,7 @@ KORT_TXT = {
     "renovering": "Vægge, gulve, lofter, isolering og facader.",
     "nybyg": "Nye huse, gæstehuse, anneks, carporte og garager.",
     "pergola-hegn-og-cykelskur": "Pergolaer, hegn, cykelskure og bænke til private og erhverv.",
-    "udlejning-af-stillads-og-trailer": "Lej rullestillads, trailer og værktøj i Hundested.",
+    "materieludlejning": "Lej stillads, betonblander, affugter, dumper, pælebor og værktøj i Hundested.",
 }
 
 def svc_grid():
@@ -211,7 +211,7 @@ def liste(items):
 
 OMR_VERB = {"totalentreprise": "styrer byggerier", "tilbygning": "bygger til huse", "sommerhus": "renoverer sommerhuse", "tag": "skifter tage",
             "vinduer": "skifter vinduer", "doere": "monterer døre", "terrasse": "bygger terrasser", "renovering": "renoverer boliger",
-            "nybyg": "bygger nyt", "pergola-hegn-og-cykelskur": "bygger pergolaer og hegn", "udlejning-af-stillads-og-trailer": "udlejer materiel"}
+            "nybyg": "bygger nyt", "pergola-hegn-og-cykelskur": "bygger pergolaer og hegn"}
 
 def ydelse(slug):
     d = Y[slug]
@@ -241,6 +241,13 @@ def ydelse(slug):
     if d.get("galleri"):
         blokke.append('<div class="svc-gal">' + "".join(f'<figure><img src="{s}" alt="{e(a)}" loading="lazy" data-lb></figure>' for s, a in d["galleri"]) + "</div>")
     blokke.append(rev_mini(d["anm"]))
+    if slug in MATERIEL_LINKS:
+        # Interne links til de maskiner, der passer til opgaven (og fra udlejningssiden tilbage hertil)
+        kald = {"paelebor": "pælebor", "jordbor": "mobilt jordbor", "affugter": "affugter", "gipshejs": "gipshejs",
+                "betonblander": "betonblander", "dumper": "dumper", "rullestillads": "rullestillads"}
+        ml = [f'<a href="/materieludlejning/#{i}">{kald[i]}</a>' for i in MATERIEL_LINKS[slug]]
+        blokke.append(f'<h2>Lav noget af det selv?</h2><p>Vil du selv tage fat, kan du leje {", ".join(ml[:-1])} og {ml[-1]} hos os i Hundested. '
+                      'Se priser pr. dag under <a href="/materieludlejning/">materieludlejning</a>.</p>')
     blokke.append(f'<h2>Områder vi dækker</h2><p>Vi {OMR_VERB[slug]} i Hundested og resten af Nordsjælland. '
                   'Læs om <a href="/tomrer-hundested/">tømrer i Hundested</a>, eller se <a href="/omrader/">alle områder</a>.</p>')
     faq = "".join(f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in d["faq"])
@@ -263,7 +270,70 @@ def ydelse(slug):
          extra_js=LB_JS if d.get("galleri") else "", krummer=[(navn, None)])
 
 for sl, _ in YDELSER:
-    ydelse(sl)
+    if sl in Y:          # materieludlejning har sin egen skabelon herunder
+        ydelse(sl)
+
+# ---------------- MATERIELUDLEJNING ----------------
+# Alt indhold staar som tekst i HTML (ingen faner eller skjult indhold), saa soegemaskiner og AI kan citere priser og maal.
+def kr(n):
+    return f"{n:,}".replace(",", ".") + " kr."
+
+def maskine_kort(m):
+    mid, _, navn, tekst, specs, inkl, ekskl = m
+    pris = (f'<p class="m-pris"><strong>{kr(inkl)}</strong> pr. dag inkl. moms<span>{kr(ekskl)} ekskl. moms</span></p>'
+            if inkl else '<p class="m-pris"><strong>Kontakt for pris</strong></p>')
+    return (f'<article class="maskine" id="{mid}"><img src="/images/materiel/{mid}.svg" alt="{e(navn)} til leje i Hundested" width="480" height="360" loading="lazy">'
+            f'<div class="m-krop"><h3>{e(navn)}</h3><p>{e(tekst)}</p><ul>{"".join(f"<li>{e(x)}</li>" for x in specs)}</ul>{pris}'
+            f'<a class="btn btn-brass" href="tel:{TLF_RAW}" data-cta="materiel-{mid}">{ICON_TLF}Ring og book {TLF}</a></div></article>')
+
+def schema_materiel():
+    elementer = []
+    for i, (mid, _, navn, tekst, specs, inkl, _ekskl) in enumerate(MATERIEL):
+        p = {"@type": "Product", "name": navn, "description": tekst + " " + ". ".join(specs) + ".",
+             "image": f"{DOMAIN}/images/materiel/{mid}.svg", "url": f"{DOMAIN}/materieludlejning/#{mid}"}
+        if inkl:   # "Kontakt for pris" faar ingen offers
+            p["offers"] = {"@type": "Offer", "price": str(inkl), "priceCurrency": "DKK", "url": f"{DOMAIN}/materieludlejning/#{mid}",
+                           "seller": {"@id": DOMAIN + "/#virksomhed"},
+                           "priceSpecification": {"@type": "UnitPriceSpecification", "price": inkl, "priceCurrency": "DKK",
+                                                  "unitCode": "DAY", "valueAddedTaxIncluded": True}}
+        elementer.append({"@type": "ListItem", "position": i + 1, "item": p})
+    return {"@context": "https://schema.org", "@type": "ItemList", "name": "Materiel til leje hos " + NAVN, "itemListElement": elementer}
+
+def materiel_side():
+    d = MATERIEL_SIDE
+    navn = "Materieludlejning"
+    hurtig = "".join(f'<a href="#{k}">{e(h.replace(" til leje i Hundested", ""))}</a>' for k, h, _ in MATERIEL_KATEGORIER)
+    sektioner = "".join(
+        f'<section class="m-kat" id="{k}"><h2>{e(h)}</h2><p>{e(intro)}</p><div class="m-grid">'
+        + "".join(maskine_kort(m) for m in MATERIEL if m[1] == k) + "</div></section>"
+        for k, h, intro in MATERIEL_KATEGORIER)
+    trin = "<ol class=\"trin\">" + "".join(f"<li><strong>{e(t)}</strong>{e(x)}</li>" for t, x in d["trin"]) + "</ol>"
+    faq = "".join(f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in d["faq"])
+    ydl = {"terrasse": "Terrasse", "pergola-hegn-og-cykelskur": "Pergola, hegn og cykelskur", "renovering": "Renovering",
+           "tilbygning": "Tilbygning", "nybyg": "Nybyg"}
+    tilbage = ", ".join(f'<a href="{url(k)}">{e(v.lower())}</a>' for k, v in list(ydl.items())[:-1]) + f' og <a href="{url("nybyg")}">nybyg</a>'
+    body = f"""
+<section class="page-header"><div class="container">
+  {crumb_html([(navn, None)])}
+  <h1>{e(d['h1'])}</h1><p>{e(d['intro'])}</p>
+  {hero_knapper()}
+</div></section>
+<section class="sec"><div class="container prose m-side">
+  <div class="svar"><strong>Kort svar</strong>{e(d["svar"])}</div>
+  <nav class="m-hurtig" aria-label="Kategorier">{hurtig}</nav>
+  {sektioner}
+  <p class="m-note">Alle priser er pr. kalenderdag. Oven i den samlede pris kommer et forsikringsgebyr på 7 %. Læs de fulde <a href="/lejebetingelser/">lejebetingelser</a>, før du lejer.</p>
+  <h2>Sådan lejer du</h2>{trin}
+  <h2>Skal vi hellere lave opgaven?</h2>
+  <p>Vi er tømrere og bygger det, vi udlejer materiel til. Læs om {tilbage}.</p>
+  <h2>Ofte stillede spørgsmål</h2><div class="faq">{faq}</div>
+</div></section>
+{cta("Skal du bruge noget af det?", f"Ring og hør, om det er ledigt. Vi dækker hele {OMRAADE}.")}"""
+    side("materieludlejning", d["title"], d["desc"], body, active="materieludlejning",
+         schemas=[schema_service(navn, d["desc"], "materieludlejning"), faq_schema(d["faq"]), schema_materiel()],
+         krummer=[(navn, None)])
+
+materiel_side()
 
 # ---------------- OM OS ----------------
 fakta = [("Firmanavn", NAVN), ("CVR", CVR), ("Adresse", f"{ADR}, {POST} {BY} (værksted og kontor)"), ("Telefon", f'<a href="tel:{TLF_RAW}">{TLF}</a>'),
@@ -531,7 +601,7 @@ side("cookies", "Cookiepolitik | Rosendal Tømrer",
 # Afskrevet fra det gamle sites PDF (Rosendal-Materieludlejning-Betingelser.pdf). Indholdet er bevaret, kun stavning
 # og tegnsaetning er rettet. Det er juridisk tekst, saa aendringer i indholdet skal komme fra Sebastian.
 lb = f"""
-<section class="page-header"><div class="container">{crumb_html([("Leje af stillads og trailer", "udlejning-af-stillads-og-trailer"), ("Lejebetingelser", None)])}
+<section class="page-header"><div class="container">{crumb_html([("Materieludlejning", "materieludlejning"), ("Lejebetingelser", None)])}
 <h1>Lejebetingelser for materieludlejning</h1><p>Gælder for al leje af materiel hos {e(NAVN)}.</p></div></section>
 <section class="sec"><div class="container narrow prose">
   <h2>1. Lejeperiode</h2>
@@ -578,10 +648,11 @@ skriv("404.html", build_page("404", "Siden findes ikke | Rosendal Tømrer", "Sid
 # (terrasse, tag, nybyg, renovering, job, kontakt) eller omdirigeres her. Rigtige 301'ere kommer fra .htaccess paa
 # Simply. Stubbene er reserve (meta refresh + canonical), hvis .htaccess ikke kan bruges, og de virker paa testsiden.
 HTML_GAMLE = {"hovedentreprise.html": "totalentreprise", "doere-og-vinduer.html": "vinduer", "gaardhaver.html": "pergola-hegn-og-cykelskur",
-              "materieludlejning.html": "udlejning-af-stillads-og-trailer", "referencer.html": "anmeldelser", "terrasse.html": "terrasse",
+              "materieludlejning.html": "materieludlejning", "referencer.html": "anmeldelser", "terrasse.html": "terrasse",
               "tag.html": "tag", "nybyg.html": "nybyg", "renovering.html": "renovering", "job.html": "job", "kontakt.html": "kontakt",
               "cookies.html": "cookies", "lejebetingelser.html": "lejebetingelser"}
-WP_GAMLE = {"doere-vinduer": "vinduer", "gaardhaver": "pergola-hegn-og-cykelskur", "materieludlejning": "udlejning-af-stillads-og-trailer"}
+# /materieludlejning/ var ogsaa WordPress-adressen og er nu siden selv. udlejning-af-stillads-og-trailer var kun paa testsiden.
+WP_GAMLE = {"doere-vinduer": "vinduer", "gaardhaver": "pergola-hegn-og-cykelskur", "udlejning-af-stillads-og-trailer": "materieludlejning"}
 
 def stub(fil, ny, dybde):
     rel = "../" * dybde + ny + "/"

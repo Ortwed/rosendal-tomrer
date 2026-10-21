@@ -473,47 +473,83 @@ YDELSER = {
              ("/images/baenk-2.webp", "Rund bænk i træ med lameller, bygget af Rosendal Tømrer")],
     anm=[]),
 
-"udlejning-af-stillads-og-trailer": dict(
-    title="Leje af stillads og trailer i Hundested | Rosendal Tømrer",
-    desc="Lej rullestillads, trailer, betonblander, byggevarmer og værktøj hos Rosendal Tømrer i Hundested. Private og erhverv. Ring 50 70 05 05 for pris.",
-    h1="Leje af stillads og trailer i Hundested",
-    intro="Brug for pålideligt materiel til dit næste projekt? Vi lejer stillads, trailer og værktøj ud til private og erhverv og hjælper dig med at vælge det rigtige.",
-    svar="Hos Rosendal Tømrer i Hundested kan du leje rullestillads, trailer, betonblander, byggevarmer, jordbor, minidumper og el-værktøj. Vi lejer ud til både private og erhverv pr. kalenderdag. Materiellet afhentes på Engdraget 11, og levering kan aftales. Vi hjælper dig med at vælge det rigtige til opgaven. Ring for pris.",
-    sek=[
-        ("Udstyr der er klar til brug", [
-            "Uanset om opgaven er lille eller stor, har vi udstyr, der gør arbejdet effektivt og sikkert. Vores materiel er velholdt og klar til brug, og vi tilbyder fleksible lejeperioder.",
-            "Er du i tvivl om, hvad du skal bruge, så ring. Vi er tømrere og bruger selv materiellet, så vi kan rådgive dig om, hvad der passer bedst til opgaven.",
-        ]),
-        ("Sådan foregår lejen", ('ul', [
-            "Materiellet lejes pr. kalenderdag. En dag er 8 timers brug",
-            "Afhentning fra Engdraget 11 i Hundested efter aftale",
-            "Levering og afhentning kan aftales. Kontakt os for pris",
-            "Benzindrevne maskiner udlejes uden brændstof",
-            "Der lægges et forsikringsgebyr på 7 % oven i den samlede pris",
-        ])),
-    ],
-    kategorier=[
-        # Listerne er laest ud fra produktbillederne paa det gamle site. Sebastian bekraefter
-        # dem i dokumentet "Lejebetingelser til gennemsyn".
-        ("El-værktøj", "/images/materiel-el-vaerktoej.svg", "Til indvendige opgaver og finish.",
-         ["Byggestøvsuger", "Vægsliber", "Bordrundsav"]),
-        ("Bygningsmateriel", "/images/materiel-bygningsmateriel.svg", "Til byggepladsen og større opgaver.",
-         ["Rullestillads", "Betonblander", "Byggevarmer", "Trailer"]),
-        ("Jord- og anlægsmateriel", "/images/materiel-jord-og-anlaeg.svg", "Til haven og terrænet.",
-         ["Jordbor", "Minidumper"]),
-    ],
-    efter_html='<p>Læs de fulde <a href="/lejebetingelser/">lejebetingelser</a>, før du lejer.</p>',
-    trin=[("Ring og fortæl, hvad du skal bruge", "Vi hjælper dig med at vælge det rigtige materiel til opgaven."),
-          ("Aftal periode og levering", "Vi aftaler lejeperiode og om du henter selv eller får det leveret."),
-          ("Få materiellet udleveret", "Du får materiellet, og vi gennemgår lejebetingelserne."),
-          ("Aflever på aftalt tid", "Materiellet afleveres på Engdraget 11 i samme stand, som du fik det.")],
-    pris_intro="Prisen afhænger af materiel og lejeperiode. Ring og fortæl, hvad du skal bruge, så får du en pris. Det har betydning:",
-    pris=["Hvilket materiel du lejer", "Hvor mange kalenderdage du lejer", "Om du vil have materiellet leveret og afhentet", "Forsikringsgebyr på 7 % af den samlede pris"],
+}
+
+
+# ---------------- MATERIELUDLEJNING ----------------
+# Kilde: Sebastians Word-dokument "Rosendal Materiel Udlejning" (12 maskiner). Ingen andre kilder til maskiner
+# eller priser. Tastefejl rettet (DDK, 230C, 1,26 n, Jordbordet). Udeladt indtil afklaret med Sebastian:
+# stilladsklasse paa bukkestillads, affugterens rumstoerrelse og effekt. Se FAKTATJEK.md.
+# Hver maskine: (id/anker, kategori, navn, tekst, specifikationer, pris inkl. moms pr. dag eller None, pris ekskl.)
+# id bruges som anker nu og som /materieludlejning/<id>/, hvis en maskine senere faar sin egen side.
+MATERIEL_KATEGORIER = [
+    ("el", "El-værktøj til leje i Hundested", "Til skæring og slibning, når du bygger eller renoverer indendørs."),
+    ("bygning", "Bygningsmateriel til leje i Hundested", "Stillads, løft, varme og affugtning til byggepladsen og renoveringen."),
+    ("jord", "Jord og anlæg til leje i Hundested", "Til haven, hegnet og byggeprojektet, når der skal bores huller eller flyttes jord."),
+]
+MATERIEL = [
+    ("bordsav", "el", "Dewalt kompakt bordsav",
+     "Bordsav med aluminiumsbord og kraftig 1850 W motor. Ideel til alle skæreopgaver.",
+     ["Klinge Ø210 mm", "Maks. skæredybde 65 mm ved 90° og 45 mm ved 45°", "230 V"], 260, 208),
+    ("girafsliber", "el", "Festool girafsliber",
+     "Let og enkel langhalssliber, der giver en bedre arbejdsstilling, med udtag til støvsuger.",
+     ["Leveres uden slibenet og sandpapir"], 260, 208),
+    ("rullestillads", "bygning", "Jumbo rullestillads",
+     "Til arbejde i højden. Stilladset er nemt at transportere og samle, og det kører på hjul.",
+     ["Aluminium"], None, None),
+    ("bukkestillads", "bygning", "Jumbo bukkestillads",
+     "Til mange slags opgaver. Bukkene kan justeres i højden fra 110 til 190 cm.",
+     ["Vægt 20 kg", "Varmgalvaniseret"], None, None),
+    ("varmeblaeser", "bygning", "Varmeblæser 2 kW",
+     "Hurtig og stabil varme til garage, byggepladsvogn og lignende, med enkel styring.",
+     ["Effekt 2 kW", "Kraftig blæser"], 40, 32),
+    ("transportvogn", "bygning", "Ravendo transportvogn TW 2000",
+     "Trækvogn med bremse til transport af materialer.",
+     ["Længde 200 cm, bredde 100 cm, højde 47 cm", "Lastkapacitet 1.200 kg", "Egenvægt 88 kg", "Gummihjul på stålfælg"], 260, 208),
+    ("gipshejs", "bygning", "Raptor gipshejs",
+     "Manuel hejs til montering af gipsplader op til 3,2 m. Leveres i 3 dele.",
+     ["Samlet vægt 25 kg", "5 gummihjul, hvoraf ét kan låses"], 250, 200),
+    ("affugter", "bygning", "Master affugter DH 752",
+     "Til mindre lokaler under 100 m² ved vandskader. Afrimer hurtigt og automatisk, og tanken har overløbssikring.",
+     ["Tank 5,7 L", "Mulighed for afløbsslange", "230 V", "Vægt 30 kg"], 260, 208),
+    ("betonblander", "bygning", "Betonblander 120 L",
+     "Til blanding af beton, cement og mørtel. Nem at håndtere og med sikkerhedsafbryder.",
+     ["550 W motor, 230 V 50 Hz", "H 1,04 m, B 69 cm, D 1,26 m"], 400, 320),
+    ("dumper", "jord", "Scheppach dumper DP3000",
+     "Kraftig dumper med 4-takts motor til alle slags underlag: byggeplads, skovbrug, landbrug og byggeprojekter.",
+     ["Mål 133 × 81 × 103,8 cm", "Lad 91,2 × 65 × 56 cm", "Maks. belastning 300 kg", "3 gear og 1 bakgear"], 475, 380),
+    ("paelebor", "jord", "Pælebor",
+     "Benzindrevet 2-takts pælebor. Ideelt til hegn i haven.",
+     ["Tre bor: 100, 150 og 200 mm", "Olie og benzin 1:40", "Vægt med bor 11 til 12,5 kg"], 275, 220),
+    ("jordbor", "jord", "Mobilt jordbor",
+     "Jordbor, der kan spændes på en kuglekobling, fx på en ATV eller havetraktor.",
+     ["Bor på 127, 152, 203, 254 og 305 mm", "Motor 9 hk", "Vægt 168 kg"], 475, 380),
+]
+MATERIEL_SIDE = dict(
+    title="Materieludlejning i Hundested | Rosendal Tømrer",
+    desc="Lej bordsav, stillads, betonblander, affugter, dumper og pælebor hos Rosendal Tømrer i Hundested. Priser pr. dag for private og erhverv.",
+    h1="Materieludlejning til private og erhverv i Hundested",
+    intro="Lej det materiel, vi selv arbejder med, til dit eget projekt. Du henter det på Engdraget 11 i Hundested, så ring og hør, om det er ledigt.",
+    svar="Hos Rosendal Tømrer i Hundested kan du leje bordsav, girafsliber, rullestillads, bukkestillads, varmeblæser, transportvogn, "
+         "gipshejs, affugter, betonblander, dumper, pælebor og mobilt jordbor. Materiellet lejes pr. kalenderdag og afhentes på "
+         "Engdraget 11 i Hundested. Ring på 50 70 05 05 for at høre, om det er ledigt, og book.",
+    trin=[("Ring og fortæl, hvad du skal bruge", "Vi tjekker, om materiellet er ledigt, og hjælper dig med at vælge det rigtige."),
+          ("Hent det i Hundested", "Du henter materiellet på Engdraget 11 efter aftale. Skal det leveres, så kontakt os for pris."),
+          ("Aflever igen", "Materiellet afleveres til den aftalte tid og i samme stand, som du fik det.")],
     faq=[
-        ("Hvad koster det at leje?", "Prisen afhænger af materiel og lejeperiode. Ring og fortæl, hvad du skal bruge, så får du en pris."),
-        ("Kan I levere materiellet?", "Ja, levering og afhentning kan aftales. Kontakt os for pris."),
-        ("Kan jeg afbestille?", "Ja, op til 7 dage før den aftalte booking. Ved afbestilling opkræves et gebyr på 275 kr. inkl. moms. Se lejebetingelserne."),
-        ("Lejer I også ud til private?", "Ja. Vi lejer ud til både private og erhverv."),
+        ("Hvor længe kan jeg leje?", "Materiellet lejes pr. kalenderdag, og en dag regnes som 8 timers brug. Bruger du det mere end 8 timer, tæller det som en ekstra dag. Ring og aftal, hvor mange dage du skal bruge det."),
+        ("Hvad koster det at leje?", "Prisen pr. dag står ved hver maskine, både inkl. og ekskl. moms. Oven i den samlede pris kommer et forsikringsgebyr på 7 %. Rullestillads og bukkestillads: kontakt os for pris."),
+        ("Kan jeg afbestille?", "Ja. Afbestilling skal ske senest 7 dage før den aftalte booking, og der opkræves et gebyr på 275 kr. inkl. moms."),
+        ("Skal jeg selv sørge for brændstof?", "Ja. Benzindrevne maskiner, fx pæleboret, udlejes uden brændstof, og du skal selv påfylde korrekte væsker efter anvisningerne."),
+        ("Hvad skal jeg bruge til hegn i haven?", "Til hullerne til hegnsstolperne kan du leje pæleboret med bor på 100, 150 og 200 mm. Det mobile jordbor kan spændes på fx en ATV eller havetraktor og har bor op til 305 mm. Skal der flyttes jord, kan dumperen tage op til 300 kg."),
+        ("Hvad bruger jeg ved en vandskade?", "Affugteren Master DH 752 er til mindre lokaler under 100 m². Den afrimer automatisk, har overløbssikring på tanken og kan tilsluttes en afløbsslange."),
+        ("Kan I hjælpe med at vælge stillads?", "Ja. Vi er tømrere og bruger selv stilladserne, så ring og fortæl om opgaven. Så hjælper vi dig med at vælge mellem rullestillads og bukkestillads."),
+        ("Lejer I ud til private?", "Ja. Vi lejer ud til både private og erhverv."),
     ],
-    anm=[]),
+)
+# Ydelsessider der linker til bestemte maskiner (og omvendt fra udlejningssiden)
+MATERIEL_LINKS = {
+    "terrasse": ["paelebor", "jordbor"], "pergola-hegn-og-cykelskur": ["paelebor", "jordbor"],
+    "renovering": ["affugter", "gipshejs"],
+    "tilbygning": ["betonblander", "dumper", "rullestillads"], "nybyg": ["betonblander", "dumper", "rullestillads"],
 }

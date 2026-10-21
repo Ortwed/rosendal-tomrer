@@ -122,7 +122,7 @@ GAMLE_HTML = ["hovedentreprise", "doere-og-vinduer", "gaardhaver", "materieludle
 for g in GAMLE_HTML:
     if f"{g}.html" not in stubs: fejl.append(f"redirect-stub mangler: {g}.html")
     if f"^{g}\\.html$" not in ht: fejl.append(f".htaccess mangler 301 for {g}.html")
-for g in ["doere-vinduer", "gaardhaver", "materieludlejning"]:
+for g in ["doere-vinduer", "gaardhaver", "udlejning-af-stillads-og-trailer"]:
     if f"{g}/index.html" not in stubs: fejl.append(f"redirect-stub mangler: {g}/")
     if f"^{g}/?$" not in ht: fejl.append(f".htaccess mangler 301 for /{g}/")
 for st in stubs:
