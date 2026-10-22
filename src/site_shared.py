@@ -345,10 +345,9 @@ footer a:hover{color:#fff;text-decoration:underline}
 .svc-main{max-width:760px}
 .svc-fig{margin:0 0 1.6rem}
 .m-side{max-width:1200px}
-/* Logoerne ligger i hjoernet af forsidebilledet, saa de altid ses uden at scrolle og ikke skubber teksten ned.
-   Anmeld Haandvaerker-badget er ca. 190x245 px, derfor zoom. */
-.hero{position:relative}
-.hero-badges{position:absolute;top:1.6rem;right:3.4rem;display:flex;align-items:center;gap:1rem;zoom:.75;z-index:2}
+/* Logoerne staar lige under Ring- og tilbudsknappen. Anmeld Haandvaerker-badget er ca. 190x245 px, derfor zoom,
+   saa det ikke skubber resten af forsiden for langt ned. */
+.hero-badges{display:flex;align-items:center;flex-wrap:wrap;gap:1.2rem;margin:1.6rem 0 0;zoom:.75}
 .ah-badge{max-width:100%;overflow:hidden}
 .dh-logo{width:120px;height:auto;background:#fff;border-radius:50%;padding:6px}
 .ah-widget{margin:1.8rem 0 1.4rem;max-width:100%;overflow:hidden}
@@ -401,7 +400,7 @@ footer a:hover{color:#fff;text-decoration:underline}
   .rev-grid,.refs-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media (max-width:820px){
-  .hero-badges{top:.6rem;right:.6rem;gap:.8rem;zoom:.5}
+  .hero-badges{margin-top:1.2rem;gap:.8rem;zoom:.6}
   .hero{grid-template-columns:minmax(0,1fr);min-height:0;padding-right:0}
   .hero-text{padding:2rem 1.5rem 2.2rem;order:1}
   .hero-img{order:0;height:200px}
