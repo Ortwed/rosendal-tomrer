@@ -134,13 +134,15 @@ forside = f"""
     <div class="hero-kicker">Rosendal Tømrer Entreprise · siden 2021</div>
     <h1>Tømrermester i Hundested: tilbygning, tag, vinduer og totalentreprise i Nordsjælland</h1>
     <p class="lead">Vi hjælper private og erhverv med alt fra nye vinduer og træterrasser til renoveringer, tilbygninger og hele byggerier. Sebastian er din faste kontaktperson, og vi er et fast hold af tømrere.</p>
-    <div class="btn-row">
-      <a class="btn btn-primary" href="tel:{TLF_RAW}">{ICON_TLF}Ring {TLF}</a>
-      <a class="btn btn-ghost" href="/kontakt/" data-cta="hero">Få et tilbud</a>
-    </div>
-    <div class="hero-badges">
-      <div class="ah-badge">{AH_BADGE_DIV}</div>
-      <img class="dh-logo" src="/images/garanti-dansk-haandvaerk.webp" alt="Garanti, Dansk Håndværk: Rosendal Tømrer er medlem og giver byggegaranti" width="160" height="162">
+    <div class="cta-block">
+      <div class="btn-row">
+        <a class="btn btn-primary" href="tel:{TLF_RAW}">{ICON_TLF}Ring {TLF}</a>
+        <a class="btn btn-ghost" href="/kontakt/" data-cta="hero">Få et tilbud</a>
+      </div>
+      <div class="hero-badges">
+        <div class="ah-badge">{AH_BADGE_DIV}</div>
+        <img class="dh-logo" src="/images/garanti-dansk-haandvaerk.webp" alt="Garanti, Dansk Håndværk: Rosendal Tømrer er medlem og giver byggegaranti" width="190" height="190">
+      </div>
     </div>
   </div></div>
   <div class="hero-img"><img src="/images/terrasse-trapper.webp" srcset="/images/terrasse-trapper-720.webp 720w, /images/terrasse-trapper.webp 1500w" sizes="(max-width:820px) 100vw, 55vw"
@@ -197,7 +199,7 @@ forside = f"""
 """
 side("index", "Tømrer i Hundested og Nordsjælland | Rosendal Tømrer",
      "Tømrermester og bygningskonstruktør i Hundested. Tilbygning, tag, vinduer, terrasser og totalentreprise i Nordsjælland. Ring 50 70 05 05.",
-     forside, schemas=[schema_virksomhed()], extra_js=AH_BADGE_JS + "\n" + AH_SLIDER_JS)
+     forside, schemas=[schema_virksomhed()], extra_js=AH_BADGE_JS + "\n" + AH_SLIDER_JS + "\n" + AH_BADGE_HOEJDE_JS)
 
 # ---------------- YDELSESSIDER ----------------
 def sidebar(aktiv):

@@ -306,9 +306,10 @@ footer a:hover{color:#fff;text-decoration:underline}
 .m-side{max-width:1200px}
 /* Logoerne staar lige under Ring- og tilbudsknappen. Anmeld Haandvaerker-badget er ca. 190x245 px, derfor zoom,
    saa det ikke skubber resten af forsiden for langt ned. */
-.hero-badges{display:flex;align-items:center;flex-wrap:wrap;gap:1.2rem;margin:1.6rem 0 0;zoom:.75}
-.ah-badge{max-width:100%;overflow:hidden}
-.dh-logo{width:120px;height:auto;background:#fff;border-radius:50%;padding:6px}
+.cta-block{display:flex;flex-direction:column;align-items:flex-start;width:fit-content;max-width:100%}
+.cta-block .hero-badges{display:flex;justify-content:center;align-items:center;align-self:stretch;gap:2.4rem;margin-top:2rem}
+.ah-badge{max-width:100%;overflow:hidden;border-radius:22px;line-height:0}
+.dh-logo{width:190px;height:190px;padding:10px;box-sizing:border-box;background:#fff;border-radius:50%}
 .ah-widget{margin:1.8rem 0 1.4rem;max-width:100%;overflow:hidden}
 .ah-badge iframe,.ah-widget iframe,.ah-badge img,.ah-widget img{max-width:100%}
 .ah-mere{margin-top:.4rem}
@@ -359,7 +360,7 @@ footer a:hover{color:#fff;text-decoration:underline}
   .rev-grid,.refs-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media (max-width:820px){
-  .hero-badges{margin-top:1.2rem;gap:.8rem;zoom:.6}
+  .cta-block .hero-badges{zoom:.75;gap:1.2rem}
   .hero{grid-template-columns:minmax(0,1fr);min-height:0;padding-right:0}
   .hero-text{padding:2rem 1.5rem 2.2rem;order:1}
   .hero-img{order:0;height:200px}
@@ -467,13 +468,15 @@ nav .nav-cta a.btn:hover{color:#fff}
     <div class="hero-kicker">Rosendal Tømrer Entreprise · siden 2021</div>
     <h1>Tømrermester i Hundested: tilbygning, tag, vinduer og totalentreprise i Nordsjælland</h1>
     <p class="lead">Vi hjælper private og erhverv med alt fra nye vinduer og træterrasser til renoveringer, tilbygninger og hele byggerier. Sebastian er din faste kontaktperson, og vi er et fast hold af tømrere.</p>
-    <div class="btn-row">
-      <a class="btn btn-primary" href="tel:+4550700505"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>Ring 50 70 05 05</a>
-      <a class="btn btn-ghost" href="kontakt/" data-cta="hero">Få et tilbud</a>
-    </div>
-    <div class="hero-badges">
-      <div class="ah-badge"><div id="ah-widget-3"></div></div>
-      <img class="dh-logo" src="images/garanti-dansk-haandvaerk.webp" alt="Garanti, Dansk Håndværk: Rosendal Tømrer er medlem og giver byggegaranti" width="160" height="162">
+    <div class="cta-block">
+      <div class="btn-row">
+        <a class="btn btn-primary" href="tel:+4550700505"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>Ring 50 70 05 05</a>
+        <a class="btn btn-ghost" href="kontakt/" data-cta="hero">Få et tilbud</a>
+      </div>
+      <div class="hero-badges">
+        <div class="ah-badge"><div id="ah-widget-3"></div></div>
+        <img class="dh-logo" src="images/garanti-dansk-haandvaerk.webp" alt="Garanti, Dansk Håndværk: Rosendal Tømrer er medlem og giver byggegaranti" width="190" height="190">
+      </div>
     </div>
   </div></div>
   <div class="hero-img"><img src="images/terrasse-trapper.webp" srcset="images/terrasse-trapper-720.webp 720w, images/terrasse-trapper.webp 1500w" sizes="(max-width:820px) 100vw, 55vw"
@@ -604,5 +607,7 @@ document.addEventListener('click',function(ev){var t=ev.target.closest?ev.target
 </script>
 <script src="https://www.anmeld-haandvaerker.dk/embed.js?id=522319&amp;type=3&amp;w_id=ah-widget-3&amp;items=1&amp;score=4&amp;bgcolor=f8f8f8&amp;fcolor=000&amp;images=1"></script>
 <script src="https://www.anmeld-haandvaerker.dk/embed.js?id=522319&amp;type=2&amp;w_id=ah-widget-2&amp;items=3&amp;score=4&amp;bgcolor=f8f8f8&amp;fcolor=000&amp;images=1"></script>
+<script>(function(){var b=document.querySelector('.ah-badge');if(!b||!window.ResizeObserver)return;
+new ResizeObserver(function(){b.style.zoom='';var h=b.scrollHeight;if(h>0)b.style.zoom=Math.min(1,190/h);}).observe(document.getElementById('ah-widget-3'));})();</script>
 </body>
 </html>

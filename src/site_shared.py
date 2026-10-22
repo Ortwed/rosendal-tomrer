@@ -25,6 +25,10 @@ AH_BADGE_DIV = '<div id="ah-widget-3"></div>'
 AH_BADGE_JS = '<script src="https://www.anmeld-haandvaerker.dk/embed.js?id=522319&amp;type=3&amp;w_id=ah-widget-3&amp;items=1&amp;score=4&amp;bgcolor=f8f8f8&amp;fcolor=000&amp;images=1"></script>'
 AH_SLIDER_DIV = '<div id="ah-widget-2"></div>'
 AH_SLIDER_JS = '<script src="https://www.anmeld-haandvaerker.dk/embed.js?id=522319&amp;type=2&amp;w_id=ah-widget-2&amp;items=3&amp;score=4&amp;bgcolor=f8f8f8&amp;fcolor=000&amp;images=1"></script>'
+# Badget er hoejere end Dansk Haandvaerk-logoet. Naar widgetten er tegnet, skaleres den til 190 px hoejde, saa de to
+# er lige hoeje. Maales i stedet for et fast tal, fordi Anmeld Haandvaerker kan aendre widgettens stoerrelse.
+AH_BADGE_HOEJDE_JS = """<script>(function(){var b=document.querySelector('.ah-badge');if(!b||!window.ResizeObserver)return;
+new ResizeObserver(function(){b.style.zoom='';var h=b.scrollHeight;if(h>0)b.style.zoom=Math.min(1,190/h);}).observe(document.getElementById('ah-widget-3'));})();</script>"""
 AH_LISTE_DIV = '<div id="ah-widget-6"></div>'
 AH_LISTE_JS = '<script src="https://www.anmeld-haandvaerker.dk/embed.js?id=522319&amp;type=6&amp;w_id=ah-widget-6&amp;items=5&amp;score=4&amp;bgcolor=f8f8f8&amp;fcolor=000&amp;images=1"></script>'
 GA_ID = "G-Y07ZQXFQWY"   # GA4 paa Sebastians konto. Kun med i live-builden, se analytics_head()
@@ -347,9 +351,10 @@ footer a:hover{color:#fff;text-decoration:underline}
 .m-side{max-width:1200px}
 /* Logoerne staar lige under Ring- og tilbudsknappen. Anmeld Haandvaerker-badget er ca. 190x245 px, derfor zoom,
    saa det ikke skubber resten af forsiden for langt ned. */
-.hero-badges{display:flex;align-items:center;flex-wrap:wrap;gap:1.2rem;margin:1.6rem 0 0;zoom:.75}
-.ah-badge{max-width:100%;overflow:hidden}
-.dh-logo{width:120px;height:auto;background:#fff;border-radius:50%;padding:6px}
+.cta-block{display:flex;flex-direction:column;align-items:flex-start;width:fit-content;max-width:100%}
+.cta-block .hero-badges{display:flex;justify-content:center;align-items:center;align-self:stretch;gap:2.4rem;margin-top:2rem}
+.ah-badge{max-width:100%;overflow:hidden;border-radius:22px;line-height:0}
+.dh-logo{width:190px;height:190px;padding:10px;box-sizing:border-box;background:#fff;border-radius:50%}
 .ah-widget{margin:1.8rem 0 1.4rem;max-width:100%;overflow:hidden}
 .ah-badge iframe,.ah-widget iframe,.ah-badge img,.ah-widget img{max-width:100%}
 .ah-mere{margin-top:.4rem}
@@ -400,7 +405,7 @@ footer a:hover{color:#fff;text-decoration:underline}
   .rev-grid,.refs-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media (max-width:820px){
-  .hero-badges{margin-top:1.2rem;gap:.8rem;zoom:.6}
+  .cta-block .hero-badges{zoom:.75;gap:1.2rem}
   .hero{grid-template-columns:minmax(0,1fr);min-height:0;padding-right:0}
   .hero-text{padding:2rem 1.5rem 2.2rem;order:1}
   .hero-img{order:0;height:200px}
