@@ -138,7 +138,7 @@ forside = f"""
       <a class="btn btn-primary" href="tel:{TLF_RAW}">{ICON_TLF}Ring {TLF}</a>
       <a class="btn btn-ghost" href="/kontakt/" data-cta="hero">Få et tilbud</a>
     </div>
-    <div class="hero-proof"><strong>{ANM_SNIT}</strong><div>{STJ} ud af 5 på Anmeld Håndværker<br>{ANM_TEKST} anmeldelser · Byggaranti · Fast hold af tømrere</div></div>
+    <div class="ah-badge">{AH_BADGE_DIV}</div>
   </div></div>
   <div class="hero-img"><img src="/images/terrasse-trapper.webp" srcset="/images/terrasse-trapper-720.webp 720w, /images/terrasse-trapper.webp 1500w" sizes="(max-width:820px) 100vw, 55vw"
     alt="Terrasse i hårdttræ med siddetrapper, trappe op ad skrænten og hegn af lodrette lister, bygget af Rosendal Tømrer" width="1500" height="1125" fetchpriority="high"></div>
@@ -168,12 +168,9 @@ forside = f"""
 </div></section>
 
 <section class="sec"><div class="container">
-  <div class="rev-top">
-    <div class="sec-head" style="margin:0"><h2>Det siger kunderne</h2><p>Udvalgte anmeldelser fra Anmeld Håndværker.</p></div>
-    <div class="rev-score"><span class="big">{ANM_SNIT}</span><span class="meta">{STJ}<br>ud af 5 baseret på {ANM_TEKST} anmeldelser</span></div>
-  </div>
-  <div class="rev-grid">{rev_kort('brian')}{rev_kort('bitten')}{rev_kort('morten')}</div>
-  <div class="rev-links"><a href="/anmeldelser/">Se flere anmeldelser</a><a href="{ANM_URL}" target="_blank" rel="noopener">Læs dem alle på Anmeld Håndværker</a></div>
+  <div class="sec-head"><h2>Det siger vores kunder</h2><p>Anmeldelser fra Anmeld Håndværker. De opdateres automatisk, når der kommer nye.</p></div>
+  <div class="ah-widget">{AH_SLIDER_DIV}</div>
+  <p class="ah-mere"><a href="/anmeldelser/">Se alle anmeldelser →</a></p>
 </div></section>
 
 <section class="sec sec-sand"><div class="container">
@@ -197,7 +194,7 @@ forside = f"""
 """
 side("index", "Tømrer i Hundested og Nordsjælland | Rosendal Tømrer",
      "Tømrermester og bygningskonstruktør i Hundested. Tilbygning, tag, vinduer, terrasser og totalentreprise i Nordsjælland. Ring 50 70 05 05.",
-     forside, schemas=[schema_virksomhed()])
+     forside, schemas=[schema_virksomhed()], extra_js=AH_BADGE_JS + "\n" + AH_SLIDER_JS)
 
 # ---------------- YDELSESSIDER ----------------
 def sidebar(aktiv):
@@ -444,21 +441,19 @@ ref_body = f"""
 <section class="page-header"><div class="container">
   {crumb_html([("Anmeldelser", None)])}
   <h1>Anmeldelser fra vores kunder</h1>
-  <p>Opgaver vi har løst i Nordsjælland, fortalt med kundernes egne ord. Her er de {len(A)} nyeste af {ANM_TEKST} anmeldelser på Anmeld Håndværker.</p>
+  <p>Vi er stolte af at have {ANM_SNIT} i gennemsnit på Anmeld Håndværker. Her kan du læse, hvad vores kunder skriver om os.</p>
 </div></section>
 {proj_html}
 <section class="sec sec-mist"><div class="container">
-  <div class="rev-top">
-    <div class="sec-head" style="margin:0"><h2>{ANM_TEKST.capitalize()} anmeldelser, {ANM_SNIT} i snit</h2><p>Kommunikation, aftaler, pris, tilfredshed og oprydning.</p></div>
-  </div>
-  <div class="refs-grid">{''.join(case(k) for k in A)}</div>
+  <div class="sec-head" style="margin:0"><h2>Anmeldelser fra Anmeld Håndværker</h2><p>Kommunikation, aftaler, pris, tilfredshed og oprydning. Listen opdateres automatisk.</p></div>
+  <div class="ah-widget">{AH_LISTE_DIV}</div>
   <div class="rev-links"><a href="{ANM_URL}" target="_blank" rel="noopener">Læs alle anmeldelser på Anmeld Håndværker</a><a href="{FB_ANM}" target="_blank" rel="noopener">Anmeldelser på Facebook</a></div>
 </div></section>
 {some()}
 {cta()}"""
 side("anmeldelser", "Anmeldelser fra kunder | Rosendal Tømrer",
-     f"{ANM_TEKST.capitalize()} anmeldelser med {ANM_SNIT} i snit på Anmeld Håndværker. Tag, vinduer, terrasser, tilbygning og renovering i Nordsjælland.",
-     ref_body, schemas=[schema_virksomhed()], krummer=[("Anmeldelser", None)])
+     "Læs anmeldelser fra vores kunder på Anmeld Håndværker. Tag, vinduer, terrasser, tilbygning og renovering i Hundested og Nordsjælland.",
+     ref_body, schemas=[schema_virksomhed()], krummer=[("Anmeldelser", None)], extra_js=AH_LISTE_JS)
 
 # ---------------- PROJEKTSIDER (kun naar status = live) ----------------
 def projekt_side(p):
@@ -591,6 +586,7 @@ cookies = f"""
   <h2>Hvad er cookies?</h2><p>En cookie er en lille tekstfil, som gemmes i din browser. Vi sætter kun cookies, der ikke er nødvendige, hvis du har sagt ja.</p>
   <h2>Nødvendige cookies</h2><p><strong>{COOKIE}</strong> gemmer dit valg i cookiebanneret i 12 måneder. Den er nødvendig for at vi kan huske dit svar.</p>
   <h2>Statistik og marketing</h2><p>Hvis du accepterer, bruger vi Google Analytics til at se, hvordan siden bliver brugt. Afviser du, sendes der kun anonyme signaler uden cookies.</p>
+  <h2>Anmeldelser fra Anmeld Håndværker</h2><p>På forsiden og på siden med anmeldelser vises anmeldelser med en widget fra Anmeld Håndværker. Den hentes fra deres server, når siden åbnes.</p>
   <h2>Google Maps</h2><p>Kortet på kontaktsiden hentes fra Google og sætter cookies. Det vises derfor først, når du har accepteret.</p>
   <h2>Skift dit valg</h2><p>Du kan altid ændre eller trække dit samtykke tilbage via linket "Skift cookieindstillinger" nederst på alle sider.</p>
   <h2>Ansvarlig</h2><p>{e(NAVN)}, {ADR}, {POST} {BY}. CVR {CVR}. <a href="mailto:{MAIL}">{MAIL}</a></p>

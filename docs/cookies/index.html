@@ -303,6 +303,11 @@ footer a:hover{color:#fff;text-decoration:underline}
 .svc-main{max-width:760px}
 .svc-fig{margin:0 0 1.6rem}
 .m-side{max-width:1200px}
+.ah-badge{margin:1.6rem 0 0;max-width:100%;overflow:hidden}
+.ah-widget{margin:1.8rem 0 1.4rem;max-width:100%;overflow:hidden}
+.ah-badge iframe,.ah-widget iframe,.ah-badge img,.ah-widget img{max-width:100%}
+.ah-mere{margin-top:.4rem}
+.ah-mere a{font-weight:700;color:var(--blue);text-decoration:underline}
 .m-hurtig{display:flex;flex-wrap:wrap;gap:.6rem;margin:0 0 2rem}
 .m-hurtig a{border:1px solid var(--line);border-radius:999px;padding:.45rem 1rem;font-weight:600;font-size:.92rem;color:var(--navy);text-decoration:none}
 .m-hurtig a:hover{border-color:var(--blue);color:var(--blue)}
@@ -349,6 +354,10 @@ footer a:hover{color:#fff;text-decoration:underline}
   .rev-grid,.refs-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media (max-width:820px){
+  /* Elite-badget skal ses uden at scrolle. Paa mobil ligger billedet oeverst, saa badget laegges i hjoernet af det
+     i stedet for under knapperne, hvor det ville skubbe Ring-knappen under folden. */
+  .hero{position:relative}
+  .ah-badge{position:absolute;top:.8rem;right:.8rem;margin:0;max-width:62%;z-index:2}
   .hero{grid-template-columns:minmax(0,1fr);min-height:0;padding-right:0}
   .hero-text{padding:2rem 1.5rem 2.2rem;order:1}
   .hero-img{order:0;height:200px}
@@ -457,6 +466,7 @@ nav .nav-cta a.btn:hover{color:#fff}
   <h2>Hvad er cookies?</h2><p>En cookie er en lille tekstfil, som gemmes i din browser. Vi sætter kun cookies, der ikke er nødvendige, hvis du har sagt ja.</p>
   <h2>Nødvendige cookies</h2><p><strong>rosendal_samtykke</strong> gemmer dit valg i cookiebanneret i 12 måneder. Den er nødvendig for at vi kan huske dit svar.</p>
   <h2>Statistik og marketing</h2><p>Hvis du accepterer, bruger vi Google Analytics til at se, hvordan siden bliver brugt. Afviser du, sendes der kun anonyme signaler uden cookies.</p>
+  <h2>Anmeldelser fra Anmeld Håndværker</h2><p>På forsiden og på siden med anmeldelser vises anmeldelser med en widget fra Anmeld Håndværker. Den hentes fra deres server, når siden åbnes.</p>
   <h2>Google Maps</h2><p>Kortet på kontaktsiden hentes fra Google og sætter cookies. Det vises derfor først, når du har accepteret.</p>
   <h2>Skift dit valg</h2><p>Du kan altid ændre eller trække dit samtykke tilbage via linket "Skift cookieindstillinger" nederst på alle sider.</p>
   <h2>Ansvarlig</h2><p>Rosendal Tømrer Entreprise ApS, Engdraget 11, 3390 Hundested. CVR 42228672. <a href="mailto:info@rosendal-tomrer.dk">info@rosendal-tomrer.dk</a></p>

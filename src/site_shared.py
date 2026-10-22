@@ -17,6 +17,16 @@ IG = "https://www.instagram.com/rosendaltomrerentrepriseaps/"
 ANM_URL = "https://www.anmeld-haandvaerker.dk/tomrer/rosendal-tomrer-entreprise-aps"
 ANM_TEKST = "over 35"   # bevidst ikke et fast tal: profilen viser 39 (18-10-2026), tallet vokser
 ANM_SNIT = "4,9"
+
+# Anmeld Haandvaerker-widgets. Koderne er indsat praecis som Anmeld Haandvaerker leverede dem (URL og id uaendret).
+# Div'en staar dér, hvor widgetten skal vises. Scriptet ligger nederst paa siden via extra_js, saa det ikke blokerer
+# resten af siden. Hvert script indlaeses kun én gang pr. side.
+AH_BADGE_DIV = '<div id="ah-widget-3"></div>'
+AH_BADGE_JS = '<script src="https://www.anmeld-haandvaerker.dk/embed.js?id=522319&amp;type=3&amp;w_id=ah-widget-3&amp;items=1&amp;score=4&amp;bgcolor=f8f8f8&amp;fcolor=000&amp;images=1"></script>'
+AH_SLIDER_DIV = '<div id="ah-widget-2"></div>'
+AH_SLIDER_JS = '<script src="https://www.anmeld-haandvaerker.dk/embed.js?id=522319&amp;type=2&amp;w_id=ah-widget-2&amp;items=3&amp;score=4&amp;bgcolor=f8f8f8&amp;fcolor=000&amp;images=1"></script>'
+AH_LISTE_DIV = '<div id="ah-widget-6"></div>'
+AH_LISTE_JS = '<script src="https://www.anmeld-haandvaerker.dk/embed.js?id=522319&amp;type=6&amp;w_id=ah-widget-6&amp;items=5&amp;score=4&amp;bgcolor=f8f8f8&amp;fcolor=000&amp;images=1"></script>'
 GA_ID = "G-Y07ZQXFQWY"   # GA4 paa Sebastians konto. Kun med i live-builden, se analytics_head()
 FORMSPREE_ID = "mbgdzaov"   # Rosendals egen formular, sender til info@ og er låst til rosendal-tomrer.dk
 COOKIE = "rosendal_samtykke"
@@ -335,6 +345,11 @@ footer a:hover{color:#fff;text-decoration:underline}
 .svc-main{max-width:760px}
 .svc-fig{margin:0 0 1.6rem}
 .m-side{max-width:1200px}
+.ah-badge{margin:1.6rem 0 0;max-width:100%;overflow:hidden}
+.ah-widget{margin:1.8rem 0 1.4rem;max-width:100%;overflow:hidden}
+.ah-badge iframe,.ah-widget iframe,.ah-badge img,.ah-widget img{max-width:100%}
+.ah-mere{margin-top:.4rem}
+.ah-mere a{font-weight:700;color:var(--blue);text-decoration:underline}
 .m-hurtig{display:flex;flex-wrap:wrap;gap:.6rem;margin:0 0 2rem}
 .m-hurtig a{border:1px solid var(--line);border-radius:999px;padding:.45rem 1rem;font-weight:600;font-size:.92rem;color:var(--navy);text-decoration:none}
 .m-hurtig a:hover{border-color:var(--blue);color:var(--blue)}
@@ -381,6 +396,10 @@ footer a:hover{color:#fff;text-decoration:underline}
   .rev-grid,.refs-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media (max-width:820px){
+  /* Elite-badget skal ses uden at scrolle. Paa mobil ligger billedet oeverst, saa badget laegges i hjoernet af det
+     i stedet for under knapperne, hvor det ville skubbe Ring-knappen under folden. */
+  .hero{position:relative}
+  .ah-badge{position:absolute;top:.8rem;right:.8rem;margin:0;max-width:62%;z-index:2}
   .hero{grid-template-columns:minmax(0,1fr);min-height:0;padding-right:0}
   .hero-text{padding:2rem 1.5rem 2.2rem;order:1}
   .hero-img{order:0;height:200px}
