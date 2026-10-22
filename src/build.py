@@ -108,8 +108,8 @@ def svc_grid():
 
 TRUST = f"""<div class="container trust">
   <div><strong>Tømrermester</strong><span>og uddannet bygningskonstruktør</span></div>
-  <div><strong>{ANM_SNIT} ud af 5</strong><span>{ANM_TEKST} anmeldelser på Anmeld Håndværker</span></div>
-  <div><strong>Byggaranti</strong><span>Medlem af Dansk Håndværk</span></div>
+  <div><strong>Skriftligt tilbud</strong><span>så du kender pris og omfang, før vi går i gang</span></div>
+  <div><strong>Fast hold af tømrere</strong><span>og én fast kontaktperson hele vejen</span></div>
   <div><strong>Hele {OMRAADE}</strong><span>fra værksted og kontor i Hundested</span></div>
 </div>"""
 
@@ -117,7 +117,7 @@ TRUST_LILLE = f"""<section class="sec-mist"><div class="container trust">
   <div><strong>Tømrermester</strong><span>og uddannet bygningskonstruktør</span></div>
   <div><strong>Skriftligt tilbud</strong><span>så du kender pris og omfang, før vi går i gang</span></div>
   <div><strong>Svar inden for 24 timer</strong><span>på hverdage</span></div>
-  <div><strong>{ANM_SNIT} ud af 5</strong><span>{ANM_TEKST} anmeldelser på Anmeld Håndværker</span></div>
+  <div><strong>Fast hold af tømrere</strong><span>og én fast kontaktperson hele vejen</span></div>
 </div></section>"""
 
 SIGNATUR = """<div class="sign"><img src="/images/signatur.png" alt="Sebastian Rosendals underskrift" width="172" height="176" loading="lazy">
@@ -138,7 +138,10 @@ forside = f"""
       <a class="btn btn-primary" href="tel:{TLF_RAW}">{ICON_TLF}Ring {TLF}</a>
       <a class="btn btn-ghost" href="/kontakt/" data-cta="hero">Få et tilbud</a>
     </div>
-    <div class="ah-badge">{AH_BADGE_DIV}</div>
+    <div class="hero-badges">
+      <div class="ah-badge">{AH_BADGE_DIV}</div>
+      <img class="dh-logo" src="/images/garanti-dansk-haandvaerk.webp" alt="Garanti, Dansk Håndværk: Rosendal Tømrer er medlem og giver byggegaranti" width="160" height="162">
+    </div>
   </div></div>
   <div class="hero-img"><img src="/images/terrasse-trapper.webp" srcset="/images/terrasse-trapper-720.webp 720w, /images/terrasse-trapper.webp 1500w" sizes="(max-width:820px) 100vw, 55vw"
     alt="Terrasse i hårdttræ med siddetrapper, trappe op ad skrænten og hegn af lodrette lister, bygget af Rosendal Tømrer" width="1500" height="1125" fetchpriority="high"></div>

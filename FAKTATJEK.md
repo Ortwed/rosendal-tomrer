@@ -64,5 +64,7 @@ Bygget ud fra Sebastians Word-dokument "Rosendal Materiel Udlejning" (12 maskine
 - Tjek på testsiden: vises de tre widgets, og kommer de det rigtige sted? Hvis en widget dukker op nederst på siden i stedet, bruger scriptet document.write og skal stå lige efter sin div
 - Tjek om widgets sætter cookies (DevTools → Application → Cookies, domæne anmeld-haandvaerker.dk). Gør de, skal de først indlæses efter samtykke
 - Virker widgetsene ikke på ortwed.github.io, kan Anmeld Håndværker have låst dem til rosendal-tomrer.dk. Så testes de først live
-- Faste tal tilbage: faktalinjen ("4,9 ud af 5", "over 35 anmeldelser") og de korte kundecitater på ydelsessiderne er stadig vores egne
+- Faktalinjerne har ikke længere faste anmeldelsestal eller "Byggaranti". Elite-badget og Garanti-logoet fra Dansk Håndværk ligger i hjørnet af forsidebilledet
+- Garanti-logoet må kun bruges som medlem af Dansk Håndværk. Medlemskabet er bekræftet af Sebastian, men dokumentation mangler stadig
+- De korte kundecitater på ydelsessiderne er stadig vores egne
 
