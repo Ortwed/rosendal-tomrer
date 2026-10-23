@@ -85,7 +85,7 @@ Bygget ud fra Sebastians Word-dokument "Rosendal Materiel Udlejning" (12 maskine
 - FAQ "Overholder I tidsplanen?": sætningen "Vi aftaler tidsplanen med dig, før arbejdet går i gang." skal godkendes af Sebastian
 - Linket til anmeldelsen går til Rosendals profil på Anmeld Håndværker, ikke til selve anmeldelsen. Skift til et direkte link, hvis Anmeld Håndværker har et
 - Kunden er ikke nævnt ved navn ("Kunden fra Hundested"), og der er ingen Review-markup
-- Billederne er omdøbt og konverteret fra de tre fotos, Christian sendte. Et fjerde foto (terrassen set langs husets glasdøre) venter på at blive sendt som fil
+- Billederne er omdøbt og konverteret fra de tre fotos, Christian sendte. Det fjerde foto (terrassen set langs husets glasdøre) er med som billede 4 i galleriet
 
 ## Projektcase: jatoba-terrasse i Liseleje (23-10-2026)
 - Live på testsiden. Billederne er Christians tre fotos (23-10-2026), omdøbt til jatoba-terrasse-liseleje-1..3. Hovedbilledet er terrassen langs glaspartierne med trapperne i kanten. Billede 3 står på højkant

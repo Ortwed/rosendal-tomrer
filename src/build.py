@@ -60,6 +60,7 @@ PROJEKTER = [
                      # Det foerste er hovedbilledet. Maalene skal kun med, naar det store billede ikke er 1440 x 1080.
              ("traeterrasse-trykimpraegneret-hundested-1", "Ny træterrasse i trykimprægneret træ ved et hus med store glaspartier i Hundested.",
               "Ny træterrasse i trykimprægneret træ langs husets glaspartier, Hundested, 2025."),
+             ("traeterrasse-trykimpraegneret-hundested-4", "Træterrassen i Hundested set langs husets glasdøre, med en ramme af brædder der skifter retning mod næste felt.", None),
              ("traeterrasse-trykimpraegneret-hundested-2", "Hele træterrassen i Hundested med brædder lagt i to retninger og en ramme af brædder mellem felterne.", None),
              ("traeterrasse-trykimpraegneret-hundested-3", "Detalje af ramme af brædder mellem to felter i en træterrasse i Hundested.", None),
          ],
