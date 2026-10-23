@@ -81,7 +81,7 @@ Bygget ud fra Sebastians Word-dokument "Rosendal Materiel Udlejning" (12 maskine
 - Google-profilen skal sige det samme som sitet: åbningstid 07.00-16.00 og arbejdsområdet (ikke Hovedstadsområdet)
 
 ## Projektcase: træterrasse i Hundested (23-10-2026)
-- Siden /projekter/traeterrasse-trykimpraegneret-hundested/ er live på testsiden. Oversigten /projekter/ og menupunktet kommer først ved 3 cases. Indtil da ligger casen som kort på /anmeldelser/ og linkes fra terrasse, Hundested og Områder
+- Siden /projekter/traeterrasse-trykimpraegneret-hundested/ er live på testsiden. Casen linkes fra terrasse, Hundested og Områder
 - FAQ "Overholder I tidsplanen?": sætningen "Vi aftaler tidsplanen med dig, før arbejdet går i gang." skal godkendes af Sebastian
 - Linket til anmeldelsen går til Rosendals profil på Anmeld Håndværker, ikke til selve anmeldelsen. Skift til et direkte link, hvis Anmeld Håndværker har et
 - Kunden er ikke nævnt ved navn ("Kunden fra Hundested"), og der er ingen Review-markup
@@ -89,8 +89,12 @@ Bygget ud fra Sebastians Word-dokument "Rosendal Materiel Udlejning" (12 maskine
 
 ## Projektcase: jatoba-terrasse i Liseleje (23-10-2026)
 - Live på testsiden. Billederne er Christians tre fotos (23-10-2026), omdøbt til jatoba-terrasse-liseleje-1..3. Hovedbilledet er terrassen langs glaspartierne med trapperne i kanten. Billede 3 står på højkant
-- Med 2 live cases står de som kort på /anmeldelser/ og linker til hinanden under "Andre projekter". Oversigten /projekter/ og menupunktet kommer ved case nr. 3
+- Casene linker til hinanden under "Andre projekter"
 - Terrasse-siden nævner nu jatoba ved siden af ipé og trykimprægneret træ (kort svar, "Det bygger vi" og "Valg af træ"). Skal godkendes af Sebastian
 - Afventer Sebastian, felterne står klar i skabelonen og vises først, når de er udfyldt: størrelse i m², højde over terræn, tidsforbrug eller måned, leverandør (evt. FSC), trappernes opbygning (antal trin, placering), hans råd om vedligehold og olie, før- og detaljebilleder
 - Fakta om jatoba (art, oprindelse, farve, vægtfylde 900 til 1.000 kg/m³) er fra generelle træreferencer. Ingen Janka-tal
 - Anmeldelsen (1. august 2025) nævner ikke jatoba. Linket går til profilen på Anmeld Håndværker. Bindestregen foran "meget" i citatet er fjernet
+
+## Vores projekter og anmeldelser (23-10-2026)
+- "Vores projekter" er sit eget afsnit i Ydelser-menuen med oversigten /projekter/ og et underpunkt pr. case. Reglen om at vente til 3 cases er droppet
+- /anmeldelser/ viser kun widgetten fra Anmeld Håndværker og linket til profilen. Projektkortene og linket til anmeldelser på Facebook er fjernet derfra

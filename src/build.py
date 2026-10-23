@@ -131,11 +131,11 @@ PROJEKTER = [
     dict(slug="doere-og-vinduer-vejby", titel="Nye døre og vinduer i Vejby", by="Vejby", maaned="april 2026", ydelse="doere", anm="anita", status="pending", billeder=[]),
 ]
 LIVE = [p for p in PROJEKTER if p["status"] == "live"]
-# Oversigten /projekter/ og menupunktet kommer foerst ved 3 cases. Indtil da ligger casene som kort under
-# Projekter paa anmeldelsessiden, og der linkes til dem fra ydelses- og omraadesiderne.
-HUB = len(LIVE) >= 3
-S.STATE["projekter"] = HUB
-PROJ_KRUMME = "projekter" if HUB else "anmeldelser#projekter"
+# "Vores projekter" er sit eget afsnit i Ydelser-menuen med oversigten /projekter/ og et underpunkt pr. case
+# (Christian 23-10-2026, afloeser reglen om tidligst at vise oversigten ved 3 cases).
+HUB = bool(LIVE)
+S.STATE["projekter"] = [(p["slug"], p["link_tekst"][0].upper() + p["link_tekst"][1:]) for p in LIVE]   # korte navne i menuen
+PROJ_KRUMME = "projekter"
 
 def proj_billede(p, n=0, bredde="720"):
     return f'/images/projekter/{p["billeder"][n][0]}{"" if bredde == "1440" else "-720"}.webp'
@@ -547,22 +547,16 @@ def proj_kort():
     return "".join(f'<a class="ref-card" href="/projekter/{p["slug"]}/"><div class="ref-card-media"><img src="{proj_billede(p)}" alt="{e(p["billeder"][0][1])}" width="720" height="540" loading="lazy"></div>'
                    f'<div class="ref-card-body"><h3>{e(p["kort"])}</h3><p>{e(p["by"])} · {e(p["aar"])}</p></div></a>' for p in LIVE)
 
-proj_html = ""
-if LIVE:   # id'et bruges som "Projekter" i broedkrummen, indtil der er en oversigtsside
-    proj_html = (f'<section class="sec" id="projekter"><div class="container"><div class="sec-head"><h2>Projekter</h2>'
-                 f'<p>Udvalgte opgaver med billeder og kundens egen anmeldelse.</p></div><div class="refs-grid">{proj_kort()}</div></div></section>')
-
 ref_body = f"""
 <section class="page-header"><div class="container">
   {crumb_html([("Anmeldelser", None)])}
   <h1>Anmeldelser fra vores kunder</h1>
   <p>Vi er stolte af at have {ANM_SNIT} i gennemsnit på Anmeld Håndværker. Her kan du læse, hvad vores kunder skriver om os.</p>
 </div></section>
-{proj_html}
 <section class="sec sec-mist"><div class="container">
   <div class="sec-head" style="margin:0"><h2>Anmeldelser fra Anmeld Håndværker</h2><p>Kommunikation, aftaler, pris, tilfredshed og oprydning. Listen opdateres automatisk.</p></div>
   <div class="ah-widget">{AH_LISTE_DIV}</div>
-  <div class="rev-links"><a href="{ANM_URL}" target="_blank" rel="noopener">Læs alle anmeldelser på Anmeld Håndværker</a><a href="{FB_ANM}" target="_blank" rel="noopener">Anmeldelser på Facebook</a></div>
+  <div class="rev-links"><a href="{ANM_URL}" target="_blank" rel="noopener">Læs alle anmeldelser på Anmeld Håndværker</a></div>
 </div></section>
 {some()}
 {cta()}"""
@@ -573,7 +567,7 @@ side("anmeldelser", "Anmeldelser fra kunder | Rosendal Tømrer",
 # ---------------- PROJEKTSIDER (kun naar status = live) ----------------
 # Ingen Review- eller aggregateRating-markup: citatet er fra Anmeld Haandvaerker og vises kun som tekst.
 def projekt_side(p):
-    krummer = [("Projekter", PROJ_KRUMME), (p["titel"], None)]
+    krummer = [("Vores projekter", PROJ_KRUMME), (p["titel"], None)]
     fakta = [(k, v) for k, v in p["fakta"] if v]
     fakta += [("Anmeldt", f'{p["anmeldt"][0]} på <a href="{ANM_URL}" target="_blank" rel="noopener">{p["anmeldt"][1]}</a>'),
               ("Udført af", NAVN)]
@@ -620,15 +614,17 @@ def projekt_side(p):
   <h2>Ofte stillede spørgsmål</h2><div class="faq">{faq}</div>
 </div></section>
 {cta()}"""
-    side(f"projekter/{p['slug']}", p["title"], p["desc"], body, active="projekter", og_img=p["og_img"],
+    side(f"projekter/{p['slug']}", p["title"], p["desc"], body, active=f"projekter/{p['slug']}", og_img=p["og_img"],
          schemas=[faq_schema(p["faq"])], extra_js=LB_JS, krummer=krummer)
 
 for p in LIVE:
     projekt_side(p)
 if HUB:
-    side("projekter", "Projekter | Rosendal Tømrer", "Se udvalgte projekter fra Rosendal Tømrer i Hundested og Nordsjælland: tag, vinduer, terrasser, tilbygning og renovering.",
-         f'<section class="page-header"><div class="container">{crumb_html([("Projekter", None)])}<h1>Projekter</h1><p>Udvalgte opgaver, vist med billeder af det færdige resultat.</p></div></section>'
-         f'<section class="sec"><div class="container"><div class="refs-grid">{proj_kort()}</div></div></section>{cta()}', krummer=[("Projekter", None)])
+    side("projekter", "Vores projekter | Rosendal Tømrer", "Se udvalgte projekter fra Rosendal Tømrer i Hundested og Nordsjælland med billeder, fakta og kundens egen anmeldelse.",
+         f'<section class="page-header"><div class="container">{crumb_html([("Vores projekter", None)])}<h1>Vores projekter</h1>'
+         f'<p>Udvalgte opgaver med billeder af det færdige resultat, fakta om opgaven og kundens egen anmeldelse.</p>{hero_knapper("projekter")}</div></section>'
+         f'<section class="sec"><div class="container"><div class="refs-grid">{proj_kort()}</div></div></section>{cta()}',
+         active="projekter", krummer=[("Vores projekter", None)])
 
 # ---------------- FORMULARER ----------------
 # Ingen honeypot (_gotcha): Formspree's eget spamfilter (Formshield) er nok, og et skjult

@@ -464,12 +464,13 @@ footer a:hover{color:#fff;text-decoration:underline}
 .dd summary::after{content:'▾';margin-left:.35rem;font-size:.8rem;color:var(--brass)}
 .dd summary:hover,.dd summary.active{color:var(--blue)}
 .dd summary.active{box-shadow:inset 0 -3px 0 var(--brass)}
-nav .dd-menu{display:block;position:absolute;top:100%;left:-1rem;background:#fff;border:1px solid var(--line);border-top:3px solid var(--brass);min-width:290px;padding:.4rem 0;z-index:200;box-shadow:0 10px 28px rgba(10,30,79,.12)}
+nav .dd-menu{display:block;position:absolute;top:100%;left:-1rem;max-height:calc(100vh - 200px);overflow-y:auto;background:#fff;border:1px solid var(--line);border-top:3px solid var(--brass);min-width:290px;padding:.4rem 0;z-index:200;box-shadow:0 10px 28px rgba(10,30,79,.12)}
 nav .dd-menu a{padding:.55rem 1.2rem;font-weight:600}
 nav .dd-menu a.active::after{display:none}
 nav .dd-menu a.active,nav .dd-menu a:hover{background:var(--mist)}
 nav .dd-menu .dd-grp a{font-weight:800;color:var(--navy)}
 nav .dd-menu .dd-sub a{padding:.35rem 1.2rem .35rem 2.1rem;font-size:.86rem;font-weight:600;color:var(--muted)}
+nav .dd-menu .dd-grp2{margin-top:.4rem;padding-top:.4rem;border-top:1px solid var(--line)}
 nav .dd-menu .dd-sep{margin-top:.4rem;padding:.6rem 1.2rem .3rem;border-top:1px solid var(--line);font-size:.74rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--brass-dk)}
 .nav-cta{margin-left:auto}
 nav .nav-cta a.btn{padding:.55rem 1.1rem;margin:.3rem 0;display:inline-flex;font-size:.9rem;color:#fff}
@@ -494,7 +495,7 @@ nav .nav-cta a.btn:hover{color:#fff}
 .tak .btn-row{justify-content:center;margin-top:1.6rem}
 @media (max-width:1140px){
   .dd summary{padding:.8rem 1.5rem;display:block}
-  nav .dd-menu{position:static;box-shadow:none;border:0;padding:0 0 .4rem 1rem;min-width:0}
+  nav .dd-menu{position:static;box-shadow:none;border:0;padding:0 0 .4rem 1rem;min-width:0;max-height:none;overflow:visible}
   nav .dd-menu a{padding:.6rem 1.5rem}
   .nav-cta{margin:0;padding:.5rem 1.5rem 1rem}
 }
@@ -578,7 +579,7 @@ gtag('js',new Date());gtag('config','{GA_ID}',{{'anonymize_ip':true}});
 <script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>"""
 
 MATERIEL_MENU = [("el", "El-værktøj"), ("bygning", "Bygningsmateriel"), ("jord", "Jord og anlæg")]
-STATE = {"projekter": False}   # saettes af build.py: er der projektsider med faerdigbilleder?
+STATE = {"projekter": []}   # saettes af build.py: [(slug, navn)] for de projektsider, der er live
 
 def nav(active):
     # Materieludlejning staar oeverst som sit eget afsnit med underpunkter, adskilt fra tømrerydelserne.
@@ -586,10 +587,13 @@ def nav(active):
     a = lambda sl: ' class="active"' if sl == active else ""
     mat = (f'<li class="dd-grp"><a href="/materieludlejning/"{a("materieludlejning")}>Materieludlejning</a></li>'
            + "".join(f'<li class="dd-sub"><a href="/materieludlejning/#{k}">{e(n)}</a></li>' for k, n in MATERIEL_MENU)
+           + ('<li class="dd-grp dd-grp2"><a href="/projekter/"' + a("projekter") + '>Vores projekter</a></li>'
+              + "".join(f'<li class="dd-sub"><a href="/projekter/{sl}/"{a("projekter/" + sl)}>{e(n)}</a></li>' for sl, n in STATE["projekter"])
+              if STATE["projekter"] else "")
            + '<li class="dd-sep" aria-hidden="true">Tømrerarbejde</li>')
     ydl = mat + "".join(f'<li><a href="{url(sl)}"{a(sl)}>{e(n)}</a></li>' for sl, n in YDELSER if sl != "materieludlejning")
-    yakt = " active" if active in dict(YDELSER) else ""
-    punkter = [("omrader", "Områder")] + ([("projekter", "Projekter")] if STATE["projekter"] else []) + [
+    yakt = " active" if active in dict(YDELSER) or (active or "").startswith("projekter") else ""
+    punkter = [("omrader", "Områder")] + [
         ("anmeldelser", "Anmeldelser"), ("om-os", "Om os"), ("kontakt", "Kontakt")]
     li = (f'<li class="dd"><details><summary class="dd-sum{yakt}">Ydelser</summary><ul class="dd-menu">{ydl}</ul></details></li>'
           + "".join(f'<li><a href="{url(k)}"{" class=\"active\"" if k == active or (k == "omrader" and active == "tomrer-hundested") else ""}>{t}</a></li>' for k, t in punkter)
@@ -628,7 +632,7 @@ def some():
 
 def footer():
     ylinks = "".join(f'<li><a href="{url(sl)}">{e(n)}</a></li>' for sl, n in YDELSER)
-    proj = '<li><a href="/projekter/">Projekter</a></li>' if STATE["projekter"] else ""
+    proj = '<li><a href="/projekter/">Vores projekter</a></li>' if STATE["projekter"] else ""
     return f"""<footer><div class="container">
   <div class="f-grid">
     <div>
