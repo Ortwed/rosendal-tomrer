@@ -17,14 +17,14 @@ ANMELDELSER = {
               "Anita", "Vejby", "april 2026", "5,0", "Døre og vinduer"),
     "brian": ("Renovering af sommerhus med nyt tag",
               "Nye vægge og gulv med isolering og nyt tag. Det har været en fornøjelse hele vejen igennem. Sebastian er altid til at få fat på, og hans ansatte er både dygtige og søde. Alle aftaler er overholdt, derfor fuld plade herfra.",
-              "Brian", "Hundested", "februar 2026", "5,0", "Renovering · Fag- og totalentreprise"),
+              "Brian", "Hundested", "februar 2026", "5,0", "Renovering · Fag- og hovedentreprise"),
     "elisabeth": ("Dør, paneler og terrassedør", "Montering af dør og paneler og reparation af terrassedør.", "Elisabeth", "Hundested", "februar 2026", "4,8", "Indvendigt"),
     "erik": ("Nye bærende stolper ved indgangen",
              "Meget fin oplevelse fra første dialog med firmaet og indtil arbejdet var færdigt. Pænt arbejde og rigtig fin oprydning.",
              "Erik", "Hundested", "januar 2026", "5,0", "Renovering"),
     "rita": ("Tilbygning og gæstehus",
              "Tømrerfirma med fokus på virkelig godt håndværk. Overholder aftaler og informerer fint, hvis der er problemer. Konstruktiv i løsning af misforståelser. Et firma jeg har været 100 % tryg ved.",
-             "Rita", "Hundested", "november 2025", "5,0", "Nybyg · Fag- og totalentreprise"),
+             "Rita", "Hundested", "november 2025", "5,0", "Nybyg · Fag- og hovedentreprise"),
     "nila": ("Vindue", "God kommunikation, levering til tiden og hurtigt arbejde. Alt er fint.", "Nila", "Hillerød", "oktober 2025", "4,2", "Døre og vinduer"),
     "richo": ("Gulv der trak sig fra hinanden om vinteren", "Opgaven blev løst på aftalt tidspunkt, kan ikke sætte en finger på noget. Kan varmt anbefale Rosendal Tømrer Entreprise!", "Richo", "Hundested", "oktober 2025", "5,0", "Renovering"),
     "erikms": ("Ny terrassedør",
@@ -57,33 +57,32 @@ TRIN_STD = [("Første snak", "Du ringer eller skriver og fortæller kort om opga
             ("Udførelse og aflevering", "Vi udfører arbejdet, holder dig orienteret og afleverer ryddet op.")]
 
 YDELSER = {
-"totalentreprise": dict(
-    title="Totalentreprise i Nordsjælland | Rosendal Tømrer",
-    desc="Totalentreprise og hovedentreprise i Nordsjælland. Tømrermester i Hundested koordinerer murer, el, VVS og maler. Én kontrakt, én kontakt. Ring 50 70 05 05.",
-    h1="Totalentreprise og hovedentreprise",
+"hovedentreprise": dict(
+    title="Hovedentreprise i Nordsjælland | Rosendal Tømrer",
+    desc="Hovedentreprise i Nordsjælland. Tømrermester i Hundested koordinerer murer, el, VVS og maler. Én kontrakt, én kontakt. Ring 50 70 05 05.",
+    h1="Hovedentreprise: én kontrakt og én kontakt",
     intro="Én kontrakt, én kontakt og ét ansvar. Vi styrer byggeriet og koordinerer de andre fag, så du ikke selv skal være byggeleder.",
-    svar='Totalentreprise og hovedentreprise betyder i praksis, at du har én aftalepart: Rosendal Tømrer Entreprise i Hundested. Vi koordinerer murer, el, VVS, maler og kloak, holder tidsplanen og afleverer et færdigt byggeri i Nordsjælland. Du kender prisen, før byggeriet går i gang, fordi alle fag samles i ét skriftligt tilbud.',
+    svar='Hovedentreprise betyder, at du har én aftalepart: Rosendal Tømrer Entreprise i Hundested. Vi koordinerer murer, el, VVS, maler og kloak, holder tidsplanen og afleverer et færdigt byggeri i Nordsjælland. Du kender prisen, før byggeriet går i gang, fordi alle fag samles i ét skriftligt tilbud.',
     ind=["Ét samlet, skriftligt tilbud", "Koordinering af murer, el, VVS, maler og kloak", "Tidsplan, som du får sammen med tilbuddet",
          "Tømrerarbejdet udført af vores eget hold", "Løbende dialog med dig som bygherre", "Oprydning undervejs og ved aflevering"],
     sek=[
-        ("Forskellen på fagentreprise, hovedentreprise og totalentreprise", [
+        ("Forskellen på fagentreprise og hovedentreprise", [
             "Entrepriseform handler om, hvem du har en aftale med, og hvem der hæfter for helheden. Her er forskellen, som vi forklarer den, når en kunde spørger.",
             "Fagentreprise. Du har en kontrakt med hver håndværker. Vi udfører tømrerarbejdet, og du eller din rådgiver sørger for, at murer, el, VVS og maler kommer ind på det rigtige tidspunkt.",
-            "Hovedentreprise. Du har én kontrakt med os om hele byggeriet. Vi hyrer og koordinerer de øvrige fag og er din eneste kontakt. Projektet er typisk tegnet på forhånd af en arkitekt eller en ingeniør.",
-            "Totalentreprise. Formelt rækker en totalentreprise også ind i planlægningen af byggeriet. Mange bruger ordet bare om, at én entreprenør tager hele opgaven. Tegninger og beregninger laver vi ikke selv, men vi arbejder sammen med din arkitekt eller ingeniør, og du har stadig kun én aftalepart for udførelsen.",
+            "Hovedentreprise. Du har én kontrakt med os om hele byggeriet. Vi hyrer og koordinerer de øvrige fag og er din eneste kontakt. Tegninger og beregninger laver vi ikke selv. Dem står din arkitekt eller ingeniør for, og vi bygger efter dem.",
         ]),
         ("Hvem er aftalepart, og hvem hæfter?", [
-            "Ved hoved- og totalentreprise har du kontrakten med os, også når arbejdet udføres af vores samarbejdspartnere. Går noget skævt mellem to fag, er det vores opgave at få det rettet, ikke din.",
+            "Ved hovedentreprise har du kontrakten med os, også når arbejdet udføres af vores samarbejdspartnere. Går noget skævt mellem to fag, er det vores opgave at få det rettet, ikke din.",
             "Det er den største forskel i hverdagen: du skal ikke selv være byggeleder ved siden af dit arbejde.",
         ]),
         ("Sådan koordinerer vi murer, el, VVS, maler og kloak", [
             "Vi har faste samarbejdspartnere inden for murer, el, VVS, maler og kloak i Nordsjælland. Vi indhenter tilbuddene, lægger tidsplanen og sørger for, at fagene kommer ind i den rækkefølge, byggeriet kræver. Du får ét samlet tilbud.",
-            "Det kræver, at byggeriet er tænkt igennem, før det første fag går i gang. Det er her, Sebastians baggrund som både tømrermester og uddannet bygningskonstruktør kommer til nytte: Han kender konstruktionen indefra og er med i planlægningen tidligt.",
+            "Det kræver, at byggeriet er tænkt igennem, før det første fag går i gang. Det er her, Sebastians baggrund som både tømrer og bygningskonstruktør kommer til nytte: Han kender konstruktionen indefra og er med i planlægningen tidligt.",
         ]),
         ("Typiske projekter", ('ul', [
             "Tilbygning, anneks og gæstehus",
             "Nyt hus på egen grund",
-            "Totalrenovering af hus eller sommerhus",
+            "Renovering af hele huset eller sommerhuset",
             "Nyt tag med nye vinduer i samme projekt",
             "Renovering, hvor flere fag skal passe sammen",
         ])),
@@ -91,7 +90,7 @@ YDELSER = {
             "Har du selv styr på de andre fag, eller vil du stå for koordineringen, laver vi også tømrerarbejdet som ren fagentreprise. Vi siger ærligt, hvad vi tror passer bedst til dit projekt.",
         ]),
     ],
-    trin=[("Første snak", "Du fortæller om projektet, og vi afklarer, om det skal være fag-, hoved- eller totalentreprise."),
+    trin=[("Første snak", "Du fortæller om projektet, og vi afklarer, om det skal være fagentreprise eller hovedentreprise."),
           ("Besigtigelse", "Vi besøger grunden eller huset og gennemgår tegninger, hvis du har dem."),
           ("Fast tilbud", "Du får ét skriftligt tilbud, der samler alle fagene, med omfang og tidsplan."),
           ("Udførelse og aflevering", "Vi koordinerer byggepladsen, holder dig orienteret og afleverer ryddet op.")],
@@ -99,7 +98,7 @@ YDELSER = {
     pris=["Byggeriets størrelse og hvor mange fag, der skal koordineres", "Om projektet allerede er tegnet af en arkitekt eller en ingeniør",
           "Valg af materialer, vinduer, tag og facade", "Grundens beliggenhed og adgangsforholdene"],
     faq=[
-        ("Hvad er forskellen på totalentreprise og hovedentreprise?", "I en hovedentreprise udfører vi et byggeri, der er tegnet på forhånd, og koordinerer fagene. I en totalentreprise rækker aftalen formelt også ind i planlægningen. I begge tilfælde har du én aftalepart for udførelsen. Hvilken form der passer til dit projekt, afklarer vi ved første besigtigelse."),
+        ("Hvad er forskellen på fagentreprise og hovedentreprise?", "I en fagentreprise har du en kontrakt med hver håndværker og står selv for koordineringen. I en hovedentreprise har du én kontrakt med os, og vi koordinerer de øvrige fag. Hvilken form der passer til dit projekt, afklarer vi ved første besigtigelse."),
         ("Hvad koster koordineringen?", "Der er et tillæg for koordineringen, men til gengæld slipper du for spildtid mellem fagene og for selv at bære risikoen, når de skal passe sammen. Vi lægger tallene frem, så du kan vurdere det."),
         ("Hvem søger byggetilladelse?", "Ansøgningen går til kommunen, og reglerne afhænger af byggeriets art og størrelse. Vi gennemgår med dig, hvad dit projekt kræver, og hvem der tager sig af hvad, inden vi giver tilbud."),
         ("Kan vi bo i huset under byggeriet?", "Ofte ja. Vi planlægger rækkefølgen, så der er mindst muligt rod og støv i de rum, I bruger, og så der først åbnes ind til det eksisterende hus, når nybygningen er lukket og tæt."),
@@ -135,7 +134,7 @@ YDELSER = {
             "En tilbygning til en bolig skal som udgangspunkt have tilladelse fra kommunen. Reglerne afhænger af størrelse, placering og lokalplan, og det er kommunen, der afgør sagen. Vi taler det igennem med dig, inden vi giver tilbud, så du ved, hvad der skal søges, og af hvem.",
         ]),
         ("Hele projektet eller kun tømrerarbejdet", [
-            ('html', '<p>Du kan nøjes med tømrerarbejdet, eller du kan få hele byggeriet som hovedentreprise med én kontakt. Læs om forskellen under <a href="/totalentreprise/">totalentreprise og hovedentreprise</a>. Skal der bygges et helt nyt hus eller et fritliggende anneks, finder du det under <a href="/nybyg/">nybyg</a>.</p>'),
+            ('html', '<p>Du kan nøjes med tømrerarbejdet, eller du kan få hele byggeriet som hovedentreprise med én kontakt. Læs mere under <a href="/hovedentreprise/">hovedentreprise</a>. Skal der bygges et helt nyt hus eller et fritliggende anneks, finder du det under <a href="/nybyg/">nybyg</a>.</p>'),
         ][0]),
     ],
     trin=[("Første snak", "Du fortæller, hvad du vil bruge pladsen til, og omtrent hvad du har af budget."),
@@ -154,46 +153,6 @@ YDELSER = {
         ("Kan tilbygningen blive i samme stil som huset?", "Det er målet. Taghældning, vinduer og materialer skal passe til huset, så tilbygningen ser ud, som om den altid har været der."),
     ],
     anm=['rita']),
-
-"sommerhus": dict(
-    title="Sommerhus renovering i Nordsjælland | Rosendal Tømrer",
-    desc="Renovering, nyt tag, efterisolering, vinduer og terrasse til sommerhuse i Nordsjælland. Tømrermester i Hundested tager hele opgaven. Ring 50 70 05 05.",
-    h1="Renovering og tilbygning af sommerhuse i Nordsjælland",
-    intro="Mange af vores opgaver ligger i sommerhusområderne omkring Hundested og på Nordkysten. Vi tager det hele, fra tag og isolering til terrasse og altan.",
-    svar='Vi renoverer og bygger til sommerhuse i Nordsjælland: nyt tag, efterisolering, vægge og gulve, nye vinduer, terrasse, altan, facade og tilbygning. Du har én kontakt, Sebastian Rosendal, og kan få hele projektet som hovedentreprise. Prisen står i et skriftligt tilbud, som du får, når vi har besøgt sommerhuset.',
-    ind_h="Det laver vi i sommerhuse",
-    ind=[("Nyt tag", "tag"), "Efterisolering af vægge, gulv og loft", "Nye vægge og gulve", ("Nye vinduer", "vinduer"), ("Terrasse", "terrasse"),
-         "Altan", "Facadebeklædning", ("Tilbygning", "tilbygning")],
-    sek=[
-        ("Hele projektet i ét forløb", [
-            "Et sommerhus har ofte brug for flere ting på én gang: nyt tag, ny isolering og nye vinduer. Det kan give god mening at tage dem samlet, fordi stilladset står der alligevel, og fordi arbejdet kan planlægges, så huset kun er åbent, når det er nødvendigt.",
-            "Vi kan tage hele renoveringen som hovedentreprise og koordinere de øvrige fag, så du kun har én kontakt.",
-        ]),
-        ("Når et ældre sommerhus åbnes", [
-            "Åbner man vægge, gulve eller tag i et ældre hus, kan man finde skader, der ikke kunne ses udefra. Vi stopper op, viser dig, hvad vi har fundet, og giver en pris på udbedringen, før vi fortsætter. Du skal aldrig blive overrasket over regningen.",
-        ]),
-        ("Terrasse og altan", [
-            ('html', '<p>Mange sommerhuse får en terrasse eller en altan som en del af renoveringen. Vi bygger i både hårdttræ som ipé og i nåletræ. Se mere under <a href="/terrasse/">terrasse</a>.</p>'),
-        ][0]),
-        ("Sommerhuse i vores område", [
-            ('html', '<p>Vi har løst opgaver i sommerhuse og boliger i blandt andet Hundested, Liseleje og Vejby. Kunderne fortæller selv om forløbene nedenfor. Du kan også se, <a href="/omrader/">hvilke områder vi dækker</a>.</p>'),
-        ][0]),
-    ],
-    trin=[("Første snak", "Du fortæller, hvad sommerhuset skal kunne, og hvornår på året du bruger det."),
-          ("Besigtigelse", "Vi gennemgår huset og taler løsninger og rækkefølge igennem."),
-          ("Fast tilbud", "Du får tilbuddet på skrift, så du kan tage stilling i ro og mag."),
-          ("Udførelse og aflevering", "Vi holder dig orienteret undervejs og afleverer ryddet op.")],
-    pris_intro='Når vi har set sommerhuset, får du en fast pris. Disse forhold spiller størst rolle:',
-    pris=["Husets størrelse og stand", "Hvor mange opgaver der tages i samme forløb", "Valg af materialer til tag, facade og terrasse", "Adgangen til huset og grunden"],
-    faq=[
-        ("Kan I arbejde, mens vi er væk?", "Det aftaler vi. Vi taler om adgang, tidsplan og hvornår du får besked, så du ikke behøver at stå på pladsen. Ring, så finder vi ud af, hvad der passer til dit sommerhus."),
-        ("Hvornår på året kan I lave arbejdet?", "Det afhænger af opgaven. Indvendigt arbejde kan i høj grad planlægges efter dit behov, mens tag og facade afhænger af vejret. Vi gennemgår tidsplanen med dig, når vi har set sommerhuset."),
-        ("Kan I tage hele projektet?", "Ja. Vi kan tage hele renoveringen som hovedentreprise og koordinere de øvrige fag, så du har én kontakt."),
-        ("Hvad koster en efterisolering?", "Det afhænger af, hvad der skal isoleres, og hvordan huset er bygget. Vi giver et fast skriftligt tilbud efter besigtigelse og siger ærligt, hvad vi tror giver mest mening."),
-        ("Hvilke områder kører I til?", "Vi kører fra Engdraget 11 i Hundested og har blandt andet løst opgaver i Hundested, Liseleje, Vejby og Frederiksværk."),
-        ("Kan I også bygge terrasse og altan?", "Ja. Vi bygger terrasser og altaner i træ, også i hårdttræ som ipé."),
-    ],
-    anm=['bitten', 'kira']),
 
 "tag": dict(
     title="Nyt tag og tagrenovering i Nordsjælland | Rosendal",
@@ -257,7 +216,7 @@ YDELSER = {
         ]),
         ("Reparation, forsatsvinduer og ovenlys", [
             "Ikke alle vinduer skal skiftes. Er rammen kun slidt i overfladen, kan en reparation være nok. Er træet blødt, skal der nyt til. Vi ser på vinduet og siger det ærligt, også når svaret er, at du ikke har brug for et nyt.",
-            "Vi monterer også ovenlysvinduer og forsatsvinduer og udbedrer vinduesrammer og fuger.",
+            "Vi monterer også ovenlysvinduer og forsatsvinduer og udbedrer vinduesrammer og fuger. Reparationer og små opgaver tager vi i hele Hundested og omegn, og dem samler vi gerne, så flere tages ad gangen.",
         ]),
         ("Vinduer og døre i samme opgave", [
             ('html', '<p>Mange skifter vinduer og yderdøre samtidig, så huset får ét samlet udtryk. Se mere under <a href="/doere/">døre, terrassedøre og foldedøre</a>. Vinduer sammen med nyt tag kan tages i samme forløb, se <a href="/tag/">tag</a>.</p>'),
@@ -298,6 +257,7 @@ YDELSER = {
         ]),
         ("Indvendige døre og paneler", [
             "Vi monterer også indvendige døre, paneler og lister og reparerer eksisterende døre, fx en terrassedør, der ikke lukker, som den skal.",
+            "Vi laver alt i Hundested og omegn, også de små opgaver. Et enkelt dørskift samler vi gerne med andre små opgaver og tager flere ad gangen.",
         ]),
     ],
     trin=[("Første snak", "Du fortæller, hvilken dør det drejer sig om, og hvad du ønsker dig."),
@@ -313,6 +273,7 @@ YDELSER = {
         ("Leverer I selv dørene?", "Ja. Vi bestiller døren hjem og leverer den, og du har én kontakt fra bestilling til montering."),
         ("Hvad med afslutningen omkring døren?", "Fuger, lister og paneler omkring døren er en del af opgaven, så den står færdig, når vi er væk."),
         ("Kan I også reparere en dør?", "Ja. Vi har blandt andet repareret en terrassedør og monteret paneler ved en dør."),
+        ("Tager I også et enkelt dørskift?", "Ja. Små opgaver som et dørskift samler vi og tager flere ad gangen, så ring og fortæl, hvad du har brug for."),
     ],
     anm=['erikms', 'marie']),
 
@@ -321,7 +282,7 @@ YDELSER = {
     desc="Træterrasser, repos og trappetrin i ipé og andre træsorter. Vi bygger terrassen med en stabil underkonstruktion, så den holder. Ring 50 70 05 05.",
     h1="Terrasser i træ",
     intro="En terrasse er hverdagens udestue. Vi bygger træterrasser, repos og trappetrin i Nordsjælland.",
-    svar='Vi bygger træterrasser, repos og trappetrin i hårdttræ som ipé og i nåletræ i Nordsjælland. Vi starter med underkonstruktionen, så terrassen ligger plant og tørt i mange år. Belægning omkring terrassen laver vi i samarbejde med en lokal anlægsgartner. Når vi har set stedet, får du en fast pris i et skriftligt tilbud.',
+    svar='Vi bygger træterrasser, repos og trappetrin i hårdttræ som ipé og jatoba og i nåletræ i Nordsjælland. Vi starter med underkonstruktionen, så terrassen ligger plant og tørt i mange år. Belægning omkring terrassen laver vi i samarbejde med en lokal anlægsgartner. Når vi har set stedet, får du en fast pris i et skriftligt tilbud.',
     ind=["Besigtigelse og rådgivning om træsort", "Fundament og underkonstruktion", "Terrasse, repos eller trappetrin i det valgte træ",
          "Siddetrin, bænke og plantekasser efter ønske", "Oprydning efter opgaven"],
     sek=[
@@ -330,13 +291,19 @@ YDELSER = {
             "Derfor starter vi altid med fundamentet og konstruktionen, før vi taler om brædder og overflade.",
         ]),
         ("Det bygger vi", ('ul', [
-            "Træterrasser i hårdttræ og nåletræ",
+            "Træterrasser i hårdttræ som ipé og jatoba og i trykimprægneret træ",
             "Repos og trappetrin fra dør til have",
             "Hævede terrasser på skrå grunde",
             "Terrasser med indbygget bænk eller plantekasse",
         ])),
         ("Valg af træ", [
-            "Hårdttræ som ipé er tungt, tæt og holdbart, men koster mere. Trykimprægneret træ er billigere og fint til mange opgaver. Vi gennemgår forskellen på holdbarhed, udseende og vedligehold, så du kan vælge med åbne øjne.",
+            "Hårdttræ som ipé og jatoba er tungt, tæt og holdbart, men koster mere. Trykimprægneret træ er billigere og fint til mange opgaver. Vi gennemgår forskellen på holdbarhed, udseende og vedligehold, så du kan vælge med åbne øjne.",
+        ]),
+        ("Sebastian: Sådan rådgiver jeg om træ", [
+            "Jeg anbefaler ud fra den enkelte opgave: hvor terrassen ligger, og hvilke forhold den skal stå i. Ligger den tæt på vandet, fraråder jeg blødt træ, fordi det holder dårligere der. Flere kunder vil også gerne væk fra trykimprægneret, og det tager vi med i snakken. Du skal føle dig godt rådgivet, før du vælger.",
+        ]),
+        ("Terrasse og altan til sommerhuset", [
+            "Mange sommerhuse får en ny terrasse eller en altan, ofte som en del af en større renovering. Vi bygger begge dele og kan tage dem i samme forløb som tag, vinduer eller facade.",
         ]),
     ],
     trin=[("Første snak", "Du fortæller, hvor terrassen skal ligge, og hvordan den skal bruges."),
@@ -372,12 +339,12 @@ YDELSER = {
             "Når man åbner op i et ældre hus, finder man ofte noget, man ikke havde regnet med. Vi siger det med det samme, forklarer mulighederne og aftaler prisen med dig, før vi går videre.",
             "Mange renoveringer involverer flere fag. Vi kan tage hele opgaven som hovedentreprise, så du kun har én kontakt.",
         ]),
-        ("Små og store opgaver", [
-            "Vi skifter også en enkelt dør, et par paneler eller en rådden stolpe. Små opgaver er ikke for små, og store opgaver kan vi tage som hovedentreprise.",
+        ("Reparationer og små opgaver", [
+            "Vi laver alt i Hundested og omegn, også reparationer og de små opgaver: en dør, der skal skiftes, et par paneler eller en rådden stolpe. Små opgaver som fx dørskift samler vi og tager flere ad gangen, så du ikke skal vente længe, og så turen giver mening for begge parter. Store opgaver kan vi tage som hovedentreprise.",
         ]),
-        ("Sommerhuse", [
-            ('html', '<p>Renovering af sommerhuse har sin egen side med nyt tag, isolering, vinduer og terrasse. Se <a href="/sommerhus/">renovering af sommerhuse</a>.</p>'),
-        ][0]),
+        ("Renovering af sommerhuse", ('html',
+            '<p>Mange af vores opgaver ligger i sommerhusområderne omkring Hundested og på Nordkysten. Et sommerhus har ofte brug for flere ting på én gang: nyt tag, efterisolering, nye vægge og gulve, nye vinduer og facadebeklædning. Det kan give god mening at tage dem samlet, fordi stilladset står der alligevel, og fordi arbejdet kan planlægges, så huset kun er åbent, når det er nødvendigt.</p>'
+            '<p>Skal sommerhuset også have en terrasse eller en altan, bygger vi den i samme forløb. Se <a href="/terrasse/">terrasse</a>, <a href="/tag/">nyt tag</a> og <a href="/vinduer/">vinduer</a>.</p>')),
     ],
     trin=[("Første snak", "Du fortæller, hvad der skal renoveres, og hvad du ønsker dig af resultatet."),
           ("Besigtigelse", "Vi gennemgår rummene eller huset og forklarer mulighederne."),
@@ -389,10 +356,11 @@ YDELSER = {
         ("Hvad sker der, hvis I åbner noget uventet?", "Vi stopper arbejdet, viser dig det, vi har fundet, og aftaler løsning og pris, før noget fortsætter."),
         ("Kan vi bo i huset under renoveringen?", "Ofte ja. Vi planlægger arbejdet, så der er mindst muligt rod og støv i de rum, I bruger."),
         ("Rydder I op efter jer?", "Ja. Oprydning er en del af opgaven, både undervejs og når vi afleverer."),
-        ("Laver I små opgaver også?", "Ja. Vi skifter også en enkelt dør, et par paneler eller en rådden stolpe. Ring og fortæl, hvad det drejer sig om."),
+        ("Laver I små opgaver også?", "Ja. Vi laver alt i Hundested og omegn, også reparationer og små opgaver. Små opgaver som fx dørskift samler vi og tager flere ad gangen. Ring og fortæl, hvad det drejer sig om."),
+        ("Renoverer I også sommerhuse?", "Ja. Vi renoverer sommerhuse med nyt tag, efterisolering, vægge, gulve, vinduer og facade, og vi kan bygge terrasse eller altan i samme forløb."),
         ("Kan I tage hele renoveringen?", "Ja. Vi kan tage hele opgaven som hovedentreprise og koordinere de øvrige fag, så du har én kontakt."),
     ],
-    anm=['erik', 'richo']),
+    anm=['erik', 'bitten']),
 
 "nybyg": dict(
     title="Nybyg i Nordsjælland | Rosendal Tømrer",
@@ -410,7 +378,7 @@ YDELSER = {
             "Carporte og garager bygger vi som selvstændige opgaver eller sammen med andet tømrerarbejde.",
         ]),
         ("Nyt hus i hovedentreprise", [
-            ('html', '<p>Ved et nyt hus skal mange fag passe sammen. Som hovedentreprise har du én kontrakt og én kontakt, og vi koordinerer murer, el, VVS, maler og kloak. Læs mere under <a href="/totalentreprise/">totalentreprise og hovedentreprise</a>. Vil du udvide et eksisterende hus i stedet, se <a href="/tilbygning/">tilbygning</a>.</p>'),
+            ('html', '<p>Ved et nyt hus skal mange fag passe sammen. Som hovedentreprise har du én kontrakt og én kontakt, og vi koordinerer murer, el, VVS, maler og kloak. Læs mere under <a href="/hovedentreprise/">hovedentreprise</a>. Vil du udvide et eksisterende hus i stedet, se <a href="/tilbygning/">tilbygning</a>.</p>'),
         ][0]),
         ("Tegninger og byggetilladelse", [
             "Tegninger og beregninger laver vi ikke selv. Dem står din arkitekt eller ingeniør for, og vi bygger efter dem. Kommunen skal give tilladelse til et nyt hus, og vi gennemgår med dig, hvad der skal være klar, før første spade sættes i jorden.",
@@ -480,7 +448,9 @@ YDELSER = {
 # Kilde: Sebastians Word-dokument "Rosendal Materiel Udlejning" (12 maskiner). Ingen andre kilder til maskiner
 # eller priser. Tastefejl rettet (DDK, 230C, 1,26 n, Jordbordet). Udeladt indtil afklaret med Sebastian:
 # stilladsklasse paa bukkestillads, affugterens rumstoerrelse og effekt. Se FAKTATJEK.md.
-# Hver maskine: (id/anker, kategori, navn, tekst, specifikationer, pris inkl. moms pr. dag eller None, pris ekskl.)
+# Hver maskine: (id/anker, kategori, navn, tekst, specifikationer).
+# Ingen priser paa sitet (moedet 23-10-2026): Sebastian krydstjekker priser og maskiner med Stark foerst.
+# Priserne staar i hans Word-dokument, ikke her, saa de ikke ved et uheld kommer med i en build.
 # id bruges som anker nu og som /materieludlejning/<id>/, hvis en maskine senere faar sin egen side.
 MATERIEL_KATEGORIER = [
     ("el", "El-værktøj til leje i Hundested", "Til skæring og slibning, når du bygger eller renoverer indendørs."),
@@ -490,44 +460,44 @@ MATERIEL_KATEGORIER = [
 MATERIEL = [
     ("bordsav", "el", "Dewalt kompakt bordsav",
      "Bordsav med aluminiumsbord og kraftig 1850 W motor. Ideel til alle skæreopgaver.",
-     ["Klinge Ø210 mm", "Maks. skæredybde 65 mm ved 90° og 45 mm ved 45°", "230 V"], 260, 208),
+     ["Klinge Ø210 mm", "Maks. skæredybde 65 mm ved 90° og 45 mm ved 45°", "230 V"]),
     ("girafsliber", "el", "Festool girafsliber",
      "Let og enkel langhalssliber, der giver en bedre arbejdsstilling, med udtag til støvsuger.",
-     ["Leveres uden slibenet og sandpapir"], 260, 208),
+     ["Leveres uden slibenet og sandpapir"]),
     ("rullestillads", "bygning", "Jumbo rullestillads",
      "Til arbejde i højden. Stilladset er nemt at transportere og samle, og det kører på hjul.",
-     ["Aluminium"], None, None),
+     ["Aluminium"]),
     ("bukkestillads", "bygning", "Jumbo bukkestillads",
      "Til mange slags opgaver. Bukkene kan justeres i højden fra 110 til 190 cm.",
-     ["Vægt 20 kg", "Varmgalvaniseret"], None, None),
+     ["Vægt 20 kg", "Varmgalvaniseret"]),
     ("varmeblaeser", "bygning", "Varmeblæser 2 kW",
      "Hurtig og stabil varme til garage, byggepladsvogn og lignende, med enkel styring.",
-     ["Effekt 2 kW", "Kraftig blæser"], 40, 32),
+     ["Effekt 2 kW", "Kraftig blæser"]),
     ("transportvogn", "bygning", "Ravendo transportvogn TW 2000",
      "Trækvogn med bremse til transport af materialer.",
-     ["Længde 200 cm, bredde 100 cm, højde 47 cm", "Lastkapacitet 1.200 kg", "Egenvægt 88 kg", "Gummihjul på stålfælg"], 260, 208),
+     ["Længde 200 cm, bredde 100 cm, højde 47 cm", "Lastkapacitet 1.200 kg", "Egenvægt 88 kg", "Gummihjul på stålfælg"]),
     ("gipshejs", "bygning", "Raptor gipshejs",
      "Manuel hejs til montering af gipsplader op til 3,2 m. Leveres i 3 dele.",
-     ["Samlet vægt 25 kg", "5 gummihjul, hvoraf ét kan låses"], 250, 200),
+     ["Samlet vægt 25 kg", "5 gummihjul, hvoraf ét kan låses"]),
     ("affugter", "bygning", "Master affugter DH 752",
-     "Til mindre lokaler under 100 m² ved vandskader. Afrimer hurtigt og automatisk, og tanken har overløbssikring.",
-     ["Tank 5,7 L", "Mulighed for afløbsslange", "230 V", "Vægt 30 kg"], 260, 208),
+     "Til mindre lokaler ved vandskader. Afrimer hurtigt og automatisk, og tanken har overløbssikring.",
+     ["Tank 5,7 L", "Mulighed for afløbsslange", "230 V", "Vægt 30 kg"]),
     ("betonblander", "bygning", "Betonblander 120 L",
      "Til blanding af beton, cement og mørtel. Nem at håndtere og med sikkerhedsafbryder.",
-     ["550 W motor, 230 V 50 Hz", "H 1,04 m, B 69 cm, D 1,26 m"], 400, 320),
+     ["550 W motor, 230 V 50 Hz", "H 1,04 m, B 69 cm, D 1,26 m"]),
     ("dumper", "jord", "Scheppach dumper DP3000",
      "Kraftig dumper med 4-takts motor til alle slags underlag: byggeplads, skovbrug, landbrug og byggeprojekter.",
-     ["Mål 133 × 81 × 103,8 cm", "Lad 91,2 × 65 × 56 cm", "Maks. belastning 300 kg", "3 gear og 1 bakgear"], 475, 380),
+     ["Mål 133 × 81 × 103,8 cm", "Lad 91,2 × 65 × 56 cm", "Maks. belastning 300 kg", "3 gear og 1 bakgear"]),
     ("paelebor", "jord", "Pælebor",
      "Benzindrevet 2-takts pælebor. Ideelt til hegn i haven.",
-     ["Tre bor: 100, 150 og 200 mm", "Olie og benzin 1:40", "Vægt med bor 11 til 12,5 kg"], 275, 220),
+     ["Tre bor: 100, 150 og 200 mm", "Olie og benzin 1:40", "Vægt med bor 11 til 12,5 kg"]),
     ("jordbor", "jord", "Mobilt jordbor",
      "Jordbor, der kan spændes på en kuglekobling, fx på en ATV eller havetraktor.",
-     ["Bor på 127, 152, 203, 254 og 305 mm", "Motor 9 hk", "Vægt 168 kg"], 475, 380),
+     ["Bor på 127, 152, 203, 254 og 305 mm", "Motor 9 hk", "Vægt 168 kg"]),
 ]
 MATERIEL_SIDE = dict(
     title="Materieludlejning i Hundested | Rosendal Tømrer",
-    desc="Lej bordsav, stillads, betonblander, affugter, dumper og pælebor hos Rosendal Tømrer i Hundested. Priser pr. dag for private og erhverv.",
+    desc="Lej bordsav, stillads, betonblander, affugter, dumper og pælebor hos Rosendal Tømrer. Afhentning på Engdraget 11, 3390 Hundested. Ring for pris.",
     h1="Materieludlejning til private og erhverv i Hundested",
     intro="Lej det materiel, vi selv arbejder med, til dit eget projekt. Du henter det på Engdraget 11 i Hundested, så ring og hør, om det er ledigt.",
     svar="Hos Rosendal Tømrer i Hundested kan du leje bordsav, girafsliber, rullestillads, bukkestillads, varmeblæser, transportvogn, "
@@ -538,13 +508,14 @@ MATERIEL_SIDE = dict(
           ("Aflever igen", "Materiellet afleveres til den aftalte tid og i samme stand, som du fik det.")],
     faq=[
         ("Hvor længe kan jeg leje?", "Materiellet lejes pr. kalenderdag, og en dag regnes som 8 timers brug. Bruger du det mere end 8 timer, tæller det som en ekstra dag. Ring og aftal, hvor mange dage du skal bruge det."),
-        ("Hvad koster det at leje?", "Prisen pr. dag står ved hver maskine, både inkl. og ekskl. moms. Oven i den samlede pris kommer et forsikringsgebyr på 7 %. Rullestillads og bukkestillads: kontakt os for pris."),
-        ("Kan jeg afbestille?", "Ja. Afbestilling skal ske senest 7 dage før den aftalte booking, og der opkræves et gebyr på 275 kr. inkl. moms."),
+        ("Hvad koster det at leje?", "Kontakt os for pris. Ring på 50 70 05 05, så får du prisen og hører samtidig, om materiellet er ledigt."),
+        ("Kan jeg afbestille?", "Ja. Afbestilling skal ske senest 7 dage før den aftalte booking. Der opkræves et gebyr, som du får oplyst, når du booker."),
         ("Skal jeg selv sørge for brændstof?", "Ja. Benzindrevne maskiner, fx pæleboret, udlejes uden brændstof, og du skal selv påfylde korrekte væsker efter anvisningerne."),
         ("Hvad skal jeg bruge til hegn i haven?", "Til hullerne til hegnsstolperne kan du leje pæleboret med bor på 100, 150 og 200 mm. Det mobile jordbor kan spændes på fx en ATV eller havetraktor og har bor op til 305 mm. Skal der flyttes jord, kan dumperen tage op til 300 kg."),
-        ("Hvad bruger jeg ved en vandskade?", "Affugteren Master DH 752 er til mindre lokaler under 100 m². Den afrimer automatisk, har overløbssikring på tanken og kan tilsluttes en afløbsslange."),
+        ("Hvad bruger jeg ved en vandskade?", "Affugteren Master DH 752 er til mindre lokaler. Den afrimer automatisk, har overløbssikring på tanken og kan tilsluttes en afløbsslange. Ring og fortæl om rummet, så hører du, om den passer til opgaven."),
         ("Kan I hjælpe med at vælge stillads?", "Ja. Vi er tømrere og bruger selv stilladserne, så ring og fortæl om opgaven. Så hjælper vi dig med at vælge mellem rullestillads og bukkestillads."),
         ("Lejer I ud til private?", "Ja. Vi lejer ud til både private og erhverv."),
+        ("Hvor henter jeg materiellet?", "På Engdraget 11, 3390 Hundested, efter aftale. Skal det leveres, så kontakt os for pris."),
     ],
 )
 # Ydelsessider der linker til bestemte maskiner (og omvendt fra udlejningssiden)

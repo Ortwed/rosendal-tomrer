@@ -40,19 +40,109 @@ def side(slug, *a, **k):
 
 # ---------------- PROJEKTER ----------------
 # status 'pending' = skjult (ingen side, intet menupunkt, ikke i sitemap) indtil der er faerdigbilleder
-# og tekst fra Sebastian. Saet status til 'live' og udfyld billeder, tekst og citat, saa bygges siden.
+# og tekst fra Sebastian. Saet status til 'live' og udfyld felterne som i traeterrasse-casen, saa bygges siden.
+# Valgfrie felter: en linje i fakta eller en sektion i sek/sek_efter med vaerdien None vises ikke. Saa kan Sebastians
+# svar (m², tidsforbrug, leverandoer, vedligehold osv.) skrives direkte ind, naar de kommer. udvidet = kundens laengere
+# kommentar. Flere billeder, fx foer- og detaljebilleder, er bare flere linjer i billeder.
+# Opfind aldrig tal: et tomt felt er bedre end et gaet.
 PROJEKTER = [
-    dict(slug="sommerhus-nyt-tag", titel="Sommerhusrenovering med nyt tag", by="Hundested", maaned="februar 2026", ydelse="sommerhus", anm="brian", status="pending", billeder=[]),
+    dict(slug="traeterrasse-trykimpraegneret-hundested", status="live", ydelse="terrasse", by="Hundested", aar="2025",
+         titel="Træterrasse i trykimprægneret træ i Hundested",
+         kort="Træterrasse i trykimprægneret træ",            # kortet paa anmeldelser og projektoversigten
+         link_tekst="træterrasse i Hundested",                # "Se et projekt: ..." fra ydelses- og omraadesider
+         title="Træterrasse i trykimprægneret træ, Hundested | Rosendal",
+         desc="Ny træterrasse i trykimprægneret træ i Hundested, bygget som 1:1-kopi af den gamle. Se projektet og kundens anmeldelse. Rosendal Tømrer.",
+         svar="I 2025 byggede vi en ny træterrasse i trykimprægneret træ ved et hus i Hundested. Den nye terrasse blev lavet som en 1:1-kopi af den gamle, så mål og udtryk gik igen. En terrasse som denne kan vi også bygge til dit hus i Nordsjælland.",
+         fakta=[("Opgave", "Ny træterrasse"), ("Materiale", "Trykimprægneret træ"), ("Sted", "Hundested"), ("År", "2025"),
+                ("Størrelse", None), ("Tidsforbrug", None), ("Den gamle terrasse", None)],   # None = afventer Sebastian
+         anmeldt=("4. juli 2025", "Anmeld Håndværker"), udvidet=None,
+         billeder=[  # (fil uden endelse i /images/projekter/, alt, billedtekst eller None). Det foerste er hovedbilledet.
+             ("traeterrasse-trykimpraegneret-hundested-1", "Ny træterrasse i trykimprægneret træ ved et hus med store glaspartier i Hundested.",
+              "Ny træterrasse i trykimprægneret træ langs husets glaspartier, Hundested, 2025."),
+             ("traeterrasse-trykimpraegneret-hundested-2", "Hele træterrassen i Hundested med brædder lagt i to retninger og en ramme af brædder mellem felterne.", None),
+             ("traeterrasse-trykimpraegneret-hundested-3", "Detalje af ramme af brædder mellem to felter i en træterrasse i Hundested.", None),
+         ],
+         og_img="images/og-traeterrasse-trykimpraegneret-hundested.jpg",
+         sek=[
+             ("Opgaven: en ny terrasse, der ligner den gamle", ["Kunden i Hundested skulle have en ny træterrasse i trykimprægneret træ. Ønsket var, at den nye terrasse skulle være en 1:1-kopi af den gamle, så den passede til huset og til den måde, haven blev brugt på."]),
+             ("Sådan blev den bygget", ["Vi byggede den nye terrasse i trykimprægneret træ og lavede den 1 til 1 som den gamle. Terrassen ligger langs husets lange række af glaspartier og døre. Brædderne er lagt i to retninger, med en ramme af brædder imellem felterne, og det giver terrassen et roligt, men levende udtryk. Kunden beskriver selv terrassen som stor."]),
+         ],
+         citat="En stor terrasse. Dygtige og behagelige håndværkere. Overholdt tidsplan og lavede flot arbejde.",
+         karakterer="Kunden gav 5 ud af 5 på kommunikation, aftale, pris i forhold til tilbud, tilfredshed og oprydning.",
+         sek_efter=[
+             ("Trykimprægneret træ til terrasse", ('html', '<p>Trykimprægneret træ er et almindeligt valg til terrasser. Vi bygger terrasser i både trykimprægneret træ og hårdttræ som ipé. Er du i tvivl om, hvilket der passer til dit hus og din have, hjælper vi dig med at vælge. <a href="/terrasse/">Læs mere om terrasser</a>.</p>')),
+             ("Skal du have en ny terrasse?", ('html', f'<p>Har du en gammel terrasse, der skal udskiftes, kan vi bygge en ny, der ligner den gamle, eller tegne en helt ny løsning sammen med dig. Vi tager opgaver i <a href="/tomrer-hundested/">Hundested</a> og resten af Nordsjælland. Ring på <a href="tel:{TLF_RAW}">{TLF}</a> eller <a href="/kontakt/" data-cta="projekt-tekst">skriv til os</a>, så aftaler vi en besigtigelse og giver dig et skriftligt tilbud.</p>')),
+         ],
+         faq=[
+             ("Kan I bygge en ny terrasse, der er en kopi af den gamle?", "Ja. I dette projekt i Hundested blev den nye terrasse lavet 1 til 1 som den gamle."),
+             ("Hvilket træ blev brugt?", "Trykimprægneret træ."),
+             ("Bygger I terrasser uden for Hundested?", "Ja, vi bygger terrasser i hele Nordsjælland."),
+             ("Hvad koster en ny terrasse?", "Prisen afhænger af størrelse, materiale og underlag. Efter en besigtigelse får du et skriftligt tilbud."),
+             # Sidste saetning skal godkendes af Sebastian (FAKTATJEK.md)
+             ("Overholder I tidsplanen?", "Kunden i Hundested skrev i sin anmeldelse, at vi overholdt tidsplanen. Vi aftaler tidsplanen med dig, før arbejdet går i gang."),
+         ]),
+    # Afventer billederne som filer. Saet status="live", naar jatoba-terrasse-liseleje-1..3 ligger i docs/images/projekter/.
+    dict(slug="jatoba-terrasse-liseleje", status="pending", ydelse="terrasse", by="Liseleje", aar="2025",
+         titel="Jatoba terrasse med indbyggede trapper i Liseleje",
+         kort="Jatoba terrasse med indbyggede trapper",
+         link_tekst="jatoba-terrasse i Liseleje",
+         title="Jatoba terrasse med indbyggede trapper, Liseleje | Rosendal",
+         desc="Ny terrasse i jatoba 21x145 mm på trækonstruktion med indbyggede trapper i Liseleje. Se projektet, fakta om jatoba og kundens anmeldelse.",
+         svar="I 2025 byggede vi en ny terrasse i jatoba 21 × 145 mm på en trækonstruktion i Liseleje, med indbyggede trapper. Jatoba er et hårdt og tæt hårdttræ med rødbrun farve, som egner sig til terrasser. Vi bygger terrasser i hele Nordsjælland.",
+         fakta=[("Opgave", "Ny terrasse med indbyggede trapper"), ("Træsort", "Jatoba"), ("Brædder", "21 × 145 mm"), ("Konstruktion", "Træ"),
+                ("Sted", "Liseleje"), ("År", "2025"),
+                ("Størrelse", None), ("Højde over terræn", None), ("Tidsforbrug", None), ("Leverandør", None)],   # afventer Sebastian
+         anmeldt=("1. august 2025", "Anmeld Håndværker"), udvidet=None,
+         billeder=[
+             ("jatoba-terrasse-liseleje-1", "Ny terrasse i jatoba på trækonstruktion med indbyggede trapper ved et sort hus i Liseleje.",
+              "Ny jatoba-terrasse med indbyggede trapper, Liseleje, 2025."),
+             ("jatoba-terrasse-liseleje-2", "Jatoba-terrassen set på afstand, hele vejen rundt om et sort hus med fyrretræer og en birk i Liseleje.", None),
+             ("jatoba-terrasse-liseleje-3", "Hjørnet af en hævet jatoba-terrasse under husets tagudhæng i Liseleje, med kanten klædt i samme træ.", None),
+         ],
+         og_img="images/og-jatoba-terrasse-liseleje.jpg",
+         sek=[
+             ("Opgaven: en ny jatoba-terrasse med trapper", ["Kunden i Liseleje skulle have en ny terrasse i jatoba, opført på en trækonstruktion og med trapper bygget ind i terrassen."]),
+             ("Sådan blev den bygget", ["Vi byggede terrassen på en trækonstruktion og lagde dækket i jatoba 21 × 145 mm. Terrassen ligger hævet over terrænet langs husets glaspartier, og kanten er klædt med brædder i samme træsort, så den fremstår som ét samlet træværk. Trapperne er bygget ind i terrassens kant, så de er en del af terrassens form og ikke en separat trappe, der står ved siden af."]),
+             ("Sådan er trapperne bygget op", None),   # antal trin og placering, afventer Sebastian
+             ("Hvad er jatoba?", ["Jatoba (Hymenaea courbaril) er et hårdttræ fra Mellem- og Sydamerika. Det kaldes også brasiliansk kirsebær. Kernetræet er laksrødt til orangebrunt og bliver med tiden mørkere, især når det rammes af sollys. Jatoba er meget hårdt og tæt, med en vægtfylde omkring 900 til 1.000 kg/m³, og regnes for holdbart og modstandsdygtigt over for naturlig nedbrydning, og det er derfor, det bruges til terrasser og trapper. Fordi træet er så hårdt, er det mere krævende at bearbejde end nåletræ. Som alt træ arbejder det med årstiderne."]),
+             ("Jatoba eller trykimprægneret træ?", ('html', '<p>Trykimprægneret træ er et almindeligt og økonomisk valg til terrasser, mens hårdttræ som jatoba og ipé har en tættere struktur og en dybere farve. Du kan se et eksempel på en terrasse i trykimprægneret træ i vores projekt <a href="/projekter/traeterrasse-trykimpraegneret-hundested/">træterrasse i Hundested</a>. Er du i tvivl om, hvad der passer til dit hus og din have, hjælper vi dig med at vælge. Læs mere om <a href="/terrasse/">terrasser</a>.</p>')),
+             ("Sebastians råd om vedligehold af jatoba", None),   # afventer Sebastian
+         ],
+         citat="God kommunikation, god pris, flot arbejde, meget tilfredse.",   # bindestregen foran "meget" i originalen er fjernet
+         karakterer="Kunden gav 5 ud af 5 på kommunikation, aftale, pris i forhold til tilbud, tilfredshed og oprydning.",
+         sek_efter=[
+             ("Skal du have en ny terrasse?", ('html', f'<p>Vi bygger terrasser i jatoba, andre hårdttræsorter og trykimprægneret træ, med eller uden indbyggede trapper. Vi tager opgaver i Liseleje og resten af Nordsjælland. Ring på <a href="tel:{TLF_RAW}">{TLF}</a> eller <a href="/kontakt/" data-cta="projekt-tekst">skriv til os</a>, så aftaler vi en besigtigelse og giver dig et skriftligt tilbud.</p>')),
+         ],
+         faq=[
+             ("Hvad er jatoba?", "Jatoba er et hårdt og tæt hårdttræ fra Mellem- og Sydamerika med rødbrun farve, som bliver mørkere med tiden. Det bruges blandt andet til terrasser og trapper."),
+             ("Hvad er forskellen på jatoba og trykimprægneret træ?", "Jatoba er et hårdttræ, der er hårdere og tættere end trykimprægneret nåletræ. Trykimprægneret træ er et almindeligt og økonomisk valg til terrasser. Vi hjælper dig med at vælge ud fra hus, have og budget."),
+             ("Skal en jatoba-terrasse olieres?", "Det er et valg. Ubehandlet udvikler jatoba en naturlig patina. Vil du bevare den varme røde farve, kan terrassen olieres. Vi rådgiver om, hvad der passer til din terrasse."),
+             ("Kan I bygge trapper ind i terrassen?", "Ja. I dette projekt i Liseleje er trapperne bygget ind i terrassens kant."),
+             ("Bygger I terrasser i Liseleje og omegn?", "Ja, vi bygger terrasser i Liseleje og i hele Nordsjælland."),
+             ("Hvad koster en jatoba-terrasse?", "Prisen afhænger af størrelse, træsort, konstruktion og trapper. Efter en besigtigelse får du et skriftligt tilbud."),
+         ]),
+    dict(slug="sommerhus-nyt-tag", titel="Sommerhusrenovering med nyt tag", by="Hundested", maaned="februar 2026", ydelse="renovering", anm="brian", status="pending", billeder=[]),
     dict(slug="tilbygning-gaestehus", titel="Tilbygning og gæstehus", by="Hundested", maaned="november 2025", ydelse="tilbygning", anm="rita", status="pending", billeder=[]),
     dict(slug="repos-trappe-ipe", titel="Repos-trappe i ipé", by="Veksø", maaned="juli 2026", ydelse="terrasse", anm="morten", status="pending", billeder=[]),
     dict(slug="nyt-tegltag", titel="Nyt tegltag", by="Hundested", maaned="oktober 2026", ydelse="tag", anm="kenneth", status="pending", billeder=[]),
     dict(slug="vinduer-og-franske-altaner", titel="Nye vinduer og to franske altaner", by="Hundested", maaned="august 2026", ydelse="vinduer", anm="peter", status="pending", billeder=[]),
     dict(slug="facadebeklaedning-og-isolering", titel="Facadebeklædning og isolering", by="Ølsted", maaned="september 2025", ydelse="renovering", anm="hanne", status="pending", billeder=[]),
-    dict(slug="terrasse-liseleje", titel="Terrasse i Liseleje", by="Liseleje", maaned="august 2025", ydelse="terrasse", anm="kira", status="pending", billeder=[]),
     dict(slug="doere-og-vinduer-vejby", titel="Nye døre og vinduer i Vejby", by="Vejby", maaned="april 2026", ydelse="doere", anm="anita", status="pending", billeder=[]),
 ]
 LIVE = [p for p in PROJEKTER if p["status"] == "live"]
-S.STATE["projekter"] = bool(LIVE)
+# Oversigten /projekter/ og menupunktet kommer foerst ved 3 cases. Indtil da ligger casene som kort under
+# Projekter paa anmeldelsessiden, og der linkes til dem fra ydelses- og omraadesiderne.
+HUB = len(LIVE) >= 3
+S.STATE["projekter"] = HUB
+PROJ_KRUMME = "projekter" if HUB else "anmeldelser#projekter"
+
+def proj_billede(p, n=0, bredde="720"):
+    return f'/images/projekter/{p["billeder"][n][0]}{"" if bredde == "1440" else "-720"}.webp'
+
+def proj_links(ydelse=None, by=None):
+    """'Se et projekt: ...' til ydelses- og omraadesiderne."""
+    ps = [p for p in LIVE if (ydelse is None or p["ydelse"] == ydelse) and (by is None or p["by"] == by)]
+    return "".join(f'<p><a href="/projekter/{p["slug"]}/" style="text-decoration:underline">Se et projekt: {e(p["link_tekst"])}</a></p>' for p in ps)
 
 # ---------------- FAELLES BYGGEKLODSER ----------------
 LB_JS = """<div class="lb" id="lb" role="dialog" aria-label="Billedvisning"><button class="lb-close" aria-label="Luk">×</button><button class="lb-prev" aria-label="Forrige">‹</button><img alt=""><button class="lb-next" aria-label="Næste">›</button></div>
@@ -83,12 +173,11 @@ def omr_chips():
 
 KORT_TXT = {
     "tilbygning": "Mere plads til stuen, et ekstra værelse, et anneks eller en førstesal.",
-    "sommerhus": "Nyt tag, isolering, vinduer, terrasse og altan til sommerhuse.",
     "tag": "Nyt tag, tegltag, tagrenovering og efterisolering.",
     "vinduer": "Vinduer i træ og træ/alu, målt op, leveret og monteret.",
     "doere": "Hoveddøre, terrassedøre, foldedøre og franske altaner.",
     "terrasse": "Træterrasser, repos og trappetrin, gerne i ipé.",
-    "renovering": "Vægge, gulve, lofter, isolering og facader.",
+    "renovering": "Vægge, gulve, lofter, isolering og facader, også i sommerhuse.",
     "nybyg": "Nye huse, gæstehuse, anneks, carporte og garager.",
     "pergola-hegn-og-cykelskur": "Pergolaer, hegn, cykelskure og bænke til private og erhverv.",
     "materieludlejning": "Lej stillads, betonblander, affugter, dumper, pælebor og værktøj i Hundested.",
@@ -96,9 +185,9 @@ KORT_TXT = {
 
 def svc_grid():
     out = ['<div class="svc-grid">',
-           f'<a class="svc svc-feature" href="{url("totalentreprise")}">{HEX}<h3>Totalentreprise og hovedentreprise</h3>'
+           f'<a class="svc svc-feature" href="{url("hovedentreprise")}">{HEX}<h3>Hovedentreprise</h3>'
            '<p>Vi styrer hele byggeriet og koordinerer murer, elektriker, VVS og maler. Én kontrakt, én kontakt og ét ansvar fra start til aflevering.</p>'
-           '<span class="svc-go">Læs om entrepriseformerne</span></a>']
+           '<span class="svc-go">Læs om hovedentreprise</span></a>']
     for sl, n in YDELSER:
         if sl in KORT_TXT:
             out.append(f'<a class="svc" href="{url(sl)}">{HEX}<h3>{e(n)}</h3><p>{KORT_TXT[sl]}</p><span class="svc-go">Læs mere</span></a>')
@@ -132,8 +221,8 @@ forside = f"""
 <section class="hero">
   <div class="hero-text"><div class="hero-inner">
     <div class="hero-kicker">Rosendal Tømrer Entreprise · siden 2021</div>
-    <h1>Tømrermester i Hundested: tilbygning, tag, vinduer og totalentreprise i Nordsjælland</h1>
-    <p class="lead">Vi hjælper private og erhverv med alt fra nye vinduer og træterrasser til renoveringer, tilbygninger og hele byggerier. Sebastian er din faste kontaktperson, og vi er et fast hold af tømrere.</p>
+    <h1>Godt håndværk og aftaler, du kan regne med</h1>
+    <p class="lead">Tømrerfirma i Hundested. Vi hjælper private og erhverv i Nordsjælland med alt fra nye vinduer og træterrasser til renoveringer, tilbygninger og hele byggerier. Sebastian er din faste kontaktperson, og vi er et fast hold af tømrere.</p>
     <div class="cta-block">
       <div class="btn-row">
         <a class="btn btn-primary" href="tel:{TLF_RAW}">{ICON_TLF}Ring {TLF}</a>
@@ -155,7 +244,7 @@ forside = f"""
   <div class="prose">
     <h2>Et tømrerfirma, der tager hele opgaven</h2>
     <p>Rosendal Tømrer Entreprise blev stiftet i 2021 af Sebastian Rosendal, der er tømrermester og uddannet bygningskonstruktør. I dag er vi et fast hold af tømrere med værksted og kontor på Engdraget i Hundested. Herfra hjælper vi private og erhverv med tømreropgaver i hele {OMRAADE}.</p>
-    <p>Vi tager os af både de mindre opgaver og de større byggeprojekter. Det kan være alt fra en ny terrassedør til en tilbygning eller en gennemgribende renovering, hvor vi også koordinerer de øvrige håndværkere.</p>
+    <p>Vi tager os af både de mindre opgaver og de større byggeprojekter. Det kan være alt fra en ny terrassedør til en tilbygning eller en gennemgribende renovering, hvor vi også koordinerer de øvrige håndværkere. Små opgaver som fx dørskift samler vi og tager flere ad gangen.</p>
     <p>For os handler godt håndværk ikke kun om det færdige resultat. Det handler også om, at du ved, hvad der skal ske, at vi holder vores aftaler, og at der bliver taget hånd om tingene undervejs. Læs mere <a href="/om-os/" style="text-decoration:underline">om os</a>.</p>
     {SIGNATUR}
   </div>
@@ -190,7 +279,7 @@ forside = f"""
 
 <section class="sec"><div class="container narrow prose">
   <h2>Hvor kører vi?</h2>
-  <p>Vi kører fra værksted og kontor på Engdraget 11 i Hundested og tager opgaver i hele Nordsjælland. Her er de områder, vi dækker.</p>
+  <p>Vi kører fra værksted og kontor på Engdraget 11 i Hundested. Vores arbejdsområde går {ARBEJDSOMRAADE}, og opgaver længere væk tager vi også imod. Her er de områder, vi dækker.</p>
   {omr_chips()}
   <p><a href="/omrader/" style="text-decoration:underline">Se alle områder</a></p>
 </div></section>
@@ -198,7 +287,7 @@ forside = f"""
 {cta()}
 """
 side("index", "Tømrer i Hundested og Nordsjælland | Rosendal Tømrer",
-     "Tømrermester og bygningskonstruktør i Hundested. Tilbygning, tag, vinduer, terrasser og totalentreprise i Nordsjælland. Ring 50 70 05 05.",
+     "Tømrermester og bygningskonstruktør i Hundested. Tilbygning, tag, vinduer, terrasser og hovedentreprise i Nordsjælland. Ring 50 70 05 05.",
      forside, schemas=[schema_virksomhed()], extra_js=AH_BADGE_JS + "\n" + AH_SLIDER_JS + "\n" + AH_BADGE_HOEJDE_JS)
 
 # ---------------- YDELSESSIDER ----------------
@@ -211,7 +300,7 @@ def sidebar(aktiv):
 def liste(items):
     return "<ul>" + "".join(f'<li><a href="{url(x[1])}">{e(x[0])}</a></li>' if isinstance(x, tuple) else f"<li>{e(x)}</li>" for x in items) + "</ul>"
 
-OMR_VERB = {"totalentreprise": "styrer byggerier", "tilbygning": "bygger til huse", "sommerhus": "renoverer sommerhuse", "tag": "skifter tage",
+OMR_VERB = {"hovedentreprise": "styrer byggerier", "tilbygning": "bygger til huse", "tag": "skifter tage",
             "vinduer": "skifter vinduer", "doere": "monterer døre", "terrasse": "bygger terrasser", "renovering": "renoverer boliger",
             "nybyg": "bygger nyt", "pergola-hegn-og-cykelskur": "bygger pergolaer og hegn"}
 
@@ -242,6 +331,7 @@ def ydelse(slug):
     blokke.append(f'<h2>Hvad påvirker prisen?</h2><p>{e(d["pris_intro"])}</p>{liste(d["pris"])}')
     if d.get("galleri"):
         blokke.append('<div class="svc-gal">' + "".join(f'<figure><img src="{s}" alt="{e(a)}" loading="lazy" data-lb></figure>' for s, a in d["galleri"]) + "</div>")
+    blokke.append(proj_links(ydelse=slug))
     blokke.append(rev_mini(d["anm"]))
     if slug in MATERIEL_LINKS:
         # Interne links til de maskiner, der passer til opgaven (og fra udlejningssiden tilbage hertil)
@@ -249,8 +339,8 @@ def ydelse(slug):
                 "betonblander": "betonblander", "dumper": "dumper", "rullestillads": "rullestillads"}
         ml = [f'<a href="/materieludlejning/#{i}">{kald[i]}</a>' for i in MATERIEL_LINKS[slug]]
         blokke.append(f'<h2>Lav noget af det selv?</h2><p>Vil du selv tage fat, kan du leje {", ".join(ml[:-1])} og {ml[-1]} hos os i Hundested. '
-                      'Se priser pr. dag under <a href="/materieludlejning/">materieludlejning</a>.</p>')
-    blokke.append(f'<h2>Områder vi dækker</h2><p>Vi {OMR_VERB[slug]} i Hundested og resten af Nordsjælland. '
+                      'Ring for pris, eller læs mere under <a href="/materieludlejning/">materieludlejning</a>.</p>')
+    blokke.append(f'<h2>Områder vi dækker</h2><p>Vi {OMR_VERB[slug]} i Hundested og resten af Nordsjælland. Arbejdsområdet går {ARBEJDSOMRAADE}, og opgaver længere væk tager vi også imod. '
                   'Læs om <a href="/tomrer-hundested/">tømrer i Hundested</a>, eller se <a href="/omrader/">alle områder</a>.</p>')
     faq = "".join(f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in d["faq"])
     body = f"""
@@ -276,30 +366,34 @@ for sl, _ in YDELSER:
         ydelse(sl)
 
 # ---------------- MATERIELUDLEJNING ----------------
-# Alt indhold staar som tekst i HTML (ingen faner eller skjult indhold), saa soegemaskiner og AI kan citere priser og maal.
-def kr(n):
-    return f"{n:,}".replace(",", ".") + " kr."
+# Alt indhold staar som tekst i HTML (ingen faner eller skjult indhold), saa soegemaskiner og AI kan citere maal og specs.
+# Ingen priser og ingen offers i schema, foer Sebastian har krydstjekket dem med Stark (moedet 23-10-2026).
+AFHENTNING = f"{ADR}, {POST} {BY}"
 
 def maskine_kort(m):
-    mid, _, navn, tekst, specs, inkl, ekskl = m
-    pris = (f'<p class="m-pris"><strong>{kr(inkl)}</strong> pr. dag inkl. moms<span>{kr(ekskl)} ekskl. moms</span></p>'
-            if inkl else '<p class="m-pris"><strong>Kontakt for pris</strong></p>')
+    mid, _, navn, tekst, specs = m
+    pris = '<p class="m-pris"><strong>Kontakt os for pris</strong></p>'
     return (f'<article class="maskine" id="{mid}"><img src="/images/materiel/{mid}.svg" alt="{e(navn)} til leje i Hundested" width="480" height="360" loading="lazy">'
             f'<div class="m-krop"><h3>{e(navn)}</h3><p>{e(tekst)}</p><ul>{"".join(f"<li>{e(x)}</li>" for x in specs)}</ul>{pris}'
             f'<a class="btn btn-brass" href="tel:{TLF_RAW}" data-cta="materiel-{mid}">{ICON_TLF}Ring og book {TLF}</a></div></article>')
 
 def schema_materiel():
     elementer = []
-    for i, (mid, _, navn, tekst, specs, inkl, _ekskl) in enumerate(MATERIEL):
+    for i, (mid, _, navn, tekst, specs) in enumerate(MATERIEL):
         p = {"@type": "Product", "name": navn, "description": tekst + " " + ". ".join(specs) + ".",
              "image": f"{DOMAIN}/images/materiel/{mid}.svg", "url": f"{DOMAIN}/materieludlejning/#{mid}"}
-        if inkl:   # "Kontakt for pris" faar ingen offers
-            p["offers"] = {"@type": "Offer", "price": str(inkl), "priceCurrency": "DKK", "url": f"{DOMAIN}/materieludlejning/#{mid}",
-                           "seller": {"@id": DOMAIN + "/#virksomhed"},
-                           "priceSpecification": {"@type": "UnitPriceSpecification", "price": inkl, "priceCurrency": "DKK",
-                                                  "unitCode": "DAY", "valueAddedTaxIncluded": True}}
         elementer.append({"@type": "ListItem", "position": i + 1, "item": p})
     return {"@context": "https://schema.org", "@type": "ItemList", "name": "Materiel til leje hos " + NAVN, "itemListElement": elementer}
+
+def schema_udlejning(navn, desc):
+    # Udlejningsadressen er ogsaa virksomhedens adresse, men skrives ud her, saa afhentningsstedet staar i schema.
+    s = schema_service(navn, desc, "materieludlejning")
+    s["availableChannel"] = {"@type": "ServiceChannel", "name": "Afhentning",
+                             "servicePhone": TLF_RAW,
+                             "serviceLocation": {"@type": "Place", "name": "Afhentning af lejet materiel",
+                                                 "address": {"@type": "PostalAddress", "streetAddress": ADR, "postalCode": POST,
+                                                             "addressLocality": BY, "addressCountry": "DK"}}}
+    return s
 
 def materiel_side():
     d = MATERIEL_SIDE
@@ -322,9 +416,11 @@ def materiel_side():
 </div></section>
 <section class="sec"><div class="container prose m-side">
   <div class="svar"><strong>Kort svar</strong>{e(d["svar"])}</div>
+  <dl class="fakta"><dt>Afhentning</dt><dd>{AFHENTNING}, efter aftale</dd><dt>Pris</dt><dd>Kontakt os for pris: <a href="tel:{TLF_RAW}">{TLF}</a></dd>
+    <dt>Åbningstid</dt><dd>{AABNING}</dd></dl>
   <nav class="m-hurtig" aria-label="Kategorier">{hurtig}</nav>
   {sektioner}
-  <p class="m-note">Alle priser er pr. kalenderdag. Oven i den samlede pris kommer et forsikringsgebyr på 7 %. Læs de fulde <a href="/lejebetingelser/">lejebetingelser</a>, før du lejer.</p>
+  <p class="m-note">Materiellet lejes pr. kalenderdag. Kontakt os for pris på {TLF}. Læs de fulde <a href="/lejebetingelser/">lejebetingelser</a>, før du lejer.</p>
   <h2>Sådan lejer du</h2>{trin}
   <h2>Skal vi hellere lave opgaven?</h2>
   <p>Vi er tømrere og bygger det, vi udlejer materiel til. Læs om {tilbage}.</p>
@@ -332,7 +428,7 @@ def materiel_side():
 </div></section>
 {cta("Skal du bruge noget af det?", f"Ring og hør, om det er ledigt. Vi dækker hele {OMRAADE}.")}"""
     side("materieludlejning", d["title"], d["desc"], body, active="materieludlejning",
-         schemas=[schema_service(navn, d["desc"], "materieludlejning"), faq_schema(d["faq"]), schema_materiel()],
+         schemas=[schema_udlejning(navn, d["desc"]), faq_schema(d["faq"]), schema_materiel()],
          krummer=[(navn, None)])
 
 materiel_side()
@@ -340,7 +436,8 @@ materiel_side()
 # ---------------- OM OS ----------------
 fakta = [("Firmanavn", NAVN), ("CVR", CVR), ("Adresse", f"{ADR}, {POST} {BY} (værksted og kontor)"), ("Telefon", f'<a href="tel:{TLF_RAW}">{TLF}</a>'),
          ("E-mail", f'<a href="mailto:{MAIL}">{MAIL}</a>'), ("Åbningstid", AABNING), ("Stiftet", "2021 af Sebastian Rosendal"),
-         ("Dækningsområde", f"Hundested og {OMRAADE}"), ("Svartid", "Inden for 24 timer på hverdage"),
+         ("Ansatte", str(ANSATTE)), ("Medlem af", "Dansk Håndværk"),
+         ("Arbejdsområde", f"{ARBEJDSOMRAADE[0].upper()}{ARBEJDSOMRAADE[1:]}. Opgaver længere væk tager vi også imod"), ("Svartid", "Inden for 24 timer på hverdage"),
          ("Anmeldelser", f'{ANM_SNIT} ud af 5 på <a href="{ANM_URL}" target="_blank" rel="noopener">Anmeld Håndværker</a> ({ANM_TEKST} anmeldelser)')]
 fakta_html = "".join(f"<dt>{e(k)}</dt><dd>{v if '<a' in v else e(v)}</dd>" for k, v in fakta)
 omos = f"""
@@ -352,13 +449,19 @@ omos = f"""
 </div></section>
 <section class="sec"><div class="container narrow prose">
   <h2>Sebastian Rosendal</h2>
-  <p>Sebastian er tømrermester og uddannet bygningskonstruktør. Han stiftede firmaet i 2021 og er den, du taler med fra den første snak til det færdige resultat. Når der er brug for at tænke et projekt igennem, før det bygges, kommer begge uddannelser i spil.</p>
+  <p>Sebastian blev uddannet tømrer i 2010 og bygningskonstruktør i 2018. I dag er han tømrermester, og i 2021 stiftede han Rosendal Tømrer Entreprise. Han er den, du taler med fra den første snak til det færdige resultat. Når der er brug for at tænke et projekt igennem, før det bygges, kommer begge uddannelser i spil.</p>
   {SIGNATUR}
+  <h2>Rådgivning ud fra din opgave</h2>
+  <div class="proj-citat"><blockquote>Jeg anbefaler ud fra den enkelte opgave: hvor den ligger, og hvilke forhold den skal stå i. Ligger en terrasse tæt på vandet, fraråder jeg blødt træ, fordi det holder dårligere der. Flere kunder vil også gerne væk fra trykimprægneret, og det tager vi med i snakken. Du skal føle dig godt rådgivet, før du vælger.</blockquote>
+  <p>Sebastian Rosendal</p></div>
   <h2>Holdet</h2>
-  <p>Vi er et fast hold af tømrere. Kunderne omtaler vores svende som dygtige og venlige, og det er den måde, vi vil arbejde på. Du får besøg af folk, der kender opgaven, og som tager godt imod dine spørgsmål undervejs. Vi søger løbende tømrersvende, så er du interesseret i at blive en del af holdet, kan du læse mere under <a href="/job/">job</a>.</p>
+  <p>Vi er {ANSATTE} ansatte og et fast hold af tømrere. Kunderne omtaler vores svende som dygtige og venlige, og det er den måde, vi vil arbejde på. Du får besøg af folk, der kender opgaven, og som tager godt imod dine spørgsmål undervejs. Vi søger løbende tømrersvende, så er du interesseret i at blive en del af holdet, kan du læse mere under <a href="/job/">job</a>.</p>
   <h2>Sådan arbejder vi</h2>
   <p>Du har én fast kontaktperson. Du får et skriftligt tilbud, så du ved, hvad der er aftalt, og hvis der opstår noget uventet undervejs, tager vi dialogen med dig, inden vi går videre. Vi arbejder i dit hjem, og det tager vi alvorligt: Vi rydder op efter os og gør os umage for at gøre byggeperioden så overskuelig som muligt.</p>
-  <p>Mange af opgaverne involverer flere fag. Vi har faste samarbejdspartnere inden for murer, el, VVS, maler og kloak og kan tage hele projektet som <a href="/totalentreprise/">hovedentreprise</a>, så du kun har én kontakt.</p>
+  <p>Vi laver alt i Hundested og omegn, også reparationer og små opgaver. Små opgaver som fx dørskift samler vi og tager flere ad gangen.</p>
+  <p>Mange af opgaverne involverer flere fag. Vi har faste samarbejdspartnere inden for murer, el, VVS, maler og kloak og kan tage hele projektet som <a href="/hovedentreprise/">hovedentreprise</a>, så du kun har én kontakt.</p>
+  <h2>Medlem af Dansk Håndværk</h2>
+  <p>Vi er medlem af Dansk Håndværk. For vores medarbejdere betyder medlemskabet overenskomst. For dig som kunde er det et garantistempel.</p>
   <h2>Fakta om virksomheden</h2>
   <dl class="fakta">{fakta_html}</dl>
   <p>Se også hvad kunderne siger under <a href="/anmeldelser/">anmeldelser</a>, eller <a href="/omrader/">se hvilke områder vi dækker</a>.</p>
@@ -373,32 +476,34 @@ omr = f"""
 <section class="page-header"><div class="container">
   {crumb_html([("Områder", None)])}
   <h1>Områder vi dækker i Nordsjælland</h1>
-  <p>Vi kører fra værksted og kontor på Engdraget 11 i Hundested og tager tømrerarbejde i hele Nordsjælland.</p>
+  <p>Vi kører fra værksted og kontor på Engdraget 11 i Hundested. Arbejdsområdet går {ARBEJDSOMRAADE}.</p>
   {hero_knapper()}
 </div></section>
 <section class="sec"><div class="container narrow prose">
-  <div class="svar"><strong>Kort svar</strong>Rosendal Tømrer Entreprise har base i Hundested og tager opgaver i Hundested, Frederiksværk, Hillerød, Helsinge, Gilleleje og sommerhusområderne langs Nordkysten. Ring på {TLF}, så finder vi ud af, om vi kan tage din opgave.</div>
+  <div class="svar"><strong>Kort svar</strong>Rosendal Tømrer Entreprise har base i Hundested. Vores arbejdsområde går {ARBEJDSOMRAADE}, med Frederiksværk, Hillerød, Helsinge, Gilleleje og sommerhusområderne langs Nordkysten imellem. Opgaver længere væk tager vi også imod. Ring på {TLF}, så finder vi ud af, hvordan vi kan hjælpe.</div>
   <h2>Her kører vi</h2>
   {omr_chips()}
   <p>Hundested har sin egen side, hvor du kan se opgaver fra byen: <a href="/tomrer-hundested/">tømrer i Hundested</a>.</p>
+  {proj_links()}
   <h2>Hvor vi har løst opgaver</h2>
   <p>Kunderne fortæller selv, hvor og hvad vi har lavet. Vi har blandt andet løst opgaver i Hundested, Frederiksværk, Ølsted, Hillerød, Liseleje og Vejby: tag, vinduer og døre, terrasser, facade og renoveringer. Læs deres anmeldelser under <a href="/anmeldelser/">anmeldelser</a>.</p>
-  <h2>Ligger din opgave et andet sted?</h2>
-  <p>Ring og fortæl, hvor opgaven ligger, og hvad den går ud på. Så hører du, om vi kan tage den.</p>
+  <h2>Ligger din opgave længere væk?</h2>
+  <p>Opgaver uden for arbejdsområdet tager vi også imod. Ring og fortæl, hvor opgaven ligger, og hvad den går ud på.</p>
   <h2>Det laver vi i hele området</h2>
   {liste([(n, sl) for sl, n in YDELSER])}
 </div></section>
 {cta()}"""
 side("omrader", "Områder vi dækker i Nordsjælland | Rosendal Tømrer",
-     "Rosendal Tømrer i Hundested tager tømrerarbejde i Hundested, Frederiksværk, Hillerød, Helsinge, Gilleleje og på Nordkysten. Ring 50 70 05 05.",
+     "Rosendal Tømrer i Hundested tager tømrerarbejde fra Hundested til Frederikssund, Stenløse, Farum og Hørsholm. Ring 50 70 05 05.",
      omr, schemas=[schema_virksomhed()], krummer=[("Områder", None)])
 
 hund_faq = [
     ("Har I værksted i Hundested?", f"Ja. Vi har værksted og kontor på {ADR}, {POST} {BY}."),
-    ("Hvilke områder omkring Hundested kører I til?", "Vi tager opgaver i hele Nordsjælland, blandt andet Frederiksværk, Ølsted, Lynæs, Hillerød, Helsinge, Gilleleje og sommerhusområderne langs Nordkysten."),
-    ("Hvordan får jeg et tilbud i Hundested?", f"Ring på {TLF} på hverdage mellem 07.00 og 17.00, eller send en henvendelse. Vi kommer ud og ser på opgaven og giver et fast skriftligt tilbud."),
+    ("Hvilke områder omkring Hundested kører I til?", f"Arbejdsområdet går {ARBEJDSOMRAADE}, blandt andet Frederiksværk, Ølsted, Lynæs, Hillerød, Helsinge, Gilleleje og sommerhusområderne langs Nordkysten. Opgaver længere væk tager vi også imod."),
+    ("Tager I også små opgaver i Hundested?", "Ja. Vi laver alt i Hundested og omegn, også reparationer og små opgaver. Små opgaver som fx dørskift samler vi og tager flere ad gangen."),
+    ("Hvordan får jeg et tilbud i Hundested?", f"Ring på {TLF} på hverdage mellem 07.00 og 16.00, eller send en henvendelse. Vi kommer ud og ser på opgaven og giver et fast skriftligt tilbud."),
     ("Hvor hurtigt svarer I?", "Vi vender tilbage inden for 24 timer på hverdage."),
-    ("Kan jeg leje stillads eller trailer i Hundested?", "Ja. Rullestillads, trailer og andet materiel kan hentes på Engdraget 11 efter aftale, og levering kan aftales."),
+    ("Kan jeg leje stillads i Hundested?", "Ja. Rullestillads, bukkestillads og andet materiel kan hentes på Engdraget 11 efter aftale. Kontakt os for pris."),
 ]
 hund = f"""
 <section class="page-header"><div class="container">
@@ -408,15 +513,16 @@ hund = f"""
   {hero_knapper()}
 </div></section>
 <section class="sec"><div class="container narrow prose">
-  <div class="svar"><strong>Kort svar</strong>Rosendal Tømrer Entreprise er et tømrerfirma i Hundested, stiftet i 2021 af tømrermester og bygningskonstruktør Sebastian Rosendal. Vi har værksted og kontor på Engdraget 11 og tager tag, vinduer, døre, terrasser, tilbygninger og renoveringer. Ring på {TLF} på hverdage 07.00 til 17.00.</div>
+  <div class="svar"><strong>Kort svar</strong>Rosendal Tømrer Entreprise er et tømrerfirma i Hundested, stiftet i 2021 af tømrermester og bygningskonstruktør Sebastian Rosendal. Vi har værksted og kontor på Engdraget 11 og tager tag, vinduer, døre, terrasser, tilbygninger og renoveringer. Ring på {TLF} på hverdage 07.00 til 16.00.</div>
   <h2>Vi har base i Hundested</h2>
-  <p>Det er herfra, vi kører ud til opgaverne, og det er her, du kan hente rullestillads, trailer og værktøj, hvis du vil leje. Du ringer til Sebastian og får en fast kontaktperson, der kender dit projekt fra første snak til aflevering.</p>
+  <p>Det er herfra, vi kører ud til opgaverne, og det er her, du kan hente stillads og værktøj, hvis du vil <a href="/materieludlejning/">leje materiel</a>. Du ringer til Sebastian og får en fast kontaktperson, der kender dit projekt fra første snak til aflevering.</p>
   <h2>Opgaver vi har løst i Hundested</h2>
   <p>Kunderne fortæller selv, hvordan det er gået. Her er et udpluk fra Hundested.</p>
   <div class="rev-mini">{rev_kort('kenneth')}{rev_kort('peter')}{rev_kort('brian')}</div>
   <p>Hundestedkunderne har blandt andet også fået en tilbygning og et gæstehus (november 2025), beklædning på vægge og loft samt altan i et sommerhus (august 2025), nyt tag og skillevæg (september 2025) og nyt tag (august 2025). <a href="/anmeldelser/">Læs flere anmeldelser</a>.</p>
+  {proj_links(by="Hundested")}
   <h2>De mest relevante ydelser i Hundested</h2>
-  {liste([("Tag: nyt tag og tagrenovering", "tag"), ("Vinduer: nye vinduer og vinduesudskiftning", "vinduer"), ("Tilbygning: mere plads til huset", "tilbygning"), ("Sommerhus: renovering og nyt tag", "sommerhus")])}
+  {liste([("Tag: nyt tag og tagrenovering", "tag"), ("Vinduer: nye vinduer og vinduesudskiftning", "vinduer"), ("Tilbygning: mere plads til huset", "tilbygning"), ("Renovering af hus og sommerhus", "renovering"), ("Terrasse: træterrasser og trappetrin", "terrasse")])}
   <h2>Sådan kommer vi i gang</h2>
   <p>Ring på <a href="tel:{TLF_RAW}">{TLF}</a>, eller send en henvendelse via <a href="/kontakt/" data-cta="omrade">kontaktsiden</a>. Vi kommer ud og ser på opgaven, og du får et fast skriftligt tilbud. Vi svarer inden for 24 timer på hverdage.</p>
   <p>Vi kører også til resten af Nordsjælland. Se <a href="/omrader/">alle områder</a>.</p>
@@ -436,11 +542,14 @@ def case(key):
             f'<div class="case-body"><div>{stj(k)}</div><blockquote>{e(q)}</blockquote>'
             f'<div class="who"><strong>{e(n)}</strong>, {e(by)} · {e(d)}</div></div></article>')
 
+def proj_kort():
+    return "".join(f'<a class="ref-card" href="/projekter/{p["slug"]}/"><div class="ref-card-media"><img src="{proj_billede(p)}" alt="{e(p["billeder"][0][1])}" width="720" height="540" loading="lazy"></div>'
+                   f'<div class="ref-card-body"><h3>{e(p["kort"])}</h3><p>{e(p["by"])} · {e(p["aar"])}</p></div></a>' for p in LIVE)
+
 proj_html = ""
-if LIVE:
-    kort = "".join(f'<a class="ref-card" href="/projekter/{p["slug"]}/"><div class="ref-card-media"><img src="{p["billeder"][0][0]}" alt="{e(p["billeder"][0][1])}" loading="lazy"></div>'
-                   f'<div class="ref-card-body"><h3>{e(p["titel"])}</h3><p>{e(p["by"])} · {e(p["maaned"])}</p></div></a>' for p in LIVE)
-    proj_html = f'<section class="sec"><div class="container"><div class="sec-head"><h2>Projekter</h2></div><div class="refs-grid">{kort}</div></div></section>'
+if LIVE:   # id'et bruges som "Projekter" i broedkrummen, indtil der er en oversigtsside
+    proj_html = (f'<section class="sec" id="projekter"><div class="container"><div class="sec-head"><h2>Projekter</h2>'
+                 f'<p>Udvalgte opgaver med billeder og kundens egen anmeldelse.</p></div><div class="refs-grid">{proj_kort()}</div></div></section>')
 
 ref_body = f"""
 <section class="page-header"><div class="container">
@@ -461,25 +570,63 @@ side("anmeldelser", "Anmeldelser fra kunder | Rosendal Tømrer",
      ref_body, schemas=[schema_virksomhed()], krummer=[("Anmeldelser", None)], extra_js=AH_LISTE_JS)
 
 # ---------------- PROJEKTSIDER (kun naar status = live) ----------------
+# Ingen Review- eller aggregateRating-markup: citatet er fra Anmeld Haandvaerker og vises kun som tekst.
 def projekt_side(p):
-    ydl = dict(YDELSER)[p["ydelse"]]
-    imgs = "".join(f'<figure><img src="{s}" alt="{e(a)}" loading="lazy" data-lb></figure>' for s, a in p["billeder"])
-    body = (f'<section class="page-header"><div class="container">{crumb_html([("Projekter", "projekter"), (p["titel"], None)])}'
-            f'<h1>{e(p["titel"])}</h1><p>{e(p["by"])} · {e(p["maaned"])}</p></div></section>'
-            f'<section class="sec"><div class="container"><div class="proj-gallery">{imgs}</div></div></section>'
-            f'<section class="sec sec-mist"><div class="container narrow prose">{rev_mini([p["anm"]])}'
-            f'<p>Læs mere om <a href="{url(p["ydelse"])}">{e(ydl.lower())}</a> eller <a href="/tomrer-hundested/">tømrer i Hundested</a>.</p></div></section>{cta()}')
-    side(f"projekter/{p['slug']}", f"{p['titel']} | Rosendal Tømrer", f"{p['titel']} i {p['by']}, {p['maaned']}. Udført af Rosendal Tømrer. Ring 50 70 05 05.",
-         body, active="projekter", extra_js=LB_JS, krummer=[("Projekter", "projekter"), (p["titel"], None)])
+    krummer = [("Projekter", PROJ_KRUMME), (p["titel"], None)]
+    fakta = [(k, v) for k, v in p["fakta"] if v]
+    fakta += [("Anmeldt", f'{p["anmeldt"][0]} på <a href="{ANM_URL}" target="_blank" rel="noopener">{p["anmeldt"][1]}</a>'),
+              ("Udført af", NAVN)]
+    dl = "".join(f"<dt>{e(k)}</dt><dd>{v if '<a' in v else e(v)}</dd>" for k, v in fakta)
 
-if LIVE:
-    kort = "".join(f'<a class="ref-card" href="/projekter/{p["slug"]}/"><div class="ref-card-media"><img src="{p["billeder"][0][0]}" alt="{e(p["billeder"][0][1])}" loading="lazy"></div>'
-                   f'<div class="ref-card-body"><h3>{e(p["titel"])}</h3><p>{e(p["by"])} · {e(p["maaned"])}</p></div></a>' for p in LIVE)
+    def figur(i, cls=""):
+        fil, alt, tekst = p["billeder"][i]
+        img = (f'<img src="/images/projekter/{fil}.webp" srcset="/images/projekter/{fil}-720.webp 720w, /images/projekter/{fil}.webp 1440w" '
+               f'sizes="{"(max-width:820px) 100vw, 780px" if i == 0 else "(max-width:600px) 100vw, 390px"}" alt="{e(alt)}" width="1440" height="1080"'
+               + ('' if i == 0 else ' loading="lazy"') + ' data-lb>')
+        return f'<figure{cls}>{img}' + (f"<figcaption>{e(tekst)}</figcaption>" if tekst else "") + "</figure>"
+
+    def sektioner(liste):
+        ud = ""
+        for h2, c in liste:
+            if not c: continue          # tom sektion afventer Sebastian
+            ud += f"<h2>{e(h2)}</h2>" + (c[1] if isinstance(c, tuple) else "".join(f"<p>{e(x)}</p>" for x in c))
+        return ud
+
+    galleri = "".join(figur(i) for i in range(1, len(p["billeder"])))
+    andre = "".join(f'<li><a href="/projekter/{q["slug"]}/">{e(q["kort"])}, {e(q["by"])}</a></li>' for q in LIVE if q is not p)
+    andre = f"<h2>Andre projekter</h2><ul>{andre}</ul>" if andre else ""
+    udvidet = f'<p>{e(p["udvidet"])}</p>' if p.get("udvidet") else ""
+    faq = "".join(f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in p["faq"])
+    body = f"""
+<section class="page-header"><div class="container">
+  {crumb_html(krummer)}
+  <h1>{e(p['titel'])}</h1><p>{e(p['by'])} · {e(p['aar'])}</p>
+  {hero_knapper("projekt")}
+</div></section>
+<section class="sec"><div class="container narrow prose">
+  <div class="svar"><strong>Kort svar</strong>{e(p['svar'])}</div>
+  {figur(0, ' class="proj-hoved"')}
+  <dl class="fakta">{dl}</dl>
+  {sektioner(p['sek'])}
+  {f'<div class="proj-gallery">{galleri}</div>' if galleri else ''}
+  <h2>Det siger kunden</h2>
+  <div class="proj-citat"><blockquote>{e(p['citat'])}</blockquote>
+    <p>Kunden fra {e(p['by'])}, anmeldt {e(p['anmeldt'][0])} på <a href="{ANM_URL}" target="_blank" rel="noopener">{e(p['anmeldt'][1])}</a></p></div>
+  {udvidet}<p>{e(p['karakterer'])}</p>
+  {sektioner(p['sek_efter'])}
+  {andre}
+  <h2>Ofte stillede spørgsmål</h2><div class="faq">{faq}</div>
+</div></section>
+{cta()}"""
+    side(f"projekter/{p['slug']}", p["title"], p["desc"], body, active="projekter", og_img=p["og_img"],
+         schemas=[faq_schema(p["faq"])], extra_js=LB_JS, krummer=krummer)
+
+for p in LIVE:
+    projekt_side(p)
+if HUB:
     side("projekter", "Projekter | Rosendal Tømrer", "Se udvalgte projekter fra Rosendal Tømrer i Hundested og Nordsjælland: tag, vinduer, terrasser, tilbygning og renovering.",
          f'<section class="page-header"><div class="container">{crumb_html([("Projekter", None)])}<h1>Projekter</h1><p>Udvalgte opgaver, vist med billeder af det færdige resultat.</p></div></section>'
-         f'<section class="sec"><div class="container"><div class="refs-grid">{kort}</div></div></section>{cta()}', krummer=[("Projekter", None)])
-    for p in LIVE:
-        projekt_side(p)
+         f'<section class="sec"><div class="container"><div class="refs-grid">{proj_kort()}</div></div></section>{cta()}', krummer=[("Projekter", None)])
 
 # ---------------- FORMULARER ----------------
 # Ingen honeypot (_gotcha): Formspree's eget spamfilter (Formshield) er nok, og et skjult
@@ -497,7 +644,7 @@ job = f"""
 <section class="page-header"><div class="container">
   {crumb_html([("Job", None)])}
   <h1>Er du vores nye tømrer?</h1>
-  <p>Vi søger løbende tømrersvende til holdet. Også selvom der ikke ligger et opslag ude.</p>
+  <p>Vi søger løbende tømrersvende til holdet, og vi tager altid imod ansøgninger.</p>
 </div></section>
 <section class="sec"><div class="container contact-grid">
   <div class="prose">
@@ -505,6 +652,8 @@ job = f"""
     <h2>Hvem er vi?</h2>
     <p>Hos Rosendal Tømrer Entreprise er vi kvalitetsbevidste og stolte af vores faglige kunnen. Vi går på arbejde med glæde, fordi vi laver det vi brænder for, og vi lægger vægt på et kammeratligt og tæt sammenhold.</p>
     <p>Vi laver alle former for tømreropgaver, fordi vi kan lide at to dage ikke er ens: tag, døre og vinduer, terrasser, hegn, skure, gårdmiljøer, nybyg og renovering. Alt udføres ud fra kundens ønsker, så det er vigtigt at du er god til at tale med kunderne fra start til slut.</p>
+    <h2>Send en åben ansøgning</h2>
+    <p>Du behøver ikke vente på et opslag. Send en åben ansøgning via formularen, så tager vi en snak, når det passer.</p>
     <h2>Fortæl os gerne</h2>
     <ul><li>Kort hvem du er</li><li>Din erfaring og tidligere arbejde</li><li>Hvorfor du elsker tømrerfaget</li><li>Hvorfor du er vores nye kollega</li></ul>
     <p>Du kan også bare ringe til Sebastian på <a href="tel:{TLF_RAW}">{TLF}</a>.</p>
@@ -536,6 +685,7 @@ kontakt = f"""
   {crumb_html([("Kontakt", None)])}
   <h1>Få et uforpligtende tilbud</h1>
   <p>Fortæl kort om opgaven, så vender vi tilbage inden for 24 timer på hverdage. Den hurtigste vej er telefonen.</p>
+  <p>Vi laver alt i Hundested og omegn, også reparationer og små opgaver. Små opgaver som fx dørskift samler vi og tager flere ad gangen.</p>
 </div></section>
 <section class="sec"><div class="container contact-grid">
   <div>
@@ -599,8 +749,9 @@ cookies = f"""
 side("cookies", "Cookiepolitik | Rosendal Tømrer",
      "Sådan bruger rosendal-tomrer.dk cookies, og hvordan du ændrer eller trækker dit samtykke tilbage.", cookies, noindex=True)
 
-# Afskrevet fra det gamle sites PDF (Rosendal-Materieludlejning-Betingelser.pdf). Indholdet er bevaret, kun stavning
-# og tegnsaetning er rettet. Det er juridisk tekst, saa aendringer i indholdet skal komme fra Sebastian.
+# Afskrevet fra det gamle sites PDF (Rosendal-Materieludlejning-Betingelser.pdf). Kun stavning og tegnsaetning er rettet,
+# bortset fra at beloeb og procentsatser er taget ud (moedet 23-10-2026), indtil Sebastian har krydstjekket priserne.
+# Det er juridisk tekst, saa aendringer i indholdet skal komme fra Sebastian.
 lb = f"""
 <section class="page-header"><div class="container">{crumb_html([("Materieludlejning", "materieludlejning"), ("Lejebetingelser", None)])}
 <h1>Lejebetingelser for materieludlejning</h1><p>Gælder for al leje af materiel hos {e(NAVN)}.</p></div></section>
@@ -613,18 +764,18 @@ lb = f"""
   <h2>3. Fremleje og tilbagelevering</h2>
   <p>Lejer må ikke fremleje eller handle med lejet materiel. Alt lejet materiel skal tilbageleveres på udlejers plads til den aftalte tid og i samme stand. Lejer erklærer sig indforstået med, at udlejer ved lejers svigtende tilbagelevering kan komme i besiddelse af materiellet ved en fogedforretning på lejers regning.</p>
   <h2>4. Skader, tyveri og selvrisiko</h2>
-  <p>Har lejer beskadiget lejet materiel, forpligter lejer sig til at erstatte bortkommet eller beskadiget materiel. Ved tyveri, brand, hærværk m.v. forpligter lejer sig til en selvrisiko på 35 % af materiellets værdi. Selvrisikoen er oplyst ekskl. moms.</p>
+  <p>Har lejer beskadiget lejet materiel, forpligter lejer sig til at erstatte bortkommet eller beskadiget materiel. Ved tyveri, brand, hærværk m.v. forpligter lejer sig til at betale en selvrisiko, der beregnes af materiellets værdi og oplyses ved booking.</p>
   <h2>5. Uheld</h2>
   <p>Udgifter for lejer på grund af uheld er udlejer uvedkommende.</p>
   <h2>6. Forsikringsgebyr</h2>
-  <p>Der tillægges et almindeligt forsikringsgebyr på 7 % af den samlede pris.</p>
+  <p>Der tillægges et almindeligt forsikringsgebyr, der beregnes af den samlede pris og oplyses ved booking.</p>
   <h2>7. Ansvarsforsikring</h2>
   <p>Udlejer tegner ansvarsforsikring mod det erstatningsansvar, som udlejer ifølge dansk ret måtte ifalde for skader på personer eller ejendom (tingskader). Udlejer påtager sig intet ansvar og ingen risiko, hvorfor dette påhviler lejer. Såfremt udlejer bliver pålagt dette ansvar, er lejer forpligtet til at holde udlejer skadesløs for ethvert ansvar.</p>
   <h2>Annullering</h2>
-  <p>Annullering af en ordre skal ske senest 7 dage før den aftalte booking. Ved annullering opkræves et gebyr på 220 kr. ekskl. moms (275 kr. inkl. moms).</p>
+  <p>Annullering af en ordre skal ske senest 7 dage før den aftalte booking. Ved annullering opkræves et gebyr, som oplyses ved booking.</p>
   <h2>Kontrol, rengøring og brændstof</h2>
   <p>I lejeperioden er udlejer forpligtet til at lave sikkerheds- og driftsmæssige kontroller af lejet materiel, herunder væskestand, batterier og løbende rengøring.</p>
-  <p>Ved manglende rengøring opkræves et gebyr på 400 kr. ekskl. moms (500 kr. inkl. moms).</p>
+  <p>Ved manglende rengøring opkræves et gebyr, som oplyses ved booking.</p>
   <p>Alle benzindrevne maskiner udleveres uden brændstof, og det er lejers ansvar at påfylde korrekte væsker i henhold til anvisningerne.</p>
   <h2>Ansvar og erstatning</h2>
   <p>Lejer påtager sig alt ansvar og al risiko ved lejet materiel, herunder skader på personer, ting eller materiel, uanset om skaderne sker som følge af forkerte oplysninger.</p>
@@ -648,12 +799,14 @@ skriv("404.html", build_page("404", "Siden findes ikke | Rosendal Tømrer", "Sid
 # Gamle sider laa som <navn>.html. De oprindelige WordPress-adresser var /<slug>/ og er enten nye sider
 # (terrasse, tag, nybyg, renovering, job, kontakt) eller omdirigeres her. Rigtige 301'ere kommer fra .htaccess paa
 # Simply. Stubbene er reserve (meta refresh + canonical), hvis .htaccess ikke kan bruges, og de virker paa testsiden.
-HTML_GAMLE = {"hovedentreprise.html": "totalentreprise", "doere-og-vinduer.html": "vinduer", "gaardhaver.html": "pergola-hegn-og-cykelskur",
+HTML_GAMLE = {"hovedentreprise.html": "hovedentreprise", "doere-og-vinduer.html": "vinduer", "gaardhaver.html": "pergola-hegn-og-cykelskur",
               "materieludlejning.html": "materieludlejning", "referencer.html": "anmeldelser", "terrasse.html": "terrasse",
               "tag.html": "tag", "nybyg.html": "nybyg", "renovering.html": "renovering", "job.html": "job", "kontakt.html": "kontakt",
               "cookies.html": "cookies", "lejebetingelser.html": "lejebetingelser"}
 # /materieludlejning/ var ogsaa WordPress-adressen og er nu siden selv. udlejning-af-stillads-og-trailer var kun paa testsiden.
-WP_GAMLE = {"doere-vinduer": "vinduer", "gaardhaver": "pergola-hegn-og-cykelskur", "udlejning-af-stillads-og-trailer": "materieludlejning"}
+WP_GAMLE = {"doere-vinduer": "vinduer", "gaardhaver": "pergola-hegn-og-cykelskur", "udlejning-af-stillads-og-trailer": "materieludlejning",
+            # Moedet 23-10-2026: totalentreprise hedder nu hovedentreprise, og sommerhus er ikke en selvstaendig ydelse laengere
+            "totalentreprise": "hovedentreprise", "sommerhus": "renovering"}
 
 def stub(fil, ny, dybde):
     rel = "../" * dybde + ny + "/"
@@ -709,7 +862,7 @@ skriv("sitemap.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="ht
 ylist = "\n".join(f"- [{n}]({DOMAIN}{url(sl)})" for sl, n in YDELSER)
 skriv("llms.txt", f"""# {NAVN}
 
-> Tømrerfirma i Hundested, stiftet 2021 af tømrermester og bygningskonstruktør Sebastian Norborg Rosendal. Fag-, hoved- og totalentrepriser for private og erhverv i Nordsjælland: tilbygning, tag, vinduer og døre, terrasser, sommerhuse, renovering og nybyg.
+> Tømrerfirma i Hundested, stiftet 2021 af tømrermester Sebastian Norborg Rosendal, der blev uddannet tømrer i 2010 og bygningskonstruktør i 2018. Fag- og hovedentrepriser for private og erhverv i Nordsjælland: tilbygning, tag, vinduer og døre, terrasser, renovering af huse og sommerhuse samt nybyg. Reparationer og små opgaver tages også. Materieludlejning med afhentning på {ADR}, {POST} {BY}.
 
 - Telefon: {TLF}
 - E-mail: {MAIL}
@@ -717,7 +870,10 @@ skriv("llms.txt", f"""# {NAVN}
 - CVR: {CVR}
 - Anmeldelser: {ANM_SNIT} ud af 5, {ANM_TEKST} anmeldelser på Anmeld Håndværker ({ANM_URL})
 - Åbningstid: {AABNING}
-- Serviceområde: Hundested og resten af Nordsjælland, med base på Engdraget 11 i Hundested
+- Ansatte: {ANSATTE}
+- Medlem af Dansk Håndværk
+- Serviceområde: {ARBEJDSOMRAADE}, med base på Engdraget 11 i Hundested. Opgaver længere væk tages også
+- Materieludlejning: kontakt os for pris. Afhentning på {ADR}, {POST} {BY}
 
 ## Ydelser
 {ylist}
@@ -728,7 +884,7 @@ skriv("llms.txt", f"""# {NAVN}
 - [Tømrer i Hundested]({DOMAIN}/tomrer-hundested/)
 - [Anmeldelser]({DOMAIN}/anmeldelser/)
 - [Kontakt]({DOMAIN}/kontakt/)
-""")
+""" + "".join(f"- [Projekt: {p['titel']}]({DOMAIN}/projekter/{p['slug']}/)\n" for p in LIVE))
 
 if not LIVEBYG:
     skriv(".nojekyll", "")  # kun GitHub Pages bruger den

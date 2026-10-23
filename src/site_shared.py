@@ -40,13 +40,14 @@ COOKIE = "rosendal_samtykke"
 LIVEBYG = "--live" in sys.argv
 DEMO = not LIVEBYG
 
-AABNING = "Mandag-fredag 07.00-17.00"
-OMRAADE = "Nordsjælland og Hovedstadsområdet"   # Hovedstadsområdet afventer Sebastians bekræftelse
+AABNING = "Mandag-fredag 07.00-16.00"
+OMRAADE = "Nordsjælland"   # Moedet 23-10-2026: fra Hundested til Frederikssund, Stenløse, Farum og Hørsholm
+ARBEJDSOMRAADE = "fra Hundested til Frederikssund, Stenløse, Farum og Hørsholm"
+ANSATTE = 7   # moedet 23-10-2026
 
 YDELSER = [  # (slug, navn i menu, lister og formular). Slug = URL: /<slug>/
-    ("totalentreprise", "Totalentreprise"),
+    ("hovedentreprise", "Hovedentreprise"),
     ("tilbygning", "Tilbygning"),
-    ("sommerhus", "Sommerhus"),
     ("tag", "Tag"),
     ("vinduer", "Vinduer"),
     ("doere", "Døre"),
@@ -60,10 +61,14 @@ YDELSER = [  # (slug, navn i menu, lister og formular). Slug = URL: /<slug>/
 OMRAADER = [("tomrer-hundested", "Hundested"), (None, "Frederiksværk"), (None, "Ølsted"), (None, "Lynæs"),
             (None, "Hillerød"), (None, "Helsinge"), (None, "Gilleleje"), (None, "Græsted"),
             (None, "Skævinge"), (None, "Gørløse"), (None, "Liseleje"), (None, "Tisvildeleje"),
-            (None, "Vejby"), (None, "Rågeleje"), (None, "Dronningmølle"), (None, "Tibirke"), (None, "Asserbo")]
-SIDST_OPDATERET = "2026-10-21"   # lastmod i sitemap. Saet til byggedato naar indhold aendres
+            (None, "Vejby"), (None, "Rågeleje"), (None, "Dronningmølle"), (None, "Tibirke"), (None, "Asserbo"),
+            (None, "Frederikssund"), (None, "Stenløse"), (None, "Farum"), (None, "Hørsholm")]
+SIDST_OPDATERET = "2026-10-23"   # lastmod i sitemap. Saet til byggedato naar indhold aendres
 
 def url(slug):
+    if "#" in slug:          # fx "anmeldelser#projekter": et afsnit paa en side
+        side, anker = slug.split("#")
+        return f"{url(side)}#{anker}"
     return "/" if slug == "index" else f"/{slug}/"
 
 def e(s):
@@ -257,6 +262,13 @@ nav a.active::after{content:'';position:absolute;left:0;right:0;bottom:0;height:
 .proj-gallery{columns:3;column-gap:1rem}
 .proj-gallery figure{break-inside:avoid;margin:0 0 1rem}
 .proj-gallery img{width:100%;height:auto;cursor:zoom-in}
+.proj-hoved{margin:0 0 2rem}
+.proj-hoved img{width:100%;height:auto;cursor:zoom-in}
+.proj-hoved figcaption,.proj-gallery figcaption{font-size:.88rem;color:var(--muted);margin-top:.5rem}
+.prose .proj-gallery{columns:2;margin:0 0 1.6rem}
+.proj-citat{background:var(--sand);border-left:4px solid var(--brass);padding:1.4rem 1.6rem;margin:0 0 1rem}
+.proj-citat blockquote{font-family:var(--head);font-stretch:92%;font-size:1.25rem;line-height:1.4;color:var(--navy);margin:0 0 .7rem}
+.proj-citat p{margin:0;font-size:.93rem;color:var(--muted)}
 .lb{position:fixed;inset:0;background:rgba(9,22,36,.95);display:none;align-items:center;justify-content:center;z-index:999;padding:2rem}
 .lb.open{display:flex}
 .lb img{max-width:100%;max-height:86vh}
@@ -456,6 +468,9 @@ nav .dd-menu{display:block;position:absolute;top:100%;left:-1rem;background:#fff
 nav .dd-menu a{padding:.55rem 1.2rem;font-weight:600}
 nav .dd-menu a.active::after{display:none}
 nav .dd-menu a.active,nav .dd-menu a:hover{background:var(--mist)}
+nav .dd-menu .dd-grp a{font-weight:800;color:var(--navy)}
+nav .dd-menu .dd-sub a{padding:.35rem 1.2rem .35rem 2.1rem;font-size:.86rem;font-weight:600;color:var(--muted)}
+nav .dd-menu .dd-sep{margin-top:.4rem;padding:.6rem 1.2rem .3rem;border-top:1px solid var(--line);font-size:.74rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--brass-dk)}
 .nav-cta{margin-left:auto}
 nav .nav-cta a.btn{padding:.55rem 1.1rem;margin:.3rem 0;display:inline-flex;font-size:.9rem;color:#fff}
 nav .nav-cta a.btn:hover{color:#fff}
@@ -484,6 +499,7 @@ nav .nav-cta a.btn:hover{color:#fff}
   .nav-cta{margin:0;padding:.5rem 1.5rem 1rem}
 }
 @media (max-width:600px){.fakta{grid-template-columns:1fr;gap:.1rem}.fakta dd{margin-bottom:.7rem}}
+@media (max-width:600px){.prose .proj-gallery{columns:1}}
 """
 
 ICON_TLF = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>'
@@ -507,13 +523,18 @@ def schema_virksomhed():
         "image": DOMAIN + "/images/og-forside.jpg",
         "telephone": TLF_RAW, "email": MAIL, "vatID": "DK" + CVR, "taxID": CVR,
         "foundingDate": "2021-03", "founder": {"@type": "Person", "name": "Sebastian Norborg Rosendal",
-                                               "jobTitle": "Tømrermester og bygningskonstruktør"},
+                                               "jobTitle": "Tømrermester og bygningskonstruktør",
+                                               # Hans egen uddannelse, ikke firmaets alder (stiftet 2021)
+                                               "hasCredential": [
+                                                   {"@type": "EducationalOccupationalCredential", "name": "Uddannet tømrer", "dateCreated": "2010"},
+                                                   {"@type": "EducationalOccupationalCredential", "name": "Uddannet bygningskonstruktør", "dateCreated": "2018"}]},
         "address": {"@type": "PostalAddress", "streetAddress": ADR, "postalCode": POST,
                     "addressLocality": BY, "addressCountry": "DK"},
         "areaServed": [{"@type": "Place", "name": n} for _, n in OMRAADER],
         "openingHoursSpecification": [{"@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "07:00", "closes": "17:00"}],
-        "knowsAbout": ["Totalentreprise", "Hovedentreprise", "Fagentreprise", "Tilbygning", "Tagarbejde",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "07:00", "closes": "16:00"}],
+        "numberOfEmployees": {"@type": "QuantitativeValue", "value": ANSATTE},
+        "knowsAbout": ["Hovedentreprise", "Fagentreprise", "Tilbygning", "Tagarbejde",
                        "Vinduer og døre", "Terrasser", "Carporte", "Renovering af sommerhuse"],
         "sameAs": [FB, IG, ANM_URL],
     }
@@ -556,10 +577,17 @@ gtag('js',new Date());gtag('config','{GA_ID}',{{'anonymize_ip':true}});
 </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>"""
 
+MATERIEL_MENU = [("el", "El-værktøj"), ("bygning", "Bygningsmateriel"), ("jord", "Jord og anlæg")]
 STATE = {"projekter": False}   # saettes af build.py: er der projektsider med faerdigbilleder?
 
 def nav(active):
-    ydl = "".join(f'<li><a href="{url(sl)}"{" class=\"active\"" if sl == active else ""}>{e(n)}</a></li>' for sl, n in YDELSER)
+    # Materieludlejning staar oeverst som sit eget afsnit med underpunkter, adskilt fra tømrerydelserne.
+    # Underpunkterne er ankre nu og kan blive egne undersider, naar Sebastian har krydstjekket maskinerne.
+    a = lambda sl: ' class="active"' if sl == active else ""
+    mat = (f'<li class="dd-grp"><a href="/materieludlejning/"{a("materieludlejning")}>Materieludlejning</a></li>'
+           + "".join(f'<li class="dd-sub"><a href="/materieludlejning/#{k}">{e(n)}</a></li>' for k, n in MATERIEL_MENU)
+           + '<li class="dd-sep" aria-hidden="true">Tømrerarbejde</li>')
+    ydl = mat + "".join(f'<li><a href="{url(sl)}"{a(sl)}>{e(n)}</a></li>' for sl, n in YDELSER if sl != "materieludlejning")
     yakt = " active" if active in dict(YDELSER) else ""
     punkter = [("omrader", "Områder")] + ([("projekter", "Projekter")] if STATE["projekter"] else []) + [
         ("anmeldelser", "Anmeldelser"), ("om-os", "Om os"), ("kontakt", "Kontakt")]
@@ -605,7 +633,7 @@ def footer():
   <div class="f-grid">
     <div>
       <img class="flogo" src="/images/logo-hvid.png" alt="{e(NAVN)}" width="437" height="150" loading="lazy">
-      <p>Tømrermester og bygningskonstruktør. Fag-, hoved- og totalentrepriser for private og erhverv i {OMRAADE}.</p>
+      <p>Tømrermester og bygningskonstruktør. Fag- og hovedentrepriser for private og erhverv i {OMRAADE}.</p>
       <p style="margin-top:1rem">{AABNING}<br>{ADR}, {POST} {BY}<br><a href="tel:{TLF_RAW}">Tlf. {TLF}</a><br><a href="mailto:{MAIL}">{MAIL}</a></p>
     </div>
     <div><h3>Ydelser</h3><ul>{ylinks}</ul></div>

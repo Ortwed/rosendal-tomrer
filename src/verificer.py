@@ -87,13 +87,20 @@ for f in sider:
     if "/wp-content" in h: t("hotlink til gammel WordPress")
     for ord_, msg in ([("27010474", "forveksling med S. Rosendal ApS (CVR)"), ("S. Rosendal", "omtale af S. Rosendal ApS"),
                       ("[UDFYLD", "pladsholder paa side"), ("[VERIFIC", "pladsholder paa side"),
-                      ("Frederikssund", "udenfor scope"), ("Jægerspris", "udenfor scope"), ("Skibby", "udenfor scope"), ("Slangerup", "udenfor scope"),
+                      ("Jægerspris", "udenfor scope"), ("Skibby", "udenfor scope"), ("Slangerup", "udenfor scope"),
                       ("38 anmeldelser", "forkert anmeldelsestal"), ("38 verificerede", "forkert anmeldelsestal"), ("39 anmeldelser", "fast anmeldelsestal")]
                      # Hovedstadsomraadet var udenfor scope i auditten, men er med igen (20-10-2026), saa
                      # site og Google-profil siger det samme. Fejl kun hvis OMRAADE ikke laengere naevner det.
                      + ([] if "Hovedstadsområdet" in OMRAADE else [("Hovedstadsområdet", "udenfor scope (audit)")])):
         if ord_ in h: t(f"{msg}: '{ord_}'")
     if "København" in brod: adv.append(f"{f}: nævner København (udenfor aftalt scope)")
+    # Moedet 23-10-2026: ordet hedder hovedentreprise, sommerhus er ingen selvstaendig ydelse, ingen udlejningspriser
+    if re.search(r"totalent[er]+pr", h, re.I): t("'totalentreprise' paa siden (hedder nu hovedentreprise)")
+    if 'href="/sommerhus/"' in h or re.search(r'href="(\.\./)*sommerhus/"', h): t("link til den gamle sommerhus-side")
+    if "6.000" in brod: t("beløbet 6.000 kr. må ikke stå på sitet")
+    if "spjæld" in brod.lower(): t("ordet 'spjæld' må ikke stå på sitet")
+    if re.search(r"ingen ledige|ikke ledige", brod, re.I): t("tekst om at der ikke er ledige stillinger")
+    if sl in ("materieludlejning", "lejebetingelser") and re.search(r"\d[\d.]*\s*(kr\.|%)", brod): t("pris eller procentsats paa udlejningsside")
 
 for tt, fs in titler.items():
     if len(fs) > 1: fejl.append(f"samme title paa flere sider: {tt} ({', '.join(fs)})")
@@ -122,7 +129,7 @@ GAMLE_HTML = ["hovedentreprise", "doere-og-vinduer", "gaardhaver", "materieludle
 for g in GAMLE_HTML:
     if f"{g}.html" not in stubs: fejl.append(f"redirect-stub mangler: {g}.html")
     if f"^{g}\\.html$" not in ht: fejl.append(f".htaccess mangler 301 for {g}.html")
-for g in ["doere-vinduer", "gaardhaver", "udlejning-af-stillads-og-trailer"]:
+for g in ["doere-vinduer", "gaardhaver", "udlejning-af-stillads-og-trailer", "totalentreprise", "sommerhus"]:
     if f"{g}/index.html" not in stubs: fejl.append(f"redirect-stub mangler: {g}/")
     if f"^{g}/?$" not in ht: fejl.append(f".htaccess mangler 301 for /{g}/")
 for st in stubs:

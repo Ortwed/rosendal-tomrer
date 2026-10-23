@@ -3,12 +3,12 @@
 Opdateret 07-10-2026 efter gennemgang af det gamle site (skærmbilleder) og Anmeld Håndværker.
 
 ## Bekræftet via hans eget site eller Anmeld Håndværker
-- Åbningstid mandag-fredag 07.00-17.00
-- Dækker hele Nordsjælland og Hovedstadsområdet
+- Åbningstid mandag-fredag 07.00-16.00 (rettet efter mødet 23-10-2026, var 07.00-17.00)
+- Arbejdsområde fra Hundested til Frederikssund, Stenløse, Farum og Hørsholm (mødet 23-10-2026). Hovedstadsområdet er taget ud af sitet
 - Byggaranti
 - Søger løbende tømrersvende (jobside med formular)
 - Gårdhaver = gårdmiljøer: hegn, skure, pergolaer, cykeloverdækninger, platforme. Private og erhverv
-- 38 anmeldelser, snit 4,9, Elite. 6 ansatte (5/2026). 20 nyeste vises på referencesiden
+- 38 anmeldelser, snit 4,9, Elite. 7 ansatte (mødet 23-10-2026, var 6 i 5/2026). 20 nyeste vises på referencesiden
 - Ekstra ydelser fra Anmeld Håndværker: carporte, garager, udestuer, vinterhaver, trapper, spær, skillevægge, loftsbeklædning, facader, foldedøre, forsatsvinduer, køkkener, garderobeskabe
 
 ## Påstande bekræftet af Sebastian 13-10-2026 (står også på Anmeld Håndværker)
@@ -56,7 +56,7 @@ Bygget ud fra Sebastians Word-dokument "Rosendal Materiel Udlejning" (12 maskine
 - Gælder lejebetingelserne og forsikringsgebyret på 7 % stadig? Den nye PDF er ordret den samme som den gamle
 - Levering: lejebetingelserne siger "kontakt for pris". Er det stadig sådan?
 - Trailer: udlejes den stadig? Den står ikke i Word-dokumentet og er derfor fjernet fra siden
-- Geografi: prompten siger "Vi dækker hele Nordsjælland", men sitet bruger OMRAADE (lige nu med Hovedstadsområdet), så siden følger resten af sitet
+- Geografi: siden følger OMRAADE, som nu er Nordsjælland
 - Illustrationerne er tegninger (src/lav_materiel_svg.py), ikke fotos af Sebastians materiel
 
 ## Anmeld Håndværker-widgets (22-10-2026)
@@ -68,3 +68,28 @@ Bygget ud fra Sebastians Word-dokument "Rosendal Materiel Udlejning" (12 maskine
 - Garanti-logoet må kun bruges som medlem af Dansk Håndværk. Medlemskabet er bekræftet af Sebastian, men dokumentation mangler stadig
 - De korte kundecitater på ydelsessiderne er stadig vores egne
 
+
+## Mødet med Sebastian 23-10-2026
+- Totalentreprise hedder nu hovedentreprise. /totalentreprise/ sender 301 til /hovedentreprise/
+- Sommerhus er ikke længere en selvstændig ydelse. /sommerhus/ sender 301 til /renovering/, og sommerhuse er nævnt på renovering og terrasse
+- Materieludlejning: alle priser, gebyrer og procentsatser er taget af udlejningssiden, lejebetingelserne og schema ("Kontakt os for pris"). Priserne står kun i Sebastians Word-dokument. Lejebetingelserne siger nu "oplyses ved booking" om selvrisiko, forsikringsgebyr, annullering og rengøring. Det er juridisk tekst, så Sebastian skal godkende formuleringen
+- Afventer Sebastians krydstjek med Stark: priser, maskiner og specs. Affugterens rumstørrelse er fjernet ("til mindre lokaler"). Bukkestilladsets stilladsklasse og girafsliberens modelnavn er stadig uafklaret. Ingen billeder eller specs fra Stark, og ingen af Sebastians produktbilleder
+- 7 ansatte: tæller Sebastian med i de 7? Sitet skriver "Vi er 7 ansatte"
+- Uddannet tømrer 2010 og bygningskonstruktør 2018 står som hans personlige uddannelse (Om os, schema, llms.txt). Firmaet er stiftet 2021
+- Hans faglige holdning om træ til terrasser står på Om os og terrasse-siden i hans stemme. Ingen konkrete træarter endnu (kommer som separat content)
+- Dansk Håndværk: "overenskomst for medarbejderne og et garantistempel for kunderne" står på Om os. Beløbet nævnes ikke nogen steder
+- Google-profilen skal sige det samme som sitet: åbningstid 07.00-16.00 og arbejdsområdet (ikke Hovedstadsområdet)
+
+## Projektcase: træterrasse i Hundested (23-10-2026)
+- Siden /projekter/traeterrasse-trykimpraegneret-hundested/ er live på testsiden. Oversigten /projekter/ og menupunktet kommer først ved 3 cases. Indtil da ligger casen som kort på /anmeldelser/ og linkes fra terrasse, Hundested og Områder
+- FAQ "Overholder I tidsplanen?": sætningen "Vi aftaler tidsplanen med dig, før arbejdet går i gang." skal godkendes af Sebastian
+- Linket til anmeldelsen går til Rosendals profil på Anmeld Håndværker, ikke til selve anmeldelsen. Skift til et direkte link, hvis Anmeld Håndværker har et
+- Kunden er ikke nævnt ved navn ("Kunden fra Hundested"), og der er ingen Review-markup
+- Billederne er omdøbt og konverteret fra de tre fotos, Christian sendte. Et fjerde foto (terrassen set langs husets glasdøre) venter på at blive sendt som fil
+
+## Projektcase: jatoba-terrasse i Liseleje (23-10-2026)
+- Bygget og testet, men står som status "pending", indtil de tre fotos er sendt som filer. Så konverteres de til jatoba-terrasse-liseleje-1..3 (720/1440 webp) og og-jatoba-terrasse-liseleje.jpg, og status sættes til "live"
+- Terrasse-siden nævner nu jatoba ved siden af ipé og trykimprægneret træ (kort svar, "Det bygger vi" og "Valg af træ"). Skal godkendes af Sebastian
+- Afventer Sebastian, felterne står klar i skabelonen og vises først, når de er udfyldt: størrelse i m², højde over terræn, tidsforbrug eller måned, leverandør (evt. FSC), trappernes opbygning (antal trin, placering), hans råd om vedligehold og olie, før- og detaljebilleder
+- Fakta om jatoba (art, oprindelse, farve, vægtfylde 900 til 1.000 kg/m³) er fra generelle træreferencer. Ingen Janka-tal
+- Anmeldelsen (1. august 2025) nævner ikke jatoba. Linket går til profilen på Anmeld Håndværker. Bindestregen foran "meget" i citatet er fjernet

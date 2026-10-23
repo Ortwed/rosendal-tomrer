@@ -31,7 +31,7 @@ with sync_playwright() as p:
                 print(f'index @{w}x{h}: CTA bund {bot:.0f}px', 'OK' if bot<=h else 'UNDER FOLDEN')
                 if bot>h: fejl+=1
                 pg.screenshot(path=f'/home/claude/shots/index-{w}.png',full_page=(w==1440 or w==390))
-            if f in('totalentreprise/index.html','kontakt/index.html','anmeldelser/index.html','omrader/index.html') and w in (1440,390):
+            if f in('hovedentreprise/index.html','kontakt/index.html','anmeldelser/index.html','omrader/index.html') and w in (1440,390):
                 pg.evaluate("document.getElementById('ckBanner') && document.getElementById('ckBanner').classList.remove('vis')")
                 pg.screenshot(path=f'/home/claude/shots/{f.split(chr(47))[0]}-{w}.png',full_page=True)
             pg.close()

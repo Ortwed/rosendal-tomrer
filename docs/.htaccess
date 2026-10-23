@@ -5,7 +5,7 @@ ErrorDocument 410 /404.html
 
 RewriteEngine On
 # Gamle .html-adresser og WordPress-adresser til de nye sider (301)
-RewriteRule ^hovedentreprise\.html$ https://rosendal-tomrer.dk/totalentreprise/ [R=301,L]
+RewriteRule ^hovedentreprise\.html$ https://rosendal-tomrer.dk/hovedentreprise/ [R=301,L]
 RewriteRule ^doere-og-vinduer\.html$ https://rosendal-tomrer.dk/vinduer/ [R=301,L]
 RewriteRule ^gaardhaver\.html$ https://rosendal-tomrer.dk/pergola-hegn-og-cykelskur/ [R=301,L]
 RewriteRule ^materieludlejning\.html$ https://rosendal-tomrer.dk/materieludlejning/ [R=301,L]
@@ -21,6 +21,8 @@ RewriteRule ^lejebetingelser\.html$ https://rosendal-tomrer.dk/lejebetingelser/ 
 RewriteRule ^doere-vinduer/?$ https://rosendal-tomrer.dk/vinduer/ [R=301,L]
 RewriteRule ^gaardhaver/?$ https://rosendal-tomrer.dk/pergola-hegn-og-cykelskur/ [R=301,L]
 RewriteRule ^udlejning-af-stillads-og-trailer/?$ https://rosendal-tomrer.dk/materieludlejning/ [R=301,L]
+RewriteRule ^totalentreprise/?$ https://rosendal-tomrer.dk/hovedentreprise/ [R=301,L]
+RewriteRule ^sommerhus/?$ https://rosendal-tomrer.dk/renovering/ [R=301,L]
 
 # WordPress-rester findes ikke laengere (410)
 RewriteRule ^(wp-admin|wp-content|wp-includes|wp-json)(/.*)?$ - [G,L]

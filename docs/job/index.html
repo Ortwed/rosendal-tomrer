@@ -212,6 +212,13 @@ nav a.active::after{content:'';position:absolute;left:0;right:0;bottom:0;height:
 .proj-gallery{columns:3;column-gap:1rem}
 .proj-gallery figure{break-inside:avoid;margin:0 0 1rem}
 .proj-gallery img{width:100%;height:auto;cursor:zoom-in}
+.proj-hoved{margin:0 0 2rem}
+.proj-hoved img{width:100%;height:auto;cursor:zoom-in}
+.proj-hoved figcaption,.proj-gallery figcaption{font-size:.88rem;color:var(--muted);margin-top:.5rem}
+.prose .proj-gallery{columns:2;margin:0 0 1.6rem}
+.proj-citat{background:var(--sand);border-left:4px solid var(--brass);padding:1.4rem 1.6rem;margin:0 0 1rem}
+.proj-citat blockquote{font-family:var(--head);font-stretch:92%;font-size:1.25rem;line-height:1.4;color:var(--navy);margin:0 0 .7rem}
+.proj-citat p{margin:0;font-size:.93rem;color:var(--muted)}
 .lb{position:fixed;inset:0;background:rgba(9,22,36,.95);display:none;align-items:center;justify-content:center;z-index:999;padding:2rem}
 .lb.open{display:flex}
 .lb img{max-width:100%;max-height:86vh}
@@ -411,6 +418,9 @@ nav .dd-menu{display:block;position:absolute;top:100%;left:-1rem;background:#fff
 nav .dd-menu a{padding:.55rem 1.2rem;font-weight:600}
 nav .dd-menu a.active::after{display:none}
 nav .dd-menu a.active,nav .dd-menu a:hover{background:var(--mist)}
+nav .dd-menu .dd-grp a{font-weight:800;color:var(--navy)}
+nav .dd-menu .dd-sub a{padding:.35rem 1.2rem .35rem 2.1rem;font-size:.86rem;font-weight:600;color:var(--muted)}
+nav .dd-menu .dd-sep{margin-top:.4rem;padding:.6rem 1.2rem .3rem;border-top:1px solid var(--line);font-size:.74rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--brass-dk)}
 .nav-cta{margin-left:auto}
 nav .nav-cta a.btn{padding:.55rem 1.1rem;margin:.3rem 0;display:inline-flex;font-size:.9rem;color:#fff}
 nav .nav-cta a.btn:hover{color:#fff}
@@ -439,12 +449,13 @@ nav .nav-cta a.btn:hover{color:#fff}
   .nav-cta{margin:0;padding:.5rem 1.5rem 1rem}
 }
 @media (max-width:600px){.fakta{grid-template-columns:1fr;gap:.1rem}.fakta dd{margin-bottom:.7rem}}
+@media (max-width:600px){.prose .proj-gallery{columns:1}}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Hjem", "item": "https://rosendal-tomrer.dk/"}, {"@type": "ListItem", "position": 2, "name": "Job"}]}</script>
 </head>
 <body>
 <div class="topbar"><div class="topbar-inner">
-  <span>Mandag-fredag 07.00-17.00</span><span class="omr">Vi dækker Nordsjælland og Hovedstadsområdet</span>
+  <span>Mandag-fredag 07.00-16.00</span><span class="omr">Vi dækker Nordsjælland</span>
   <div class="social">
     <a href="https://www.facebook.com/profile.php?id=100068776222589" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.8c0-.9.3-1.5 1.6-1.5h1.7V3.4c-.3 0-1.3-.1-2.5-.1-2.4 0-4.1 1.5-4.1 4.2v2.3H7.5V13h2.7v8z"/></svg></a>
     <a href="https://www.instagram.com/rosendaltomrerentrepriseaps/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7.3A4.7 4.7 0 1 0 16.7 12 4.7 4.7 0 0 0 12 7.3zm0 7.8a3.1 3.1 0 1 1 3.1-3.1 3.1 3.1 0 0 1-3.1 3.1zm6-8a1.1 1.1 0 1 1-1.1-1.1A1.1 1.1 0 0 1 18 7.1zM21.9 8.2a5.5 5.5 0 0 0-1.5-3.9 5.5 5.5 0 0 0-3.9-1.5C15 2.7 9 2.7 7.5 2.8a5.5 5.5 0 0 0-3.9 1.5 5.5 5.5 0 0 0-1.5 3.9C2 9.7 2 14.3 2.1 15.8a5.5 5.5 0 0 0 1.5 3.9 5.5 5.5 0 0 0 3.9 1.5c1.5.1 7.5.1 9 0a5.5 5.5 0 0 0 3.9-1.5 5.5 5.5 0 0 0 1.5-3.9c.1-1.5.1-6.1 0-7.6zm-2 9.2a3.1 3.1 0 0 1-1.8 1.8c-1.2.5-4.1.4-5.4.4s-4.2.1-5.4-.4a3.1 3.1 0 0 1-1.8-1.8c-.5-1.2-.4-4.1-.4-5.4s-.1-4.2.4-5.4a3.1 3.1 0 0 1 1.8-1.8C8.5 4.3 11.4 4.4 12.7 4.4s4.2-.1 5.4.4a3.1 3.1 0 0 1 1.8 1.8c.5 1.2.4 4.1.4 5.4s.1 4.2-.4 5.4z"/></svg></a>
@@ -459,14 +470,14 @@ nav .nav-cta a.btn:hover{color:#fff}
     <button class="menu-toggle" type="button" aria-label="Åbn menu" aria-controls="mainnav" aria-expanded="false"
       onclick="var n=document.getElementById('mainnav');n.classList.toggle('open');this.setAttribute('aria-expanded',n.classList.contains('open'))">☰</button>
   </div>
-  <div class="menubar"><div class="menubar-inner"><nav id="mainnav" aria-label="Hovedmenu"><ul><li class="dd"><details><summary class="dd-sum">Ydelser</summary><ul class="dd-menu"><li><a href="../totalentreprise/">Totalentreprise</a></li><li><a href="../tilbygning/">Tilbygning</a></li><li><a href="../sommerhus/">Sommerhus</a></li><li><a href="../tag/">Tag</a></li><li><a href="../vinduer/">Vinduer</a></li><li><a href="../doere/">Døre</a></li><li><a href="../terrasse/">Terrasse</a></li><li><a href="../renovering/">Renovering</a></li><li><a href="../nybyg/">Nybyg</a></li><li><a href="../pergola-hegn-og-cykelskur/">Pergola, hegn og cykelskur</a></li><li><a href="../materieludlejning/">Materieludlejning</a></li></ul></details></li><li><a href="../omrader/">Områder</a></li><li><a href="../anmeldelser/">Anmeldelser</a></li><li><a href="../om-os/">Om os</a></li><li><a href="../kontakt/">Kontakt</a></li><li class="nav-cta"><a class="btn btn-brass" href="../kontakt/" data-cta="menu">Få et tilbud</a></li></ul></nav></div></div>
+  <div class="menubar"><div class="menubar-inner"><nav id="mainnav" aria-label="Hovedmenu"><ul><li class="dd"><details><summary class="dd-sum">Ydelser</summary><ul class="dd-menu"><li class="dd-grp"><a href="../materieludlejning/">Materieludlejning</a></li><li class="dd-sub"><a href="../materieludlejning/#el">El-værktøj</a></li><li class="dd-sub"><a href="../materieludlejning/#bygning">Bygningsmateriel</a></li><li class="dd-sub"><a href="../materieludlejning/#jord">Jord og anlæg</a></li><li class="dd-sep" aria-hidden="true">Tømrerarbejde</li><li><a href="../hovedentreprise/">Hovedentreprise</a></li><li><a href="../tilbygning/">Tilbygning</a></li><li><a href="../tag/">Tag</a></li><li><a href="../vinduer/">Vinduer</a></li><li><a href="../doere/">Døre</a></li><li><a href="../terrasse/">Terrasse</a></li><li><a href="../renovering/">Renovering</a></li><li><a href="../nybyg/">Nybyg</a></li><li><a href="../pergola-hegn-og-cykelskur/">Pergola, hegn og cykelskur</a></li></ul></details></li><li><a href="../omrader/">Områder</a></li><li><a href="../anmeldelser/">Anmeldelser</a></li><li><a href="../om-os/">Om os</a></li><li><a href="../kontakt/">Kontakt</a></li><li class="nav-cta"><a class="btn btn-brass" href="../kontakt/" data-cta="menu">Få et tilbud</a></li></ul></nav></div></div>
 </header>
 <main>
 
 <section class="page-header"><div class="container">
   <div class="crumb"><a href="../">Hjem</a> › Job</div>
   <h1>Er du vores nye tømrer?</h1>
-  <p>Vi søger løbende tømrersvende til holdet. Også selvom der ikke ligger et opslag ude.</p>
+  <p>Vi søger løbende tømrersvende til holdet, og vi tager altid imod ansøgninger.</p>
 </div></section>
 <section class="sec"><div class="container contact-grid">
   <div class="prose">
@@ -474,6 +485,8 @@ nav .nav-cta a.btn:hover{color:#fff}
     <h2>Hvem er vi?</h2>
     <p>Hos Rosendal Tømrer Entreprise er vi kvalitetsbevidste og stolte af vores faglige kunnen. Vi går på arbejde med glæde, fordi vi laver det vi brænder for, og vi lægger vægt på et kammeratligt og tæt sammenhold.</p>
     <p>Vi laver alle former for tømreropgaver, fordi vi kan lide at to dage ikke er ens: tag, døre og vinduer, terrasser, hegn, skure, gårdmiljøer, nybyg og renovering. Alt udføres ud fra kundens ønsker, så det er vigtigt at du er god til at tale med kunderne fra start til slut.</p>
+    <h2>Send en åben ansøgning</h2>
+    <p>Du behøver ikke vente på et opslag. Send en åben ansøgning via formularen, så tager vi en snak, når det passer.</p>
     <h2>Fortæl os gerne</h2>
     <ul><li>Kort hvem du er</li><li>Din erfaring og tidligere arbejde</li><li>Hvorfor du elsker tømrerfaget</li><li>Hvorfor du er vores nye kollega</li></ul>
     <p>Du kan også bare ringe til Sebastian på <a href="tel:+4550700505">50 70 05 05</a>.</p>
@@ -503,10 +516,10 @@ nav .nav-cta a.btn:hover{color:#fff}
   <div class="f-grid">
     <div>
       <img class="flogo" src="../images/logo-hvid.png" alt="Rosendal Tømrer Entreprise ApS" width="437" height="150" loading="lazy">
-      <p>Tømrermester og bygningskonstruktør. Fag-, hoved- og totalentrepriser for private og erhverv i Nordsjælland og Hovedstadsområdet.</p>
-      <p style="margin-top:1rem">Mandag-fredag 07.00-17.00<br>Engdraget 11, 3390 Hundested<br><a href="tel:+4550700505">Tlf. 50 70 05 05</a><br><a href="mailto:info@rosendal-tomrer.dk">info@rosendal-tomrer.dk</a></p>
+      <p>Tømrermester og bygningskonstruktør. Fag- og hovedentrepriser for private og erhverv i Nordsjælland.</p>
+      <p style="margin-top:1rem">Mandag-fredag 07.00-16.00<br>Engdraget 11, 3390 Hundested<br><a href="tel:+4550700505">Tlf. 50 70 05 05</a><br><a href="mailto:info@rosendal-tomrer.dk">info@rosendal-tomrer.dk</a></p>
     </div>
-    <div><h3>Ydelser</h3><ul><li><a href="../totalentreprise/">Totalentreprise</a></li><li><a href="../tilbygning/">Tilbygning</a></li><li><a href="../sommerhus/">Sommerhus</a></li><li><a href="../tag/">Tag</a></li><li><a href="../vinduer/">Vinduer</a></li><li><a href="../doere/">Døre</a></li><li><a href="../terrasse/">Terrasse</a></li><li><a href="../renovering/">Renovering</a></li><li><a href="../nybyg/">Nybyg</a></li><li><a href="../pergola-hegn-og-cykelskur/">Pergola, hegn og cykelskur</a></li><li><a href="../materieludlejning/">Materieludlejning</a></li></ul></div>
+    <div><h3>Ydelser</h3><ul><li><a href="../hovedentreprise/">Hovedentreprise</a></li><li><a href="../tilbygning/">Tilbygning</a></li><li><a href="../tag/">Tag</a></li><li><a href="../vinduer/">Vinduer</a></li><li><a href="../doere/">Døre</a></li><li><a href="../terrasse/">Terrasse</a></li><li><a href="../renovering/">Renovering</a></li><li><a href="../nybyg/">Nybyg</a></li><li><a href="../pergola-hegn-og-cykelskur/">Pergola, hegn og cykelskur</a></li><li><a href="../materieludlejning/">Materieludlejning</a></li></ul></div>
     <div><h3>Virksomheden</h3><ul>
       <li><a href="../om-os/">Om os</a></li><li><a href="../anmeldelser/">Anmeldelser</a></li>
       <li><a href="../omrader/">Områder</a></li><li><a href="../tomrer-hundested/">Tømrer i Hundested</a></li>
