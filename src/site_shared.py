@@ -470,7 +470,6 @@ nav .dd-menu a.active::after{display:none}
 nav .dd-menu a.active,nav .dd-menu a:hover{background:var(--mist)}
 nav .dd-menu .dd-grp a{font-weight:800;color:var(--navy)}
 nav .dd-menu .dd-sub a{padding:.35rem 1.2rem .35rem 2.1rem;font-size:.86rem;font-weight:600;color:var(--muted)}
-nav .dd-menu .dd-grp2{margin-top:.4rem;padding-top:.4rem;border-top:1px solid var(--line)}
 nav .dd-menu .dd-sep{margin-top:.4rem;padding:.6rem 1.2rem .3rem;border-top:1px solid var(--line);font-size:.74rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--brass-dk)}
 .nav-cta{margin-left:auto}
 nav .nav-cta a.btn{padding:.55rem 1.1rem;margin:.3rem 0;display:inline-flex;font-size:.9rem;color:#fff}
@@ -587,16 +586,20 @@ def nav(active):
     a = lambda sl: ' class="active"' if sl == active else ""
     mat = (f'<li class="dd-grp"><a href="/materieludlejning/"{a("materieludlejning")}>Materieludlejning</a></li>'
            + "".join(f'<li class="dd-sub"><a href="/materieludlejning/#{k}">{e(n)}</a></li>' for k, n in MATERIEL_MENU)
-           + ('<li class="dd-grp dd-grp2"><a href="/projekter/"' + a("projekter") + '>Vores projekter</a></li>'
-              + "".join(f'<li class="dd-sub"><a href="/projekter/{sl}/"{a("projekter/" + sl)}>{e(n)}</a></li>' for sl, n in STATE["projekter"])
-              if STATE["projekter"] else "")
            + '<li class="dd-sep" aria-hidden="true">Tømrerarbejde</li>')
     ydl = mat + "".join(f'<li><a href="{url(sl)}"{a(sl)}>{e(n)}</a></li>' for sl, n in YDELSER if sl != "materieludlejning")
-    yakt = " active" if active in dict(YDELSER) or (active or "").startswith("projekter") else ""
+    yakt = " active" if active in dict(YDELSER) else ""
+    # "Vores projekter" har sin egen dropdown i topmenuen: oversigten foerst, saa en linje pr. case
+    pakt = " active" if (active or "").startswith("projekter") else ""
+    proj = (f'<li class="dd"><details><summary class="dd-sum{pakt}">Vores projekter</summary><ul class="dd-menu">'
+            f'<li class="dd-grp"><a href="/projekter/"{a("projekter")}>Alle projekter</a></li>'
+            + "".join(f'<li><a href="/projekter/{sl}/"{a("projekter/" + sl)}>{e(n)}</a></li>' for sl, n in STATE["projekter"])
+            + "</ul></details></li>") if STATE["projekter"] else ""
     punkter = [("omrader", "Områder")] + [
         ("anmeldelser", "Anmeldelser"), ("om-os", "Om os"), ("kontakt", "Kontakt")]
     li = (f'<li class="dd"><details><summary class="dd-sum{yakt}">Ydelser</summary><ul class="dd-menu">{ydl}</ul></details></li>'
           + "".join(f'<li><a href="{url(k)}"{" class=\"active\"" if k == active or (k == "omrader" and active == "tomrer-hundested") else ""}>{t}</a></li>' for k, t in punkter)
+          + proj
           + '<li class="nav-cta"><a class="btn btn-brass" href="/kontakt/" data-cta="menu">Få et tilbud</a></li>')
     return f"""<div class="topbar"><div class="topbar-inner">
   <span>{AABNING}</span><span class="omr">Vi dækker {OMRAADE}</span>
@@ -679,9 +682,11 @@ document.addEventListener('click',function(ev){var t=ev.target.closest?ev.target
   if(h.indexOf('tel:')===0){gtag('event','kontakt_opkald',{'nummer':h.slice(4)});}
   else if(h.indexOf('mailto:')===0){gtag('event','email_click',{'adresse':h.slice(7)});}
   else if(t.hasAttribute('data-cta')){gtag('event','cta_click',{'placering':t.getAttribute('data-cta')});}},true);
-(function(){var d=document.querySelector('.dd details');if(!d)return;
-  document.addEventListener('click',function(ev){if(!d.contains(ev.target))d.removeAttribute('open');});
-  document.addEventListener('keydown',function(ev){if(ev.key==='Escape')d.removeAttribute('open');});})();
+(function(){var D=[].slice.call(document.querySelectorAll('.dd details'));if(!D.length)return;
+  // Kun én dropdown aaben ad gangen. Klik udenfor eller Escape lukker.
+  D.forEach(function(d){d.addEventListener('toggle',function(){if(d.open)D.forEach(function(x){if(x!==d)x.removeAttribute('open');});});});
+  document.addEventListener('click',function(ev){D.forEach(function(d){if(!d.contains(ev.target))d.removeAttribute('open');});});
+  document.addEventListener('keydown',function(ev){if(ev.key==='Escape')D.forEach(function(d){d.removeAttribute('open');});});})();
 </script>""" % {"c": COOKIE}
 
 import re

@@ -96,5 +96,5 @@ Bygget ud fra Sebastians Word-dokument "Rosendal Materiel Udlejning" (12 maskine
 - Anmeldelsen (1. august 2025) nævner ikke jatoba. Linket går til profilen på Anmeld Håndværker. Bindestregen foran "meget" i citatet er fjernet
 
 ## Vores projekter og anmeldelser (23-10-2026)
-- "Vores projekter" er sit eget afsnit i Ydelser-menuen med oversigten /projekter/ og et underpunkt pr. case. Reglen om at vente til 3 cases er droppet
+- "Vores projekter" har sin egen dropdown i topmenuen efter Kontakt, med "Alle projekter" (/projekter/) og en linje pr. case. Reglen om at vente til 3 cases er droppet
 - /anmeldelser/ viser kun widgetten fra Anmeld Håndværker og linket til profilen. Projektkortene og linket til anmeldelser på Facebook er fjernet derfra
