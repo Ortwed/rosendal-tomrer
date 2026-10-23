@@ -56,7 +56,8 @@ PROJEKTER = [
          fakta=[("Opgave", "Ny træterrasse"), ("Materiale", "Trykimprægneret træ"), ("Sted", "Hundested"), ("År", "2025"),
                 ("Størrelse", None), ("Tidsforbrug", None), ("Den gamle terrasse", None)],   # None = afventer Sebastian
          anmeldt=("4. juli 2025", "Anmeld Håndværker"), udvidet=None,
-         billeder=[  # (fil uden endelse i /images/projekter/, alt, billedtekst eller None). Det foerste er hovedbilledet.
+         billeder=[  # (fil uden endelse i /images/projekter/, alt, billedtekst eller None[, (bredde, hoejde)]).
+                     # Det foerste er hovedbilledet. Maalene skal kun med, naar det store billede ikke er 1440 x 1080.
              ("traeterrasse-trykimpraegneret-hundested-1", "Ny træterrasse i trykimprægneret træ ved et hus med store glaspartier i Hundested.",
               "Ny træterrasse i trykimprægneret træ langs husets glaspartier, Hundested, 2025."),
              ("traeterrasse-trykimpraegneret-hundested-2", "Hele træterrassen i Hundested med brædder lagt i to retninger og en ramme af brædder mellem felterne.", None),
@@ -81,8 +82,7 @@ PROJEKTER = [
              # Sidste saetning skal godkendes af Sebastian (FAKTATJEK.md)
              ("Overholder I tidsplanen?", "Kunden i Hundested skrev i sin anmeldelse, at vi overholdt tidsplanen. Vi aftaler tidsplanen med dig, før arbejdet går i gang."),
          ]),
-    # Afventer billederne som filer. Saet status="live", naar jatoba-terrasse-liseleje-1..3 ligger i docs/images/projekter/.
-    dict(slug="jatoba-terrasse-liseleje", status="pending", ydelse="terrasse", by="Liseleje", aar="2025",
+    dict(slug="jatoba-terrasse-liseleje", status="live", ydelse="terrasse", by="Liseleje", aar="2025",
          titel="Jatoba terrasse med indbyggede trapper i Liseleje",
          kort="Jatoba terrasse med indbyggede trapper",
          link_tekst="jatoba-terrasse i Liseleje",
@@ -97,7 +97,7 @@ PROJEKTER = [
              ("jatoba-terrasse-liseleje-1", "Ny terrasse i jatoba på trækonstruktion med indbyggede trapper ved et sort hus i Liseleje.",
               "Ny jatoba-terrasse med indbyggede trapper, Liseleje, 2025."),
              ("jatoba-terrasse-liseleje-2", "Jatoba-terrassen set på afstand, hele vejen rundt om et sort hus med fyrretræer og en birk i Liseleje.", None),
-             ("jatoba-terrasse-liseleje-3", "Hjørnet af en hævet jatoba-terrasse under husets tagudhæng i Liseleje, med kanten klædt i samme træ.", None),
+             ("jatoba-terrasse-liseleje-3", "Hjørnet af en hævet jatoba-terrasse under husets tagudhæng i Liseleje, med kanten klædt i samme træ.", None, (1125, 1500)),
          ],
          og_img="images/og-jatoba-terrasse-liseleje.jpg",
          sek=[
@@ -579,9 +579,10 @@ def projekt_side(p):
     dl = "".join(f"<dt>{e(k)}</dt><dd>{v if '<a' in v else e(v)}</dd>" for k, v in fakta)
 
     def figur(i, cls=""):
-        fil, alt, tekst = p["billeder"][i]
-        img = (f'<img src="/images/projekter/{fil}.webp" srcset="/images/projekter/{fil}-720.webp 720w, /images/projekter/{fil}.webp 1440w" '
-               f'sizes="{"(max-width:820px) 100vw, 780px" if i == 0 else "(max-width:600px) 100vw, 390px"}" alt="{e(alt)}" width="1440" height="1080"'
+        fil, alt, tekst, *maal = p["billeder"][i]
+        b, h = maal[0] if maal else (1440, 1080)   # stort billede; et billede paa hoejkant faar sine egne maal
+        img = (f'<img src="/images/projekter/{fil}.webp" srcset="/images/projekter/{fil}-720.webp 720w, /images/projekter/{fil}.webp {b}w" '
+               f'sizes="{"(max-width:820px) 100vw, 780px" if i == 0 else "(max-width:600px) 100vw, 390px"}" alt="{e(alt)}" width="{b}" height="{h}"'
                + ('' if i == 0 else ' loading="lazy"') + ' data-lb>')
         return f'<figure{cls}>{img}' + (f"<figcaption>{e(tekst)}</figcaption>" if tekst else "") + "</figure>"
 

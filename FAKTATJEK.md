@@ -88,7 +88,8 @@ Bygget ud fra Sebastians Word-dokument "Rosendal Materiel Udlejning" (12 maskine
 - Billederne er omdøbt og konverteret fra de tre fotos, Christian sendte. Et fjerde foto (terrassen set langs husets glasdøre) venter på at blive sendt som fil
 
 ## Projektcase: jatoba-terrasse i Liseleje (23-10-2026)
-- Bygget og testet, men står som status "pending", indtil de tre fotos er sendt som filer. Så konverteres de til jatoba-terrasse-liseleje-1..3 (720/1440 webp) og og-jatoba-terrasse-liseleje.jpg, og status sættes til "live"
+- Live på testsiden. Billederne er Christians tre fotos (23-10-2026), omdøbt til jatoba-terrasse-liseleje-1..3. Hovedbilledet er terrassen langs glaspartierne med trapperne i kanten. Billede 3 står på højkant
+- Med 2 live cases står de som kort på /anmeldelser/ og linker til hinanden under "Andre projekter". Oversigten /projekter/ og menupunktet kommer ved case nr. 3
 - Terrasse-siden nævner nu jatoba ved siden af ipé og trykimprægneret træ (kort svar, "Det bygger vi" og "Valg af træ"). Skal godkendes af Sebastian
 - Afventer Sebastian, felterne står klar i skabelonen og vises først, når de er udfyldt: størrelse i m², højde over terræn, tidsforbrug eller måned, leverandør (evt. FSC), trappernes opbygning (antal trin, placering), hans råd om vedligehold og olie, før- og detaljebilleder
 - Fakta om jatoba (art, oprindelse, farve, vægtfylde 900 til 1.000 kg/m³) er fra generelle træreferencer. Ingen Janka-tal
