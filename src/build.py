@@ -48,7 +48,8 @@ def side(slug, *a, **k):
 PROJEKTER = [
     dict(slug="traeterrasse-trykimpraegneret-hundested", status="live", ydelse="terrasse", by="Hundested", aar="2025",
          titel="Træterrasse i trykimprægneret træ i Hundested",
-         kort="Træterrasse i trykimprægneret træ",            # kortet paa anmeldelser og projektoversigten
+         kort="Træterrasse i trykimprægneret træ",            # kortet paa projektoversigten
+         tag="Trykimprægneret træ",                            # lille etiket paa kortet (valgfri, ligesom undertekst)
          link_tekst="træterrasse i Hundested",                # "Se et projekt: ..." fra ydelses- og omraadesider
          title="Træterrasse i trykimprægneret træ, Hundested | Rosendal",
          desc="Ny træterrasse i trykimprægneret træ i Hundested, bygget som 1:1-kopi af den gamle. Se projektet og kundens anmeldelse. Rosendal Tømrer.",
@@ -85,7 +86,7 @@ PROJEKTER = [
          ]),
     dict(slug="jatoba-terrasse-liseleje", status="live", ydelse="terrasse", by="Liseleje", aar="2025",
          titel="Jatoba terrasse med indbyggede trapper i Liseleje",
-         kort="Jatoba terrasse med indbyggede trapper",
+         kort="Jatoba terrasse med indbyggede trapper", tag="Jatoba",
          link_tekst="jatoba-terrasse i Liseleje",
          title="Jatoba terrasse med indbyggede trapper, Liseleje | Rosendal",
          desc="Ny terrasse i jatoba 21x145 mm på trækonstruktion med indbyggede trapper i Liseleje. Se projektet, fakta om jatoba og kundens anmeldelse.",
@@ -121,6 +122,44 @@ PROJEKTER = [
              ("Kan I bygge trapper ind i terrassen?", "Ja. I dette projekt i Liseleje er trapperne bygget ind i terrassens kant."),
              ("Bygger I terrasser i Liseleje og omegn?", "Ja, vi bygger terrasser i Liseleje og i hele Nordsjælland."),
              ("Hvad koster en jatoba-terrasse?", "Prisen afhænger af størrelse, træsort, konstruktion og trapper. Efter en besigtigelse får du et skriftligt tilbud."),
+         ]),
+    # Afventer Christian (FAKTATJEK.md, "Melby"): skolens navn, billede 04, omfanget af "legeplads", anmeldelse og billedrettigheder.
+    # Skolens navn staar ikke nogen steder, foer det er godkendt: "en skole i Melby".
+    dict(slug="siddebaenke-termofyr-melby-skole", status="pending", ydelse="pergola-hegn-og-cykelskur", by="Melby", aar="2024",
+         titel="Siddebænke i termofyr og nyt udeområde ved en skole i Melby",
+         kort="Siddebænke i termofyr ved en skole i Melby", undertekst="Nye bænke og udeområde, 2024", tag="Termofyr",
+         link_tekst="siddebænke i termofyr i Melby",
+         title="Siddebænke i termofyr ved skole i Melby | Rosendal",
+         desc="Nye siddebænke i termofyr og nyt udeområde ved en skole i Melby i 2024. Se projektet og fakta om termofyr fra Rosendal Tømrer i Nordsjælland.",
+         svar="Vi har udført nye siddebænke i termofyr og et nyt udeområde ved en skole i Melby i 2024. Bænkene er bygget ind i trædæk omkring skolegårdens store træer. Termofyr er varmebehandlet fyr uden kemikalier, og det er mere formstabilt end ubehandlet fyr.",
+         fakta=[("Projekt", "Nye siddebænke i termofyr og nyt udeområde"), ("Sted", "Melby"), ("År", "2024"),
+                ("Træ", "Termofyr (varmebehandlet fyr)"), ("Omfang", None), ("Størrelse", None)],   # None = afventer Sebastian
+         anmeldt=None, citat=None, udvidet=None,   # ingen anmeldelse fundet endnu
+         billeder=[
+             ("melby-skole-termofyr-traedaek-omkring-trae-01", "Trædæk og siddebænke i termofyr omkring et stort træ i skolegård, Melby",
+              "Trædæk med indbyggede bænke omkring skolegårdens træer"),
+             ("melby-skole-termofyr-siddebaenke-skolegaard-02", "Nye siddebænke i termofyr i en skolegård i Melby", "Siddebænke i termofyr i skolegården"),
+             ("melby-skole-termofyr-traedaek-rosendal-varevogn-03", "Færdigt trædæk med termofyrbænke og Rosendal Tømrers varevogn i baggrunden, Melby",
+              "Færdigt udeområde, Melby 2024"),
+             ("melby-skole-termofyr-siddebaenke-traedaek-05", "Nyolieret termofyr på siddebænke og trædæk, orangebrun farve, skolegård i Melby", "Termofyr efter oliering"),
+             ("melby-skole-termofyr-traedaek-og-siddebaenke-06", "Trædæk i flere niveauer med siddebænke i termofyr ved en skole i Melby", "Udeområdet set fra siden"),
+         ],
+         og_img="images/og-siddebaenke-termofyr-melby-skole.jpg",
+         sek=[
+             ("Om projektet", ["Vi har udført nye siddebænke i termofyr og et nyt udeområde ved en skole i Melby i 2024. Udeområdet er bygget som trædæk i flere niveauer, og siddebænkene er bygget ind i dækket omkring de store træer i skolegården. Både dæk og bænke er udført i termofyr."]),
+             ("Hvad er termofyr?", ["Termofyr er fyrretræ, der er varmebehandlet uden kemikalier. Varmebehandlingen gør træet mere dimensionsstabilt end almindeligt trykimprægneret træ, så det arbejder mindre, og den giver træet en mørk, brun farve. Producenter anbefaler UV-olie for at bevare farven udendørs. Uolieret går træet med tiden i en sølvgrå patina."]),
+             ("Hvorfor termofyr til siddebænke?", ["Termofyr er ikke kemisk imprægneret, fordi træet alene er varmebehandlet. Samtidig giver varmebehandlingen træet en varm brun farve."]),
+             ("Sebastians erfaring med termofyr", None),   # afventer Sebastian, kun med hans accept
+         ],
+         sek_efter=[
+             ("Skal I have siddebænke eller trædæk?", ('html', f'<p>Vi bygger siddebænke, trædæk og terrasser i hele <a href="/omrader/">Nordsjælland</a>. Ring på <a href="tel:{TLF_RAW}">{TLF}</a> eller <a href="/kontakt/" data-cta="projekt-tekst">skriv til os</a>, så aftaler vi en besigtigelse og giver jer et skriftligt tilbud.</p>')),
+         ],
+         faq=[
+             ("Hvad er termofyr?", "Termofyr er varmebehandlet fyr uden kemikalier. Det er mere formstabilt og brunt i farven."),
+             ("Skal termofyr vedligeholdes?", "Producenter anbefaler UV-olie for at bevare den brune farve. Uolieret bliver træet med tiden sølvgråt."),
+             ("Hvor har I udført projektet?", "Ved en skole i Melby i 2024."),
+             ("Udfører I også terrasser og udeområder til private?", ('html', 'Ja, se vores terrasseprojekter i <a href="/projekter/traeterrasse-trykimpraegneret-hundested/">Hundested</a> og <a href="/projekter/jatoba-terrasse-liseleje/">Liseleje</a>, eller læs mere om <a href="/terrasse/">terrasser</a>.')),
+             ("Kan I lave siddebænke og trædæk til offentlige institutioner?", "Ja, projektet ved en skole i Melby er et eksempel."),
          ]),
     dict(slug="sommerhus-nyt-tag", titel="Sommerhusrenovering med nyt tag", by="Hundested", maaned="februar 2026", ydelse="renovering", anm="brian", status="pending", billeder=[]),
     dict(slug="tilbygning-gaestehus", titel="Tilbygning og gæstehus", by="Hundested", maaned="november 2025", ydelse="tilbygning", anm="rita", status="pending", billeder=[]),
@@ -545,7 +584,8 @@ def case(key):
 
 def proj_kort():
     return "".join(f'<a class="ref-card" href="/projekter/{p["slug"]}/"><div class="ref-card-media"><img src="{proj_billede(p)}" alt="{e(p["billeder"][0][1])}" width="720" height="540" loading="lazy"></div>'
-                   f'<div class="ref-card-body"><h3>{e(p["kort"])}</h3><p>{e(p["by"])} · {e(p["aar"])}</p></div></a>' for p in LIVE)
+                   f'<div class="ref-card-body">{f"""<span class="ref-tag">{e(p["tag"])}</span>""" if p.get("tag") else ""}<h3>{e(p["kort"])}</h3>'
+                   f'<p>{e(p.get("undertekst") or p["by"] + " · " + p["aar"])}</p></div></a>' for p in LIVE)
 
 ref_body = f"""
 <section class="page-header"><div class="container">
@@ -566,11 +606,19 @@ side("anmeldelser", "Anmeldelser fra kunder | Rosendal Tømrer",
 
 # ---------------- PROJEKTSIDER (kun naar status = live) ----------------
 # Ingen Review- eller aggregateRating-markup: citatet er fra Anmeld Haandvaerker og vises kun som tekst.
+def schema_webside(p):
+    return {"@context": "https://schema.org", "@type": "WebPage", "name": p["titel"], "description": p["desc"],
+            "url": f'{DOMAIN}/projekter/{p["slug"]}/', "inLanguage": "da-DK",
+            "primaryImageOfPage": f'{DOMAIN}/images/projekter/{p["billeder"][0][0]}.webp',
+            "isPartOf": {"@type": "WebSite", "url": DOMAIN + "/", "name": NAVN},
+            "about": {"@id": DOMAIN + "/#virksomhed"}}
+
 def projekt_side(p):
     krummer = [("Vores projekter", PROJ_KRUMME), (p["titel"], None)]
     fakta = [(k, v) for k, v in p["fakta"] if v]
-    fakta += [("Anmeldt", f'{p["anmeldt"][0]} på <a href="{ANM_URL}" target="_blank" rel="noopener">{p["anmeldt"][1]}</a>'),
-              ("Udført af", NAVN)]
+    if p.get("anmeldt"):   # cases uden anmeldelse udelader baade faktalinjen og afsnittet "Det siger kunden"
+        fakta.append(("Anmeldt", f'{p["anmeldt"][0]} på <a href="{ANM_URL}" target="_blank" rel="noopener">{p["anmeldt"][1]}</a>'))
+    fakta.append(("Udført af", NAVN))
     dl = "".join(f"<dt>{e(k)}</dt><dd>{v if '<a' in v else e(v)}</dd>" for k, v in fakta)
 
     def figur(i, cls=""):
@@ -578,7 +626,7 @@ def projekt_side(p):
         b, h = maal[0] if maal else (1440, 1080)   # stort billede; et billede paa hoejkant faar sine egne maal
         img = (f'<img src="/images/projekter/{fil}.webp" srcset="/images/projekter/{fil}-720.webp 720w, /images/projekter/{fil}.webp {b}w" '
                f'sizes="{"(max-width:820px) 100vw, 780px" if i == 0 else "(max-width:600px) 100vw, 390px"}" alt="{e(alt)}" width="{b}" height="{h}"'
-               + ('' if i == 0 else ' loading="lazy"') + ' data-lb>')
+               + (' fetchpriority="high"' if i == 0 else ' loading="lazy"') + ' data-lb>')
         return f'<figure{cls}>{img}' + (f"<figcaption>{e(tekst)}</figcaption>" if tekst else "") + "</figure>"
 
     def sektioner(liste):
@@ -592,7 +640,12 @@ def projekt_side(p):
     andre = "".join(f'<li><a href="/projekter/{q["slug"]}/">{e(q["kort"])}, {e(q["by"])}</a></li>' for q in LIVE if q is not p)
     andre = f"<h2>Andre projekter</h2><ul>{andre}</ul>" if andre else ""
     udvidet = f'<p>{e(p["udvidet"])}</p>' if p.get("udvidet") else ""
-    faq = "".join(f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in p["faq"])
+    faq = "".join(f"<details><summary>{e(q)}</summary><p>{faq_html(a)}</p></details>" for q, a in p["faq"])
+    kunde = ""
+    if p.get("citat"):
+        kunde = (f'<h2>Det siger kunden</h2><div class="proj-citat"><blockquote>{e(p["citat"])}</blockquote>'
+                 f'<p>Kunden fra {e(p["by"])}, anmeldt {e(p["anmeldt"][0])} på <a href="{ANM_URL}" target="_blank" rel="noopener">{e(p["anmeldt"][1])}</a></p></div>'
+                 f'{udvidet}<p>{e(p["karakterer"])}</p>')
     body = f"""
 <section class="page-header"><div class="container">
   {crumb_html(krummer)}
@@ -605,24 +658,21 @@ def projekt_side(p):
   <dl class="fakta">{dl}</dl>
   {sektioner(p['sek'])}
   {f'<div class="proj-gallery">{galleri}</div>' if galleri else ''}
-  <h2>Det siger kunden</h2>
-  <div class="proj-citat"><blockquote>{e(p['citat'])}</blockquote>
-    <p>Kunden fra {e(p['by'])}, anmeldt {e(p['anmeldt'][0])} på <a href="{ANM_URL}" target="_blank" rel="noopener">{e(p['anmeldt'][1])}</a></p></div>
-  {udvidet}<p>{e(p['karakterer'])}</p>
+  {kunde}
   {sektioner(p['sek_efter'])}
   {andre}
   <h2>Ofte stillede spørgsmål</h2><div class="faq">{faq}</div>
 </div></section>
 {cta()}"""
     side(f"projekter/{p['slug']}", p["title"], p["desc"], body, active=f"projekter/{p['slug']}", og_img=p["og_img"],
-         schemas=[faq_schema(p["faq"])], extra_js=LB_JS, krummer=krummer)
+         schemas=[schema_webside(p), faq_schema(p["faq"])], extra_js=LB_JS, krummer=krummer)
 
 for p in LIVE:
     projekt_side(p)
 if HUB:
-    side("projekter", "Vores projekter | Rosendal Tømrer", "Se udvalgte projekter fra Rosendal Tømrer i Hundested og Nordsjælland med billeder, fakta og kundens egen anmeldelse.",
+    side("projekter", "Vores projekter | Rosendal Tømrer", "Se udvalgte projekter fra Rosendal Tømrer i Hundested og Nordsjælland med billeder af det færdige resultat og fakta om opgaven.",
          f'<section class="page-header"><div class="container">{crumb_html([("Vores projekter", None)])}<h1>Vores projekter</h1>'
-         f'<p>Udvalgte opgaver med billeder af det færdige resultat, fakta om opgaven og kundens egen anmeldelse.</p>{hero_knapper("projekter")}</div></section>'
+         f'<p>Udvalgte opgaver med billeder af det færdige resultat og fakta om opgaven.</p>{hero_knapper("projekter")}</div></section>'
          f'<section class="sec"><div class="container"><div class="refs-grid">{proj_kort()}</div></div></section>{cta()}',
          active="projekter", krummer=[("Vores projekter", None)])
 

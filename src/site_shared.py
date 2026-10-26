@@ -257,6 +257,7 @@ nav a.active::after{content:'';position:absolute;left:0;right:0;bottom:0;height:
 .ref-card-body{padding:1.3rem 1.4rem 1.5rem}
 .ref-card-body h3{font-size:1.15rem;margin-bottom:.4rem}
 .ref-card-body p{font-size:.93rem;color:var(--muted)}
+.ref-tag{display:inline-block;font-size:.74rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--brass-dk);margin-bottom:.45rem}
 
 /* PROJEKTSIDE */
 .proj-gallery{columns:3;column-gap:1rem}
@@ -557,9 +558,16 @@ def crumb_html(krummer):
         dele.append(f'<a href="{url(sl)}">{e(n)}</a>' if sl else e(n))
     return '<div class="crumb">' + " › ".join(dele) + "</div>"
 
+def faq_tekst(a):
+    """Et svar kan vaere ren tekst eller ('html', '...') med links. Schemaet faar samme tekst uden tags."""
+    return re.sub(r"<[^>]+>", "", a[1]) if isinstance(a, tuple) else a
+
+def faq_html(a):
+    return a[1] if isinstance(a, tuple) else e(a)
+
 def faq_schema(faqs):
     return {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
-        {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faqs]}
+        {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": faq_tekst(a)}} for q, a in faqs]}
 
 def analytics_head():
     # Testsiden paa github.io maa ikke sende data til GA4, ellers blandes vores egne
@@ -639,7 +647,7 @@ def footer():
     return f"""<footer><div class="container">
   <div class="f-grid">
     <div>
-      <img class="flogo" src="/images/logo-hvid.png" alt="{e(NAVN)}" width="437" height="150" loading="lazy">
+      <img class="flogo" src="/images/logo-hvid.png" alt="{e(NAVN)}, hvidt logo" width="437" height="150" loading="lazy">
       <p>Tømrermester og bygningskonstruktør. Fag- og hovedentrepriser for private og erhverv i {OMRAADE}.</p>
       <p style="margin-top:1rem">{AABNING}<br>{ADR}, {POST} {BY}<br><a href="tel:{TLF_RAW}">Tlf. {TLF}</a><br><a href="mailto:{MAIL}">{MAIL}</a></p>
     </div>

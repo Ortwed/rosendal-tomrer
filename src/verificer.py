@@ -59,6 +59,8 @@ for f in sider:
         for ss in re.findall(r'srcset="([^"]+)"', img):
             for s in [x.strip().split(" ")[0] for x in ss.split(",")]:
                 if not os.path.exists(os.path.normpath(os.path.join(R, os.path.dirname(f), s))): t(f"srcset findes ikke: {s}")
+    alts = [a for a in re.findall(r'<img[^>]*\salt="([^"]+)"', h)]
+    for a in {a for a in alts if alts.count(a) > 1}: t(f"samme alt-tekst flere gange: {a[:50]}")
     typer = []
     for ld in re.findall(r'<script type="application/ld\+json">(.*?)</script>', h, re.S):
         try:

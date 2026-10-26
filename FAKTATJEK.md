@@ -99,3 +99,15 @@ Bygget ud fra Sebastians Word-dokument "Rosendal Materiel Udlejning" (12 maskine
 - Materieludlejning har sin egen dropdown i topmenuen efter "Vores projekter": Alt materiel, El-værktøj, Bygningsmateriel, Jord og anlæg og Lejebetingelser. Den står ikke længere under Ydelser
 - "Vores projekter" har sin egen dropdown i topmenuen efter Kontakt, med "Alle projekter" (/projekter/) og en linje pr. case. Reglen om at vente til 3 cases er droppet
 - /anmeldelser/ viser kun widgetten fra Anmeld Håndværker og linket til profilen. Projektkortene og linket til anmeldelser på Facebook er fjernet derfra
+
+## Melby (projektcase: siddebænke i termofyr, 26-10-2026)
+Bygget og testet, men står som status "pending". Christian skal afklare, før casen sættes live:
+1. Må skolens navn (Melby Skole) bruges? Indtil da står der "en skole i Melby" i title, H1, tekster, alt-tekster og schema
+2. Hører billede 04 (rund bænk i rødbrunt hårdttræ på stålstel, brosten, med en person) til projektet? Det er ikke med
+3. Hvad omfattede "ny legeplads"? Ordet "legeplads" er ikke brugt på siden. Billede 03 viser en gynge i baggrunden, som vi ikke omtaler
+4. Findes der en anmeldelse på Anmeld Håndværker? Indtil da er der intet afsnit om kundens anmeldelse
+5. Billederne: på billede 02 er to personer i baggrunden og nummerpladen på varevognen sløret. På billede 03 er nummerpladen sløret. Christian bekræfter, at billederne må bruges
+- Afventer Sebastian: omfang, mål, hvorfor termofyr blev valgt og hans erfaring med termofyr i skolemiljø (felterne står klar og vises først, når de er udfyldt)
+- Fakta om termofyr er kun de kildebelagte: varmebehandlet uden kemikalier, mere dimensionsstabil end trykimprægneret, brun farve, UV-olie anbefales af producenter, ellers sølvgrå patina. Intet om holdbarhed i år, holdbarhedsklasse eller jordkontakt
+- Casen er knyttet til ydelsen "Pergola, hegn og cykelskur" (bænke og gårdmiljøer) og linker til /terrasse/, de to andre cases og /omrader/
+- Billederne er 720 og 1440 px webp som de andre cases, ikke 480/800/1200/1600 som i prompten
