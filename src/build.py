@@ -125,9 +125,9 @@ PROJEKTER = [
              ("Bygger I terrasser i Liseleje og omegn?", "Ja, vi bygger terrasser i Liseleje og i hele Nordsjælland."),
              ("Hvad koster en jatoba-terrasse?", "Prisen afhænger af størrelse, træsort, konstruktion og trapper. Efter en besigtigelse får du et skriftligt tilbud."),
          ]),
-    # Case 3. Afklaret af Christian: skolens navn maa bruges, billede 02 og 03 er godkendt, billede 04 hoerer til, ingen anmeldelse.
-    # Afventer stadig (FAKTATJEK.md, "Melby"): hvad "ny legeplads" omfattede, traesorten i den runde baenk, og om personen paa 04 er godkendt.
-    dict(slug="siddebaenke-termofyr-melby-skole", status="pending", ydelse="pergola-hegn-og-cykelskur", by="Melby", aar="2024",
+    # Case 3. Afklaret af Christian: skolens navn maa bruges, billederne er godkendt (personen paa 04 forbliver sloeret),
+    # "legeplads" er traedaekkene rundt om traeerne, og den runde baenk er i termotrae. Ingen anmeldelse.
+    dict(slug="siddebaenke-termofyr-melby-skole", status="live", ydelse="pergola-hegn-og-cykelskur", by="Melby", aar="2024",
          titel="Siddebænke i termofyr og nyt udeområde, Melby Skole",
          krumme="Siddebænke i termofyr, Melby Skole",
          kort="Siddebænke i termofyr, Melby Skole", undertekst="Nye bænke og udeområde, 2024", tag="Termofyr",
@@ -136,7 +136,8 @@ PROJEKTER = [
          desc="Nye siddebænke i termofyr og nyt udeområde på Melby Skole i 2024. Se projektet og fakta om termofyr fra Rosendal Tømrer i Nordsjælland.",
          svar="Vi har udført nye siddebænke i termofyr og et nyt udeområde ved Melby Skole i 2024. Bænkene er bygget ind i trædæk omkring skolegårdens store træer. Termofyr er varmebehandlet fyr uden kemikalier, og det er mere formstabilt end ubehandlet fyr.",
          fakta=[("Projekt", "Nye siddebænke i termofyr og nyt udeområde"), ("Sted", "Melby"), ("År", "2024"),
-                ("Træ", "Termofyr (varmebehandlet fyr)"), ("Omfang", None), ("Størrelse", None)],   # None = afventer Sebastian
+                ("Træ", "Termofyr (varmebehandlet fyr)"),
+                ("Omfang", "Trædæk med siddebænke rundt om træerne og en rund bænk i termotræ på stålstel"), ("Størrelse", None)],   # None = afventer Sebastian
          anmeldt=None, citat=None, udvidet=None,   # der findes ingen anmeldelse til casen
          billeder=[
              ("melby-skole-termofyr-traedaek-omkring-trae-01", "Trædæk og siddebænke i termofyr omkring et stort træ i skolegård, Melby",
@@ -144,14 +145,14 @@ PROJEKTER = [
              ("melby-skole-termofyr-siddebaenke-skolegaard-02", "Nye siddebænke i termofyr i skolegård ved Melby Skole", "Siddebænke i termofyr i skolegården"),
              ("melby-skole-termofyr-traedaek-rosendal-varevogn-03", "Færdigt trædæk med termofyrbænke og Rosendal Tømrers varevogn i baggrunden, Melby",
               "Færdigt udeområde, Melby 2024"),
-             # Traesorten er ikke bekraeftet: kun "rund baenk paa staalstel", aldrig termofyr
-             ("melby-skole-rund-baenk-staalstel-04", "Rund bænk på stålstel på belægning ved Melby Skole", "Rund bænk i udeområdet", (1440, 1632)),
+             # Christian: termotrae. Ikke "termofyr", da traesorten bag varmebehandlingen ikke er bekraeftet
+             ("melby-skole-rund-baenk-staalstel-04", "Rund bænk i termotræ på stålstel på belægning ved Melby Skole", "Rund bænk i udeområdet", (1440, 1632)),
              ("melby-skole-termofyr-siddebaenke-traedaek-05", "Nyolieret termofyr på siddebænke og trædæk, orangebrun farve, skolegård i Melby", "Termofyr efter oliering"),
              ("melby-skole-termofyr-traedaek-og-siddebaenke-06", "Trædæk i flere niveauer med siddebænke i termofyr, Melby Skole", "Udeområdet set fra siden"),
          ],
          og_img="images/og-siddebaenke-termofyr-melby-skole.jpg",
          sek=[
-             ("Om projektet", ["Vi har udført nye siddebænke i termofyr og et nyt udeområde ved Melby Skole i Melby i 2024. Udeområdet er bygget som trædæk i flere niveauer, og siddebænkene er bygget ind i dækket omkring de store træer i skolegården. Trædækket og de indbyggede bænke er udført i termofyr. Projektet omfatter også en rund bænk på stålstel."]),
+             ("Om projektet", ["Vi har udført nye siddebænke i termofyr og et nyt udeområde ved Melby Skole i Melby i 2024. Den nye legeplads er bygget som trædæk i flere niveauer, og siddebænkene er bygget ind i dækket omkring de store træer i skolegården. Trædækket og de indbyggede bænke er udført i termofyr. Projektet omfatter også en rund bænk i termotræ, også kaldet thermotræ, på stålstel."]),
              ("Hvad er termofyr?", ["Termofyr, som også skrives thermofyr, er fyrretræ, der er varmebehandlet uden kemikalier. Varmebehandlingen gør træet mere dimensionsstabilt end almindeligt trykimprægneret træ, så det arbejder mindre, og den giver træet en mørk, brun farve. Producenter anbefaler UV-olie for at bevare farven udendørs. Uolieret går træet med tiden i en sølvgrå patina."]),
              ("Hvorfor termofyr til siddebænke?", ["Termofyr er ikke kemisk imprægneret, fordi træet alene er varmebehandlet. Samtidig giver varmebehandlingen træet en varm brun farve."]),
              ("Sebastians erfaring med termofyr", None),   # afventer Sebastian, kun med hans accept
@@ -166,9 +167,9 @@ PROJEKTER = [
              ("Udfører I også terrasser og udeområder til private?", ('html', 'Ja, se vores terrasseprojekter i <a href="/projekter/traeterrasse-trykimpraegneret-hundested/">Hundested</a> og <a href="/projekter/jatoba-terrasse-liseleje/">Liseleje</a>, eller læs mere om <a href="/terrasse/">terrasser</a>.')),
              ("Kan I lave siddebænke og trædæk til offentlige institutioner?", "Ja, projektet ved Melby Skole er et eksempel."),
          ]),
-    # Case 4. Afklaret af Christian: foer- og efterbillederne er samme hus. Ingen anmeldelse (2023 er foer Anmeld Haandvaerker-profilen).
-    # Afventer (FAKTATJEK.md, "Renovering Melby"): facadens materiale, om vinduer/doere/indfatninger/tag var med, kundens accept af billederne.
-    dict(slug="efterisolering-facadebeklaedning-sommerhus-melby", status="pending", ydelse="renovering", by="Melby", aar="2023",
+    # Case 4. Afklaret af Christian: samme hus foer og efter, kunden er indforstaaet med billederne, og vinduer, doere,
+    # indfatninger og tag blev ikke skiftet. Beklaedningens traesort kendes ikke: kun "traebeklaedning". Ingen anmeldelse.
+    dict(slug="efterisolering-facadebeklaedning-sommerhus-melby", status="live", ydelse="renovering", by="Melby", aar="2023",
          titel="Efterisolering og ny facadebeklædning af sommerhus, Melby",
          krumme="Efterisolering og ny facade, Melby",
          kort="Efterisolering og ny facade, Melby", undertekst="Sommerhus, 2023", tag="Renovering",
@@ -183,11 +184,11 @@ PROJEKTER = [
              ("sommerhus-efterisoleret-ny-facadebeklaedning-melby-03", "Efterisoleret sommerhus med ny lys facadebeklædning i træ, Melby", "Efter: ny facade, Melby 2023"),
              ("sommerhus-facade-foer-renovering-melby-01", "Rødmalet sommerhus med bræddeklædning før efterisolering og ny facade, Melby", "Før: den oprindelige facade"),
              ("sommerhus-gavl-foer-renovering-melby-02", "Gavl på rødmalet sommerhus før renovering af facaden, Melby", "Før: gavlen"),
-             ("sommerhus-ny-facadebeklaedning-gavl-melby-04", "Gavl og langside på sommerhus med ny træbeklædning og nye indfatninger, Melby", "Efter: gavl og langside"),
+             ("sommerhus-ny-facadebeklaedning-gavl-melby-04", "Gavl og langside på sommerhus med ny træbeklædning, Melby", "Efter: gavl og langside"),
              ("sommerhus-ny-facadebeklaedning-indgang-melby-05", "Indgangsside på sommerhus med ny facadebeklædning og hvid dør, Melby", "Efter: indgangssiden"),
          ],
          foer_efter=dict(kolonner=[("Før", [1, 2]), ("Efter", [3, 4])],
-                         tekst="Før havde sommerhuset en rødmalet bræddeklædning. Efter har det fået ny, lys træbeklædning, nye indfatninger omkring vinduerne og ny facade hele vejen rundt."),
+                         tekst="Før havde sommerhuset en rødmalet bræddeklædning. Efter har det fået ny, lys træbeklædning og ny facade hele vejen rundt."),
          og_img="images/og-efterisolering-facadebeklaedning-sommerhus-melby.jpg",
          sek=[
              ("Opgaven", ["I 2023 efterisolerede vi et sommerhus i Melby og satte ny facadebeklædning op. Før renoveringen havde huset en rødmalet bræddeklædning. Vi byggede en ny trækonstruktion uden på den eksisterende væg, efterisolerede i den nye konstruktion og afsluttede med ny træbeklædning."]),
@@ -203,10 +204,11 @@ PROJEKTER = [
              ("Udfører I efterisolering og facadebeklædning af sommerhuse?", ('html', 'Ja, projektet i Melby i 2023 er et eksempel. <a href="/kontakt/" data-cta="projekt-faq">Kontakt os</a>, hvis du vil høre, hvad vi kan gøre ved dit hus.')),
              ("Hvor udfører I renoveringsopgaver?", ('html', f'Vores arbejdsområde går {ARBEJDSOMRAADE}. Se mere på siden om <a href="/omrader/">områder</a>.')),
          ]),
-    # Case 5. Afventer (FAKTATJEK.md, "Tegltag Hundested"): producentens beskrivelse af Hardie Plank, tagsten og antal
-    # velux-vinduer, kundens accept af billederne, og om anmeldelseslinket aabner den rigtige anmeldelse.
+    # Case 5. Afklaret af Christian: kunden er indforstaaet med billederne, og anmeldelseslinket aabner den rigtige anmeldelse.
+    # Tagsten og antal velux-vinduer kendes ikke. Producentens egen beskrivelse af Hardie Plank er ikke tjekket, saa der
+    # staar kun "fibercement" og "begraense vedligeholdelsen", aldrig "vedligeholdelsesfri".
     # Adressen er kendt internt, men maa ikke staa nogen steder: hverken i tekst, filnavne, alt-tekster eller her.
-    dict(slug="nyt-tegltag-hundested", status="pending", ydelse="tag", by="Hundested", aar="2026",
+    dict(slug="nyt-tegltag-hundested", status="live", ydelse="tag", by="Hundested", aar="2026",
          titel="Nyt tegltag med velux-vinduer og nye vindskeder, Hundested",
          krumme="Nyt tegltag, Hundested",
          kort="Nyt tegltag, Hundested", undertekst="Tag, velux og vindskeder, 2026", tag="Tag",
@@ -220,7 +222,7 @@ PROJEKTER = [
          # Kundens tekst med tastefejlen "Rigtige" rettet til "Rigtig" (som i ANMELDELSER["kenneth"])
          citat="Vi har fået lagt et nyt tegltag. Alt er forløbet som vi havde håbet og forventet. Rigtig flinke og flittige håndværkere.",
          anmeldt=("oktober 2026", "Anmeld Håndværker"), anm_opgave="Udvendigt", udvidet=None,
-         anm_url=ANM_RID_URL.format(rid=2145085),   # dekodet fra Facebooks delingslink. Test om det aabner den rigtige anmeldelse
+         anm_url=ANM_RID_URL.format(rid=2145085),   # dekodet fra Facebooks delingslink, testet af Christian 26-10-2026
          karakterer="5,0 på Anmeld Håndværker.",
          billeder=[
              ("nyt-tegltag-med-velux-vinduer-hundested-01", "Nyt mørkt tegltag med nye velux-vinduer og nye vindskeder på hus i Hundested", "Efter: nyt tag, Hundested 2026"),

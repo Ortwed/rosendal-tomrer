@@ -100,36 +100,32 @@ Bygget ud fra Sebastians Word-dokument "Rosendal Materiel Udlejning" (12 maskine
 - "Vores projekter" har sin egen dropdown i topmenuen efter Kontakt, med "Alle projekter" (/projekter/) og en linje pr. case. Reglen om at vente til 3 cases er droppet
 - /anmeldelser/ viser kun widgetten fra Anmeld Håndværker og linket til profilen. Projektkortene og linket til anmeldelser på Facebook er fjernet derfra
 
-## Melby (projektcase: siddebænke i termofyr, 26-10-2026)
-Status "pending". Afklaret af Christian: skolens navn må bruges, billede 02 og 03 er godkendt, billede 04 hører til projektet, og der er ingen anmeldelse.
-Mangler stadig:
-1. Hvad omfattede "ny legeplads" præcist? Ordet bruges ikke på siden. Billede 03 viser en gynge i baggrunden, som vi ikke omtaler
-2. Hvilket træ er den runde bænk lavet af? Den kaldes kun "rund bænk på stålstel"
-3. Er personen på billede 04 godkendt? Indtil da er personen sløret, og fotografens fod er skåret væk nederst
-- På billede 02 er to personer i baggrunden og nummerpladen sløret, på 03 nummerpladen. Christian har godkendt billederne, så sløringen kan fjernes, hvis han ønsker det
-- Afventer Sebastian: omfang, mål, hvorfor termofyr blev valgt og hans erfaring med termofyr i skolemiljø (felterne står klar og vises først, når de er udfyldt)
-- Fakta om termofyr er kun de kildebelagte. "Thermofyr" nævnes én gang som søgevariant og i FAQ-spørgsmål 1
-- Casen er knyttet til ydelsen "Pergola, hegn og cykelskur" (bænke og gårdmiljøer)
+## Melby (projektcase: siddebænke i termofyr, live på testsiden 26-10-2026)
+Afklaret af Christian: skolens navn må bruges, billederne er godkendt, "legeplads" er trædækkene med bænke rundt om træerne, og der er ingen anmeldelse.
+Til Sebastian:
+1. Er den runde bænk på billede 04 i termotræ? Christian siger ja, men den ser rødbrun ud. Er det termofyr eller en anden varmebehandlet træsort?
+2. Omfang, mål, hvorfor termofyr blev valgt og hans erfaring med termofyr i skolemiljø (felterne står klar og vises først, når de er udfyldt)
+- Personen på billede 04 er sløret, og fotografens fod er skåret væk. På billede 02 er to personer og en nummerplade sløret, på 03 en nummerplade
+- "Thermofyr" og "thermotræ" nævnes én gang hver som søgevariant
+- Casen hører under ydelsen "Pergola, hegn og cykelskur" (bænke og gårdmiljøer)
 - Billederne er 720 og 1440 px webp som de andre cases, ikke 480/800/1200/1600 som i prompterne
 
-## Renovering Melby (projektcase: efterisolering og ny facade, 26-10-2026)
-Status "pending". Afklaret af Christian: før- og efterbillederne er samme hus. Ingen anmeldelse, og der vises ingen fra andre projekter.
-Mangler stadig:
-1. Hvilket materiale er den nye facade i? Siden siger kun "træbeklædning"
-2. Omfattede opgaven også vinduer, døre, indfatninger eller tag? Siden nævner kun de nye indfatninger, fordi de ses på billederne. Varmepumpe, solfanger og vinduer nævnes ikke
-3. Er kunden indforstået med billederne af huset?
-- Afventer Sebastian: materiale og profil, isolering, vindspærre og ventilation, hvorfor udvendigt, areal og tid (felterne står klar)
-- FAQ 5 om vinduer og dørpartier er udeladt, indtil Sebastian bekræfter det
+## Renovering Melby (projektcase: efterisolering og ny facade, live på testsiden 26-10-2026)
+Afklaret af Christian: samme hus før og efter, kunden er indforstået med billederne, og vinduer, døre, indfatninger og tag blev ikke skiftet. Ingen anmeldelse.
+Til Sebastian:
+1. Hvilken træsort og profil er den nye beklædning? Siden siger kun "træbeklædning"
+2. Isolering, vindspærre og ventilation, hvorfor udvendigt, areal og tid (felterne står klar)
+- FAQ om vinduer og dørpartier er udeladt
 - Hovedbilledet (efter, 03) står øverst. Før/efter-afsnittet viser 01 og 02 som før og 04 og 05 som efter
 
-## Tegltag Hundested (projektcase: nyt tegltag, 26-10-2026)
-Status "pending". Mangler:
-1. Producentens egen beskrivelse af Hardie Plank. "Vedligeholdelsesfri" bruges ikke. Siden siger kun, at vi valgte fibercement for at begrænse vedligeholdelsen
-2. Tagsten (type, farve) og antal velux-vinduer før og efter. Vinduerne er ikke talt i teksten, kun i alt-teksten til førbilledet ("to velux-vinduer"), som prompten angav
-3. Er kunden indforstået med billederne af huset?
-4. Åbner anmeldelseslinket (rid=2145085) den rigtige anmeldelse? Det er den første case med et direkte link
-- Anmeldelsens "Rigtige flinke" er rettet til "Rigtig flinke" som tastefejl (samme tekst som Kenneths anmeldelse i indhold.py)
-- Billede 03: postkasse og husnummer på nabohuset var allerede sløret. Navneskiltet på hoveddøren på billede 01 kunne ikke læses, men er sløret for en sikkerheds skyld
+## Tegltag Hundested (projektcase: nyt tegltag, live på testsiden 26-10-2026)
+Afklaret af Christian: kunden er indforstået med billederne, og linket med rid=2145085 åbner den rigtige anmeldelse.
+Til Sebastian:
+1. Tagsten (type, farve) og antal velux-vinduer før og efter. Vinduerne er ikke talt i teksten, kun i alt-teksten til førbilledet ("to velux-vinduer"), som prompten angav
+2. Hardie Plank: producentens egen beskrivelse er ikke tjekket. Siden siger kun "fibercement" og "for at begrænse vedligeholdelsen", aldrig "vedligeholdelsesfri"
+3. Undertag, lægter, tid og areal, og hvorfor Hardie Plank (felterne står klar)
+- Anmeldelsens "Rigtige flinke" er rettet til "Rigtig flinke" som tastefejl
+- Postkasse og husnummer på billede 03 var sløret på forhånd. Navneskiltet på hoveddøren på billede 01 er sløret for en sikkerheds skyld
 - Der er kun ét efterbillede, så hovedbilledet står også sidst i rækken "Før, under og efter" med sin egen alt-tekst
 
 ## Fælles anmeldelseskomponent (26-10-2026)
