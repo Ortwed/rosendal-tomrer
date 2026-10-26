@@ -15,6 +15,7 @@ FB = "https://www.facebook.com/profile.php?id=100068776222589"
 FB_ANM = "https://www.facebook.com/profile.php?id=100068776222589&sk=reviews"
 IG = "https://www.instagram.com/rosendaltomrerentrepriseaps/"
 ANM_URL = "https://www.anmeld-haandvaerker.dk/tomrer/rosendal-tomrer-entreprise-aps"
+ANM_RID_URL = ANM_URL + "?rid={rid}"   # den enkelte anmeldelse paa en projektcase
 ANM_TEKST = "over 35"   # bevidst ikke et fast tal: profilen viser 39 (18-10-2026), tallet vokser
 ANM_SNIT = "4,9"
 
@@ -267,6 +268,11 @@ nav a.active::after{content:'';position:absolute;left:0;right:0;bottom:0;height:
 .proj-hoved img{width:100%;height:auto;cursor:zoom-in}
 .proj-hoved figcaption,.proj-gallery figcaption{font-size:.88rem;color:var(--muted);margin-top:.5rem}
 .prose .proj-gallery{columns:2;margin:0 0 1.6rem}
+.foer-efter{display:grid;grid-template-columns:repeat(var(--kol,2),1fr);gap:1.2rem;margin:0 0 1.6rem}
+.foer-efter h3{margin:0 0 .6rem;font-size:1rem;text-transform:uppercase;letter-spacing:.06em;color:var(--brass-dk)}
+.foer-efter figure{margin:0 0 1rem}
+.foer-efter img{width:100%;height:auto;cursor:zoom-in}
+@media (max-width:600px){.foer-efter{grid-template-columns:1fr}}
 .proj-citat{background:var(--sand);border-left:4px solid var(--brass);padding:1.4rem 1.6rem;margin:0 0 1rem}
 .proj-citat blockquote{font-family:var(--head);font-stretch:92%;font-size:1.25rem;line-height:1.4;color:var(--navy);margin:0 0 .7rem}
 .proj-citat p{margin:0;font-size:.93rem;color:var(--muted)}

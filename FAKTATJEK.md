@@ -101,13 +101,38 @@ Bygget ud fra Sebastians Word-dokument "Rosendal Materiel Udlejning" (12 maskine
 - /anmeldelser/ viser kun widgetten fra Anmeld Håndværker og linket til profilen. Projektkortene og linket til anmeldelser på Facebook er fjernet derfra
 
 ## Melby (projektcase: siddebænke i termofyr, 26-10-2026)
-Bygget og testet, men står som status "pending". Christian skal afklare, før casen sættes live:
-1. Må skolens navn (Melby Skole) bruges? Indtil da står der "en skole i Melby" i title, H1, tekster, alt-tekster og schema
-2. Hører billede 04 (rund bænk i rødbrunt hårdttræ på stålstel, brosten, med en person) til projektet? Det er ikke med
-3. Hvad omfattede "ny legeplads"? Ordet "legeplads" er ikke brugt på siden. Billede 03 viser en gynge i baggrunden, som vi ikke omtaler
-4. Findes der en anmeldelse på Anmeld Håndværker? Indtil da er der intet afsnit om kundens anmeldelse
-5. Billederne: på billede 02 er to personer i baggrunden og nummerpladen på varevognen sløret. På billede 03 er nummerpladen sløret. Christian bekræfter, at billederne må bruges
+Status "pending". Afklaret af Christian: skolens navn må bruges, billede 02 og 03 er godkendt, billede 04 hører til projektet, og der er ingen anmeldelse.
+Mangler stadig:
+1. Hvad omfattede "ny legeplads" præcist? Ordet bruges ikke på siden. Billede 03 viser en gynge i baggrunden, som vi ikke omtaler
+2. Hvilket træ er den runde bænk lavet af? Den kaldes kun "rund bænk på stålstel"
+3. Er personen på billede 04 godkendt? Indtil da er personen sløret, og fotografens fod er skåret væk nederst
+- På billede 02 er to personer i baggrunden og nummerpladen sløret, på 03 nummerpladen. Christian har godkendt billederne, så sløringen kan fjernes, hvis han ønsker det
 - Afventer Sebastian: omfang, mål, hvorfor termofyr blev valgt og hans erfaring med termofyr i skolemiljø (felterne står klar og vises først, når de er udfyldt)
-- Fakta om termofyr er kun de kildebelagte: varmebehandlet uden kemikalier, mere dimensionsstabil end trykimprægneret, brun farve, UV-olie anbefales af producenter, ellers sølvgrå patina. Intet om holdbarhed i år, holdbarhedsklasse eller jordkontakt
-- Casen er knyttet til ydelsen "Pergola, hegn og cykelskur" (bænke og gårdmiljøer) og linker til /terrasse/, de to andre cases og /omrader/
-- Billederne er 720 og 1440 px webp som de andre cases, ikke 480/800/1200/1600 som i prompten
+- Fakta om termofyr er kun de kildebelagte. "Thermofyr" nævnes én gang som søgevariant og i FAQ-spørgsmål 1
+- Casen er knyttet til ydelsen "Pergola, hegn og cykelskur" (bænke og gårdmiljøer)
+- Billederne er 720 og 1440 px webp som de andre cases, ikke 480/800/1200/1600 som i prompterne
+
+## Renovering Melby (projektcase: efterisolering og ny facade, 26-10-2026)
+Status "pending". Afklaret af Christian: før- og efterbillederne er samme hus. Ingen anmeldelse, og der vises ingen fra andre projekter.
+Mangler stadig:
+1. Hvilket materiale er den nye facade i? Siden siger kun "træbeklædning"
+2. Omfattede opgaven også vinduer, døre, indfatninger eller tag? Siden nævner kun de nye indfatninger, fordi de ses på billederne. Varmepumpe, solfanger og vinduer nævnes ikke
+3. Er kunden indforstået med billederne af huset?
+- Afventer Sebastian: materiale og profil, isolering, vindspærre og ventilation, hvorfor udvendigt, areal og tid (felterne står klar)
+- FAQ 5 om vinduer og dørpartier er udeladt, indtil Sebastian bekræfter det
+- Hovedbilledet (efter, 03) står øverst. Før/efter-afsnittet viser 01 og 02 som før og 04 og 05 som efter
+
+## Tegltag Hundested (projektcase: nyt tegltag, 26-10-2026)
+Status "pending". Mangler:
+1. Producentens egen beskrivelse af Hardie Plank. "Vedligeholdelsesfri" bruges ikke. Siden siger kun, at vi valgte fibercement for at begrænse vedligeholdelsen
+2. Tagsten (type, farve) og antal velux-vinduer før og efter. Vinduerne er ikke talt i teksten, kun i alt-teksten til førbilledet ("to velux-vinduer"), som prompten angav
+3. Er kunden indforstået med billederne af huset?
+4. Åbner anmeldelseslinket (rid=2145085) den rigtige anmeldelse? Det er den første case med et direkte link
+- Anmeldelsens "Rigtige flinke" er rettet til "Rigtig flinke" som tastefejl (samme tekst som Kenneths anmeldelse i indhold.py)
+- Billede 03: postkasse og husnummer på nabohuset var allerede sløret. Navneskiltet på hoveddøren på billede 01 kunne ikke læses, men er sløret for en sikkerheds skyld
+- Der er kun ét efterbillede, så hovedbilledet står også sidst i rækken "Før, under og efter" med sin egen alt-tekst
+
+## Fælles anmeldelseskomponent (26-10-2026)
+- anmeldelse_html i build.py: citatet som tekst, byline "Kunde i <by>", linket "Anmeldelse på Anmeld Håndværker" med target="_blank" rel="noopener noreferrer" og cta_click (anmeldelse_link). Ingen Review-markup
+- Link til den enkelte anmeldelse: ANM_RID_URL i site_shared.py (profilen med ?rid=<id>). Delingslinks fra Facebook omsættes til den dekodede u-parameter
+- Case 1 og 2 linker stadig til profilen. Christian indsætter deres rid i anm_url
