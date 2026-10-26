@@ -150,3 +150,14 @@ Til Sebastian:
 - anmeldelse_html i build.py: citatet som tekst, byline "Kunde i <by>", linket "Anmeldelse på Anmeld Håndværker" med target="_blank" rel="noopener noreferrer" og cta_click (anmeldelse_link). Ingen Review-markup
 - Link til den enkelte anmeldelse: ANM_RID_URL i site_shared.py (profilen med ?rid=<id>). Delingslinks fra Facebook omsættes til den dekodede u-parameter
 - Case 1 og 2 linker stadig til profilen. Christian indsætter deres rid i anm_url
+
+## Strider mod tidligere beslutninger (tages til sidst)
+Samlet 26-10-2026. Sitet følger lige nu det, der står efter "Nu:".
+1. Anmeldelseslinks. Guide-prompten (del B) siger profil-link på alle cases. Christian har testet, at rid=2145085 åbner Kenneths anmeldelse. Nu: case 1 og 2 linker til profilen, case 5 direkte til anmeldelsen
+2. Hovedstadsområdet. Guidens FAQ "Hvor bygger I terrasser?" nævner hovedstadsområdet. Mødet 23-10-2026 tog Hovedstadsområdet ud til fordel for arbejdsområdet fra Hundested til Frederikssund, Stenløse, Farum og Hørsholm. Nu: svaret bruger arbejdsområdet
+3. Træ tæt på vandet. Guiden siger "Vi fravælger ikke nogen træsorter". Om os og terrassesiden siger, at Sebastian fraråder blødt træ tæt på vandet. Nu: begge tekster står uændret
+4. Projektmenuen. Case-prompterne siger, at oversigten og menupunktet først vises ved 3 live cases. Christian besluttede 23-10-2026, at "Vores projekter" altid har sin egen dropdown. Nu: dropdown og oversigt vises fra første case
+5. Billedstørrelser. Case-prompterne siger webp i 480/800/1200/1600 px. Case 1 og 2 blev bygget i 720/1440 px. Nu: alle cases bruger 720/1440 px
+6. Antal velux-vinduer. Tegltag-prompten siger "tæl ikke vinduerne", men dens egen alt-tekst til førbilledet siger "to velux-vinduer". Nu: alt-teksten står som angivet, brødteksten tæller ikke
+7. Den runde bænk i Melby. Christian siger termotræ. På billedet ser den rødbrun ud som hårdttræ. Nu: "rund bænk i termotræ på stålstel", aldrig "termofyr"
+8. Case 4. Christian beskrev den som "beklædning og nyt tegltag", men prompten handler kun om efterisolering og facade, og tegltaget er case 5. Nu: case 4 nævner ikke taget
