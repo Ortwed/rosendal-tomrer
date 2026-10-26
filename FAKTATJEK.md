@@ -128,7 +128,25 @@ Til Sebastian:
 - Postkasse og husnummer på billede 03 var sløret på forhånd. Navneskiltet på hoveddøren på billede 01 er sløret for en sikkerheds skyld
 - Der er kun ét efterbillede, så hovedbilledet står også sidst i rækken "Før, under og efter" med sin egen alt-tekst
 
-## Fælles anmeldelseskomponent (26-10-2026)
+## Anmeldelseslinks på cases (26-10-2026)
+- anmeldelse_html i build.py: citatet som tekst, byline "Kunde i <by>", target="_blank" rel="noopener noreferrer". Ingen Review-markup, ingen navne, aldrig "verificeret kunde"
+- Som udgangspunkt linker alle cases til profilen (ANM_URL) med teksten "Se vores profil og anmeldelser på Anmeld Håndværker" og cta_click "anmeldelse_profil" (case 1 og 2)
+- Case 5 (tegltag) linker direkte til anmeldelsen med rid=2145085, fordi Christian har testet, at linket åbner Kenneths anmeldelse. Teksten er så "Anmeldelse på Anmeld Håndværker" og cta_click "anmeldelse_link". Den nye prompt (del B) siger profil på alle cases, men den er skrevet, før linket blev testet. Sig til, hvis case 5 også skal linke til profilen
+- Nye direkte links: sæt anm_rid på casen i build.py, når linket er testet. Ingen delingslinks fra Facebook
+
+## Guide træ til terrasse (26-10-2026)
+Siden /guide/trae-til-terrasse/ er bygget ud fra Christians udkast med Sebastians svar. Flaget GODKENDT_AF_SEBASTIAN i indhold.py er False:
+- Testsiden viser guiden med noindex, uden byline og uden links fra andre sider. Den er hverken i sitemap eller llms.txt
+- Live-builden bygger den slet ikke. verificer.py fejler, hvis den alligevel kommer med, eller hvis en side linker til den før godkendelsen
+- Når Sebastian har godkendt teksten: sæt GODKENDT_AF_SEBASTIAN = True. Så kommer byline (med Sebastian som author i schema), sitemap, llms.txt og links fra /terrasse/ og case 1, 2 og 3 automatisk
+Til Sebastian:
+1. Godkend hele teksten, også levetiderne (15 til 20 år og 25 til 50 år eller mere), som står som hans skøn og ikke en garanti
+2. FAQ "Hvor bygger I terrasser?": udkastet nævner "hovedstadsområdet". Efter mødet 23-10-2026 bruger sitet arbejdsområdet (fra Hundested til Frederikssund, Stenløse, Farum og Hørsholm), så svaret følger det. Han afgør, hvad der skal stå
+3. Guiden siger "Vi fravælger ikke nogen træsorter". Om os og terrassesiden siger, at han fraråder blødt træ tæt på vandet. Passer de to sammen for ham?
+4. Senere, kun med hans ja: hvad han mener med "brun imprægneret", eksempler (Vedbæk, jatoba, kyst), kilde til et eventuelt kommunalt forbud, fakta om ipé, "hvad ville jeg vælge derhjemme" og citater med hans navn
+- Ingen billeder endnu. Der er plads til et hero-billede (kommentar i build.py). Ingen lagerfotos
+
+## Fælles anmeldelseskomponent, oprindelig (26-10-2026, erstattet af afsnittet ovenfor)
 - anmeldelse_html i build.py: citatet som tekst, byline "Kunde i <by>", linket "Anmeldelse på Anmeld Håndværker" med target="_blank" rel="noopener noreferrer" og cta_click (anmeldelse_link). Ingen Review-markup
 - Link til den enkelte anmeldelse: ANM_RID_URL i site_shared.py (profilen med ?rid=<id>). Delingslinks fra Facebook omsættes til den dekodede u-parameter
 - Case 1 og 2 linker stadig til profilen. Christian indsætter deres rid i anm_url

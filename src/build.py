@@ -11,6 +11,11 @@ sys.path.insert(0, os.path.dirname(__file__))
 import site_shared as S
 from site_shared import *
 from indhold import ANMELDELSER as A, YDELSER as Y, MATERIEL, MATERIEL_KATEGORIER, MATERIEL_SIDE, MATERIEL_LINKS
+from indhold import GUIDE_TRAE_TERRASSE as GUIDE, GODKENDT_AF_SEBASTIAN
+GUIDE_SLUG = "guide/trae-til-terrasse"
+GUIDE_LINK = f'<p><a href="/{GUIDE_SLUG}/" style="text-decoration:underline">Læs vores guide til træ til terrasse</a></p>'
+# Andre sider linker kun til guiden, naar Sebastian har godkendt teksten
+GUIDE_AKTIV = GODKENDT_AF_SEBASTIAN
 
 ROD = os.path.join(os.path.dirname(__file__), "..")
 OUT = os.path.join(ROD, "live" if LIVEBYG else "docs")
@@ -46,7 +51,7 @@ def side(slug, *a, **k):
 # kommentar. Flere billeder, fx foer- og detaljebilleder, er bare flere linjer i billeder.
 # Opfind aldrig tal: et tomt felt er bedre end et gaet.
 PROJEKTER = [
-    dict(slug="traeterrasse-trykimpraegneret-hundested", status="live", ydelse="terrasse", by="Hundested", aar="2025",
+    dict(slug="traeterrasse-trykimpraegneret-hundested", status="live", guide=True, ydelse="terrasse", by="Hundested", aar="2025",
          titel="Træterrasse i trykimprægneret træ i Hundested",
          kort="Træterrasse i trykimprægneret træ",            # kortet paa projektoversigten
          tag="Trykimprægneret træ",                            # lille etiket paa kortet (valgfri, ligesom undertekst)
@@ -57,7 +62,7 @@ PROJEKTER = [
          fakta=[("Opgave", "Ny træterrasse"), ("Materiale", "Trykimprægneret træ"), ("Sted", "Hundested"), ("År", "2025"),
                 ("Størrelse", None), ("Tidsforbrug", None), ("Den gamle terrasse", None)],   # None = afventer Sebastian
          anmeldt=("4. juli 2025", "Anmeld Håndværker"), udvidet=None,
-         anm_url=None, anm_opgave=None,   # Christian indsaetter ANM_RID_URL.format(rid=...) eller det link, han har
+         anm_rid=None, anm_opgave=None,   # rid saettes, naar et direkte link til anmeldelsen er testet
          billeder=[  # (fil uden endelse i /images/projekter/, alt, billedtekst eller None[, (bredde, hoejde)]).
                      # Det foerste er hovedbilledet. Maalene skal kun med, naar det store billede ikke er 1440 x 1080.
              ("traeterrasse-trykimpraegneret-hundested-1", "Ny træterrasse i trykimprægneret træ ved et hus med store glaspartier i Hundested.",
@@ -85,7 +90,7 @@ PROJEKTER = [
              # Sidste saetning skal godkendes af Sebastian (FAKTATJEK.md)
              ("Overholder I tidsplanen?", "Kunden i Hundested skrev i sin anmeldelse, at vi overholdt tidsplanen. Vi aftaler tidsplanen med dig, før arbejdet går i gang."),
          ]),
-    dict(slug="jatoba-terrasse-liseleje", status="live", ydelse="terrasse", by="Liseleje", aar="2025",
+    dict(slug="jatoba-terrasse-liseleje", status="live", guide=True, ydelse="terrasse", by="Liseleje", aar="2025",
          titel="Jatoba terrasse med indbyggede trapper i Liseleje",
          kort="Jatoba terrasse med indbyggede trapper", tag="Jatoba",
          link_tekst="jatoba-terrasse i Liseleje",
@@ -96,7 +101,7 @@ PROJEKTER = [
                 ("Sted", "Liseleje"), ("År", "2025"),
                 ("Størrelse", None), ("Højde over terræn", None), ("Tidsforbrug", None), ("Leverandør", None)],   # afventer Sebastian
          anmeldt=("1. august 2025", "Anmeld Håndværker"), udvidet=None,
-         anm_url=None, anm_opgave=None,   # Christian indsaetter ANM_RID_URL.format(rid=...) eller det link, han har
+         anm_rid=None, anm_opgave=None,   # rid saettes, naar et direkte link til anmeldelsen er testet
          billeder=[
              ("jatoba-terrasse-liseleje-1", "Ny terrasse i jatoba på trækonstruktion med indbyggede trapper ved et sort hus i Liseleje.",
               "Ny jatoba-terrasse med indbyggede trapper, Liseleje, 2025."),
@@ -127,7 +132,7 @@ PROJEKTER = [
          ]),
     # Case 3. Afklaret af Christian: skolens navn maa bruges, billederne er godkendt (personen paa 04 forbliver sloeret),
     # "legeplads" er traedaekkene rundt om traeerne, og den runde baenk er i termotrae. Ingen anmeldelse.
-    dict(slug="siddebaenke-termofyr-melby-skole", status="live", ydelse="pergola-hegn-og-cykelskur", by="Melby", aar="2024",
+    dict(slug="siddebaenke-termofyr-melby-skole", status="live", guide=True, ydelse="pergola-hegn-og-cykelskur", by="Melby", aar="2024",
          titel="Siddebænke i termofyr og nyt udeområde, Melby Skole",
          krumme="Siddebænke i termofyr, Melby Skole",
          kort="Siddebænke i termofyr, Melby Skole", undertekst="Nye bænke og udeområde, 2024", tag="Termofyr",
@@ -222,7 +227,7 @@ PROJEKTER = [
          # Kundens tekst med tastefejlen "Rigtige" rettet til "Rigtig" (som i ANMELDELSER["kenneth"])
          citat="Vi har fået lagt et nyt tegltag. Alt er forløbet som vi havde håbet og forventet. Rigtig flinke og flittige håndværkere.",
          anmeldt=("oktober 2026", "Anmeld Håndværker"), anm_opgave="Udvendigt", udvidet=None,
-         anm_url=ANM_RID_URL.format(rid=2145085),   # dekodet fra Facebooks delingslink, testet af Christian 26-10-2026
+         anm_rid=2145085,   # testet af Christian 26-10-2026: aabner den rigtige anmeldelse
          karakterer="5,0 på Anmeld Håndværker.",
          billeder=[
              ("nyt-tegltag-med-velux-vinduer-hundested-01", "Nyt mørkt tegltag med nye velux-vinduer og nye vindskeder på hus i Hundested", "Efter: nyt tag, Hundested 2026"),
@@ -458,6 +463,8 @@ def ydelse(slug):
         blokke.append('<div class="svc-gal">' + "".join(f'<figure><img src="{s}" alt="{e(a)}" loading="lazy" data-lb></figure>' for s, a in d["galleri"]) + "</div>")
     blokke.append(proj_links(ydelse=slug))
     blokke.append(rev_mini(d["anm"]))
+    if slug == "terrasse" and GUIDE_AKTIV:
+        blokke.append(f"<h2>Guide: træ til terrasse</h2>{GUIDE_LINK}")
     if slug in MATERIEL_LINKS:
         # Interne links til de maskiner, der passer til opgaven (og fra udlejningssiden tilbage hertil)
         kald = {"paelebor": "pælebor", "jordbor": "mobilt jordbor", "affugter": "affugter", "gipshejs": "gipshejs",
@@ -692,20 +699,19 @@ side("anmeldelser", "Anmeldelser fra kunder | Rosendal Tømrer",
 # ---------------- PROJEKTSIDER (kun naar status = live) ----------------
 # Ingen Review- eller aggregateRating-markup: citatet er fra Anmeld Haandvaerker og vises kun som tekst.
 # ---------------- ANMELDELSE PAA EN CASE ----------------
-# Link til den enkelte anmeldelse: ANM_RID_URL i site_shared.py. Mangler id'et, linkes til profilen.
+# Som udgangspunkt linkes til Sebastians profil paa Anmeld Haandvaerker (ANM_URL), fordi vi ikke har links til de enkelte
+# anmeldelser. Har en case et rid, der er testet og aabner den rigtige anmeldelse, linkes direkte til den (ANM_RID_URL).
+# Ingen delingslinks fra Facebook.
+def anm_href(rid=None):
+    return ANM_RID_URL.format(rid=rid) if rid else ANM_URL
 
-def anm_link(url):
-    """Delingslinks fra Facebook (facebook.com/sharer/...?u=<url>) maa ikke bruges som href. Brug den dekodede u-parameter."""
-    from urllib.parse import urlparse, parse_qs
-    if url and "facebook.com/sharer" in url:
-        return parse_qs(urlparse(url).query).get("u", [ANM_URL])[0]
-    return url or ANM_URL
-
-def anmeldelse_html(tekst, byline, dato, opgave, url):
+def anmeldelse_html(tekst, byline, dato, opgave, rid=None):
     """Faelles anmeldelsesboks. Synlig tekst, ingen navne, ingen Review- eller aggregateRating-markup."""
     linje = " · ".join(e(x) for x in (byline, opgave, dato) if x)
+    link, maal = (("Anmeldelse på Anmeld Håndværker", "anmeldelse_link") if rid
+                  else ("Se vores profil og anmeldelser på Anmeld Håndværker", "anmeldelse_profil"))
     return (f'<div class="proj-citat"><blockquote>{e(tekst)}</blockquote>'
-            f'<p>{linje}. <a href="{e(anm_link(url))}" target="_blank" rel="noopener noreferrer" data-cta="anmeldelse_link">Anmeldelse på Anmeld Håndværker</a></p></div>')
+            f'<p>{linje}. <a href="{e(anm_href(rid))}" target="_blank" rel="noopener noreferrer" data-cta="{maal}">{link}</a></p></div>')
 
 def schema_webside(p):
     return {"@context": "https://schema.org", "@type": "WebPage", "name": p["titel"], "description": p["desc"],
@@ -718,7 +724,7 @@ def projekt_side(p):
     krummer = [("Vores projekter", PROJ_KRUMME), (p.get("krumme") or p["titel"], None)]
     fakta = [(k, v) for k, v in p["fakta"] if v]
     if p.get("anmeldt"):   # cases uden anmeldelse udelader baade faktalinjen og afsnittet "Det siger kunden"
-        fakta.append(("Anmeldt", f'{p["anmeldt"][0]} på <a href="{e(anm_link(p.get("anm_url")))}" target="_blank" rel="noopener noreferrer">{p["anmeldt"][1]}</a>'))
+        fakta.append(("Anmeldt", f'{p["anmeldt"][0]} på <a href="{e(anm_href(p.get("anm_rid")))}" target="_blank" rel="noopener noreferrer">{p["anmeldt"][1]}</a>'))
     fakta.append(("Udført af", NAVN))
     dl = "".join(f"<dt>{e(k)}</dt><dd>{v if '<a' in v else e(v)}</dd>" for k, v in fakta)
 
@@ -757,7 +763,7 @@ def projekt_side(p):
     kunde = ""
     if p.get("citat"):
         kunde = ("<h2>Det siger kunden</h2>"
-                 + anmeldelse_html(p["citat"], f'Kunde i {p["by"]}', f'anmeldt {p["anmeldt"][0]}', p.get("anm_opgave"), p.get("anm_url"))
+                 + anmeldelse_html(p["citat"], f'Kunde i {p["by"]}', f'anmeldt {p["anmeldt"][0]}', p.get("anm_opgave"), p.get("anm_rid"))
                  + f'{udvidet}<p>{e(p["karakterer"])}</p>')
     body = f"""
 <section class="page-header"><div class="container">
@@ -769,7 +775,7 @@ def projekt_side(p):
   <div class="svar"><strong>Kort svar</strong>{e(p['svar'])}</div>
   {figur(0, ' class="proj-hoved"')}
   <dl class="fakta">{dl}</dl>
-  {sektioner(p['sek'])}
+  {sektioner(p['sek'][:1])}{GUIDE_LINK if GUIDE_AKTIV and p.get("guide") else ""}{sektioner(p['sek'][1:])}
   {fe_html}
   {f'<div class="proj-gallery">{galleri}</div>' if galleri else ''}
   {kunde}
@@ -789,6 +795,54 @@ if HUB:
          f'<p>Udvalgte opgaver med billeder af det færdige resultat og fakta om opgaven.</p>{hero_knapper("projekter")}</div></section>'
          f'<section class="sec"><div class="container"><div class="refs-grid">{proj_kort()}</div></div></section>{cta()}',
          active="projekter", krummer=[("Vores projekter", None)])
+
+# ---------------- GUIDE: TRAE TIL TERRASSE ----------------
+# Afventer Sebastian (GODKENDT_AF_SEBASTIAN i indhold.py). Indtil da: kun paa testsiden, med noindex og uden byline.
+# Live-builden springer siden over, og verificer.py fejler, hvis den alligevel kommer med.
+def guide_side():
+    g = GUIDE
+    navn = "Træ til terrasse"
+    krummer = [("Terrasse", "terrasse"), (navn, None)]
+    byline = f'<p class="byline">{e(g["byline"])}</p>' if GODKENDT_AF_SEBASTIAN else ""
+    t = g["tabel"]
+    tabel = ('<div class="tabel-wrap"><table><thead><tr>' + "".join(f'<th scope="col">{e(h)}</th>' for h in t["hoved"]) + "</tr></thead><tbody>"
+             + "".join("<tr>" + f'<th scope="row">{e(r[0])}</th>' + "".join(f"<td>{e(c)}</td>" for c in r[1:]) + "</tr>" for r in t["raekker"])
+             + "</tbody></table></div>")
+    sek = "".join(f"<h2>{e(h)}</h2>" + (c[1] if isinstance(c, tuple) else "".join(f"<p>{e(x)}</p>" for x in c)) for h, c in g["sek"])
+    faq = "".join(f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in g["faq"])
+    body = f"""
+<section class="page-header"><div class="container">
+  {crumb_html(krummer)}
+  <h1>{e(g['h1'])}</h1>{byline}
+  {hero_knapper("guide")}
+</div></section>
+<section class="sec"><div class="container svc-layout">
+  {sidebar("terrasse")}
+  <div class="prose svc-main">
+    <div class="svar"><strong>Kort svar</strong>{e(g['svar'])}</div>
+    <p>{e(g['intro'])}</p>
+    <h2>De tre træsorter vi bygger i</h2>
+    {tabel}
+    <p><a href="/projekter/jatoba-terrasse-liseleje/">Læs mere om jatoba i vores terrasse i Liseleje</a><br>
+       <a href="/projekter/traeterrasse-trykimpraegneret-hundested/">Se en terrasse i trykimprægneret træ i Hundested</a></p>
+    {sek}
+    <p>Læs mere om <a href="/terrasse/">terrasser</a>, eller <a href="/kontakt/" data-cta="guide-tekst">send en forespørgsel</a>.</p>
+    <h2>Ofte stillede spørgsmål</h2><div class="faq">{faq}</div>
+  </div>
+</div></section>
+{cta("Har I en terrasse i tankerne?", "Ring på 50 70 05 05 eller send en forespørgsel via kontaktformularen.")}"""
+    # Hero-billede: indsaettes oeverst i svc-main, naar der er et rigtigt foto fra Sebastian. Ingen lagerfotos.
+    idag = __import__("datetime").date.today().isoformat()
+    forfatter = ({"@type": "Person", "name": "Sebastian Norborg Rosendal", "jobTitle": "Tømrermester og bygningskonstruktør"}
+                 if GODKENDT_AF_SEBASTIAN else {"@type": "Organization", "name": NAVN, "url": DOMAIN + "/"})
+    artikel = {"@context": "https://schema.org", "@type": "Article", "headline": g["h1"], "description": g["desc"],
+               "url": f"{DOMAIN}/{GUIDE_SLUG}/", "inLanguage": "da-DK", "datePublished": idag, "dateModified": idag,
+               "author": forfatter, "publisher": {"@type": "Organization", "name": NAVN, "url": DOMAIN + "/", "logo": DOMAIN + "/images/logo.png"}}
+    side(GUIDE_SLUG, g["title"], g["desc"], body, active="terrasse", schemas=[artikel, faq_schema(g["faq"])],
+         krummer=krummer, noindex=not GODKENDT_AF_SEBASTIAN)
+
+if GODKENDT_AF_SEBASTIAN or not LIVEBYG:
+    guide_side()
 
 # ---------------- FORMULARER ----------------
 # Ingen honeypot (_gotcha): Formspree's eget spamfilter (Formshield) er nok, og et skjult
@@ -1046,7 +1100,7 @@ skriv("llms.txt", f"""# {NAVN}
 - [Tømrer i Hundested]({DOMAIN}/tomrer-hundested/)
 - [Anmeldelser]({DOMAIN}/anmeldelser/)
 - [Kontakt]({DOMAIN}/kontakt/)
-""" + "".join(f"- [Projekt: {p['titel']}]({DOMAIN}/projekter/{p['slug']}/)\n" for p in LIVE))
+""" + (f"- [Guide til træ til terrasse: trykimprægneret, jatoba og ipé, ud fra vores erfaring]({DOMAIN}/{GUIDE_SLUG}/)\n" if GUIDE_AKTIV else "") + "".join(f"- [Projekt: {p['titel']}]({DOMAIN}/projekter/{p['slug']}/)\n" for p in LIVE))
 
 if not LIVEBYG:
     skriv(".nojekyll", "")  # kun GitHub Pages bruger den

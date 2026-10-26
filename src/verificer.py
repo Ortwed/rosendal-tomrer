@@ -11,6 +11,11 @@ R = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "live" if LIVE
 fejl, adv = [], []
 YSLUGS = [s for s, _ in YDELSER]
 NOINDEX = ("404", "tak", "cookies", "lejebetingelser")   # bevidst noindex, ogsaa paa live
+# Guiden er noindex og uden links fra andre sider, indtil Sebastian har godkendt den (GODKENDT_AF_SEBASTIAN)
+from indhold import GODKENDT_AF_SEBASTIAN
+GUIDE = "guide/trae-til-terrasse"
+if not GODKENDT_AF_SEBASTIAN:
+    NOINDEX = NOINDEX + (GUIDE,)
 
 def laes(p): return open(os.path.join(R, p), encoding="utf-8").read()
 
@@ -169,6 +174,12 @@ for a, b in itertools.combinations(O, 2):
 if DEMO: adv.append("testside: noindex paa alle sider (live bygges med --live)")
 if not GA_ID: adv.append("GA_ID ikke sat (ingen Google Analytics endnu)")
 if not FORMSPREE_ID: adv.append("FORMSPREE_ID ikke sat: formularen sender ikke")
+if LIVEBYG and not GODKENDT_AF_SEBASTIAN and os.path.exists(os.path.join(R, GUIDE, "index.html")):
+    fejl.append(f"{GUIDE}: guiden er med i live-builden, men GODKENDT_AF_SEBASTIAN er False")
+if not GODKENDT_AF_SEBASTIAN:
+    for f in sider:
+        if slug_af(f) != GUIDE and "trae-til-terrasse" in laes(f): fejl.append(f"{f}: linker til guiden, foer Sebastian har godkendt den")
+    if "trae-til-terrasse" in laes("llms.txt"): fejl.append("llms.txt naevner guiden, foer Sebastian har godkendt den")
 if LIVEBYG:
     for s in sider:
         if 'content="noindex' in laes(s) and slug_af(s) not in NOINDEX: fejl.append(f"live-side med noindex: {s}")

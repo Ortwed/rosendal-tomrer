@@ -524,3 +524,44 @@ MATERIEL_LINKS = {
     "renovering": ["affugter", "gipshejs"],
     "tilbygning": ["betonblander", "dumper", "rullestillads"], "nybyg": ["betonblander", "dumper", "rullestillads"],
 }
+
+
+# ---------------- GUIDE: TRAE TIL TERRASSE ----------------
+# Teksten er Christians udkast ud fra Sebastians svar. Sebastian har bedt om at laese den, foer den bruges.
+# Indtil GODKENDT_AF_SEBASTIAN = True: siden findes kun paa testsiden (noindex), uden byline, uden links fra andre sider,
+# og den er hverken i sitemap eller llms.txt. I live-builden bygges den slet ikke.
+# Opfind intet: ingen haardhed, densitet, certificering, priser, herkomst, forbud eller "brun impraegneret".
+GODKENDT_AF_SEBASTIAN = False
+GUIDE_TRAE_TERRASSE = dict(
+    title="Træ til terrasse: trykimprægneret, jatoba, ipé | Rosendal",
+    desc="Guide til træ til terrasse: trykimprægneret, jatoba og ipé. Vedligehold, levetid og underkonstruktion, skrevet ud fra vores erfaring som tømrere.",
+    h1="Træ til terrasse: trykimprægneret, jatoba eller ipé",
+    byline="Skrevet af Rosendal Tømrer på baggrund af Sebastian Rosendals erfaring. Sebastian er uddannet tømrer (2010) og bygningskonstruktør (2018).",
+    intro="Her forklarer vi, hvilket træ vi bygger terrasser i, hvad der afgør valget, og hvad der skal være i orden under brædderne. Det bygger på vores egen erfaring som tømrere. Guiden erstatter ikke et tilbud, for det rigtige valg afhænger af huset og placeringen.",
+    svar="Vi bygger terrasser i trykimprægneret træ, jatoba og ipé. Trykimprægneret er den økonomiske løsning og males efter cirka et år. Jatoba og ipé er hårdttræ, som kan blive gråt eller olieres en gang om året. Placering og vejrpåvirkning vejer tungest, og underkonstruktionen afgør levetiden.",
+    tabel=dict(hoved=["Træsort", "Fordele", "Ulemper", "Vedligehold"], raekker=[
+        ["Trykimprægneret", "God holdbarhed til pengene", "Skal males", "Maling efter cirka et år"],
+        ["Jatoba", "Hårdttræ", "", "Lad den blive grå, eller behandl en gang om året"],
+        ["Ipé", "Hårdttræ", "Høj pris", "Lad den blive grå, eller behandl en gang om året"]]),
+    sek=[
+        ("Hvad afgør, hvilket træ vi anbefaler?", ["Placering og vejrpåvirkning vejer tungest. Terrasser tæt på vand er hårdere belastet end terrasser længere inde i landet. Derudover handler det om kundens økonomi. Vi fravælger ikke nogen træsorter, men finder den løsning, der passer til netop den kunde og det hus."]),
+        ("Underkonstruktionen afgør meget", ('html', '<p>Det er ikke kun træet i overfladen, der bestemmer, hvor længe en terrasse holder. Tre ting er vigtige for os:</p>'
+            '<ul><li>Ordentlig dimensionering af underkonstruktionen.</li><li>Strøtape ovenpå strøerne, som forlænger levetiden.</li>'
+            '<li>Korrekt mellemrum mellem brædderne, så træet kan arbejde, når det udsættes for fugt.</li></ul>')),
+        ("Vedligehold", ["Trykimprægneret træ behandles med maling. Hårdttræ kan stå uden behandling og blive gråt, og det tåler det godt, fordi det er hårdttræ. Vil man bevare træets farve, anbefaler vi olie en gang om året."]),
+        ("Hvor længe holder en terrasse?", ["Efter vores erfaring holder en terrasse i trykimprægneret træ typisk 15 til 20 år, og en terrasse i hårdttræ 25 til 50 år eller mere. Tallene er et skøn ud fra vores erfaring og ikke en garanti. Levetiden afhænger af, hvordan underkonstruktionen er udført."]),
+        ("Hvorfor vælger nogle kunder trykimprægneret fra?", ["Nogle kunder fortæller os, at de gerne vil væk fra behandlingsformen, fordi trykimprægnering tidligere var kraftigere og giftigere. Andre vælger trykimprægneret, fordi det giver god holdbarhed til prisen. Begge dele er et fornuftigt udgangspunkt for en snak om, hvad der passer til jer."]),
+        ("Året rundt", ["Vi bygger på samme måde hele året. Men fyrretræ kan have et højt fugtindhold, når det lægges, og det skal man tage højde for."]),
+    ],
+    faq=[
+        ("Hvilket træ skal jeg vælge til min terrasse?", "Det afhænger af placering, vejrpåvirkning og økonomi. Terrasser tæt på vand er hårdere belastet. Vi finder den løsning, der passer til netop jeres hus og budget."),
+        ("Hvor længe holder en terrasse?", "Efter vores erfaring typisk 15 til 20 år i trykimprægneret træ og 25 til 50 år eller mere i hårdttræ, afhængigt af underkonstruktionen. Det er et skøn og ikke en garanti."),
+        ("Skal en terrasse i hårdttræ behandles?", "Nej, den kan stå ubehandlet og blive grå. Vil man bevare farven, anbefaler vi olie en gang om året."),
+        ("Skal trykimprægneret træ males?", "Ja, vi anbefaler maling efter cirka et år."),
+        ("Hvad gør en terrasse mere holdbar?", "En ordentligt dimensioneret underkonstruktion, strøtape ovenpå strøerne og korrekt mellemrum mellem brædderne."),
+        ("Hvad koster en terrasse?", "Det afhænger af træsort og størrelse. Ipé er den dyreste af de tre. Kontakt os, så giver vi et tilbud."),
+        # Udkastet siger "Mest i Nordsjaelland. Vi tager ogsaa opgaver i hovedstadsomraadet ...". Efter moedet 23-10-2026 bruger
+        # sitet arbejdsomraadet i stedet for Hovedstadsomraadet, saa svaret foelger det. Sebastian afgoer det ved godkendelsen.
+        ("Hvor bygger I terrasser?", "Mest i Nordsjælland. Vores arbejdsområde går fra Hundested til Frederikssund, Stenløse, Farum og Hørsholm, og opgaver længere væk tager vi også imod, når projektet passer til os."),
+    ],
+)
