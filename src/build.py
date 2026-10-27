@@ -849,7 +849,9 @@ if GODKENDT_AF_SEBASTIAN or not LIVEBYG:
 # felt kan blive udfyldt af Chromes autoudfyld, saa en rigtig henvendelse forsvinder.
 # NB: Formshield lagde testbeskeder som "asdasd" i Spam. Test altid med rigtige saetninger.
 # Efter afsendelse sendes besoegende til /tak/ (egen side, noindex), hvor maalingen sker.
-FORM_ACTION = f"https://formspree.io/f/{FORMSPREE_ID}" if FORMSPREE_ID else "#"
+# Formularen sender kun fra live-builden. Paa testsiden (github.io) viser den en besked om at ringe i stedet,
+# saa testbesoeg aldrig ender som henvendelser hos Sebastian.
+FORM_ACTION = f"https://formspree.io/f/{FORMSPREE_ID}" if FORMSPREE_ID and LIVEBYG else "#"
 FORM_JS = """<script>(function(){var f=document.getElementById('kf');
 f.addEventListener('submit',function(ev){ev.preventDefault();var b=f.querySelector('button[type=submit]'),t=b.textContent;b.disabled=true;b.textContent='Sender...';
 if(f.getAttribute('action')==='#'){b.disabled=false;b.textContent=t;alert('Formularen er ikke koblet til endnu (demo). Ring på 50 70 05 05.');return;}

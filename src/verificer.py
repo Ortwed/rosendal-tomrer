@@ -180,6 +180,12 @@ if not GODKENDT_AF_SEBASTIAN:
     for f in sider:
         if slug_af(f) != GUIDE and "trae-til-terrasse" in laes(f): fejl.append(f"{f}: linker til guiden, foer Sebastian har godkendt den")
     if "trae-til-terrasse" in laes("llms.txt"): fejl.append("llms.txt naevner guiden, foer Sebastian har godkendt den")
+# GA og formular maa kun vaere aktive paa det rigtige domaene (live-builden)
+for f in ("kontakt/index.html", "job/index.html"):
+    aktiv = "formspree.io" in laes(f)
+    if LIVEBYG and not aktiv: fejl.append(f"{f}: formularen sender ikke i live-builden")
+    if not LIVEBYG and aktiv: fejl.append(f"{f}: formularen er aktiv paa testsiden")
+if not LIVEBYG and any("googletagmanager.com" in laes(s) for s in sider): fejl.append("GA4 er med paa testsiden")
 if LIVEBYG:
     for s in sider:
         if 'content="noindex' in laes(s) and slug_af(s) not in NOINDEX: fejl.append(f"live-side med noindex: {s}")
