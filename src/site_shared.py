@@ -64,7 +64,7 @@ OMRAADER = [("tomrer-hundested", "Hundested"), (None, "Frederiksværk"), (None, 
             (None, "Skævinge"), (None, "Gørløse"), (None, "Liseleje"), (None, "Tisvildeleje"),
             (None, "Vejby"), (None, "Rågeleje"), (None, "Dronningmølle"), (None, "Tibirke"), (None, "Asserbo"),
             (None, "Frederikssund"), (None, "Stenløse"), (None, "Farum"), (None, "Hørsholm")]
-SIDST_OPDATERET = "2026-10-23"   # lastmod i sitemap. Saet til byggedato naar indhold aendres
+SIDST_OPDATERET = "2026-10-27"   # lastmod i sitemap. Saet til byggedato naar indhold aendres
 
 def url(slug):
     if "#" in slug:          # fx "anmeldelser#projekter": et afsnit paa en side
