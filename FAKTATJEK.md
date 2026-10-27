@@ -78,7 +78,7 @@ Bygget ud fra Sebastians Word-dokument "Rosendal Materiel Udlejning" (12 maskine
 - Uddannet tømrer 2010 og bygningskonstruktør 2018 står som hans personlige uddannelse (Om os, schema, llms.txt). Firmaet er stiftet 2021
 - Hans faglige holdning om træ til terrasser står på Om os og terrasse-siden i hans stemme. Ingen konkrete træarter endnu (kommer som separat content)
 - Dansk Håndværk: "overenskomst for medarbejderne og et garantistempel for kunderne" står på Om os. Beløbet nævnes ikke nogen steder
-- Google-profilen skal sige det samme som sitet: åbningstid 07.00-16.00 og arbejdsområdet (ikke Hovedstadsområdet)
+- Google-profilen: åbningstiden er rettet til 07.00-16.00 (Christian, inden 27-10-2026). Arbejdsområdet skal også passe med sitet (ikke Hovedstadsområdet)
 
 ## Projektcase: træterrasse i Hundested (23-10-2026)
 - Siden /projekter/traeterrasse-trykimpraegneret-hundested/ er live på testsiden. Casen linkes fra terrasse, Hundested og Områder
